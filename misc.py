@@ -1,4 +1,9 @@
 import scipy.linalg as lg
+"""
+Miscellanous functions
+"""
+
+
 
 #Centre de notre repère "fait-maison"
 (x0,y0)=(106,128)
