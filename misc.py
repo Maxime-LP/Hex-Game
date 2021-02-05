@@ -7,6 +7,8 @@ Miscellanous functions
 #Centre de notre repère "fait-maison"
 (x0,y0)=(106,128)
 
+l=64
+h=74.3
 
 #On se donne la liste des centres des hexagones
 tiles_centers=[]
@@ -23,8 +25,6 @@ def get_polygon(point):
     """
     Retourne la liste des points déterminant le polygone contenant le point en argument
     """
-    l=64
-    h=74.3
     min_point=tiles_centers[0]
     k=0
     while True:
@@ -42,3 +42,9 @@ def get_polygon(point):
     points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
     return points,min_point
 
+def convert(i,j):
+    """
+    Convertit les coordonnées (i,j) en l'indice de l'hexagone correspondant
+    """
+
+    return i*N + j
