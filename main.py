@@ -1,11 +1,11 @@
 import pygame
 import numpy as np
 from misc import get_polygon,tiles_centers
+from config import N
 
 pygame.init()
-
 screen = pygame.display.set_mode((1300,900))
-background = pygame.image.load("Hex_board.png")
+background = pygame.image.load(f"Hex_board_{N}.png")
 
 #   0__________________x=1300
 #   |
@@ -20,7 +20,7 @@ background = pygame.image.load("Hex_board.png")
 screen.blit(background,(0,0))
 
 #plateau lisible par nos algorithmes
-plateau=[['.' for i in range(11)] for j in range(11)]
+plateau=[['.' for i in range(N)] for j in range(N)]
 plateau=np.array(plateau)
 
 
@@ -59,7 +59,7 @@ while running:
                     last_played_tile=center
                     played_tiles.append(center)
                     index=tiles_centers.index(center)
-                    i,j=index//11,index%11 #on pourra verifier que si q et r sont tq index=11q+r alors on a bien i,j=q,r
+                    i,j=index//N,index%N #on pourra verifier que si q et r sont tq index=11q+r alors on a bien i,j=q,r
                     plateau[i,j]=color
                     print(plateau)
                     if color=="red": color="blue"

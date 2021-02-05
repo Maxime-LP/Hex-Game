@@ -1,9 +1,8 @@
 import scipy.linalg as lg
+from config import N
 """
 Miscellanous functions
 """
-
-
 
 #Centre de notre repère "fait-maison"
 (x0,y0)=(106,128)
@@ -13,10 +12,10 @@ Miscellanous functions
 tiles_centers=[]
 y0-=20 #initial shift
 x0-=67
-for i in range(1,12):
+for i in range(1,N+1):
     y0=y0+57.7
     x0+=33.6
-    for j in range(1,12):
+    for j in range(1,N+1):
         point=(x0+j*66.7,y0)
         tiles_centers.append(point)
 
