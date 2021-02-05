@@ -114,6 +114,7 @@ while running and it<N*N:
                 index=convert(i,j)
                 x,y=tiles_centers[index]
                 points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
+                played_tiles.append((x,y))
                 pygame.draw.polygon(screen,color,points)
 
                 if color=="red": color="blue"
@@ -130,6 +131,7 @@ while running and it<N*N:
                 index=convert(i,j)
                 x,y=tiles_centers[index]
                 points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
+                played_tiles.append((x,y))
                 pygame.draw.polygon(screen,color,points)
                 color="blue"
             else:
@@ -138,9 +140,30 @@ while running and it<N*N:
                 index=convert(i,j)
                 x,y=tiles_centers[index]
                 points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
+                played_tiles.append((x,y))
                 pygame.draw.polygon(screen,color,points)
                 color="red"
             
             it+=1
 
+
+
     pygame.display.flip()
+
+####
+#Ecran de fin
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: 
+            running = False
+            break
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+                break
+
+    pygame.display.flip()
+
+
+
+
