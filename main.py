@@ -146,24 +146,7 @@ while running and it<N*N:
             
             it+=1
 
-
-
     pygame.display.flip()
-
-####
-#Ecran de fin
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: 
-            running = False
-            break
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                running = False
-                break
-
-    pygame.display.flip()
-
 
 
 
