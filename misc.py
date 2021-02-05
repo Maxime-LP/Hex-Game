@@ -23,7 +23,7 @@ for i in range(1,N+1):
 
 def get_polygon(point):
     """
-    Retourne la liste des points déterminant le polygone contenant le point en argument
+    Retourne la liste des points déterminant le polygone contenant le point entré en argument
     """
     min_point=tiles_centers[0]
     k=0

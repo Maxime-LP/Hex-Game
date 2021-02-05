@@ -2,7 +2,7 @@
 import sys
 import pygame
 import numpy as np
-from misc import get_polygon,tiles_centers,convert
+from misc import get_polygon,tiles_centers,convert,l,h
 from config import N
 from AI import Player_AI
 
@@ -107,8 +107,6 @@ while running and it<N*N:
 
             
             elif color==AI_color:
-                l=64
-                h=74.3
                 i,j=AI.joue(plateau)
                 plateau[i,j]=color
                 index=convert(i,j)
@@ -122,8 +120,6 @@ while running and it<N*N:
                 it+=1
 
         elif gamemode=="aivsai":
-            l=64
-            h=74.3
 
             if color=="red":
                 i,j=AI1.joue(plateau)
@@ -147,6 +143,3 @@ while running and it<N*N:
             it+=1
 
     pygame.display.flip()
-
-
-
