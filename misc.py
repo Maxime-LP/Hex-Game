@@ -25,7 +25,6 @@ def get_polygon(point):
     """
     l=64
     h=74.3
-
     min_point=tiles_centers[0]
     k=0
     while True:

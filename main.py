@@ -3,6 +3,8 @@ import numpy as np
 from misc import get_polygon,tiles_centers
 from config import N
 
+
+#####Initialisations
 pygame.init()
 screen = pygame.display.set_mode((1300,900))
 background = pygame.image.load(f"Hex_board_{N}.png")
@@ -23,17 +25,15 @@ screen.blit(background,(0,0))
 plateau=[['.' for i in range(N)] for j in range(N)]
 plateau=np.array(plateau)
 
-
-#####Initialisation
-#Liste des hexagones posés
 played_tiles=[]
+pygame.display.set_caption("Homemade Hex Game")
+running=True
 #Le joueur bleu commence
 color="blue"
-pygame.display.set_caption("Homemade Hex Game")
-last_played_tile=None
-running=True
+
 
 while running:
+    #integrer un critère d'arrêt
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
@@ -56,13 +56,11 @@ while running:
                 if center not in played_tiles:
                     #On dessine l'hexagone au lieu sélectionné et on change de joueur
                     pygame.draw.polygon(screen,color,points)
-                    last_played_tile=center
-                    played_tiles.append(center)
                     index=tiles_centers.index(center)
-                    i,j=index//N,index%N #on pourra verifier que si q et r sont tq index=11q+r alors on a bien i,j=q,r
+                    i,j=index//N,index%N #Si q et r sont tq index=11q+r alors on a bien i,j=q,r
+                    played_tiles.append(center)
                     plateau[i,j]=color
                     print(plateau)
                     if color=="red": color="blue"
                     else: color="red"
-    
     pygame.display.flip()
