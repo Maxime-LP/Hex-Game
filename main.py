@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pygame
 import numpy as np
 from misc import get_polygon,tiles_centers
