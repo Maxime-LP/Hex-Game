@@ -1,27 +1,8 @@
 import scipy.linalg as lg
-from config import N
 """
 Miscellanous functions
 """
-
-#Centre de notre repère "fait-maison"
-(x0,y0)=(106,128)
-
-l=64
-h=74.3
-
-#On se donne la liste des centres des hexagones
-tiles_centers=[]
-y0-=20 #initial shift
-x0-=67
-for i in range(1,N+1):
-    y0=y0+57.7
-    x0+=33.6
-    for j in range(1,N+1):
-        point=(x0+j*66.7,y0)
-        tiles_centers.append(point)
-
-def get_polygon(point):
+def get_polygon(point,l,h):
     """
     Retourne la liste des points déterminant le polygone contenant le point entré en argument
     """
@@ -42,9 +23,3 @@ def get_polygon(point):
     points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
     return points,min_point
 
-def convert(i,j):
-    """
-    Convertit les coordonnées (i,j) en l'indice de l'hexagone correspondant
-    """
-
-    return i*N + j
