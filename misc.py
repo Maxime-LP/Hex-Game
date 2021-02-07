@@ -2,10 +2,17 @@ import scipy.linalg as lg
 """
 Miscellanous functions
 """
-def get_polygon(point,l,h):
+def get_polygon(point,l,h,tiles_centers=None,center=False):
     """
-    Retourne la liste des points déterminant le polygone contenant le point entré en argument
+    Retourne la liste des points déterminant l'hexagone contenant le point entré en argument
+    L'argument center indique si le point entré est le point central de l'hexagone, auquel cas on a pas besoin
+    de faire tout un calcul fastidieux
     """
+
+    if center:
+        x,y=point
+        return [(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)],point
+
     min_point=tiles_centers[0]
     k=0
     while True:
@@ -22,4 +29,3 @@ def get_polygon(point,l,h):
     x,y=min_point
     points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
     return points,min_point
-

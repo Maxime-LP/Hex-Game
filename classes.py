@@ -1,5 +1,12 @@
 import numpy.random as npr
 from misc import get_polygon
+import numpy as np
+
+###
+#Paramètres globaux déterminant la taille des hexagones joués
+l=64
+h=74.3
+###
 
 class Player_AI():
     """
@@ -10,13 +17,11 @@ class Player_AI():
         self.method=method
     
     def play(self,plateau):
-
+        N1,N2=np.shape(plateau)
         while True:
-            N=self.N
-            self.b
             if self.method=="random":
-                i=npr.randint(0,self.N)
-                j=npr.randint(0,self.N)
+                i=npr.randint(0,N1)
+                j=npr.randint(0,N2)
                 if plateau[i,j]=='.':
                     return i,j
 
@@ -27,32 +32,29 @@ class Player_AI():
                 pass
 
 class Game():
-    l=64
-    h=74.3
-    def __init__(self,gamemode,N,human_color,method):
+    def __init__(self,gamemode,N,human_color=None,method=None,starter="blue"):
         self.gamemode=gamemode
-        self.N=N
-        #le joueur bleu commence
-        self.turn="blue"
+        self.N=int(N)
+        self.turn=starter
 
         #plateau lisible par nos algorithmes
-        plateau=[['.' for i in range(N)] for j in range(N)]
+        plateau=[['.' for i in range(self.N)] for j in range(self.N)]
         plateau=np.array(plateau)
         self.plateau=plateau
         self.played_tiles=played_tiles=[]
 
-        if self.gamemode!="hvsh":
+        if self.gamemode=="hvsh":
             self.human_color=human_color
-        if gamemode=="aivsai":
+        elif self.gamemode=="aivsai":
             self.red=Player_AI("red",method)
             self.blue=Player_AI("blue",method)
-        elif gamemode=="hvsai":
-            human_color=sys.argv[2]
-            if human_color=="blue":
-                AI_color="red"
+        elif self.gamemode=="hvsai":
+            self.human_color=human_color
+            if self.human_color=="blue":
+                self.AI_color="red"
             else:
-                AI_color="blue"
-            self.AI=Player_AI(AI_color,method)
+                self.AI_color="blue"
+            self.AI=Player_AI(self.AI_color,method)
         
         ###Liste des centres des hexagones
         #Centre de notre repère "fait-maison"
@@ -61,10 +63,10 @@ class Game():
         self.tiles_centers=[]
         y0-=20 #initial shift
         x0-=67
-        for i in range(1,N+1):
+        for i in range(1,self.N+1):
             y0=y0+57.7
             x0+=33.6
-            for j in range(1,N+1):
+            for j in range(1,self.N+1):
                 point=(x0+j*66.7,y0)
                 self.tiles_centers.append(point)
 
@@ -75,38 +77,41 @@ class Game():
         return i*self.N + j
 
     def play_turn(self,pos=None):
+        """
+        Retourne les points determinants l'hexagone joué et la couleur de joueur
+        Retourne None,color si l'emplacement choisi est occupé
+        """
         if self.gamemode=="hvsh" or (self.gamemode=="hvsai" and self.turn==self.human_color):
 
-            points,center=get_polygon(pos,l,h)
+            points,center=get_polygon(pos,l,h,self.tiles_centers)
             if center not in self.played_tiles:
                     index=self.tiles_centers.index(center)
-                    i,j=index//N,index%N                                #Si q et r sont tq index = N*q+r alors on a bien i,j = q,r
+                    i,j=index//self.N,index%self.N                                #Si q et r sont tq index = N*q+r alors on a bien i,j = q,r
                     self.played_tiles.append(center)
             else:
                 points=None
             
         elif (self.gamemode=="hvsai" and self.turn!=self.human_color) or self.gamemode=="aivsai":
-
             if self.gamemode=="hvsai":
-                i,j=self.AI.play(plateau)
+                i,j=self.AI.play(self.plateau)
             elif self.gamemode=="aivsai":
                 if self.turn=="blue":
-                    i,j=self.blue.play(plateau)
+                    i,j=self.blue.play(self.plateau)
                 else:
-                    i,j=self.AI.play(plateau)
+                    i,j=self.red.play(self.plateau)
 
-            index=convert(i,j)
+            index=self.convert(i,j)
             x,y=self.tiles_centers[index]
-            points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
-            self.played_tiles.append((x,y))
+            points,center=get_polygon((x,y),l,h,center=True)
+            self.played_tiles.append(center)
         
+        color=self.turn
         if points!=None:
-            color=self.turn
             self.plateau[i,j]=self.turn
             if self.turn=="red":
                 self.turn="blue"
             else: self.turn="red"
-            return points
+            return points,color
         else:
             return points,color
 
@@ -114,14 +119,8 @@ class Game():
         """
         returns the state of the game (finished or not)
         """
+        #version pour tester, il faudrait aussi retourner le vainqueur
         if len(self.played_tiles)==self.N**2:
             return True
-
-
-
-        
-
-
-
-
-
+        else:
+            return False
