@@ -59,40 +59,17 @@ while running:
                 pos=pygame.mouse.get_pos()
 
                 if background.get_at(pos)==(223, 223, 223, 255):
-                    points=Hex.play_turn(pos)
+                    points,color=Hex.play_turn(pos)
                     if points!=None:
-                        pygame.draw.polygon(screen,Hex.turn,points)
+                        pygame.draw.polygon(screen,color,points)
 
-            
             elif Hex.turn==Hex.AI_color:
-                points=Hex.play_turn(pos)
+                points,color=Hex.play_turn(pos)
                 pygame.draw.polygon(screen,color,points)
 
-                
-                it+=1
-
         elif gamemode=="aivsai":
-
-            if color=="red":
-                i,j=AI1.joue(plateau)
-                plateau[i,j]=color
-                index=convert(i,j)
-                x,y=tiles_centers[index]
-                points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
-                played_tiles.append((x,y))
-                pygame.draw.polygon(screen,Hex.turn,points)
-                
-            else:
-                i,j=AI2.joue(plateau)
-                plateau[i,j]=color
-                index=convert(i,j)
-                x,y=tiles_centers[index]
-                points=[(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
-                played_tiles.append((x,y))
-                pygame.draw.polygon(screen,Hex.turn,points)
-                
-            
-            it+=1
+            points,color=Hex.play_turn(pos)
+            pygame.draw.polygon(screen,color,points)
 
     pygame.display.flip()
 input()

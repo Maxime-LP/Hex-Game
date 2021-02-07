@@ -74,7 +74,7 @@ class Game():
         """
         return i*self.N + j
 
-    def play_turn(self,pos):
+    def play_turn(self,pos=None):
         if self.gamemode=="hvsh" or (self.gamemode=="hvsai" and self.turn==self.human_color):
 
             points,center=get_polygon(pos,l,h)
@@ -101,13 +101,14 @@ class Game():
             self.played_tiles.append((x,y))
         
         if points!=None:
+            color=self.turn
             self.plateau[i,j]=self.turn
             if self.turn=="red":
                 self.turn="blue"
             else: self.turn="red"
             return points
         else:
-            return points
+            return points,color
 
     def IsOver(self):
         """
