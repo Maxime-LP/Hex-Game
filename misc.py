@@ -2,12 +2,17 @@ import scipy.linalg as lg
 """
 Miscellanous functions
 """
-def get_polygon(point,l,h,tiles_centers=None,center=False):
+
+def get_polygon(point, tiles_centers=None,center=False):
     """
     Retourne la liste des points déterminant l'hexagone contenant le point entré en argument
     L'argument center indique si le point entré est le point central de l'hexagone, auquel cas on a pas besoin
     de faire tout un calcul fastidieux
     """
+
+    #Paramètres globaux déterminant la taille des hexagones joués
+    l = 64
+    h = 74.3
 
     if center:
         x,y=point
