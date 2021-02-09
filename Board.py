@@ -52,7 +52,7 @@ class Board:
         if center:
             x, y = pos
             hex_vertices = [(x+l/2,y-h/4), (x+l/2,y+h/4), (x,y+h/2), (x-l/2,y+h/4), (x-l/2,y-h/4), (x,y-h/2)]
-            return hex_vertices, tile_center
+            return hex_vertices, pos
 
         min_pos = self.tiles_centers[0]
         k = 0
