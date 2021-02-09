@@ -24,11 +24,11 @@ class Board:
                 self.tiles_centers.append(point)
 
 
-    def board_to_list(self,i,j):
+    def board_to_list(self, pos):
         """
         Convertit les coordonnées (i,j) du plateau en l'indice de l'hexagone correspondant
         """
-        return i*self.N + j
+        return pos[0]*self.size + pos[1]
 
 
     def list_to_bord(self, tile_center):
@@ -50,9 +50,9 @@ class Board:
         h = 74.3
 
         if center:
-            x, y = pos
+            x, y = pos[0], pos[1]
             hex_vertices = [(x+l/2,y-h/4), (x+l/2,y+h/4), (x,y+h/2), (x-l/2,y+h/4), (x-l/2,y-h/4), (x,y-h/2)]
-            return hex_vertices, pos
+            return hex_vertices, tile_center
 
         min_pos = self.tiles_centers[0]
         k = 0

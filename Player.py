@@ -9,25 +9,25 @@ class Player:
         self.color_trad = {1:'red', 2:'blue'}
 
 
-    def put_a_stone(self, pos, board):
+    def put_a_stone(self, pos, board, center=False):
 
-        hex_vertices, tile_center = board.get_polygon(pos)
+        hex_vertices, tile_center = board.get_polygon(pos, center)
 
         if tile_center not in board.played_tiles:
             i, j = board.list_to_bord(tile_center)
             board.board[i,j] = self.color
             board.played_tiles.append(tile_center)
             return hex_vertices
-
         else:
             return None
+
 
 class Human(Player):
 
     def __init__(self, color):
         super().__init__(color)
+   
 
-    
     def plays(self, board):
         have_play = False
         
@@ -41,7 +41,7 @@ class Human(Player):
 
 class AI(Player):
 
-    def __init__(self, color, algorithm):
+    def __init__(self, color, algorithm,center=True):
         super().__init__(color)
 
         algorithms = {
@@ -55,6 +55,10 @@ class AI(Player):
 
     def plays(self, board):
         pos = self.algorithm(board)
-        hex_vertices = self.put_a_stone(pos, board)
+        tile_center = board.board_to_list(pos)
+        # 
+        #PB DE CONVERTION
+        #
+        hex_vertices = self.put_a_stone(tile_center, board, center=True)
         pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
         return True
