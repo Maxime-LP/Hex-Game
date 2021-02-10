@@ -38,7 +38,7 @@ class Board:
         return i, j
 
 
-    def get_polygon(self, pos, tiles_centers=None, center=False):
+    def get_polygon(self, pos, center=False):
         """
         Retourne la liste des poss déterminant l'hexagone contenant le pos entré en argument
         L'argument center indique si le pos entré est le pos central de l'hexagone, auquel cas on a pas besoin
@@ -52,7 +52,7 @@ class Board:
         if center:
             x, y = pos[0], pos[1]
             hex_vertices = [(x+l/2,y-h/4), (x+l/2,y+h/4), (x,y+h/2), (x-l/2,y+h/4), (x-l/2,y-h/4), (x,y-h/2)]
-            return hex_vertices, tile_center
+            return hex_vertices, pos
 
         min_pos = self.tiles_centers[0]
         k = 0

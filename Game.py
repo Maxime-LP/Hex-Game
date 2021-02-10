@@ -44,11 +44,13 @@ class Game:
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
                             print(self.board.board)
-
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
+                    #pause = input('Press ENTER for run game.')
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
+                        print(self.board.board)
+                        pause = input('Press ENTER for play AI.')
 
                 #checks for a win
                 winner = self.check_win(currplayer)

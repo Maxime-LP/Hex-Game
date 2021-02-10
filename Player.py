@@ -12,7 +12,7 @@ class Player:
     def put_a_stone(self, pos, board, center=False):
 
         hex_vertices, tile_center = board.get_polygon(pos, center)
-
+        #print(hex_vertices, tile_center)
         if tile_center not in board.played_tiles:
             i, j = board.list_to_bord(tile_center)
             board.board[i,j] = self.color
@@ -20,7 +20,29 @@ class Player:
             return hex_vertices
         else:
             return None
+    
 
+class AI(Player):
+
+    def __init__(self, color, algorithm):
+        super().__init__(color)
+
+        algorithms = {
+                    'random':run_random, 
+                    'ucb':run_ucb1, 
+                    'mcts':run_mcts
+                    }
+
+        self.algorithm = algorithms[algorithm]
+
+
+    def plays(self, board):
+        pos = self.algorithm(board)
+        tile_center = board.tiles_centers[board.board_to_list(pos)]
+        hex_vertices = self.put_a_stone(tile_center, board, True)
+        if hex_vertices != None:
+            pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
+            return True
 
 class Human(Player):
 
@@ -37,28 +59,3 @@ class Human(Player):
             if hex_vertices != None:
                 pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
                 return True
-    
-
-class AI(Player):
-
-    def __init__(self, color, algorithm,center=True):
-        super().__init__(color)
-
-        algorithms = {
-                    'random':run_random, 
-                    'ucb':run_ucb1, 
-                    'mcts':run_mcts
-                    }
-
-        self.algorithm = algorithms[algorithm]
-
-
-    def plays(self, board):
-        pos = self.algorithm(board)
-        tile_center = board.board_to_list(pos)
-        # 
-        #PB DE CONVERTION
-        #
-        hex_vertices = self.put_a_stone(tile_center, board, center=True)
-        pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
-        return True
