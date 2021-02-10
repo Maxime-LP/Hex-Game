@@ -1,5 +1,6 @@
 import numpy as np
 import pygame
+from time import sleep
 
 
 class Game:
@@ -10,24 +11,19 @@ class Game:
         self.turn = 0
         self.on = True
 
-    def check_win(self, player_color):
-        # if condition de fin: return players_name
-        # si le plateau est plein en attendant ...
-        #if len(self.board)==self.N**2:
-            #return True
-        #if no wins, return false
+    def check_win(self, currplayer):
+        if len(self.board.played_tiles) == self.board.size**2:
+            return currplayer
         return False
-
-    def game_over(self, player_color):
-            print(f"It's over! {player_color}s wins!")
+            
 
     def run(self):
 
         while self.on:
 
-            currplayer = self.players[self.turn]
-
             for event in pygame.event.get():
+
+                currplayer = self.players[self.turn]
 
                 # when QUIT button is press
                 if event.type == pygame.QUIT: 
@@ -44,19 +40,23 @@ class Game:
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
                             print(self.board.board)
+                
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
-                    #pause = input('Press ENTER for run game.')
+                    sleep(0.2)
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
                         print(self.board.board)
-                        pause = input('Press ENTER for play AI.')
 
                 #checks for a win
                 winner = self.check_win(currplayer)
+
                 #if win, declare win and break loop
                 if winner != False:
-                    self.game_over(winner.color)
                     self.on = False
+                    print(f"It's over : {winner.color_trad[winner.color]} stones won!")
+                    break
 
-            pygame.display.flip()
+                pygame.display.flip()
+
+        return

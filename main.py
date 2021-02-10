@@ -7,6 +7,7 @@ from Board import Board
 
 
 ##### Initialisations de la fenêtre graphique #####
+
 board_size = sys.argv[3]
 
 pygame.init()
@@ -25,21 +26,22 @@ pygame.display.set_caption("Hex")
 #appliquer l'image du plateau de jeu
 screen.blit(background,(0,0))
 
+#####################################################
+
+
+
 ##### Initialisation des instances Game, Player #####
 
 #init boardgame
 board = Board(board_size, background, screen)
 
-'''
-player1 = Player(int(sys.argv[1]), 1)
-player2 = Player(int(sys.argv[2]), 2)
-'''
+#init player
 if sys.argv[1] == '0':
     player1 = Human(1)
 elif sys.argv[1] == '1':
     player1 = AI(1, 'random')
 else:
-    print('Veuilliez saisir un type de joueur : 0 ou 1')
+    print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
 
 if sys.argv[2] == '0':
@@ -47,7 +49,7 @@ if sys.argv[2] == '0':
 elif sys.argv[2] == '1':
     player2 = AI(2, 'random')
 else:
-    print('Veuilliez saisir un type de joueur : 0 ou 1')
+    print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
 
 
@@ -57,3 +59,5 @@ game = Game(board, player1, player2)
 
 ##### Boucle principale #####
 game.run()
+
+#####################################################

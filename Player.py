@@ -12,7 +12,7 @@ class Player:
     def put_a_stone(self, pos, board, center=False):
 
         hex_vertices, tile_center = board.get_polygon(pos, center)
-        #print(hex_vertices, tile_center)
+
         if tile_center not in board.played_tiles:
             i, j = board.list_to_bord(tile_center)
             board.board[i,j] = self.color
@@ -44,6 +44,7 @@ class AI(Player):
             pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
             return True
 
+
 class Human(Player):
 
     def __init__(self, color):
@@ -52,7 +53,6 @@ class Human(Player):
 
     def plays(self, board):
         have_play = False
-        
         pos = pygame.mouse.get_pos()
         if board.background.get_at(pos) == (223, 223, 223, 255):
             hex_vertices = self.put_a_stone(pos, board)
