@@ -55,7 +55,7 @@ class Game:
                 if winner != False:
                     self.on = False
                     print(f"It's over : {winner.color_trad[winner.color]} stones won!")
-                    break
+                    #break
 
                 pygame.display.flip()
 
