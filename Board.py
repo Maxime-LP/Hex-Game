@@ -77,16 +77,18 @@ class Board:
     def __str__(self):
             """ This function returns a string containing the current state of the board """
             schema = ""
-            headers = "  "
-            alphabet = list(string.ascii_uppercase)
+            headers = "     "
+            alphabet = list(string.ascii_uppercase) 
             alphabet.reverse()
+
+            red_line_top = headers.__add__("\033[31m--\033[0m" * (len(self.board)))
 
             i = 0
             for line in self.board:
                 line_txt = ""
                 headers += alphabet.pop().__add__(" ")
 
-                line_txt += str(f" {i+1}").__add__(' ' * (i + 1)) if i < 9 else str(i + 1).__add__(' ' * (i + 1))
+                line_txt += str(f" {i+1}").__add__(' ' * (i + 1)).__add__("\033[34m \\ \033[0m") if i < 9 else str(i + 1).__add__(' ' * (i + 1)).__add__("\033[34m \\ \033[0m")
 
                 for stone in line:
                     if stone == 0:
@@ -96,8 +98,11 @@ class Board:
                     else:
                         line_txt += "\033[34m⬢ \033[0m" #blue
 
-                schema += line_txt.__add__("\n")
+                schema += line_txt.__add__("\033[34m \\ \033[0m").__add__("\n")
 
                 i = i + 1
 
-            return headers.__add__("\n") + schema
+            
+            red_line_bottom = (" " * (self.size)) + red_line_top
+
+            return headers + "\n" + (red_line_top) + "\n" + schema + red_line_bottom
