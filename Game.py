@@ -39,14 +39,14 @@ class Game:
                     if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
-                            print(self.board.board)
+                            print(self.board)
                 
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
                     sleep(0.2)
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
-                        print(self.board.board)
+                        print(self.board)
 
                 #checks for a win
                 winner = self.check_win(currplayer)
@@ -55,7 +55,7 @@ class Game:
                 if winner != False:
                     self.on = False
                     print(f"It's over : {winner.color_trad[winner.color]} stones won!")
-                    #break
+                    break
 
                 pygame.display.flip()
 

@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.linalg as lg
+import string
 
 class Board:
 
@@ -71,3 +72,32 @@ class Board:
         x, y = min_pos
         hex_vertices = [(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
         return hex_vertices, min_pos
+
+
+    def __str__(self):
+            """ This function returns a string containing the current state of the board """
+            schema = ""
+            headers = "  "
+            alphabet = list(string.ascii_uppercase)
+            alphabet.reverse()
+
+            i = 0
+            for line in self.board:
+                line_txt = ""
+                headers += alphabet.pop().__add__(" ")
+
+                line_txt += str(f" {i+1}").__add__(' ' * (i + 1)) if i < 9 else str(i + 1).__add__(' ' * (i + 1))
+
+                for stone in line:
+                    if stone == 0:
+                        line_txt += "⬡ "
+                    elif stone == 1:
+                        line_txt +=  "\033[31m⬢ \033[0m" # red
+                    else:
+                        line_txt += "\033[34m⬢ \033[0m" #blue
+
+                schema += line_txt.__add__("\n")
+
+                i = i + 1
+
+            return headers.__add__("\n") + schema
