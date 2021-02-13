@@ -6,7 +6,7 @@ from Player import Player, Human, AI
 from Board import Board
 
 
-##### Initialisations de la fenêtre graphique #####
+############### Init graphical window ################
 
 board_size = sys.argv[3]
 
@@ -30,12 +30,12 @@ screen.blit(background,(0,0))
 
 
 
-##### Initialisation des instances Game, Player #####
+##### Init Game, Player and Board instances #####
 
 #init boardgame
 board = Board(board_size, background, screen)
 
-#init player
+#init players
 if sys.argv[1] == '0':
     player1 = Human(1)
 elif sys.argv[1] == '1':
@@ -56,8 +56,11 @@ else:
 #init game
 game = Game(board, player1, player2)
 
+#####################################################
 
-##### Boucle principale #####
+
+##################### Let's play ####################
+
 game.run()
 
 #####################################################

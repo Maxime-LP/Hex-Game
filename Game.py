@@ -12,8 +12,10 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
+        # à supprimer car il y a forcement un gagnant
         if len(self.board.played_tiles) == self.board.size**2:
             return currplayer
+
         return False
             
 
@@ -43,7 +45,6 @@ class Game:
                 
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
-                    sleep(0.2)
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
                         print(self.board)
