@@ -16,6 +16,10 @@ class Game:
         if len(self.board.played_tiles) == self.board.size**2:
             return currplayer
 
+        #elif self.currplayer == 1:
+        #   return self._is_connected(self._left(), self._right(), 1)
+        #return self._is_connected(self._top(), self._bottom(), 2)
+
         return False
             
 
@@ -55,9 +59,19 @@ class Game:
                 #if win, declare win and break loop
                 if winner != False:
                     self.on = False
-                    print(f"It's over : {winner.color_trad[winner.color]} stones won!")
+                    print(f"It's over : {winner.name} stones won!")
                     break
 
                 pygame.display.flip()
 
         return
+        
+'''
+    def reset(self):
+        """Resets the game."""
+        self.grid = [[EMPTY for _ in range(self.size)]
+                     for _ in range(self.size)]
+        self._create_graph()
+        self.current = BLUE
+        self.winner = None
+'''

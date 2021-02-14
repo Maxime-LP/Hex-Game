@@ -1,12 +1,15 @@
-#from misc import get_polygon
 import pygame
 from Algorithm_AI import run_random, run_ucb1, run_mcts
+
+"""
+Description du fichier.
+"""
 
 class Player:
 
     def __init__(self, color):
         self.color = color
-        self.color_trad = {1:'red', 2:'blue'}
+        self.name = 'Red player' if self.color==1 else 'Blue player'
 
 
     def put_a_stone(self, pos, board, center=False):
@@ -57,5 +60,6 @@ class Human(Player):
         if board.background.get_at(pos) == (223, 223, 223, 255):
             hex_vertices = self.put_a_stone(pos, board)
             if hex_vertices != None:
-                pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
+                color = 'red' if self.color==1 else 'blue'
+                pygame.draw.polygon(board.screen, color, hex_vertices)
                 return True
