@@ -1,6 +1,4 @@
-import numpy as np
 import pygame
-from time import sleep
 
 
 class Game:
@@ -16,12 +14,19 @@ class Game:
         if len(self.board.played_tiles) == self.board.size**2:
             return currplayer
 
-        #elif self.currplayer == 1:
-        #   return self._is_connected(self._left(), self._right(), 1)
-        #return self._is_connected(self._top(), self._bottom(), 2)
-
+        #elif currplayer.color == 1:
+        #   return self.is_connected(self._left(), self._right(), 1)
+        #return self.is_connected(self._top(), self._bottom(), 2)
         return False
-            
+
+    '''    
+    def reset(self):
+        """Resets the game."""
+        self.board.board = np.zeros((self.board.size, self.board.size))
+        self.turn = 0
+        self.on = True
+        self.run()
+    '''
 
     def run(self):
 
@@ -45,13 +50,13 @@ class Game:
                     if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
-                            print(self.board)
+                            #print(self.board)
                 
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
-                        print(self.board)
+                        #print(self.board)
 
                 #checks for a win
                 winner = self.check_win(currplayer)
@@ -59,19 +64,8 @@ class Game:
                 #if win, declare win and break loop
                 if winner != False:
                     self.on = False
-                    print(f"It's over : {winner.name} stones won!")
+                    print(f"It's over! {winner.name} stones won!")
                     break
 
                 pygame.display.flip()
-
         return
-        
-'''
-    def reset(self):
-        """Resets the game."""
-        self.grid = [[EMPTY for _ in range(self.size)]
-                     for _ in range(self.size)]
-        self._create_graph()
-        self.current = BLUE
-        self.winner = None
-'''

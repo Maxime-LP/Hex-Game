@@ -1,13 +1,14 @@
-import numpy as np
 import scipy.linalg as lg
 import string
+import networkx as nx
 
 class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
-        self.board = np.zeros((self.size, self.size))
+        self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
+        self.graph = nx.Graph()
         self.background = background
         self.screen = screen
 
@@ -78,6 +79,7 @@ class Board:
 #####################################################
 
 
+################  Console display  ##################
 
     def __str__(self):
         """ This function returns a string containing the current state of the board """
@@ -93,15 +95,16 @@ class Board:
             line_txt = ""
             headers += alphabet.pop() + " "
 
-            line_txt += str(f" {i+1}")  + str(' ' * (i + 1)) + "\033[34m \\ \033[0m" if i < 9 else str(i + 1)  + str(' ' * (i + 1)) + "\033[34m \\ \033[0m"
+            line_txt += str(f" {i+1}")  + str(' ' * (i + 1))  + "\033[34m \\ \033[0m" if i < 9 \
+                        else str(i + 1) + str(' ' * (i + 1)) + "\033[34m \\ \033[0m"
 
             for stone in line:
                 if stone == 0:
                     line_txt += "⬡ "
                 elif stone == 1:
-                    line_txt +=  "\033[31m⬢ \033[0m" # red
+                    line_txt +=  "\033[31m⬢ \033[0m" # 31=red
                 else:
-                    line_txt += "\033[34m⬢ \033[0m" #blue
+                    line_txt += "\033[34m⬢ \033[0m" # 34=blue
 
             schema += line_txt + "\033[34m \\ \033[0m" + "\n"
 
@@ -110,4 +113,7 @@ class Board:
         
         red_line_bottom = (" " * (self.size)) + red_line_top
 
-        return headers + "\n" + (red_line_top) + "\n" + schema + red_line_bottom
+        return headers + "\n" + (red_line_top) + "\n" \
+                + schema + red_line_bottom
+
+#####################################################

@@ -14,11 +14,13 @@ class Player:
 
     def put_a_stone(self, pos, board, center=False):
 
-        hex_vertices, tile_center = board.get_polygon(pos, center)
+        #
 
+        #
+        hex_vertices, tile_center = board.get_polygon(pos, center)
         if tile_center not in board.played_tiles:
             i, j = board.list_to_bord(tile_center)
-            board.board[i,j] = self.color
+            board.board[i][j] = self.color
             board.played_tiles.append(tile_center)
             return hex_vertices
         else:
@@ -44,7 +46,8 @@ class AI(Player):
         tile_center = board.tiles_centers[board.board_to_list(pos)]
         hex_vertices = self.put_a_stone(tile_center, board, True)
         if hex_vertices != None:
-            pygame.draw.polygon(board.screen, self.color_trad[self.color], hex_vertices)
+            color = 'red' if self.color==1 else 'blue'
+            pygame.draw.polygon(board.screen, color, hex_vertices)
             return True
 
 
