@@ -1,5 +1,6 @@
 import scipy.linalg as lg
 import string
+import numpy as np
 
 class Board:
 
@@ -31,7 +32,7 @@ class Board:
                 self.tiles_centers.append(point)
 
 
-######## Convert point and coord for display ###########
+## Convert point and coord for display ##############################
 
     def coord_to_action(self, i, j):
         """
@@ -87,20 +88,30 @@ class Board:
         hex_vertices = [(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
         return hex_vertices, min_pos
 
-#####################################################
-
-## Bijection between board tiles (i,j) and actions ##
-
-    def _2d_to_1d(self, i, j):
-        return i * self.size + j
-
-    def _1d_to_2d(self, action):
-        return action // self.size, action % self.size
-
-#####################################################
+###############################################################
 
 
-################  Console display  ##################
+## Fonction for create edge between same colored tiles ########
+
+    def get_neighbors(self, i, j):
+        """
+        It does work with coord we must work with actions in order to 
+        create edges.
+        get_nei"""
+        b = np.array(self.board)
+        neighbors = b[(i - 1):(i + 2), (j - 1):(j + 2)].copy()
+        #neighbors[0, 0] = 0
+        #neighbors[2, 2] = 0
+        nb_neighbors = sorted(set(neighbors.flatten().tolist()))
+        print(nb_neighbors)
+        print(neighbors)
+        return neighbors
+
+
+###############################################################
+
+
+## Console display  ###########################################
 
     def __str__(self):
         """ This function returns a string containing the current state of the board """
@@ -137,4 +148,4 @@ class Board:
         return headers + "\n" + (red_line_top) + "\n" \
                 + schema + red_line_bottom
 
-#####################################################
+##############################################################

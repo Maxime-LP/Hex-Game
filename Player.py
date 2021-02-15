@@ -24,11 +24,15 @@ class Player:
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
-            
+
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
             board.played_tiles.append(board.actions.pop(action_index))
+
+            neighbours = board.get_neighbors(i,j)
+
             return hex_vertices
+
         else:
             return None
     

@@ -2,7 +2,7 @@
 import sys
 import pygame
 from Game import Game
-from Player import Player, Human, AI
+from Player import Human, AI
 from Board import Board
 
 """

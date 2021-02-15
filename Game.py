@@ -29,6 +29,7 @@ class Game:
     '''
 
     def run(self):
+        compteur = 0
 
         while self.on:
 
@@ -42,7 +43,7 @@ class Game:
                 #if win, declare win and break loop
                 if winner != False:
                     self.on = False
-                    print(f"It's over! {winner.name} stones won!")
+                    print(f"It's over! {winner.name} won!")
                     break
 
                 # when QUIT button is press
@@ -66,6 +67,8 @@ class Game:
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
                         print(self.board)
+                        compteur += 1
+                        print(compteur)
 
                 pygame.display.flip()
         return
