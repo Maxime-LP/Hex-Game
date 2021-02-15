@@ -1,6 +1,5 @@
 import scipy.linalg as lg
 import string
-import networkx as nx
 
 class Board:
 
@@ -8,7 +7,13 @@ class Board:
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
-        self.graph = nx.Graph()
+
+        self.actions = list(range(self.size**2))
+        self.north = 1
+        self.south = 2
+        self.east = 3
+        self.west = 4
+
         self.background = background
         self.screen = screen
 
@@ -28,14 +33,20 @@ class Board:
 
 ######## Convert point and coord for display ###########
 
-    def board_to_list(self, pos):
+    def coord_to_action(self, i, j):
         """
-        Convert board coord (i,j) to hexagon index
+        Convert board coord (i,j) to hexagon index in board.actions
         """
-        return pos[0]*self.size + pos[1]
+        return i * self.size + j
 
 
-    def list_to_bord(self, tile_center):
+    def action_to_coord(self, action):
+        """Convert hexagon index in board.actions to board coord (i,j)"""
+        return action // self.size, action % self.size
+
+
+    def center_to_coord(self, tile_center):
+        """Convert tile_center to board coord (i,j)"""
         index  = self.tiles_centers.index(tile_center)
         i = index // self.size
         j = index % self.size
@@ -75,6 +86,16 @@ class Board:
         x, y = min_pos
         hex_vertices = [(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
         return hex_vertices, min_pos
+
+#####################################################
+
+## Bijection between board tiles (i,j) and actions ##
+
+    def _2d_to_1d(self, i, j):
+        return i * self.size + j
+
+    def _1d_to_2d(self, action):
+        return action // self.size, action % self.size
 
 #####################################################
 

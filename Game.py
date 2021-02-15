@@ -11,7 +11,7 @@ class Game:
 
     def check_win(self, currplayer):
         # à supprimer car il y a forcement un gagnant
-        if len(self.board.played_tiles) == self.board.size**2:
+        if self.board.actions == []:
             return currplayer
 
         #elif currplayer.color == 1:
@@ -36,6 +36,15 @@ class Game:
 
                 currplayer = self.players[self.turn]
 
+                #checks for a win
+                winner = self.check_win(currplayer)
+
+                #if win, declare win and break loop
+                if winner != False:
+                    self.on = False
+                    print(f"It's over! {winner.name} stones won!")
+                    break
+
                 # when QUIT button is press
                 if event.type == pygame.QUIT: 
                     self.on = False
@@ -50,22 +59,13 @@ class Game:
                     if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
-                            #print(self.board)
+                            print(self.board)
                 
                 # curent machine player plays
                 elif currplayer.__class__.__name__ == 'AI':
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
-                        #print(self.board)
-
-                #checks for a win
-                winner = self.check_win(currplayer)
-
-                #if win, declare win and break loop
-                if winner != False:
-                    self.on = False
-                    print(f"It's over! {winner.name} stones won!")
-                    break
+                        print(self.board)
 
                 pygame.display.flip()
         return

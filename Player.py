@@ -1,4 +1,5 @@
 import pygame
+import networkx as nx
 from Algorithm_AI import run_random, run_ucb1, run_mcts
 
 """
@@ -10,18 +11,23 @@ class Player:
     def __init__(self, color):
         self.color = color
         self.name = 'Red player' if self.color==1 else 'Blue player'
+        self.graph = nx.Graph()
 
 
     def put_a_stone(self, pos, board, center=False):
-
-        #
-
-        #
-        hex_vertices, tile_center = board.get_polygon(pos, center)
-        if tile_center not in board.played_tiles:
-            i, j = board.list_to_bord(tile_center)
+        # get the center and the vertices' hex where the current player clicked
+        hex_vertices, tile_center = board.get_polygon(pos)
+        i, j = board.center_to_coord(tile_center)
+        #add edges to graph's current player
+        #neighbours = get_neighbour(i, j)
+        #self.graph.add_edges_from(neighbours)
+        
+        if board.board[i][j] == 0:
             board.board[i][j] = self.color
-            board.played_tiles.append(tile_center)
+            
+            action = board.coord_to_action(i,j)
+            action_index = board.actions.index(action)
+            board.played_tiles.append(board.actions.pop(action_index))
             return hex_vertices
         else:
             return None
@@ -43,7 +49,7 @@ class AI(Player):
 
     def plays(self, board):
         pos = self.algorithm(board)
-        tile_center = board.tiles_centers[board.board_to_list(pos)]
+        tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
         hex_vertices = self.put_a_stone(tile_center, board, True)
         if hex_vertices != None:
             color = 'red' if self.color==1 else 'blue'
