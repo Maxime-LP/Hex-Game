@@ -14,9 +14,9 @@ class Game:
         if self.board.actions == []:
             return currplayer
 
-        #elif currplayer.color == 1:
-        #   return self.is_connected(self._left(), self._right(), 1)
-        #return self.is_connected(self._top(), self._bottom(), 2)
+        elif currplayer.color == 2:
+           return self.is_connected(self._left(), self._right(), 1)
+        return self.is_connected(self._top(), self._bottom(), 2)
         return False
 
     '''    
@@ -29,7 +29,6 @@ class Game:
     '''
 
     def run(self):
-        compteur = 0
 
         while self.on:
 
@@ -68,7 +67,6 @@ class Game:
                         self.turn = 1 - self.turn
                         print(self.board)
                         compteur += 1
-                        print(compteur)
 
                 pygame.display.flip()
         return
