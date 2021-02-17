@@ -5,6 +5,10 @@ from Game import Game
 from Player import Human, AI
 from Board import Board
 
+#Le module colorama permet de traduire les séquences ANSI en appels systèmes Win32 lisibles par une console windows
+import colorama
+colorama.init()
+
 """
 Description du fichier
 """
