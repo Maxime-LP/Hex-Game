@@ -10,39 +10,42 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
-        #1 correspond au rouge et 2 au bleu
+        """
+        Checks if a the current player won the game. Returns the winner's name if there is any or None if there is none.
+        It checks if there is a path in the graph between two opposite nodes : left and right for the blue player, up and down for the red one
+        1 : red player
+        2 : blue player
+        """
+        player=nx.get_node_attributes(self.board.graph,'player')
+        size=self.board.size
+
         if currplayer.color==1:
             #On commence en haut
-            color=nx.get_node_attributes(self.board.graph,'player')
-            for j in range(self.board.size):
-                if color[(0,j)]==1:
-                    
-                    for j in range(self.board.size):
-                        if nx.has_path(self.board.graph,(0,j),(self.board.size-1,j)):
-                            return currplayer.name
-            return None
-        else:
-            #On commence à gauche
-            color=nx.get_node_attributes(self.board.graph,'player')
-            #print(self.board.graph.edges())
-            for i in range(self.board.size):
-                if color[(i,0)]==2:
-                    for j in range(self.board.size):
-                        if nx.has_path(self.board.graph,(0,j),(self.board.size-1,j)):
-                            return currplayer.name
-            return None
+            for j in range(size):
+                upper_node=(0,j)
 
-        """
-        if self.board.actions == []:
-            return currplayer
-        """
-        # future condition d'arret
-        '''
-        elif currplayer.color == 2:
-           return self.is_connected(self._left(), self._right(), 1)
-        return self.is_connected(self._top(), self._bottom(), 2)
-        '''
-        return False
+                if player[upper_node]==1:
+                    for i in range(size):
+                        lower_node=(size-1,i)
+                        
+                        if player[lower_node]==1:
+                            if nx.has_path(self.board.graph,upper_node,lower_node):
+                                return currplayer.name
+
+        elif currplayer.color==2:
+            #On commence à gauche
+            for i in range(size):
+                left_node=(i,0)
+
+                if player[left_node]==2:
+                    for j in range(size):
+                        right_node=(j,size-1)
+
+                        if player[right_node]==2:
+                            if nx.has_path(self.board.graph,left_node,right_node):
+                                return currplayer.name
+
+        return None
 
     '''    
     def reset(self):
@@ -56,25 +59,14 @@ class Game:
     def run(self):
 
         while self.on:
-
             for event in pygame.event.get():
-
                 currplayer = self.players[self.turn]
 
-                #checks for a win
-                winner = self.check_win(currplayer)
-
-                #if win, declare win and break loop
-                if winner != None:
-                    self.on = False
-                    print(f"It's over! {winner} won!")
-                    break
-
-                # when QUIT button is press
+                # upon pressing QUIT button
                 if event.type == pygame.QUIT: 
                     self.on = False
                 
-                # when ESC button is press
+                # ESC button
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.on = False
@@ -96,4 +88,12 @@ class Game:
                         print(self.board)
 
                 pygame.display.flip()
+
+                #looking for a winner
+                winner = self.check_win(currplayer)
+                if winner != None:
+                    self.on = False
+                    print(f"It's over! {winner} won!")
+                    break
+
         return

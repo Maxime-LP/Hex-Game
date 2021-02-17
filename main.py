@@ -8,11 +8,14 @@ import colorama # translate ANSI sequence for Windows
 colorama.init()
 
 """
-Description du fichier
+CONTROLS :
+
+ESC : Quit the game
+G : Display the current graph of the board
 """
 
 
-############### Init graphical window ################
+############### Init window ################
 
 board_size = sys.argv[3]
 
@@ -36,7 +39,7 @@ screen.blit(background,(0,0))
 
 
 
-####### Init Game, Player and Board instances #######
+####### Init Game, Players and Board instances #######
 
 #init boardgame
 board = Board(board_size, background, screen)
