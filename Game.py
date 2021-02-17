@@ -10,6 +10,8 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
+        #On va utiliser un graphe et la fonction nx.communicability()
+
         # à supprimer car il y a forcement un gagnant
         if self.board.actions == []:
             return currplayer
