@@ -108,11 +108,14 @@ class Board:
         """
         b = np.array(self.board)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         neighbors = b[(i - 1):(i + 2), (j - 1):(j + 2)].copy()
         #neighbors[0, 0] = 0
         #neighbors[2, 2] = 0
         nb_neighbors = sorted(set(neighbors.flatten().tolist()))
 =======
+=======
+>>>>>>> Stashed changes
         neighbors=[]
         for x in range(-1,3):
             for y in range(-1,3):
@@ -121,6 +124,9 @@ class Board:
                 except IndexError:
                     #The neighbour is outside of the board !
                     pass
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         return neighbors
 
