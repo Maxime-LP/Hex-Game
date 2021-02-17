@@ -28,6 +28,7 @@ class Player:
             #Creating the edge between the played tile and the neighbood tiles of the same color
             neighbours = board.get_neighbors(i,j)
             color=nx.get_node_attributes(board.graph,'player')
+            
             for neighbour in neighbours:
                 if color[neighbour]==self.color:
                     board.graph.add_edge(neighbour,(i,j))
