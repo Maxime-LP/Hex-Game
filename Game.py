@@ -68,7 +68,6 @@ class Game:
                     if currplayer.plays(self.board):
                         self.turn = 1 - self.turn
                         print(self.board)
-                        compteur += 1
 
                 pygame.display.flip()
         return

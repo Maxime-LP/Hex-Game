@@ -30,7 +30,8 @@ class Player:
             board.played_tiles.append(board.actions.pop(action_index))
 
             neighbours = board.get_neighbors(i,j)
-
+            #create edgzs
+            
             return hex_vertices
 
         else:
