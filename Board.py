@@ -103,8 +103,6 @@ class Board:
         #neighbors[0, 0] = 0
         #neighbors[2, 2] = 0
         nb_neighbors = sorted(set(neighbors.flatten().tolist()))
-        print(nb_neighbors)
-        print(neighbors)
         return neighbors
 
 
@@ -142,7 +140,6 @@ class Board:
 
             i = i + 1
 
-        
         red_line_bottom = (" " * (self.size)) + red_line_top
 
         return headers + "\n" + (red_line_top) + "\n" \
