@@ -13,22 +13,13 @@ class Game:
         # à supprimer car il y a forcement un gagnant
         if self.board.actions == []:
             return currplayer
-        # future condition d'arret
         '''
-        elif currplayer.color == 2:
-           return self.is_connected(self._left(), self._right(), 1)
-        return self.is_connected(self._top(), self._bottom(), 2)
+        if currplayer.color == 1:
+           return has_path(self.currplayer.graph, self.board.north, self.board.south)
+        return has_path(self.currplayer.graph, self.board.east, self.board.west)
         '''
         return False
 
-    '''    
-    def reset(self):
-        """Resets the game."""
-        self.board.board = np.zeros((self.board.size, self.board.size))
-        self.turn = 0
-        self.on = True
-        self.run()
-    '''
 
     def run(self):
 
@@ -71,3 +62,13 @@ class Game:
 
                 pygame.display.flip()
         return
+
+
+    '''    
+    def reset(self):
+        """Resets the game."""
+        self.board.board = np.zeros((self.board.size, self.board.size))
+        self.turn = 0
+        self.on = True
+        self.run()
+    '''

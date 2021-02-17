@@ -15,12 +15,10 @@ class Player:
 
 
     def put_a_stone(self, pos, board, center=False):
+
         # get the center and the vertices' hex where the current player clicked
         hex_vertices, tile_center = board.get_polygon(pos)
         i, j = board.center_to_coord(tile_center)
-        #add edges to graph's current player
-        #neighbours = get_neighbour(i, j)
-        #self.graph.add_edges_from(neighbours)
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
@@ -28,10 +26,13 @@ class Player:
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
             board.played_tiles.append(board.actions.pop(action_index))
-
-            neighbours = board.get_neighbors(i,j)
-            #create edgzs
             
+            '''
+            for neighbor in board.graph.neighbors(action):
+                if nx.get_node_attributes(G, 'player')[neighbour]==self.color:
+                    self.graph.add_edge(action, neighbour)
+            '''
+
             return hex_vertices
 
         else:

@@ -1,19 +1,31 @@
 import scipy.linalg as lg
 import string
 import numpy as np
+#from graph_test import edges
+import networkx as nx
 
 class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
+        #init board with 0 everywhere
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
-
+        #(1,1)=0, ..., (size, size)= size^2
         self.actions = list(range(self.size**2))
-        self.north = 1
-        self.south = 2
-        self.east = 3
-        self.west = 4
+
+        '''
+        self.north, self.east, self.south, self.west = \
+                                [i+self.size for i in range(1,5)]
+        self.graph = nx.Graph()
+        self.graph.add_nodes_from(self.actions, player=0)
+        #49=north, 51=south
+        self.graph.add_nodes_from([north,south], player=1)
+        #50=east, , 52=west
+        self.graph.add_nodes_from([east,west], player=2)
+        #add edges with a tile and its neighbors
+        #self.graph.add_edges_from([    A faire    ]) <-----
+        '''
 
         self.background = background
         self.screen = screen

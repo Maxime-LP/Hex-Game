@@ -4,9 +4,7 @@ import pygame
 from Game import Game
 from Player import Human, AI
 from Board import Board
-
-#Le module colorama permet de traduire les séquences ANSI en appels systèmes Win32 lisibles par une console windows
-import colorama
+import colorama # translate ANSI sequence for Windows
 colorama.init()
 
 """
