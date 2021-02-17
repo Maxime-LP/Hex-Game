@@ -11,7 +11,6 @@ class Player:
     def __init__(self, color):
         self.color = color
         self.name = 'Red player' if self.color==1 else 'Blue player'
-        self.graph = nx.Graph()
 
 
     def put_a_stone(self, pos, board, center=False):
@@ -29,9 +28,11 @@ class Player:
             action_index = board.actions.index(action)
             board.played_tiles.append(board.actions.pop(action_index))
 
+            #create edge
             neighbours = board.get_neighbors(i,j)
-            #create edgzs
-            
+            board.graph.add_edges_from([(neighbour,(i,j)) for neighbour in neighbours])
+            board.add_node((i,j),player=self.color)
+
             return hex_vertices
 
         else:

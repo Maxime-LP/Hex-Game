@@ -1,5 +1,5 @@
 import pygame
-
+import networkx as nx
 
 class Game:
     
@@ -10,7 +10,12 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
-        #On va utiliser un graphe et la fonction nx.communicability()
+        #On va utiliser un graphe et la fonction has_path(G, source, target)
+        color = currplayer.color
+        nx.get_node_attributes(board.graph)
+        for node in board.graph.nodes():
+            
+
 
         # à supprimer car il y a forcement un gagnant
         if self.board.actions == []:

@@ -1,6 +1,8 @@
 import scipy.linalg as lg
 import string
 import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
 
 class Board:
 
@@ -8,6 +10,12 @@ class Board:
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
+
+        #Représentation en graph du plateau, ce qui sera utile pour les vérifications de fin de partie
+        graph=nx.Graph()
+        for i in range(self.size):
+            graph.add_nodes_from([(i,j) for j in range(self.size)])
+        self.graph=graph
 
         self.actions = list(range(self.size**2))
         self.north = 1
@@ -91,18 +99,29 @@ class Board:
 ###############################################################
 
 
-## Fonction for create edge between same colored tiles ########
+## Fonction to create edge between tiles of the same color ########
 
     def get_neighbors(self, i, j):
         """
         It does work with coord we must work with actions in order to 
         create edges.
-        get_nei"""
+        """
         b = np.array(self.board)
+<<<<<<< Updated upstream
         neighbors = b[(i - 1):(i + 2), (j - 1):(j + 2)].copy()
         #neighbors[0, 0] = 0
         #neighbors[2, 2] = 0
         nb_neighbors = sorted(set(neighbors.flatten().tolist()))
+=======
+        neighbors=[]
+        for x in range(-1,3):
+            for y in range(-1,3):
+                try:
+                    neighbors.append((i+x,j+y))
+                except IndexError:
+                    #The neighbour is outside of the board !
+                    pass
+>>>>>>> Stashed changes
         return neighbors
 
 
