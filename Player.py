@@ -23,15 +23,18 @@ class Player:
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
-
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
             board.played_tiles.append(board.actions.pop(action_index))
+            board.graph.add_node((i,j),player=self.color)
 
-            #create edge
+            #Creating the edge between the played tile and the neighbood tiles of the same color
             neighbours = board.get_neighbors(i,j)
-            board.graph.add_edges_from([(neighbour,(i,j)) for neighbour in neighbours])
-            board.add_node((i,j),player=self.color)
+            color=nx.get_node_attributes(board.graph,'player')
+            for k in range(len(neighbours)):
+                neighbour=neighbours[k]
+                if color[neighbour]==self.color:
+                    board.graph.add_edge(neighbour,(i,j))
 
             return hex_vertices
 

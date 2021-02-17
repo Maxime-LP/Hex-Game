@@ -10,16 +10,33 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
-        #On va utiliser un graphe et la fonction has_path(G, source, target)
-        color = currplayer.color
-        nx.get_node_attributes(board.graph)
-        for node in board.graph.nodes():
-            
+        #1 correspond au rouge et 2 au bleu
 
+        if currplayer.color==1:
+            #On commence en haut
+            color=nx.get_node_attributes(self.board.graph,'player')
+            print(self.board.graph.edges())
+            for j in range(self.board.size):
+                if color[(0,j)]=='RED':
+                    for j in range(self.board.size):
+                        if nx.has_path(self.board.graph,(0,j),(self.board.size-1,j)):
+                            return currplayer.name
+            return None
+        else:
+            #On commence à gauche
+            color=nx.get_node_attributes(self.board.graph,'player')
+            print(self.board.graph.edges())
+            for i in range(self.board.size):
+                if color[(i,0)]==2:
+                    for j in range(self.board.size):
+                        if nx.has_path(self.board.graph,(0,j),(self.board.size-1,j)):
+                            return currplayer.name
+            return None
 
-        # à supprimer car il y a forcement un gagnant
+        """
         if self.board.actions == []:
             return currplayer
+        """
         # future condition d'arret
         '''
         elif currplayer.color == 2:
@@ -49,9 +66,9 @@ class Game:
                 winner = self.check_win(currplayer)
 
                 #if win, declare win and break loop
-                if winner != False:
+                if winner != None:
                     self.on = False
-                    print(f"It's over! {winner.name} won!")
+                    print(f"It's over! {winner} won!")
                     break
 
                 # when QUIT button is press

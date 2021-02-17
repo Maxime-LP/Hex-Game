@@ -14,7 +14,7 @@ class Board:
         #Représentation en graph du plateau, ce qui sera utile pour les vérifications de fin de partie
         graph=nx.Graph()
         for i in range(self.size):
-            graph.add_nodes_from([(i,j) for j in range(self.size)])
+            graph.add_nodes_from([(i,j) for j in range(self.size)],player=0)
         self.graph=graph
 
         self.actions = list(range(self.size**2))
@@ -107,27 +107,12 @@ class Board:
         create edges.
         """
         b = np.array(self.board)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        neighbors = b[(i - 1):(i + 2), (j - 1):(j + 2)].copy()
-        #neighbors[0, 0] = 0
-        #neighbors[2, 2] = 0
-        nb_neighbors = sorted(set(neighbors.flatten().tolist()))
-=======
-=======
->>>>>>> Stashed changes
         neighbors=[]
         for x in range(-1,3):
             for y in range(-1,3):
-                try:
+                if i+x>=0 and j+y>=0 and i+x<self.size and j+y<self.size:
+                    #The neighbour is not outside of the board !
                     neighbors.append((i+x,j+y))
-                except IndexError:
-                    #The neighbour is outside of the board !
-                    pass
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         return neighbors
 
 
