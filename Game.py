@@ -11,13 +11,12 @@ class Game:
 
     def check_win(self, currplayer):
         #1 correspond au rouge et 2 au bleu
-
         if currplayer.color==1:
             #On commence en haut
             color=nx.get_node_attributes(self.board.graph,'player')
-            print(self.board.graph.edges())
             for j in range(self.board.size):
-                if color[(0,j)]=='RED':
+                if color[(0,j)]==1:
+                    
                     for j in range(self.board.size):
                         if nx.has_path(self.board.graph,(0,j),(self.board.size-1,j)):
                             return currplayer.name
@@ -25,7 +24,7 @@ class Game:
         else:
             #On commence à gauche
             color=nx.get_node_attributes(self.board.graph,'player')
-            print(self.board.graph.edges())
+            #print(self.board.graph.edges())
             for i in range(self.board.size):
                 if color[(i,0)]==2:
                     for j in range(self.board.size):
@@ -79,7 +78,10 @@ class Game:
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.on = False
-
+                    
+                    elif event.key == pygame.K_g:
+                        self.board.show_graph()
+                
                 # when curent human player plays
                 elif currplayer.__class__.__name__ == 'Human':
                     if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):

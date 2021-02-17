@@ -17,9 +17,6 @@ class Player:
         # get the center and the vertices' hex where the current player clicked
         hex_vertices, tile_center = board.get_polygon(pos)
         i, j = board.center_to_coord(tile_center)
-        #add edges to graph's current player
-        #neighbours = get_neighbour(i, j)
-        #self.graph.add_edges_from(neighbours)
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
@@ -31,11 +28,9 @@ class Player:
             #Creating the edge between the played tile and the neighbood tiles of the same color
             neighbours = board.get_neighbors(i,j)
             color=nx.get_node_attributes(board.graph,'player')
-            for k in range(len(neighbours)):
-                neighbour=neighbours[k]
+            for neighbour in neighbours:
                 if color[neighbour]==self.color:
                     board.graph.add_edge(neighbour,(i,j))
-
             return hex_vertices
 
         else:

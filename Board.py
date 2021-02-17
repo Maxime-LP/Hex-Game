@@ -38,7 +38,13 @@ class Board:
                 point = (x0+j*66.7, y0)
                 # add hexagon center
                 self.tiles_centers.append(point)
-
+    
+    def show_graph(self):
+        pos={}
+        for node in self.graph.nodes():
+            pos[node]=(node[1],-node[0]) #pour avoir un bel affichage
+        nx.draw(self.graph,pos=pos)
+        plt.show()
 
 ## Convert point and coord for display ##############################
 
@@ -103,16 +109,15 @@ class Board:
 
     def get_neighbors(self, i, j):
         """
-        It does work with coord we must work with actions in order to 
-        create edges.
+        Returns the neighbourhood of a point (i,j) of an hex matrix
         """
         b = np.array(self.board)
         neighbors=[]
-        for x in range(-1,3):
-            for y in range(-1,3):
-                if i+x>=0 and j+y>=0 and i+x<self.size and j+y<self.size:
-                    #The neighbour is not outside of the board !
-                    neighbors.append((i+x,j+y))
+        for a in range(-1,2): 
+            for b in range(-1,2):  
+                if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
+                    #The neighbour is not outside of the board 
+                    neighbors.append((i+a,j+b))
         return neighbors
 
 
@@ -154,5 +159,4 @@ class Board:
 
         return headers + "\n" + (red_line_top) + "\n" \
                 + schema + red_line_bottom
-
 ##############################################################
