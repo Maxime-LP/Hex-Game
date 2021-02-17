@@ -13,10 +13,12 @@ class Game:
         # à supprimer car il y a forcement un gagnant
         if self.board.actions == []:
             return currplayer
-
+        # future condition d'arret
+        '''
         elif currplayer.color == 2:
            return self.is_connected(self._left(), self._right(), 1)
         return self.is_connected(self._top(), self._bottom(), 2)
+        '''
         return False
 
     '''    
