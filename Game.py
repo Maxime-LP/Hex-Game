@@ -11,6 +11,19 @@ class Game:
         self.on = True
 
     def check_win(self, currplayer):
+        '''
+        attributes = nx.get_node_attributes(self.board.graph, 'player')
+        sub_nodes = [key for key, value in attributes.items() if value == currplayer.color]
+        sub_graph = self.board.graph.subgraph(sub_nodes)
+        print(sub_graph)
+        try:
+            if nx.has_path(sub_graph, self.board.north, self.board.south):
+                return currplayer
+            elif nx.has_path(currplayer.graph, self.board.east, self.board.west):
+                return currplayer
+        except:
+            return False
+        '''
         # à optimiser en terme de ligne de codes
         if currplayer.color == 1:
             if (50 in currplayer.graph.nodes) and (52 in currplayer.graph.nodes):
