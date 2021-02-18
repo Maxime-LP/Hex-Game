@@ -32,7 +32,6 @@ class Player:
                 if nx.get_node_attributes(board.graph, 'player')[neighbor]==self.color:
                     print(neighbor)
                     self.graph.add_edge(action, neighbor)
-
             return hex_vertices
 
         else:

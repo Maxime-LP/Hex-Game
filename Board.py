@@ -1,9 +1,6 @@
 import scipy.linalg as lg
 import string
-import numpy as np
-#from graph_test import edges
 import networkx as nx
-import matplotlib.pyplot as plt
 
 
 class Board:
