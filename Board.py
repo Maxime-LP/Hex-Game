@@ -1,27 +1,21 @@
 import scipy.linalg as lg
 import string
 import numpy as np
+#from graph_test import edges
 import networkx as nx
 import matplotlib.pyplot as plt
+
 
 class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
+        #init board with 0 everywhere
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
-
-        #Représentation en graph du plateau, ce qui sera utile pour les vérifications de fin de partie
-        graph=nx.Graph()
-        for i in range(self.size):
-            graph.add_nodes_from([(i,j) for j in range(self.size)],player=0)
-        self.graph=graph
-
+        #(1,1)=0, ..., (size, size)= size^2
         self.actions = list(range(self.size**2))
-        self.north = 1
-        self.south = 2
-        self.east = 3
-        self.west = 4
+        self.graph = self.init_graph()
 
         self.background = background
         self.screen = screen
@@ -38,13 +32,7 @@ class Board:
                 point = (x0+j*66.7, y0)
                 # add hexagon center
                 self.tiles_centers.append(point)
-    
-    def show_graph(self):
-        pos={}
-        for node in self.graph.nodes():
-            pos[node]=(node[1],-node[0]) #pour avoir un bel affichage
-        nx.draw(self.graph,pos=pos)
-        plt.show()
+
 
 ## Convert point and coord for display ##############################
 
@@ -105,20 +93,52 @@ class Board:
 ###############################################################
 
 
-## Fonction to create edge between tiles of the same color ########
+## Fonction for create edge between same colored tiles ########
 
     def get_neighbors(self, i, j):
         """
-        Returns the neighbourhood of a point (i,j) of an hex matrix
-        """
+        It does work with coord we must work with actions in order to 
+        create edges.
+        get_nei"""
         b = np.array(self.board)
-        neighbors=[]
-        for a in range(-1,2): 
-            for b in range(-1,2):  
-                if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
-                    #The neighbour is not outside of the board 
-                    neighbors.append((i+a,j+b))
+        neighbors = b[(i - 1):(i + 2), (j - 1):(j + 2)].copy()
+        #neighbors[0, 0] = 0
+        #neighbors[2, 2] = 0
+        nb_neighbors = sorted(set(neighbors.flatten().tolist()))
         return neighbors
+
+
+    def init_graph(self):
+        size = self.size
+        #add node north, east, south, west
+        self.north, self.east, self.south, self.west = \
+                                [i+self.size**2 for i in range(1,5)]
+
+        #init grid (square)
+        square = nx.grid_graph((size, size))
+        square = nx.convert_node_labels_to_integers(square)
+        G = nx.Graph()
+        G.add_nodes_from(square.nodes, player=0)
+        G.add_edges_from(square.edges)
+        nx.set_node_attributes(G, 'player', 0)
+        #create edges (action, action-size)
+        for j in range(size-1):
+            for i in range(1,size):
+                x = j + i*size
+                y = j + i*size-size + 1 
+                G.add_edges_from([(x, y)])
+
+        
+        G.add_nodes_from([self.north, self.south], player=1)
+        G.add_nodes_from([self.east, self.west], player=2)
+        #edges with tiles
+        edges = \
+        [(self.north,i) for i in range(size)] + \
+        [(self.south,i+size*(size-1)) for i in range(size)] +\
+        [(self.east,size*i) for i in range(size)] +\
+        [(self.west,size*i+size-1) for i in range(size)]
+        G.add_edges_from(edges)
+        return G
 
 
 ###############################################################
@@ -159,4 +179,5 @@ class Board:
 
         return headers + "\n" + (red_line_top) + "\n" \
                 + schema + red_line_bottom
+
 ##############################################################

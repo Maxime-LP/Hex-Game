@@ -11,27 +11,28 @@ class Player:
     def __init__(self, color):
         self.color = color
         self.name = 'Red player' if self.color==1 else 'Blue player'
+        self.graph = nx.Graph()
 
 
     def put_a_stone(self, pos, board, center=False):
+
         # get the center and the vertices' hex where the current player clicked
         hex_vertices, tile_center = board.get_polygon(pos)
         i, j = board.center_to_coord(tile_center)
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
+
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
             board.played_tiles.append(board.actions.pop(action_index))
-            board.graph.add_node((i,j),player=self.color)
-
-            #Creating the edge between the played tile and the neighbood tiles of the same color
-            neighbours = board.get_neighbors(i,j)
-            color=nx.get_node_attributes(board.graph,'player')
+            board.graph.nodes[action]['player'] = self.color
             
-            for neighbour in neighbours:
-                if color[neighbour]==self.color:
-                    board.graph.add_edge(neighbour,(i,j))
+            for neighbor in board.graph.neighbors(action):
+                if nx.get_node_attributes(board.graph, 'player')[neighbor]==self.color:
+                    print(neighbor)
+                    self.graph.add_edge(action, neighbor)
+
             return hex_vertices
 
         else:
