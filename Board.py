@@ -8,7 +8,7 @@ class Board:
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
         #init board with 0 everywhere
-        self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
+        self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.played_tiles = []
         #(1,1)=0, ..., (size, size)= size^2
         self.actions = list(range(self.size**2))

@@ -10,14 +10,17 @@ class Game:
         self.on = True
 
     def check_win(self, board, currplayer):
-        # à optimiser en terme de ligne de codes
-        if currplayer.color == 1:
-            if (board.north in currplayer.graph.nodes) and (board.south in currplayer.graph.nodes):
-                if nx.has_path(currplayer.graph, board.north, board.south):
-                    return currplayer
-        elif (board.east in currplayer.graph.nodes) and (board.west in currplayer.graph.nodes):
+        try:
+            if nx.has_path(currplayer.graph, board.north, board.south):
+                return currplayer
+        except nx.exception.NodeNotFound:
+            pass
+        try:    
             if nx.has_path(currplayer.graph, board.east, board.west):
                 return currplayer
+        except nx.exception.NodeNotFound:
+            pass
+            
         return False
 
 
