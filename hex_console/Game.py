@@ -12,7 +12,10 @@ class Game:
         self.on = True
 
     def check_win(self, board, currplayer):
-
+        """
+        Check if north and south or east and west are connected. 
+        If true return currplayer for stop the game.
+        """
         try:
             if nx.has_path(currplayer.graph, board.north, board.south):
                 return currplayer
@@ -44,7 +47,7 @@ class Game:
             #checks for a win
             winner = self.check_win(self.board, currplayer)
 
-            #if win, declare win and break loop
+            #if win, declare win and return winner color
             if winner != False:
                 self.on = False
                 #print(f"It's over! {winner.name} won!")

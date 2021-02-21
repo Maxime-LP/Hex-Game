@@ -25,7 +25,7 @@ if sys.argv[1] == '0':
 elif sys.argv[1] == '1':
     player1 = AI(RED, 'random')
 else:
-    print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
+    print('Please enter a correct player type : 0 or 1.')
     exit()
 
 if sys.argv[2] == '0':
@@ -33,7 +33,7 @@ if sys.argv[2] == '0':
 elif sys.argv[2] == '1':
     player2 = AI(BLUE, 'random')
 else:
-    print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
+    print('Please enter a correct player type : 0 or 1.')
     exit()
 
 
@@ -45,14 +45,26 @@ game = Game(board, player1, player2)
 
 ##################### Let's play ####################
 
-n = 10000
+def loop(n=1):
+    """
+    Play n game. Build for AI player.
+    """
+    res = 0
+    for i in range(n):
+        res += game.run() - 1
+        game.reset()
 
-res = 0
-for i in range(n):
-    res += game.run() - 1
-    game.reset()
+    print("Nb of game :", n)
+    print(f"Win rate (2nd player): {round(res/n*100, 2)}%")
+    t = round(time()-t0,4)
+    print(f"Tps d'éxécution : {t}s")
+    print("Games/s :", round(n/t,2))
 
-print(f"Le second joueur à remporté {res/n*100}% des parties.")
-print(f"Tps d'éxécution : {time()-t0}s")
+try:
+    loop(int(sys.argv[4]))
+except IndexError:
+    loop()
+except ValueError:
+    print("Please enter an integer to define the number of games.")
 
 #####################################################
