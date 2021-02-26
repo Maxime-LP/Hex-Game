@@ -25,7 +25,7 @@ class Player:
             board.played_tiles.append(board.actions.pop(action_index))
             board.graph.add_node((i,j),player=self.color)
 
-            #Creating the edge between the played tile and the neighbood tiles of the same color
+            #Creating the edge between the played tile and the neighbourhood tiles of the same color
             neighbours = board.get_neighbors(i,j)
             color=nx.get_node_attributes(board.graph,'player')
             
