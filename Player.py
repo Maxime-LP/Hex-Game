@@ -1,6 +1,6 @@
 import pygame
 import networkx as nx
-from Algorithm_AI import run_random, run_ucb1, run_mcts
+from AI.Algorithm_AI import run_random, run_ucb1, run_mcts
 
 """
 Description du fichier.

@@ -1,26 +1,11 @@
 from random import choice
-from random_game import run_random_game
 
 def run_random(board):
     i, j = board.action_to_coord(choice(board.actions))
     return i, j
 
-
-def run_mean(board):
-	# games played per tile
-	n = 100
-	# get dict res={action:mean}
-	res = run_random_game(board, n)
-	# get best action
-	best_action = max(res, key = res.get)
-	#convert in coords
-	i, j = board.action_to_coord(best_action)
-	return i, j
-
-
 def run_ucb1(board):
     return
-
 
 def run_mcts(board):
     """
