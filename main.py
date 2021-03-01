@@ -8,8 +8,7 @@ import colorama # translate ANSI sequence for Windows
 colorama.init()
 
 """
-CONTROLS :
-
+CONTROLS
 ESC : Quit the game
 G : Display the current graph of the board
 """
@@ -50,7 +49,7 @@ RED, BLUE = 1, 2
 if sys.argv[1] == '0':
     player1 = Human(RED)
 elif sys.argv[1] == '1':
-    player1 = AI(RED, 'random')
+    player1 = AI(RED, 'mean')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
@@ -58,7 +57,7 @@ else:
 if sys.argv[2] == '0':
     player2 = Human(BLUE)
 elif sys.argv[2] == '1':
-    player2 = AI(BLUE, 'random')
+    player2 = AI(BLUE, 'mean')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()

@@ -95,5 +95,3 @@ class Game:
                     self.on = False
                     print(f"It's over! {winner} won!")
                     break
-
-        return

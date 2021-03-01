@@ -1,6 +1,6 @@
 import pygame
 import networkx as nx
-from AI.Algorithm_AI import run_random, run_ucb1, run_mcts
+from AI.Algorithm_AI import run_random, run_mean, run_ucb1, run_mcts
 
 """
 Description du fichier.
@@ -27,7 +27,7 @@ class Player:
 
             #Creating the edge between the played tile and the neighbourhood tiles of the same color
             neighbours = board.get_neighbors(i,j)
-            color=nx.get_node_attributes(board.graph,'player')
+            color = nx.get_node_attributes(board.graph,'player')
             
             for neighbour in neighbours:
                 if color[neighbour]==self.color:
@@ -44,7 +44,8 @@ class AI(Player):
         super().__init__(color)
 
         algorithms = {
-                    'random':run_random, 
+                    'random':run_random,
+                    'mean':run_mean,
                     'ucb':run_ucb1, 
                     'mcts':run_mcts
                     }
@@ -53,7 +54,7 @@ class AI(Player):
 
 
     def plays(self, board):
-        pos = self.algorithm(board)
+        pos = self.algorithm(board, self.color)
         tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
         hex_vertices = self.put_a_stone(tile_center, board, True)
         if hex_vertices != None:

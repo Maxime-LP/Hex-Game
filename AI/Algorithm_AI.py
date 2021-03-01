@@ -1,11 +1,21 @@
 from random import choice
+from AI.mean.best_action_average import best_action_average
 
-def run_random(board):
+def run_random(board, color):
     i, j = board.action_to_coord(choice(board.actions))
     return i, j
 
+
+def run_mean(board, color):
+    n = 2
+    best_action = best_action_average(board, n, color)
+    i, j = board.action_to_coord(best_action)
+    return i, j
+
+
 def run_ucb1(board):
     return
+
 
 def run_mcts(board):
     """
