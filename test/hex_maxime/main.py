@@ -23,7 +23,7 @@ RED, BLUE = 1, 2
 if sys.argv[1] == '0':
     player1 = Human(RED)
 elif sys.argv[1] == '1':
-    player1 = AI(RED, 'random')
+    player1 = AI(RED, 'mean')
 else:
     print('Please enter a correct player type : 0 or 1.')
     exit()
@@ -31,7 +31,7 @@ else:
 if sys.argv[2] == '0':
     player2 = Human(BLUE)
 elif sys.argv[2] == '1':
-    player2 = AI(BLUE, 'random')
+    player2 = AI(BLUE, 'mean')
 else:
     print('Please enter a correct player type : 0 or 1.')
     exit()
@@ -44,7 +44,8 @@ game = Game(board, player1, player2)
 
 
 ##################### Let's play ####################
-
+game.run()
+'''
 def loop(n=1):
     """
     Play n game. Build for AI player.
@@ -66,5 +67,5 @@ except IndexError:
     loop()
 except ValueError:
     print("Please enter an integer to define the number of games.")
-
+'''
 #####################################################

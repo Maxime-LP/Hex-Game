@@ -51,17 +51,17 @@ class Game:
 
     def run(self):
 
-        #print(self.board)
+        print(self.board)
 
         while self.on:
 
             currplayer = self.players[self.turn]
 
-            if currplayer.plays(self.board):
+            if currplayer.plays(self.board, currplayer.color):
                 self.turn = 1 - self.turn
 
             #os.system('clear')
-            #print(self.board)
+            print(self.board)
             
             #checks for a win
             winner = self.check_win(self.board, currplayer)
@@ -69,7 +69,7 @@ class Game:
             #if win, declare win and return winner color
             if winner != False:
                 self.on = False
-                #print(f"It's over! {winner.name} won!")
+                print(f"It's over! {winner.name} won!")
                 return winner.color
 
     def reset(self):

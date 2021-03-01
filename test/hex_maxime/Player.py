@@ -1,6 +1,6 @@
 from coord import *
 import networkx as nx
-from Algorithm_AI import run_random, run_ucb1, run_mcts
+from AI.Algorithm_AI import run_random, run_mean, run_ucb1, run_mcts
 
 """
 Description du fichier.
@@ -39,7 +39,8 @@ class AI(Player):
         super().__init__(color)
 
         algorithms = {
-                    'random':run_random, 
+                    'random':run_random,
+                    'mean': run_mean,
                     'ucb':run_ucb1, 
                     'mcts':run_mcts
                     }
@@ -47,8 +48,8 @@ class AI(Player):
         self.algorithm = algorithms[algorithm]
 
 
-    def plays(self, board):
-        i, j = self.algorithm(board)
+    def plays(self, board, color):
+        i, j = self.algorithm(board, self.color)
         return self.put_a_stone(board, i, j)
 
 class Human(Player):
@@ -57,7 +58,7 @@ class Human(Player):
         super().__init__(color)
    
 
-    def plays(self, board):
+    def plays(self, board, color):
 
         position = input(f"{self.name} : ")
 
