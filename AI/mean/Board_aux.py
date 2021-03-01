@@ -2,7 +2,6 @@ import string
 import networkx as nx
 import numpy as np
 
-
 class Board():
 
     def __init__(self, board_size):
@@ -18,14 +17,8 @@ class Board():
         self.graph=graph
 
         self.actions = list(range(self.size**2))
-        self.north = 1
-        self.south = 2
-        self.east = 3
-        self.west = 4
-
 
     ## Convert point and coord for display ##########################
-
     def coord_to_action(self, i, j):
         """
         Convert board coord (i,j) to hexagon index in board.actions
@@ -38,12 +31,10 @@ class Board():
         Convert hexagon index in board.actions to board coord (i,j).
         """
         return action // self.size, action % self.size
-
     ###############################################################
 
 
-    ## Fonction to create edge between tiles of the same color ########
-
+    ## Fonction to create edgse between tiles of the same color ########
     def get_neighbors(self, i, j):
         """
         Returns the neighbourhood of a point (i,j) of an hex matrix
@@ -56,13 +47,10 @@ class Board():
                     #The neighbour is not outside of the board 
                     neighbors.append((i+a,j+b))
         return neighbors
-
-
     ###############################################################
 
 
     ## Console display  ###########################################
-
     def __str__(self):
         """ This function returns a string containing the current state of the board """
         schema = ""
@@ -96,5 +84,4 @@ class Board():
 
         return headers + "\n" + (red_line_top) + "\n" \
                 + schema + red_line_bottom
-
     ##############################################################

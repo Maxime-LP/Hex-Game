@@ -1,19 +1,15 @@
-from AI.mean.coord import *
+from AI.mean.coord_aux import *
 import networkx as nx
 from random import choice
 
-"""
-Description du fichier.
-"""
 
 class AI_player:
 
     def __init__(self, color):
         self.color = color
 
-
-    def put_a_stone(self, board, i, j):
-
+    def plays(self, board, i=None, j=None):
+        i, j = board.action_to_coord(choice(board.actions))
         board.board[i][j] = self.color
 
         action = board.coord_to_action(i,j)
@@ -30,9 +26,3 @@ class AI_player:
                 board.graph.add_edge(neighbor,(i,j))
 
         return True
-
-
-    def plays(self, board, i=None, j=None):
-        if i == None:
-            i, j = board.action_to_coord(choice(board.actions))
-        return self.put_a_stone(board, i, j)

@@ -2,9 +2,6 @@ import pygame
 import networkx as nx
 from AI.Algorithm_AI import run_random, run_mean, run_ucb1, run_mcts
 
-"""
-Description du fichier.
-"""
 
 class Player:
 
