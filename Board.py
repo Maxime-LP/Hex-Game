@@ -11,18 +11,13 @@ class Board:
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
 
-        #Représentation en graph du plateau, ce qui sera utile pour les vérifications de fin de partie
+        #Graph representation of the state of the game
         graph=nx.Graph()
         for i in range(self.size):
             graph.add_nodes_from([(i,j) for j in range(self.size)],player=0)
         self.graph=graph
 
         self.actions = list(range(self.size**2))
-        self.north = 1
-        self.south = 2
-        self.east = 3
-        self.west = 4
-
         self.background = background
         self.screen = screen
 

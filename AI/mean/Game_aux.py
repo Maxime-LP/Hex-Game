@@ -1,6 +1,5 @@
 import networkx as nx
-from AI.mean.coord import get_coord
-from copy import copy
+from AI.mean.coord_aux import get_coord
 
 class Game:
     
@@ -11,11 +10,6 @@ class Game:
         self.on = True
 
     def check_win(self, board, currplayer):
-        """
-        It checks if there is a path in the graph between two opposite nodes : 
-        east and west for the blue player, north and south for the red one.
-        If there is a winner, return currplayer for stop the game.
-        """
         player=nx.get_node_attributes(self.board.graph,'player')
         size=self.board.size
 
@@ -51,16 +45,13 @@ class Game:
     def run(self):
 
         while self.on:
-
             currplayer = self.players[self.turn]
 
-            if currplayer.playons(self.board):
+            if currplayer.plays(self.board):
                 self.turn = 1 - self.turn
             
-            #checks for a win
             winner = self.check_win(self.board, currplayer)
 
-            #if win, declare win and return winner color
             if winner != False:
                 self.on = False
                 return winner.color

@@ -2,7 +2,7 @@ import re
 import string
 
 def get_x_index(letter):
-    """ The X index is the "line" part of the board. Because coordinate is a letter to represent her,
+    """ The X index is the "line" part of the board. Because coordinate is a letter to represent it,
     we need his position in alphabet.
     To begin at the 1 index, we add 1 to list index. """
     return list(string.ascii_uppercase).index(letter.upper()) + 1
