@@ -47,6 +47,12 @@ class Game:
 
         return None
 
+    def check_win2(self,currplayer):
+        """
+        Version + rapide avec composantes connexes
+        """
+        return
+
     '''    
     def reset(self):
         """Resets the game."""
