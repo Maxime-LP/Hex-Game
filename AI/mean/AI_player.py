@@ -2,9 +2,6 @@ from AI.mean.coord_aux import *
 import networkx as nx
 from random import choice
 
-"""
-Description du fichier.
-"""
 
 class AI_player:
 
