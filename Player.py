@@ -20,7 +20,6 @@ class Player:
             action_index = board.actions.index(action)
             board.actions.pop(action_index)
 
-
             #adds the center of the polygon to the player connected component
             neighbors = board.get_neighbors(i,j)
             added=False
@@ -29,14 +28,14 @@ class Player:
             while index < len(board.components[self.color-1]):
                 for neighbor in neighbors:
                     if neighbor in board.components[self.color-1][index]:
-                        board.components[self.color-1][index].append((i,j))
+                        board.components[self.color-1][index].add((i,j))
                         added=True
                         break
                 index+=1
 
             if not added:
                 #ie if all the neighbors are not in any of the player's connected components ie if the neighbors are not of the player's color
-                board.components[self.color-1].append([(i,j)])
+                board.components[self.color-1].append(set([(i,j)]))
 
 
             #groups the adjacent components
@@ -46,11 +45,11 @@ class Player:
                     for index2 in range(length):
                         if index1!=index2:
                             try:
-                                #in case we are considering an already deleted list
                                 if (i,j) in board.components[self.color-1][index1] and (i,j) in board.components[self.color-1][index2]:
-                                    board.components[self.color-1][index1]+=board.components[self.color-1][index2]
-                                    board.components[self.color-1][index1].remove((i,j))
+                                    board.components[self.color-1][index1] = board.components[self.color-1][index2] | board.components[self.color-1][index1]
                                     board.components[self.color-1].remove(board.components[self.color-1][index2])
+                                    
+                            #in case we are considering an already deleted set
                             except IndexError:
                                 pass
 
