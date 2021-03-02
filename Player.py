@@ -1,5 +1,4 @@
 import pygame
-import networkx as nx
 from AI.Algorithm_AI import run_random, run_mean, run_ucb1, run_mcts
 
 
@@ -11,24 +10,50 @@ class Player:
 
 
     def put_a_stone(self, pos, board, center=False):
-        # get the center and the vertices' hex where the current player clicked
-        hex_vertices, tile_center = board.get_polygon(pos)
+        # gets the center and the vertices' hex where the current player is willing to play
+        hex_vertices, tile_center = board.get_polygon(pos,center)
         i, j = board.center_to_coord(tile_center)
         
         if board.board[i][j] == 0:
             board.board[i][j] = self.color
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
-            board.played_tiles.append(board.actions.pop(action_index))
-            board.graph.add_node((i,j),player=self.color)
+            board.actions.pop(action_index)
 
-            #Creating the edge between the played tile and the neighbourhood tiles of the same color
-            neighbours = board.get_neighbors(i,j)
-            color = nx.get_node_attributes(board.graph,'player')
-            
-            for neighbour in neighbours:
-                if color[neighbour]==self.color:
-                    board.graph.add_edge(neighbour,(i,j))
+
+            #adds the center of the polygon to the player connected component
+            neighbors = board.get_neighbors(i,j)
+            added=False
+            index=0
+
+            while index < len(board.components[self.color-1]):
+                for neighbor in neighbors:
+                    if neighbor in board.components[self.color-1][index]:
+                        board.components[self.color-1][index].append((i,j))
+                        added=True
+                        break
+                index+=1
+
+            if not added:
+                #ie if all the neighbors are not in any of the player's connected components ie if the neighbors are not of the player's color
+                board.components[self.color-1].append([(i,j)])
+
+
+            #groups the adjacent components
+            length = len(board.components[self.color-1])
+            if length>1:
+                for index1 in range(length):
+                    for index2 in range(length):
+                        if index1!=index2:
+                            try:
+                                #in case we are considering an already deleted list
+                                if (i,j) in board.components[self.color-1][index1] and (i,j) in board.components[self.color-1][index2]:
+                                    board.components[self.color-1][index1]+=board.components[self.color-1][index2]
+                                    board.components[self.color-1][index1].remove((i,j))
+                                    board.components[self.color-1].remove(board.components[self.color-1][index2])
+                            except IndexError:
+                                pass
+
             return hex_vertices
 
         else:

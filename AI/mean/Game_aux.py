@@ -1,4 +1,3 @@
-import networkx as nx
 from AI.mean.coord_aux import get_coord
 
 class Game:
@@ -10,36 +9,20 @@ class Game:
         self.on = True
 
     def check_win(self, board, currplayer):
-        player=nx.get_node_attributes(self.board.graph,'player')
         size=self.board.size
-
         if currplayer.color==1:
-            #On commence en haut
-            for j in range(size):
-                upper_node=(0,j)
+            for component in self.board.components[currplayer.color-1]:
 
-                if player[upper_node]==1:
-                    for i in range(size):
-                        lower_node=(size-1,i)
-                        
-                        if player[lower_node]==1:
-                            if nx.has_path(self.board.graph,upper_node,lower_node):
-                                return currplayer
+                if list(set(self.board.north_component) & set(component)) != [] and list(set(self.board.south_component) & set(component)) != [] :
+                    return currplayer
 
         elif currplayer.color==2:
-            #On commence à gauche
-            for i in range(size):
-                left_node=(i,0)
+            for component in self.board.components[currplayer.color-1]:
+                
+                if list(set(self.board.west_component) & set(component)) != [] and list(set(self.board.east_component) & set(component)) != [] :
+                    return currplayer
 
-                if player[left_node]==2:
-                    for j in range(size):
-                        right_node=(j,size-1)
-
-                        if player[right_node]==2:
-                            if nx.has_path(self.board.graph,left_node,right_node):
-                                return currplayer
-
-        return False
+        return None
 
 
     def run(self):
@@ -52,6 +35,6 @@ class Game:
             
             winner = self.check_win(self.board, currplayer)
 
-            if winner != False:
+            if winner != None:
                 self.on = False
                 return winner.color

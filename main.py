@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import pygame
+from time import time
 from Game import Game
 from Player import Human, AI
 from Board import Board
@@ -10,7 +11,6 @@ colorama.init()
 """
 CONTROLS
 ESC : Quit the game
-G : Display the current graph of the board
 """
 
 
@@ -74,3 +74,29 @@ game = Game(board, player1, player2)
 game.run()
 
 #####################################################
+
+"""
+###loop 
+
+def loop(n=1):
+    #Plays n games and counts the number of times blue wins
+
+    t0=time()
+    res = 0
+    for i in range(n):
+        res += game.run() - 1
+        game.reset()
+
+    print("Nb of game :", n)
+    print(f"Win rate (2nd player): {round(res/n*100, 2)}%")
+    t = round(time()-t0,4)
+    print(f"Tps d'éxécution : {t}s")
+    print("Games/s :", round(n/t,2))
+
+try:
+    loop(int(sys.argv[4]))
+except IndexError:
+    loop()
+except ValueError:
+    print("Please enter an integer to define the number of games.")
+    """
