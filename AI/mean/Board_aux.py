@@ -1,5 +1,4 @@
 import string
-import networkx as nx
 import numpy as np
 
 class Board():
@@ -7,7 +6,6 @@ class Board():
     def __init__(self, board_size):
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
-        self.played_tiles = []
 
         self.east_component = [(i,self.size) for i in range(self.size)]
         self.west_component = [(i,-1) for i in range(self.size)]

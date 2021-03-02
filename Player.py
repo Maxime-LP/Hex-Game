@@ -18,14 +18,14 @@ class Player:
             board.board[i][j] = self.color
             action = board.coord_to_action(i,j)
             action_index = board.actions.index(action)
-            board.played_tiles.append(board.actions.pop(action_index))
+            board.actions.pop(action_index)
 
 
             #adds the center of the polygon to the player connected component
             neighbors = board.get_neighbors(i,j)
             added=False
             index=0
-            
+
             while index < len(board.components[self.color-1]):
                 for neighbor in neighbors:
                     if neighbor in board.components[self.color-1][index]:

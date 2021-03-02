@@ -14,15 +14,15 @@ class Game:
             for component in self.board.components[currplayer.color-1]:
 
                 if list(set(self.board.north_component) & set(component)) != [] and list(set(self.board.south_component) & set(component)) != [] :
-                    return currplayer.name
+                    return currplayer
 
         elif currplayer.color==2:
             for component in self.board.components[currplayer.color-1]:
                 
                 if list(set(self.board.west_component) & set(component)) != [] and list(set(self.board.east_component) & set(component)) != [] :
-                    return currplayer.name
+                    return currplayer
 
-        return Nonee
+        return None
 
 
     def run(self):
@@ -35,6 +35,6 @@ class Game:
             
             winner = self.check_win(self.board, currplayer)
 
-            if winner != False:
+            if winner != None:
                 self.on = False
                 return winner.color

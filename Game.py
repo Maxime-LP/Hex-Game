@@ -23,25 +23,26 @@ class Game:
             for component in self.board.components[currplayer.color-1]:
 
                 if list(set(self.board.north_component) & set(component)) != [] and list(set(self.board.south_component) & set(component)) != [] :
-                    return currplayer.name
+                    return currplayer
 
         elif currplayer.color==2:
             for component in self.board.components[currplayer.color-1]:
                 
                 if list(set(self.board.west_component) & set(component)) != [] and list(set(self.board.east_component) & set(component)) != [] :
-                    return currplayer.name
+                    return currplayer
 
         return None
 
 
-    '''    
+    
     def reset(self):
         """Resets the game."""
         self.board.board = np.zeros((self.board.size, self.board.size))
+        self.board.actions = list(range(self.board.size**2))
+        self.board.components = [ [self.board.north_component, self.board.south_component], [self.board.west_component, self.board.east_component] ]
         self.turn = 0
         self.on = True
-        self.run()
-    '''
+    
 
     def run(self):
 
@@ -77,5 +78,6 @@ class Game:
                 winner = self.check_win(currplayer)
                 if winner != None:
                     self.on = False
-                    print(f"It's over! {winner} won!")
+                    print(f"It's over! {winner.name} won!")
                     break
+        return winner.color

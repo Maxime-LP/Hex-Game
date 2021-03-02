@@ -1,15 +1,15 @@
 import scipy.linalg as lg
 import string
 import numpy as np
-import matplotlib.pyplot as plt
 
 class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
-        self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
-        self.played_tiles = []
-
+        self.board = np.zeros((self.size, self.size))
+        self.actions = list(range(self.size**2))
+        self.background = background
+        self.screen = screen
 
         self.east_component = [(i,self.size) for i in range(self.size)]
         self.west_component = [(i,-1) for i in range(self.size)]
@@ -19,10 +19,6 @@ class Board:
         #Connected components : [ [  compred1, ..., compredq  ],  [   compblue1, ..., compbluer  ]      ]  where comp...i is a list
         #red connected components : self.components[0],  blue connected components : self.components[1]
         self.components = [ [self.north_component, self.south_component], [self.west_component, self.east_component] ]
-
-        self.actions = list(range(self.size**2))
-        self.background = background
-        self.screen = screen
 
         #center of our homemade landmark
         (x0,y0)=(106,128)
@@ -36,7 +32,6 @@ class Board:
                 point = (x0+j*66.7, y0)
                 # add hexagon center
                 self.tiles_centers.append(point)
-
 
 ## Convert point and coord for display ##############################
 

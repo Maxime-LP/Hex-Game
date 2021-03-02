@@ -19,8 +19,8 @@ def best_action(initial_board, n, color):
     #deepcopy doesn't work through pygame objects so elt's do it manually
     tboard = Board(initial_board.size)
     tboard.board = deepcopy(initial_board.board)
-    tboard.played_tiles = deepcopy(initial_board.played_tiles)
     tboard.actions = deepcopy(possible_plays)
+    tboard.components = deepcopy(initial_board.components)
 
     for action in possible_plays:
         games_won = 0
