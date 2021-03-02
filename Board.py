@@ -11,10 +11,10 @@ class Board:
         self.background = background
         self.screen = screen
 
-        self.east_component = [(i,self.size) for i in range(self.size)]
-        self.west_component = [(i,-1) for i in range(self.size)]
-        self.north_component = [(-1,i) for i in range(self.size)]
-        self.south_component = [(self.size,i) for i in range(self.size)]
+        self.east_component = set([(i,self.size) for i in range(self.size)])
+        self.west_component = set([(i,-1) for i in range(self.size)])
+        self.north_component = set([(-1,i) for i in range(self.size)])
+        self.south_component = set([(self.size,i) for i in range(self.size)])
 
         #Connected components : [ [  compred1, ..., compredq  ],  [   compblue1, ..., compbluer  ]      ]  where comp...i is a list
         #red connected components : self.components[0],  blue connected components : self.components[1]
