@@ -13,13 +13,13 @@ class Game:
         if currplayer.color==1:
             for component in self.board.components[currplayer.color-1]:
 
-                if list(set(self.board.north_component) & set(component)) != [] and list(set(self.board.south_component) & set(component)) != [] :
+                if self.board.north_component.issubset(component) and self.board.south_component.issubset(component):
                     return currplayer
 
         elif currplayer.color==2:
             for component in self.board.components[currplayer.color-1]:
                 
-                if list(set(self.board.west_component) & set(component)) != [] and list(set(self.board.east_component) & set(component)) != [] :
+                if self.board.west_component.issubset(component) and self.board.east_component.issubset(component):
                     return currplayer
 
         return None

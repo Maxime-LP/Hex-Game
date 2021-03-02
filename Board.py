@@ -102,9 +102,6 @@ class Board:
         neighbors=[]
         for a in range(-1,2): 
             for b in range(-1,2):  
-                #if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
-
-                #    #The neighbour is not outside of the board 
                 if (a,b)!=(1,1) and (a,b)!=(0,0) and (a,b)!=(-1,-1):
                     neighbors.append((i+a,j+b))
         return neighbors
