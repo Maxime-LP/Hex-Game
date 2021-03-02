@@ -21,7 +21,6 @@ def best_action(initial_board, n, color):
     tboard.board = deepcopy(initial_board.board)
     tboard.played_tiles = deepcopy(initial_board.played_tiles)
     tboard.actions = deepcopy(possible_plays)
-    tboard.graph = deepcopy(initial_board.graph)
 
     for action in possible_plays:
         games_won = 0

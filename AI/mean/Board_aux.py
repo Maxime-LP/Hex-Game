@@ -6,15 +6,17 @@ class Board():
 
     def __init__(self, board_size):
         self.size = int(board_size)
-        #init board with 0 everywhere
-        self.board = [[0 for i in range(self.size)] for j in range(self.size)]
+        self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
 
-        #Représentation en graph du plateau, ce qui sera utile pour les vérifications de fin de partie
-        graph=nx.Graph()
-        for i in range(self.size):
-            graph.add_nodes_from([(i,j) for j in range(self.size)],player=0)
-        self.graph=graph
+        self.east_component = [(i,self.size) for i in range(self.size)]
+        self.west_component = [(i,-1) for i in range(self.size)]
+        self.north_component = [(-1,i) for i in range(self.size)]
+        self.south_component = [(self.size,i) for i in range(self.size)]
+
+        #Connected components : [ [  compred1, ..., compredq  ],  [   compblue1, ..., compbluer  ]      ]  where comp...i is a list
+        #red connected components : self.components[0],  blue connected components : self.components[1]
+        self.components = [ [self.north_component, self.south_component], [self.west_component, self.east_component] ]
 
         self.actions = list(range(self.size**2))
 
@@ -43,8 +45,7 @@ class Board():
         neighbors=[]
         for a in range(-1,2): 
             for b in range(-1,2):  
-                if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
-                    #The neighbour is not outside of the board 
+                if (a,b)!=(1,1) and (a,b)!=(0,0) and (a,b)!=(-1,-1):
                     neighbors.append((i+a,j+b))
         return neighbors
     ###############################################################

@@ -1,7 +1,6 @@
 import scipy.linalg as lg
 import string
 import numpy as np
-import networkx as nx
 import matplotlib.pyplot as plt
 
 class Board:
@@ -11,11 +10,15 @@ class Board:
         self.board = [[0 for i in range(self.size)] for j in range(self.size)] # np.zeros((self.size, self.size))
         self.played_tiles = []
 
-        #Graph representation of the state of the game
-        graph=nx.Graph()
-        for i in range(self.size):
-            graph.add_nodes_from([(i,j) for j in range(self.size)],player=0)
-        self.graph=graph
+
+        self.east_component = [(i,self.size) for i in range(self.size)]
+        self.west_component = [(i,-1) for i in range(self.size)]
+        self.north_component = [(-1,i) for i in range(self.size)]
+        self.south_component = [(self.size,i) for i in range(self.size)]
+
+        #Connected components : [ [  compred1, ..., compredq  ],  [   compblue1, ..., compbluer  ]      ]  where comp...i is a list
+        #red connected components : self.components[0],  blue connected components : self.components[1]
+        self.components = [ [self.north_component, self.south_component], [self.west_component, self.east_component] ]
 
         self.actions = list(range(self.size**2))
         self.background = background
@@ -33,13 +36,7 @@ class Board:
                 point = (x0+j*66.7, y0)
                 # add hexagon center
                 self.tiles_centers.append(point)
-    
-    def show_graph(self):
-        pos={}
-        for node in self.graph.nodes():
-            pos[node]=(node[1],-node[0]) #pour avoir un bel affichage
-        nx.draw(self.graph,pos=pos)
-        plt.show()
+
 
 ## Convert point and coord for display ##############################
 
@@ -110,8 +107,10 @@ class Board:
         neighbors=[]
         for a in range(-1,2): 
             for b in range(-1,2):  
-                if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
-                    #The neighbour is not outside of the board 
+                #if i+a>=0 and j+b>=0 and i+a<self.size and j+b<self.size and (a,b)!=(-1,-1) and (a,b)!=(1,1) and (a,b)!=(0,0):
+
+                #    #The neighbour is not outside of the board 
+                if (a,b)!=(1,1) and (a,b)!=(0,0) and (a,b)!=(-1,-1):
                     neighbors.append((i+a,j+b))
         return neighbors
 
