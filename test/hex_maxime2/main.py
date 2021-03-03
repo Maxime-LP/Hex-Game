@@ -18,7 +18,7 @@ board = Board(int(sys.argv[1]))
 #init players
 RED, BLUE = 1, 2
 player1 = AI(RED, 'random')
-player2 = AI(BLUE, 'random')
+player2 = AI(BLUE, 'mean')
 
 #init game
 game = Game(board, player1, player2)
