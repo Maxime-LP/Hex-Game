@@ -20,7 +20,7 @@ class Board:
         #red connected components : self.components[0],  blue connected components : self.components[1]
         self.components = [ [self.north_component, self.south_component], [self.west_component, self.east_component] ]
 
-        #center of our homemade landmark
+        #create landmark and get tiles' center
         (x0,y0)=(106,128)
         y0-=20 #initial shift
         x0-=67
@@ -37,18 +37,22 @@ class Board:
 
     def coord_to_action(self, i, j):
         """
-        Convert board coord (i,j) to hexagon index in board.actions
+        Convert board coord (i,j) to hexagon index in board.actions.
         """
         return i * self.size + j
 
 
     def action_to_coord(self, action):
-        """Convert hexagon index in board.actions to board coord (i,j)"""
+        """
+        Convert hexagon index in board.actions to board coord (i,j).
+        """
         return action // self.size, action % self.size
 
 
     def center_to_coord(self, tile_center):
-        """Convert tile_center to board coord (i,j)"""
+        """
+        Convert tile_center to board coord (i,j).
+        """
         index  = self.tiles_centers.index(tile_center)
         i = index // self.size
         j = index % self.size
@@ -96,10 +100,9 @@ class Board:
 
     def get_neighbors(self, i, j):
         """
-        Returns the neighbourhood of a point (i,j) of an hex matrix
+        Returns the neighbours tiles of a point (i,j) on the board.
         """
-        b = np.array(self.board)
-        neighbors=[]
+        neighbors = []
         for a in range(-1,2): 
             for b in range(-1,2):  
                 if (a,b)!=(1,1) and (a,b)!=(0,0) and (a,b)!=(-1,-1):
@@ -113,7 +116,9 @@ class Board:
 ## Console display  ###########################################
 
     def __str__(self):
-        """ This function returns a string containing the current state of the board """
+        """
+        Returns a string containing the current state of the board.
+        """
         schema = ""
         headers = "     "
         alphabet = list(string.ascii_uppercase) 

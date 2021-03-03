@@ -17,8 +17,8 @@ board = Board(int(sys.argv[1]))
 
 #init players
 RED, BLUE = 1, 2
-player1 = AI(RED, 'random')
-player2 = AI(BLUE, 'mean')
+player1 = AI(RED, 'mean')
+player2 = AI(BLUE, 'random')
 
 #init game
 game = Game(board, player1, player2)
@@ -38,6 +38,7 @@ def loop(n=1):
     for i in range(n):
         game.reset()
         res += game.run() - 1
+        print(i)
 
     print("Nb of game :", n)
     print(f"Win rate (2nd player): {round(res/n*100, 2)}%")

@@ -20,30 +20,33 @@ class Player:
             action_index = board.actions.index(action)
             board.actions.pop(action_index)
 
-            #adds the center of the polygon to the player connected component
+            #adds the center of the polygon to the player connected components
             neighbors = board.get_neighbors(i,j)
-            added=False
-            index=0
+            added = False
+            index = 0
 
             while index < len(board.components[self.color-1]):
+                #regarder les intersection entre neighbors et component ?
                 for neighbor in neighbors:
                     if neighbor in board.components[self.color-1][index]:
                         board.components[self.color-1][index].add((i,j))
-                        added=True
+                        added = True
                         break
-                index+=1
+                index += 1
 
             if not added:
-                #ie if all the neighbors are not in any of the player's connected components ie if the neighbors are not of the player's color
+                # ie if all the neighbors are not in any of the player's connected components 
+                # ie if the nem1.intersection(m2)m1.intersection(m2)ighbors are not of the player's color
                 board.components[self.color-1].append(set([(i,j)]))
 
 
             #groups the adjacent components
             length = len(board.components[self.color-1])
-            if length>1:
+            #regarder les intersection entre les components ?
+            if length > 1:
                 for index1 in range(length):
                     for index2 in range(length):
-                        if index1!=index2:
+                        if index1 != index2:
                             try:
                                 if (i,j) in board.components[self.color-1][index1] and (i,j) in board.components[self.color-1][index2]:
                                     board.components[self.color-1][index1] = board.components[self.color-1][index2] | board.components[self.color-1][index1]
@@ -59,6 +62,23 @@ class Player:
             return None
     
 
+class Human(Player):
+
+    def __init__(self, color):
+        super().__init__(color)
+   
+
+    def plays(self, board):
+        have_play = False
+        pos = pygame.mouse.get_pos()
+        if board.background.get_at(pos) == (223, 223, 223, 255):
+            hex_vertices = self.put_a_stone(pos, board)
+            if hex_vertices != None:
+                color = 'red' if self.color==1 else 'blue'
+                pygame.draw.polygon(board.screen, color, hex_vertices)
+                return True
+
+                
 class AI(Player):
 
     def __init__(self, color, algorithm):
@@ -84,18 +104,3 @@ class AI(Player):
             return True
 
 
-class Human(Player):
-
-    def __init__(self, color):
-        super().__init__(color)
-   
-
-    def plays(self, board):
-        have_play = False
-        pos = pygame.mouse.get_pos()
-        if board.background.get_at(pos) == (223, 223, 223, 255):
-            hex_vertices = self.put_a_stone(pos, board)
-            if hex_vertices != None:
-                color = 'red' if self.color==1 else 'blue'
-                pygame.draw.polygon(board.screen, color, hex_vertices)
-                return True
