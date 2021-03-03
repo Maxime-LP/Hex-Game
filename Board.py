@@ -1,12 +1,10 @@
-import scipy.linalg as lg
 import string
-import numpy as np
 
 class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
-        self.board = np.zeros((self.size, self.size))
+        self.board = [[0 for i in range(self.size)] for j in range(self.size)] #np.zeros((self.size, self.size))
         self.actions = list(range(self.size**2))
         self.background = background
         self.screen = screen
@@ -83,7 +81,9 @@ class Board:
                 p = self.tiles_centers[k]
                 diff1 = (p[0]-pos[0],p[1]-pos[1])
                 diff2 = (min_pos[0]-pos[0],min_pos[1]-pos[1])
-                if lg.norm(diff1) < lg.norm(diff2):
+                norm_diff1 = (diff1[0]**2+diff1[1]**2)**(1/2)
+                norm_diff2 = (diff2[0]**2+diff2[1]**2)**(1/2)
+                if norm_diff1 < norm_diff2:
                     min_pos = self.tiles_centers[k]
             except IndexError:
                 break
@@ -150,4 +150,5 @@ class Board:
 
         return headers + "\n" + (red_line_top) + "\n" \
                 + schema + red_line_bottom
+
 ##############################################################

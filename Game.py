@@ -1,5 +1,4 @@
 import pygame
-import numpy as np
 
 class Game:
     
@@ -37,7 +36,7 @@ class Game:
     
     def reset(self):
         """Resets the game."""
-        self.board.board = np.zeros((self.board.size, self.board.size))
+        self.board.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.board.actions = list(range(self.board.size**2))
         self.board.components = [ [self.board.north_component, self.board.south_component], [self.board.west_component, self.board.east_component] ]
         self.turn = 0
