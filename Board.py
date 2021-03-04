@@ -9,14 +9,14 @@ class Board:
         self.background = background
         self.screen = screen
 
+        # init connex componant list
         self.east_component = set([(i,self.size) for i in range(self.size)])
         self.west_component = set([(i,-1) for i in range(self.size)])
         self.north_component = set([(-1,i) for i in range(self.size)])
         self.south_component = set([(self.size,i) for i in range(self.size)])
-
-        #Connected components : [ [  compred1, ..., compredq  ],  [   compblue1, ..., compbluer  ]      ]  where comp...i is a list
+        #Connected components : [[comp_red_1, ..., comp_red_n], [comp_blue_1, ..., comp_blue_n]]  where comp_color_i is a list
         #red connected components : self.components[0],  blue connected components : self.components[1]
-        self.components = [ [self.north_component, self.south_component], [self.west_component, self.east_component] ]
+        self.components = [[self.north_component, self.south_component], [self.west_component, self.east_component]]
 
         #create landmark and get tiles' center
         (x0,y0)=(106,128)

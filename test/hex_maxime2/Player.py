@@ -9,26 +9,23 @@ class Player:
 
     def put_a_stone(self, board, i, j):
         board.board[i][j] = self.color
-
         action = board.coord_to_action(i,j)
         action_index = board.actions.index(action)
         board.actions.pop(action_index)
 
-        #adds the center of the polygon to the player connected component
+        
         neighbors = board.get_neighbors(i,j)
-        added=False
-        index=0
 
-        while index < len(board.components[self.color-1]):
-            for neighbor in neighbors:
-                if neighbor in board.components[self.color-1][index]:
-                    board.components[self.color-1][index].add((i,j))
-                    added=True
-                    break
-            index+=1
+        # adds tiles to other connected tiles
+        added = False
+        index = 0
+        for component in board.components[self.color-1]:
+            if component.intersection(neighbors) != set():
+                board.components[self.color-1][index].add((i,j))
+                added = True
+            index += 1
 
         if not added:
-            #ie if all the neighbors are not in any of the player's connected components ie if the neighbors are not of the player's color
             board.components[self.color-1].append(set([(i,j)]))
 
 
