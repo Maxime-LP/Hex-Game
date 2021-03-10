@@ -71,12 +71,29 @@ class Game:
                         self.turn = 1 - self.turn
                         print(self.board)
 
-                pygame.display.flip()
-
                 # did someone win ?
                 winner = self.check_win(currplayer)
                 if winner != None:
                     self.on = False
                     print(f"It's over! {winner.name} won!")
-                    break
+
+                    # pick a font and writes the winner
+                    font = pygame.font.SysFont("Times New Roman", 30)
+                    label = font.render(f"{winner.name} won!", 1, (255, 255, 255))
+                    self.board.screen.blit(label, (0, 0))
+                    pause = True
+                
+                pygame.display.flip()
+        
+        while pause:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT: 
+                    self.on = False
+                    pause=False
+                
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.on = False
+                        pause=False
+
         return winner.color

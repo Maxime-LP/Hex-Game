@@ -12,7 +12,8 @@ def run_mean(board, color):
     """
     # if x = 10000, it is equivalent to test 100 games/play
     x = 1000
-    n = int(x / (board.size**2 + len(board.actions)))
+    #n = int(x / (board.size**2 + len(board.actions)))
+    n = 100
     action = best_action(board, n, color)
     return board.action_to_coord(action)
 
