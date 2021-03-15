@@ -1,28 +1,30 @@
 from random import choice
-from AI.mean.best_action import best_action
+from AI.mc.best_action import best_action
+from AI.mcts.Game_mcts import *
+from AI.mcts.mcts import *
+from copy import deepcopy
 
 def run_random(board, color):
+    """
+    Pick a random legal action.
+    """
     return board.action_to_coord(choice(board.actions))
 
 
-def run_mean(board, color):
+def run_mc(board, color):
     """
-    Jouer N parties sur chaque case libre et voir quelle case a le meilleur score
-    Y-a-t-il une meilleure valeur de N ? On peut augmenter la valeur de N à chaque coup car moins de cases à tester
+    Play n game for each legal action and return the action with the best win rate.
     """
-    # if x = 10000, it is equivalent to test 100 games/play
-    x = 1000
-    #n = int(x / (board.size**2 + len(board.actions)))
     n = 100
     action = best_action(board, n, color)
     return board.action_to_coord(action)
 
 
-def run_ucb1(board):
+def run_mcts(board, color):
     """
-    
+    Uses mcts method with time or iteration limit.
     """
-    return
-
-def run_mcts(board):
-    return
+    initialState = Hex(color, deepcopy(board))
+    searcher = mcts(timeLimit=5000)
+    action = searcher.search(initialState=initialState)
+    return (action.x, action.y)

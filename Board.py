@@ -4,10 +4,8 @@ class Board:
 
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
-        self.board = [[0 for i in range(self.size)] for j in range(self.size)] #np.zeros((self.size, self.size))
+        self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         self.actions = list(range(self.size**2))
-        self.background = background
-        self.screen = screen
 
         # init connex componant list
         self.east_component = set([(i,self.size) for i in range(self.size)])
@@ -31,11 +29,12 @@ class Board:
                 # add hexagon center
                 self.tiles_centers.append(point)
 
+
 ## Convert point and coord for display ##############################
 
     def coord_to_action(self, i, j):
         """
-        Convert board coord (i,j) to hexagon index in board.actions.
+        Convert board coord (i,j) to hexagon index in board actions.
         """
         return i * self.size + j
 
@@ -79,8 +78,8 @@ class Board:
         while True:
             try:
                 p = self.tiles_centers[k]
-                diff1 = (p[0]-pos[0],p[1]-pos[1])
-                diff2 = (min_pos[0]-pos[0],min_pos[1]-pos[1])
+                diff1 = (p[0]-pos[0], p[1]-pos[1])
+                diff2 = (min_pos[0]-pos[0], min_pos[1]-pos[1])
                 norm_diff1 = (diff1[0]**2+diff1[1]**2)**(1/2)
                 norm_diff2 = (diff2[0]**2+diff2[1]**2)**(1/2)
                 if norm_diff1 < norm_diff2:
@@ -100,7 +99,7 @@ class Board:
 
     def get_neighbors(self, i, j):
         """
-        Returns the neighbours tiles of a point (i,j) on the board.
+        Returns the neighbours tiles of a point (i,j) on the board .
         """
         neighbors = []
         for a in range(-1,2): 
@@ -112,12 +111,61 @@ class Board:
 
 ###############################################################
 
+## Update board state after put a stone ######################
+
+    def update(self, pos, color, center=False):
+        # gets the center and the vertices' hex where the current player is willing to play
+        hex_vertices, tile_center = self.get_polygon(pos,center)
+        i, j = self.center_to_coord(tile_center)
+        
+        if self.board[i][j] == 0:
+            self.board[i][j] = color
+            action = self.coord_to_action(i,j)
+            action_index = self.actions.index(action)
+            self.actions.pop(action_index)
+
+            
+            neighbors = self.get_neighbors(i,j)
+
+            # adds tiles to other connected tiles
+            added = False
+            index = 0
+            for component in self.components[color-1]:
+                if component.intersection(neighbors) != set():
+                    self.components[color-1][index].add((i,j))
+                    added = True
+                index += 1
+
+            if not added:
+                self.components[color-1].append(set([(i,j)]))
+
+            #groups the adjacent components
+            l = len(self.components[color-1])
+            if l > 1:
+                for index1 in range(l):
+                    for index2 in range(l):
+                        if index1 != index2:
+                            try:
+                                if (i,j) in self.components[color-1][index1] and (i,j) in self.components[color-1][index2]:
+                                    self.components[color-1][index1] = self.components[color-1][index2] | self.components[color-1][index1]
+                                    self.components[color-1].remove(self.components[color-1][index2])                              
+                            #in case we are considering an already deleted set
+                            except IndexError:
+                                pass
+
+            return hex_vertices
+
+        else:
+            return None
+
+###############################################################
+
 
 ## Console display  ###########################################
 
     def __str__(self):
         """
-        Returns a string containing the current state of the board.
+        Returns a string containing the current state of the board
         """
         schema = ""
         headers = "     "
