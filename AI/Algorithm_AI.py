@@ -1,7 +1,12 @@
 from random import choice
 from AI.mc.best_action import best_action
+
+#from AI.mcts.Game_mc import *
+#from AI.mcts.mc import *
+
 from AI.mcts.Game_mcts import *
 from AI.mcts.mcts import *
+
 from copy import deepcopy
 
 def run_random(board, color):
@@ -13,7 +18,14 @@ def run_random(board, color):
 
 def run_mc(board, color):
     """
-    Play n game for each legal action and return the action with the best win rate.
+    Plays n games with random policy for each legal actions.
+    Return the action with the best win rate.
+    """
+    """
+    initialState = Hex(color, deepcopy(board))
+    searcher = mcts(timeLimit=5000)
+    action = searcher.search(initialState=initialState)
+    return (action.x, action.y)
     """
     n = 100
     action = best_action(board, n, color)
@@ -25,6 +37,6 @@ def run_mcts(board, color):
     Uses mcts method with time or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(timeLimit=5000)
+    searcher = mcts(iterationLimit=1000)
     action = searcher.search(initialState=initialState)
     return (action.x, action.y)

@@ -14,27 +14,9 @@ def randomPolicy(state):
     return state.getReward()
 
 
-class treeNode():
-    def __init__(self, state, parent):
-        self.state = state
-        self.isTerminal = state.isTerminal()
-        self.isFullyExpanded = self.isTerminal
-        self.parent = parent
-        self.numVisits = 0
-        self.totalReward = 0
-        self.children = {}
+class mc():
 
-    def __str__(self):
-        s = []
-        s.append("totalReward: %s"%(self.totalReward))
-        s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal))
-        s.append("possibleActions: %s"%(self.children.keys()))
-        return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
-
-class mcts():
-
-    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=1/math.sqrt(2),
+    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=math.sqrt(2),
                  rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
@@ -50,30 +32,24 @@ class mcts():
                 raise ValueError("Iteration limit must be greater than one")
             self.searchLimit = iterationLimit
             self.limitType = 'iterations'
-        self.explorationConstant = explorationConstant
-        self.rollout = rolloutPolicy
+        #self.explorationConstant = explorationConstant
+        #self.rollout = rolloutPolicy
 
 
     def search(self, initialState, needDetails=False):
 
-        self.root = treeNode(initialState, None)
-
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000
-            while time.time() < timeLimit:
-                self.executeRound()
+                while time.time() < timeLimit:
+                    self.executeRound()
         else:
             for i in range(self.searchLimit):
                 self.executeRound()
 
         bestChild = self.getBestChild(self.root, 0)
-        action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
-        if needDetails:
-            for node, info in zip(self.root.children.keys(), self.root.children.values()):
-                print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
-            return {"action": action, "expectedReward": bestChild.totalReward / bestChild.numVisits}
-        else:
-            return action
+        action = max(res, key = res.get)
+        return action
+
 
     def executeRound(self):
         """

@@ -1,4 +1,6 @@
 from copy import deepcopy
+from mc import mc
+import string
 
 class Hex():
     
@@ -6,18 +8,16 @@ class Hex():
         self.size = board.size
         self.board = board.board
         self.currplayer = color
-
         self.east_component = board.east_component
         self.west_component = board.west_component
         self.north_component = board.north_component
         self.south_component = board.south_component
         self.components = board.components
-
         self.winner = None
         self.player = color
 
     def getCurrentPlayer(self):
-        return 1 if self.currplayer == self.player else -1
+        return self.currplayer
 
     def getPossibleActions(self):
         possibleActions = []
@@ -111,3 +111,10 @@ class Action():
 
     def __hash__(self):
         return hash((self.x, self.y, self.player))
+
+if __name__=="__main__":
+    color = 1
+    initialState = Hex(color)
+    searcher = mcts(iterationLimit=10000)
+    action = searcher.search(initialState=initialState, needDetails=True)
+    print(action)

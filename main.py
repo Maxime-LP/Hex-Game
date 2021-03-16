@@ -54,7 +54,7 @@ else:
 if sys.argv[2] == '0':
     player2 = Human(BLUE)
 elif sys.argv[2] == '1':
-    player2 = AI(BLUE, 'mc')
+    player2 = AI(BLUE, 'mcts')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
