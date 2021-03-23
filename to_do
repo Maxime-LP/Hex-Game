@@ -1,0 +1,18 @@
+#########################################################
+# Important
+
+# améliorer AI mcts
+
+#########################################################
+
+
+#########################################################
+# Autre
+
+# changer le num des joueur entre 1 et -1 ?
+# créer une fonction qui retourne des attributs de board
+# ajouter choice dans mc si plusieurs 'best_action'
+# ajouter un pattern du type pour sys.argv0 à 3
+
+#########################################################
+
