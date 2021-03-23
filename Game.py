@@ -41,7 +41,9 @@ class Game:
     def run(self):
 
         while self.on:
+            
             for event in pygame.event.get():
+                pygame.display.flip()
                 currplayer = self.players[self.turn]
 
                 # upon pressing QUIT button
@@ -80,7 +82,7 @@ class Game:
                     pygame.display.flip()
                     break
                 
-                pygame.display.flip()
+                #pygame.display.flip()
 
         while pause:
             for event in pygame.event.get():
