@@ -33,23 +33,17 @@ class Board:
 ## Convert point and coord for display ##############################
 
     def coord_to_action(self, i, j):
-        """
-        Convert board coord (i,j) to hexagon index in board actions.
-        """
+        """ Convert board coord (i,j) to hexagon index in board actions. """
         return i * self.size + j
 
 
     def action_to_coord(self, action):
-        """
-        Convert hexagon index in board.actions to board coord (i,j).
-        """
+        """ Convert hexagon index in board.actions to board coord (i,j). """
         return action // self.size, action % self.size
 
 
     def center_to_coord(self, tile_center):
-        """
-        Convert tile_center to board coord (i,j).
-        """
+        """ Convert tile_center to board coord (i,j). """
         index  = self.tiles_centers.index(tile_center)
         i = index // self.size
         j = index % self.size
@@ -98,9 +92,7 @@ class Board:
 ## Fonction to create edge between tiles of the same color ########
 
     def get_neighbors(self, i, j):
-        """
-        Returns the neighbours tiles of a point (i,j) on the board .
-        """
+        """ Returns the neighbours tiles of a tile (i,j) on the board. """
         neighbors = []
         for a in range(-1,2): 
             for b in range(-1,2):  
@@ -108,12 +100,14 @@ class Board:
                     neighbors.append((i+a,j+b))
         return neighbors
 
-
 ###############################################################
+
 
 ## Update board state after put a stone ######################
 
     def update(self, pos, color, center=False):
+        """ Update the board after an action. """
+
         # gets the center and the vertices' hex where the current player is willing to play
         hex_vertices, tile_center = self.get_polygon(pos,center)
         i, j = self.center_to_coord(tile_center)
@@ -123,7 +117,6 @@ class Board:
             action = self.coord_to_action(i,j)
             action_index = self.actions.index(action)
             self.actions.pop(action_index)
-
             
             neighbors = self.get_neighbors(i,j)
 
@@ -135,10 +128,8 @@ class Board:
                     self.components[color-1][index].add((i,j))
                     added = True
                 index += 1
-
             if not added:
                 self.components[color-1].append(set([(i,j)]))
-
             #groups the adjacent components
             l = len(self.components[color-1])
             if l > 1:
@@ -152,9 +143,8 @@ class Board:
                             #in case we are considering an already deleted set
                             except IndexError:
                                 pass
-
             return hex_vertices
-
+        
         else:
             return None
 
@@ -164,9 +154,7 @@ class Board:
 ## Console display  ###########################################
 
     def __str__(self):
-        """
-        Returns a string containing the current state of the board
-        """
+        """ Returns a string containing the current state of the board. """
         schema = ""
         headers = "     "
         alphabet = list(string.ascii_uppercase) 

@@ -13,24 +13,19 @@ class Game:
     def check_win(self, currplayer):
         """
         Checks if a the current player won the game. Returns the winner's name if there is any or None if there is none.
-
         1 : red player
         2 : blue player
         """
-
         size=self.board.size
         if currplayer.color == 1:
             for component in self.board.components[currplayer.color - 1]:
-
                 if self.board.north_component.issubset(component) and self.board.south_component.issubset(component):
                     return currplayer
 
         elif currplayer.color == 2:
-            for component in self.board.components[currplayer.color - 1]:
-                
+            for component in self.board.components[currplayer.color - 1]:  
                 if self.board.west_component.issubset(component) and self.board.east_component.issubset(component):
                     return currplayer
-
         return None
 
     

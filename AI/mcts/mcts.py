@@ -1,5 +1,5 @@
 import time
-import math
+from math import log, sqrt
 import random
 
 
@@ -15,6 +15,7 @@ def randomPolicy(state):
 
 
 class treeNode():
+
     def __init__(self, state, parent):
         self.state = state
         self.isTerminal = state.isTerminal()
@@ -32,9 +33,10 @@ class treeNode():
         s.append("possibleActions: %s"%(self.children.keys()))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
 
+
 class mcts():
 
-    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=1/math.sqrt(2),
+    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=sqrt(2),
                  rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
@@ -55,9 +57,7 @@ class mcts():
 
 
     def search(self, initialState, needDetails=False):
-
         self.root = treeNode(initialState, None)
-
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000
             while time.time() < timeLimit:
@@ -71,7 +71,7 @@ class mcts():
         if needDetails:
             for node, info in zip(self.root.children.keys(), self.root.children.values()):
                 print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
-            return {"action": action, "expectedReward": bestChild.totalReward / bestChild.numVisits}
+            return action
         else:
             return action
 
@@ -100,7 +100,6 @@ class mcts():
                 if len(actions) == len(node.children):
                     node.isFullyExpanded = True
                 return newNode
-
         raise Exception("Should never reach here")
 
     def backpropogate(self, node, reward):
@@ -113,8 +112,8 @@ class mcts():
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():
-            nodeValue = node.state.getCurrentPlayer() * child.totalReward / child.numVisits + explorationValue * math.sqrt(
-                2 * math.log(node.numVisits) / child.numVisits)
+            nodeValue = node.state.getCurrentPlayer() * child.totalReward / child.numVisits + explorationValue * sqrt(
+                log(node.numVisits) / child.numVisits)
             if nodeValue > bestValue:
                 bestValue = nodeValue
                 bestNodes = [child]

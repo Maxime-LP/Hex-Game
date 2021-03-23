@@ -23,20 +23,20 @@ def run_mc(board, color):
     """
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(timeLimit=5000)
+    searcher = mc(iterationLimit=1000)
     action = searcher.search(initialState=initialState)
     return (action.x, action.y)
     """
-    n = 100
+    n = 50
     action = best_action(board, n, color)
     return board.action_to_coord(action)
 
 
 def run_mcts(board, color):
     """
-    Uses mcts method with time or iteration limit.
+    Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(iterationLimit=1000)
-    action = searcher.search(initialState=initialState)
+    searcher = mcts(iterationLimit=500)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return (action.x, action.y)
