@@ -46,7 +46,7 @@ RED, BLUE = 1, 2
 if sys.argv[1] == '0':
     player1 = Human(RED)
 elif sys.argv[1] == '1':
-    player1 = AI(RED, 'mcts')
+    player1 = AI(RED, 'mc')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()

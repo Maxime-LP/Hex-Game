@@ -27,7 +27,7 @@ def run_mc(board, color):
     action = searcher.search(initialState=initialState)
     return (action.x, action.y)
     """
-    n = 50
+    n = 10
     action = best_action(board, n, color)
     return board.action_to_coord(action)
 

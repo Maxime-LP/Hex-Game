@@ -77,9 +77,11 @@ class Game:
                     label = font.render(f"  {winner.name} won!", 1, (255, 255, 255))
                     screen.blit(label, (0, 0))
                     pause = True
+                    pygame.display.flip()
+                    break
                 
                 pygame.display.flip()
-        
+
         while pause:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT: 
