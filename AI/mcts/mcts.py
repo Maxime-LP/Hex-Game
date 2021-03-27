@@ -110,7 +110,7 @@ class mcts():
             node = node.parent
 
     def getBestChild(self, node, explorationValue):
-        bestValue = float("-inf")
+        #bestValue = float("-inf")
         bestNodes = []
         
         CurrentPlayer = node.state.getCurrentPlayer()
