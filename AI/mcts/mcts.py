@@ -1,6 +1,7 @@
 import time
 from math import log, sqrt
 import random
+import numpy as np
 
 
 def randomPolicy(state):
@@ -111,6 +112,17 @@ class mcts():
     def getBestChild(self, node, explorationValue):
         bestValue = float("-inf")
         bestNodes = []
+        
+        CurrentPlayer = node.state.getCurrentPlayer()
+        numVisits = node.numVisits
+
+        nodeChildren = [child for child in node.children.values()]
+        #nodeValues[i] = the value of the exploitation exploration balancing for the i-th child of the node
+        nodeValues = np.array([ CurrentPlayer * child.totalReward / child.numVisits + explorationValue * sqrt(log(numVisits) / child.numVisits) for child in nodeChildren])
+
+        bestValue = np.amax(nodeValues)
+        bestNodes = [child for child in nodeChildren if nodeValues[ nodeChildren.index(child) ] == bestValue ]
+        """
         for child in node.children.values():
             nodeValue = node.state.getCurrentPlayer() * child.totalReward / child.numVisits + explorationValue * sqrt(
                 log(node.numVisits) / child.numVisits)
@@ -119,4 +131,6 @@ class mcts():
                 bestNodes = [child]
             elif nodeValue == bestValue:
                 bestNodes.append(child)
+        """
+        print('node values:',nodeValues,'\n','best value',bestValue)
         return random.choice(bestNodes)
