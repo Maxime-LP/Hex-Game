@@ -1,11 +1,12 @@
 from random import choice
+from math import sqrt
 from AI.mc.best_action import best_action
 
 #from AI.mcts.Game_mc import *
 #from AI.mcts.mc import *
 
-from AI.mcts.Game_mcts import *
-from AI.mcts.mcts import *
+from AI.mcts.Game_mcts import Hex
+from AI.mcts.mcts import mcts
 
 from copy import deepcopy
 
@@ -37,6 +38,6 @@ def run_mcts(board, color):
     Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(iterationLimit=100)
+    searcher = mcts(iterationLimit=200,explorationConstant=sqrt(2))
     action = searcher.search(initialState=initialState, needDetails=False)
     return (action.x, action.y)
