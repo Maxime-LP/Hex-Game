@@ -132,5 +132,4 @@ class mcts():
             elif nodeValue == bestValue:
                 bestNodes.append(child)
         """
-        print('node values:',nodeValues,'\n','best value',bestValue)
         return random.choice(bestNodes)
