@@ -69,6 +69,7 @@ class mcts():
 
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
+
         if needDetails:
             for node, info in zip(self.root.children.keys(), self.root.children.values()):
                 print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
@@ -110,19 +111,9 @@ class mcts():
             node = node.parent
 
     def getBestChild(self, node, explorationValue):
-        #bestValue = float("-inf")
+        bestValue = float("-inf")
         bestNodes = []
         
-        CurrentPlayer = node.state.getCurrentPlayer()
-        numVisits = node.numVisits
-
-        nodeChildren = [child for child in node.children.values()]
-        #nodeValues[i] = the value of the exploitation exploration balancing for the i-th child of the node
-        nodeValues = np.array([ CurrentPlayer * child.totalReward / child.numVisits + explorationValue * sqrt(log(numVisits) / child.numVisits) for child in nodeChildren])
-
-        bestValue = np.amax(nodeValues)
-        bestNodes = [child for child in nodeChildren if nodeValues[ nodeChildren.index(child) ] == bestValue ]
-        """
         for child in node.children.values():
             nodeValue = node.state.getCurrentPlayer() * child.totalReward / child.numVisits + explorationValue * sqrt(
                 log(node.numVisits) / child.numVisits)
@@ -131,5 +122,5 @@ class mcts():
                 bestNodes = [child]
             elif nodeValue == bestValue:
                 bestNodes.append(child)
-        """
+        
         return random.choice(bestNodes)
