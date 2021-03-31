@@ -169,7 +169,11 @@ class mcts():
                     x += 100
 
             nodes = tmp
-
+        """
+        pos = nx.spring_layout(G)
+        for n, p in pos.items():
+            G.nodes[n]['pos'] = p
+        """
         edge_trace = go.Scatter(
             x = [],
             y = [],
