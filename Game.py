@@ -28,7 +28,7 @@ class Game:
                     return currplayer
         return None
 
-    
+    '''
     def reset(self):
         """Resets the game."""
         self.board.board = [[0 for i in range(self.size)] for j in range(self.size)]
@@ -36,7 +36,7 @@ class Game:
         self.board.components = [ [self.board.north_component, self.board.south_component], [self.board.west_component, self.board.east_component] ]
         self.turn = 0
         self.on = True
-    
+    '''
 
     def run(self):
 

@@ -1,5 +1,4 @@
 from copy import deepcopy
-from mc import mc
 import string
 
 class Hex():
@@ -7,6 +6,7 @@ class Hex():
     def __init__(self, color, board):
         self.size = board.size
         self.board = board.board
+        self.actions = board.actions
         self.currplayer = color
         self.east_component = board.east_component
         self.west_component = board.west_component
@@ -20,14 +20,9 @@ class Hex():
         return self.currplayer
 
     def getPossibleActions(self):
-        possibleActions = []
-        for i in range(len(self.board)):
-            for j in range(len(self.board[i])):
-                if self.board[i][j] == 0:
-                    possibleActions.append(Action(player=self.currplayer, x=i, y=j))
-        return possibleActions
+        return self.actions
 
-    def get_neighbors(self, i, j):
+    def getNeighbors(self, i, j):
         """
         Returns the neighbourhood of a point (i,j) of an hex matrix
         """
@@ -38,12 +33,12 @@ class Hex():
                     neighbors.append((i+a,j+b))
         return neighbors
 
-    def takeAction(self, action):
+    def takeAction(self, action, currplayer):
         new_state = deepcopy(self)
-        (i,j) = (action.x, action.y)
-        currplayer = action.player
+        (i,j) = action
         new_state.board[i][j] = currplayer
-        neighbors = self.get_neighbors(i, j)
+        new_state.actions.remove((i,j))
+        neighbors = self.getNeighbors(i, j)
         added = False
         index = 0
         for component in new_state.components[currplayer-1]:
@@ -72,7 +67,6 @@ class Hex():
         new_state.currplayer = 3 - currplayer
         
         return new_state
-
     
 
     def isTerminal(self):
@@ -89,16 +83,19 @@ class Hex():
                     return True
         return False
 
+
     def getReward(self):
         if self.winner != None:
             return 1 if self.winner == self.player else 0
         return False
 
+
 class Action():
-    def __init__(self, player, x, y):
+
+    def __init__(self, player, i, j):
         self.player = player
-        self.x = x
-        self.y = y
+        self.i = i
+        self.j = j
 
     def __str__(self):
         return str((self.x, self.y))
@@ -111,10 +108,3 @@ class Action():
 
     def __hash__(self):
         return hash((self.x, self.y, self.player))
-
-if __name__=="__main__":
-    color = 1
-    initialState = Hex(color)
-    searcher = mcts(iterationLimit=10000)
-    action = searcher.search(initialState=initialState, needDetails=True)
-    print(action)

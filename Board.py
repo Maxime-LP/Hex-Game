@@ -5,8 +5,8 @@ class Board:
     def __init__(self, board_size, background, screen):
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        self.actions = list(range(self.size**2))
-
+        #self.actions = list(range(self.size**2))
+        self.actions = [(i,j) for i in range(self.size) for j in range(self.size)]
         # init connex componant list
         self.east_component = set([(i,self.size) for i in range(self.size)])
         self.west_component = set([(i,-1) for i in range(self.size)])
@@ -114,9 +114,9 @@ class Board:
         
         if self.board[i][j] == 0:
             self.board[i][j] = color
-            action = self.coord_to_action(i,j)
-            action_index = self.actions.index(action)
-            self.actions.pop(action_index)
+            #action = self.coord_to_action(i,j)
+            #action_index = self.actions.index(action)
+            self.actions.remove((i,j))
             
             neighbors = self.get_neighbors(i,j)
 
