@@ -16,11 +16,12 @@ class Hex():
 
         self.winner = None
         self.player = color
+        
     """
     def getCurrentPlayer(self):
         return 1 if self.currplayer == self.player else 0
     """
-    
+
     def getPossibleActions(self):
         possibleActions = []
         for i in range(len(self.board)):

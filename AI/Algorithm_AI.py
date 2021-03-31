@@ -38,6 +38,6 @@ def run_mcts(board, color):
     Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(iterationLimit=200,explorationConstant=sqrt(2))
+    searcher = mcts(iterationLimit=500,explorationConstant=sqrt(2))
     action = searcher.search(initialState=initialState, needDetails=True)
     return (action.x, action.y)
