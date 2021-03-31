@@ -26,6 +26,8 @@ class treeNode():
         self.totalReward = 0
         self.children = {}
 
+        self.player = 1 - self.parent.player if parent is not None else state.player - 1 #state.player = 1 or 2
+
     def __str__(self):
         s = []
         s.append("totalReward: %s"%(self.totalReward))
@@ -107,7 +109,7 @@ class mcts():
     def backpropogate(self, node, reward):
         while node is not None:
             node.numVisits += 1
-            node.totalReward += reward
+            node.totalReward += reward * (node.player == self.root.player)
             node = node.parent
 
     def getBestChild(self, node, explorationValue):
@@ -115,7 +117,7 @@ class mcts():
         bestNodes = []
         
         for child in node.children.values():
-            nodeValue = node.state.getCurrentPlayer() * child.totalReward / child.numVisits + explorationValue * sqrt(
+            nodeValue = child.totalReward / child.numVisits + explorationValue * sqrt(
                 log(node.numVisits) / child.numVisits)
             if nodeValue > bestValue:
                 bestValue = nodeValue

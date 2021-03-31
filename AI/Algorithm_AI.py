@@ -39,5 +39,5 @@ def run_mcts(board, color):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = mcts(iterationLimit=200,explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=False)
+    action = searcher.search(initialState=initialState, needDetails=True)
     return (action.x, action.y)

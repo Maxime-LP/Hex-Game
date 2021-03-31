@@ -16,10 +16,11 @@ class Hex():
 
         self.winner = None
         self.player = color
-
+    """
     def getCurrentPlayer(self):
-        return 1 if self.currplayer == self.player else -1
-
+        return 1 if self.currplayer == self.player else 0
+    """
+    
     def getPossibleActions(self):
         possibleActions = []
         for i in range(len(self.board)):
@@ -90,7 +91,7 @@ class Hex():
 
     def getReward(self):
         if self.winner != None:
-            return 1 if self.winner == self.player else -1
+            return 1 if self.winner == self.player else 0
         return False
 
     def __str__(self):
