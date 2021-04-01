@@ -20,8 +20,8 @@ class Node():
 
     def __init__(self, state, parent):
         self.state = state
-        #self.isTerminal = state.isTerminal()
-        #self.isFullyExpanded = self.isTerminal
+        self.isTerminal = state.isTerminal()
+        self.isFullyExpanded = self.isTerminal
         self.parent = parent
         self.numVisits = 0
         self.totalReward = 0
@@ -58,35 +58,37 @@ class mc():
 
 
     def search(self, initialState, needDetails=False):
-        
+
         self.root = Node(initialState, None)
-        #print(self.root.state.actions)
         actions = self.root.state.actions
+        # Note :
+        # imputer le temps passé ou les itérations faites
+        # plus bas pour comparaison avec mcts
+        for action in actions:
+            treeNode = Node(self.root.state, self.root)
+            self.root.children[action] = treeNode
+            self.executeRound(treeNode)
 
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / (1000 * len(actions))
-            for action in actions:
-                treeNode = Node(self.root.state.takeAction(action, self.root.state.player), self.root)
+            for child in self.root.children.values():
                 while time.time() < timeLimit:
-                    self.executeRound(treeNode)
+                    self.executeRound(child)
         else:
             nb_iter = int(self.searchLimit / len(actions))
-            for action in actions:
-                treeNode = Node(self.root.state.takeAction(action, self.root.state.player), self.root)
-                self.root.children[action] = treeNode
+            for child in self.root.children.values():
                 for i in range(nb_iter):
-                    self.executeRound(treeNode)
+                    self.executeRound(child)
 
         bestChild = self.getBestChild(self.root)
-        action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
+        action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
         if needDetails:
-            for node, info in zip(self.root.children.keys(), self.root.children.values()):
+            for node, info in self.root.children.items():
                 print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
             print(action)
-            return action
-        else:
-            return action
+            
+        return action
 
     def executeRound(self, node):
         reward = self.rollout(node)
@@ -104,7 +106,6 @@ class mc():
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():
-            print(childs)
             nodeValue = child.totalReward / child.numVisits
             if nodeValue > bestValue:
                 bestValue = nodeValue

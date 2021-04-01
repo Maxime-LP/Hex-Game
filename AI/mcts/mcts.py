@@ -75,13 +75,14 @@ class mcts():
         else:
             for i in range(self.searchLimit):
                 self.executeRound()
+
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
         
         #self.show_graph()
 
         if needDetails:
-            for node, info in zip(self.root.children.keys(), self.root.children.values()):
+            for node, info in self.root.children.items():
                 print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
             return action
         else:
