@@ -4,15 +4,15 @@ import random
 import numpy as np
 import networkx as nx
 import plotly.graph_objects as go
-from AI.mcts.Game_mcts import Action
+#from AI.mcts.Game_mcts import Action
 
 def randomPolicy(state):
     while not state.isTerminal():
         try:
-            action = random.choice(state.getPossibleActions())
+            action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
-        state = state.takeAction(action)
+        state = state.takeAction(action, state.currplayer)
     state.winner = state.currplayer
     return state.getReward()
 
@@ -78,7 +78,7 @@ class mcts():
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
         
-        self.show_graph()
+        #self.show_graph()
 
         if needDetails:
             for node, info in zip(self.root.children.keys(), self.root.children.values()):
@@ -107,7 +107,7 @@ class mcts():
         actions = node.state.getPossibleActions()
         for action in actions:
             if action not in node.children:
-                newNode = treeNode(node.state.takeAction(action), node)
+                newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
                 node.children[action] = newNode
                 if len(actions) == len(node.children):
                     node.isFullyExpanded = True
@@ -138,7 +138,7 @@ class mcts():
         
         return random.choice(bestNodes)
 
-
+'''
     def show_graph(self):
         if self.root is None:
             raise Exception("Can't draw an empty graph")
@@ -161,8 +161,8 @@ class mcts():
 
             x = -n_to_draw
             for action,node in nodes.items():
-                G.add_node(node,pos=(x,y),score=f"{node.totalReward} / {node.numVisits}",player=node.player,action=action)
-                G.add_edge(node.parent,node)
+                G.add_node(node,pos=(x,y),score=f"{node.totalReward} / {node.numVisits}",player=node.player, action=action)
+                G.add_edge(node.parent,node) 
                 
                 x += 100
                 if x==0 and n_to_draw == 0:
@@ -227,6 +227,4 @@ class mcts():
                 yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)))
         
         fig.show()
-    #############
-            
-
+'''

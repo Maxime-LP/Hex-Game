@@ -6,31 +6,25 @@ class Hex():
     def __init__(self, color, board):
         self.size = board.size
         self.board = board.board
+        self.actions = board.actions
         self.currplayer = color
-
         self.east_component = board.east_component
         self.west_component = board.west_component
         self.north_component = board.north_component
         self.south_component = board.south_component
         self.components = board.components
-
         self.winner = None
         self.player = color
-        
-    """
+
+    '''
     def getCurrentPlayer(self):
         return 1 if self.currplayer == self.player else 0
-    """
+    '''
 
     def getPossibleActions(self):
-        possibleActions = []
-        for i in range(len(self.board)):
-            for j in range(len(self.board[i])):
-                if self.board[i][j] == 0:
-                    possibleActions.append(Action(player=self.currplayer, x=i, y=j))
-        return possibleActions
+        return self.actions
 
-    def get_neighbors(self, i, j):
+    def getNeighbors(self, i, j):
         """
         Returns the neighbourhood of a point (i,j) of an hex matrix
         """
@@ -41,12 +35,12 @@ class Hex():
                     neighbors.append((i+a,j+b))
         return neighbors
 
-    def takeAction(self, action):
+    def takeAction(self, action, currplayer):
         new_state = deepcopy(self)
-        (i,j) = (action.x, action.y)
-        currplayer = action.player
+        (i,j) = action
         new_state.board[i][j] = currplayer
-        neighbors = self.get_neighbors(i, j)
+        new_state.actions.remove((i,j))
+        neighbors = self.getNeighbors(i, j)
         added = False
         index = 0
         for component in new_state.components[currplayer-1]:
@@ -76,6 +70,7 @@ class Hex():
         
         return new_state
 
+
     def isTerminal(self):
         size = len(self.board)
         currplayer = 3 - self.currplayer
@@ -89,6 +84,7 @@ class Hex():
                 if self.west_component.issubset(component) and self.east_component.issubset(component):
                     return True
         return False
+
 
     def getReward(self):
         if self.winner != None:

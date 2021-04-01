@@ -3,7 +3,6 @@ from math import log, sqrt
 import random
 import numpy as np
 
-
 def randomPolicy(node):
     state = node.state
 
@@ -62,17 +61,17 @@ class mc():
         
         self.root = Node(initialState, None)
         #print(self.root.state.actions)
-        possibleActions = self.root.state.actions
+        actions = self.root.state.actions
 
         if self.limitType == 'time':
-            timeLimit = time.time() + self.timeLimit / (1000 * len(possibleActions))
-            for action in possibleActions:
-                treeNode = treeNode(self.root.state.takeAction(action, self.root.state.player), self.root)
+            timeLimit = time.time() + self.timeLimit / (1000 * len(actions))
+            for action in actions:
+                treeNode = Node(self.root.state.takeAction(action, self.root.state.player), self.root)
                 while time.time() < timeLimit:
                     self.executeRound(treeNode)
         else:
-            nb_iter = int(self.searchLimit / len(possibleActions))
-            for action in possibleActions:
+            nb_iter = int(self.searchLimit / len(actions))
+            for action in actions:
                 treeNode = Node(self.root.state.takeAction(action, self.root.state.player), self.root)
                 self.root.children[action] = treeNode
                 for i in range(nb_iter):
@@ -105,6 +104,7 @@ class mc():
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():
+            print(childs)
             nodeValue = child.totalReward / child.numVisits
             if nodeValue > bestValue:
                 bestValue = nodeValue

@@ -16,8 +16,10 @@ class Hex():
         self.winner = None
         self.player = color
 
+    '''
     def getCurrentPlayer(self):
-        return self.currplayer
+        return 1 if self.currplayer == self.player else 0
+    '''
 
     def getPossibleActions(self):
         return self.actions
@@ -67,7 +69,7 @@ class Hex():
         new_state.currplayer = 3 - currplayer
         
         return new_state
-    
+
 
     def isTerminal(self):
         size = len(self.board)
@@ -89,13 +91,45 @@ class Hex():
             return 1 if self.winner == self.player else 0
         return False
 
+def __str__(self):
+        """ Returns a string containing the current state of the board. """
+        schema = ""
+        headers = "     "
+        alphabet = list(string.ascii_uppercase) 
+        alphabet.reverse()
+
+        red_line_top = headers + "\033[31m--\033[0m" * (len(self.board))
+
+        i = 0
+        for line in self.board:
+            line_txt = ""
+            headers += alphabet.pop() + " "
+
+            line_txt += str(f" {i+1}")  + str(' ' * (i + 1))  + "\033[34m \\ \033[0m" if i < 9 \
+                        else str(i + 1) + str(' ' * (i + 1)) + "\033[34m \\ \033[0m"
+
+            for stone in line:
+                if stone == 0:
+                    line_txt += "⬡ "
+                elif stone == 1:
+                    line_txt +=  "\033[31m⬢ \033[0m" # 31=red
+                else:
+                    line_txt += "\033[34m⬢ \033[0m" # 34=blue
+
+            schema += line_txt + "\033[34m \\ \033[0m" + "\n"
+
+            i = i + 1
+
+        red_line_bottom = (" " * (self.size)) + red_line_top
+
+        return headers + "\n" + (red_line_top) + "\n" \
+                + schema + red_line_bottom
 
 class Action():
-
-    def __init__(self, player, i, j):
+    def __init__(self, player, x, y):
         self.player = player
-        self.i = i
-        self.j = j
+        self.x = x
+        self.y = y
 
     def __str__(self):
         return str((self.x, self.y))

@@ -1,11 +1,9 @@
-from random import choice
+import random
 from math import sqrt
-from AI.mc.best_action import best_action
-
-#from AI.mcts.Game_mc import *
-#from AI.mcts.mc import *
-
-from AI.mcts.Game_mcts import Hex
+#from AI.mc.best_action import best_action
+from AI.Hex import Hex
+from AI.mc.mc import mc
+#from AI.mcts.Game_mcts import Hex
 from AI.mcts.mcts import mcts
 
 from copy import deepcopy
@@ -14,7 +12,7 @@ def run_random(board, color):
     """
     Pick a random legal action.
     """
-    return board.action_to_coord(choice(board.actions))
+    return random.choice(board.actions)
 
 
 def run_mc(board, color):
@@ -22,22 +20,16 @@ def run_mc(board, color):
     Plays n games with random policy for each legal actions.
     Return the action with the best win rate.
     """
-    """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(iterationLimit=1000)
+    searcher = mc(timeLimit=1000)
     action = searcher.search(initialState=initialState)
-    return (action.x, action.y)
-    """
-    n = 10
-    action = best_action(board, n, color)
-    return board.action_to_coord(action)
-
+    return action
 
 def run_mcts(board, color):
     """
     Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(iterationLimit=500,explorationConstant=sqrt(2))
+    searcher = mcts(timeLimit=100,explorationConstant=sqrt(2))
     action = searcher.search(initialState=initialState, needDetails=True)
-    return (action.x, action.y)
+    return action
