@@ -5,16 +5,16 @@ import numpy as np
 
 def randomPolicy(node):
     state = node.state
-
     while not state.isTerminal():
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
         state = state.takeAction(action, state.currplayer)
-    state.winner = state.currplayer
+    state.winner = 3 - state.currplayer
+    if state.winner==2 & state.getReward()!=0:
+        print(state)
     return state.getReward()
-
 
 class Node():
 
@@ -85,7 +85,7 @@ class mc():
 
         if needDetails:
             for node, info in self.root.children.items():
-                print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
+                print(node,':',info.totalReward, info.numVisits, round(info.totalReward/info.numVisits,2))
             print(action)
             
         return action

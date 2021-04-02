@@ -83,7 +83,7 @@ class mcts():
 
         if needDetails:
             for node, info in self.root.children.items():
-                print(node,':',info.totalReward, info.numVisits, info.totalReward/info.numVisits)
+                print(node,':',info.totalReward, info.numVisits, round(info.totalReward/info.numVisits,2))
             return action
         else:
             return action

@@ -89,7 +89,7 @@ class Hex():
     def getReward(self):
         if self.winner != None:
             return 1 if self.winner == self.player else 0
-        return False
+        return
 
     def __str__(self):
         """ Returns a string containing the current state of the board. """
