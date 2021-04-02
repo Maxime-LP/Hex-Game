@@ -9,10 +9,10 @@ class Game:
         self.turn = 0
         self.on = True
 
-
     def check_win(self, currplayer):
         """
-        Checks if a the current player won the game. Returns the winner's name if there is any or None if there is none.
+        Checks if a the current player won the game. 
+        Returns the winner's name if there is any or None if there is none.
         1 : red player
         2 : blue player
         """
@@ -21,22 +21,21 @@ class Game:
             for component in self.board.components[currplayer.color - 1]:
                 if self.board.north_component.issubset(component) and self.board.south_component.issubset(component):
                     return currplayer
-
         elif currplayer.color == 2:
             for component in self.board.components[currplayer.color - 1]:  
                 if self.board.west_component.issubset(component) and self.board.east_component.issubset(component):
                     return currplayer
         return None
 
-    '''
+    
     def reset(self):
         """Resets the game."""
         self.board.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        self.board.actions = list(range(self.board.size**2))
+        self.board.actions = 0
         self.board.components = [ [self.board.north_component, self.board.south_component], [self.board.west_component, self.board.east_component] ]
         self.turn = 0
         self.on = True
-    '''
+    
 
     def run(self):
 
@@ -81,8 +80,6 @@ class Game:
                     pause = True
                     pygame.display.flip()
                     break
-                
-                #pygame.display.flip()
 
         while pause:
             for event in pygame.event.get():
@@ -94,3 +91,15 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         self.on = False
                         pause=False
+
+    def runNoDisplay(self):
+        #i = 0
+        while self.on:
+            currplayer = self.players[self.turn] 
+            if currplayer.plays(self.board):
+                self.turn = 1 - self.turn
+
+            # did someone win ?
+            winner = self.check_win(currplayer)
+            if winner != None:
+                return int(winner.color) - 1

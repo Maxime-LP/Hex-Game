@@ -45,7 +45,7 @@ RED, BLUE = 1, 2
 if sys.argv[1] == '0':
     player1 = Human(RED)
 elif sys.argv[1] == '1':
-    player1 = AI(RED, 'mc_ucb1')
+    player1 = AI(RED, 'random')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
@@ -53,7 +53,7 @@ else:
 if sys.argv[2] == '0':
     player2 = Human(BLUE)
 elif sys.argv[2] == '1':
-    player2 = AI(BLUE, 'mc')
+    player2 = AI(BLUE, 'random')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
@@ -67,6 +67,21 @@ game = Game(board, player1, player2)
 
 # Let's play ####################
 
-game.run()
+if sys.argv[4]=='1':
+    game.run()
+
+elif sys.argv[4]=='0' and sys.argv[1]=='1' and sys.argv[2]=='1':
+    time0 = time()
+    n = 10000
+    w = 0
+    for i in range(n):
+        board = Board(board_size, background, screen)
+        game = Game(board, player1, player2)
+        w += game.runNoDisplay()
+    print(f'Win rate Blue: {w/n}')
+    print(f'{round(n/(time()-time0), 4)} games/s')
+
+elif (sys.argv[1]=='0') | (sys.argv[2]=='0'):
+    print('Players must be AI.')
 
 #####################################################

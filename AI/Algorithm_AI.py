@@ -21,8 +21,8 @@ def run_mc(board, color):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(timeLimit=None, iterationLimit=board.size**2*50)
-    action = searcher.search(initialState=initialState, needDetails=True)
+    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 10)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 def run_mc_ucb1(board, color):
@@ -34,7 +34,7 @@ def run_mc_ucb1(board, color):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = mc_ucb1(timeLimit=None, iterationLimit=49, explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 def run_mcts(board, color):
