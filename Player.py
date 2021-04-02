@@ -1,7 +1,6 @@
 import pygame
 from misc import background, screen
-from AI.Algorithm_AI import run_random, run_mc, run_mcts
-
+from AI.Algorithm_AI import *
 
 class Player:
 
@@ -35,9 +34,10 @@ class AI(Player):
     def __init__(self, color, algorithm):
         super().__init__(color)
         algorithms = {
-                    'random':run_random, # random
-                    'mc':run_mc,         # simple monte-carlo
-                    'mcts':run_mcts      # monte-carlo tree search
+                    'random':run_random,  # random
+                    'mc':run_mc,          # simple monte-carlo
+                    'mc_ucb1':run_mc_ucb1,# mc + ucb1
+                    'mcts':run_mcts       # monte-carlo tree search
                     }
         self.algorithm = algorithms[algorithm]
 

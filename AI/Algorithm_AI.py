@@ -28,12 +28,12 @@ def run_mc(board, color):
 def run_mc_ucb1(board, color):
     """
     Plays games with iteration or time limit.
-    The selection of the action use UCB1.
+    The actions are selected with UCB1 criterion.
     Random policy is use.
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc_ucb1(timeLimit=None, iterationLimit=board.size**2*50)
+    searcher = mc_ucb1(timeLimit=None, iterationLimit=49, explorationConstant=sqrt(2))
     action = searcher.search(initialState=initialState, needDetails=True)
     return action
 

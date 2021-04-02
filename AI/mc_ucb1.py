@@ -35,7 +35,7 @@ class Node():
         s.append("possibleActions: %s"%(self.children.keys()))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
 
-class mc():
+class mc_ucb1():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=None,
                  rolloutPolicy=randomPolicy):
@@ -51,7 +51,7 @@ class mc():
             # number of iterations of the search
             if iterationLimit < 1:
                 raise ValueError("Iteration limit must be greater than one")
-            self.searchLimit = iterationLimit
+            self.iterationLimit = iterationLimit
             self.limitType = 'iterations'
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
@@ -61,26 +61,23 @@ class mc():
 
         self.root = Node(initialState, None)
         actions = self.root.state.actions
-        # Note :
-        # imputer le temps passé ou les itérations faites
-        # plus bas pour comparaison avec mcts
+        # Init each node
         for action in actions:
             treeNode = Node(self.root.state, self.root)
             self.root.children[action] = treeNode
             self.executeRound(treeNode)
 
         if self.limitType == 'time':
-            timeLimit = time.time() + self.timeLimit / (1000 * len(actions))
-            for child in self.root.children.values():
-                while time.time() < timeLimit:
-                    self.executeRound(child)
+            timeLimit = time.time() + self.timeLimit / 1000
+            while time.time() < timeLimit:
+                child = self.selectNode()
+                self.executeRound(child)
         else:
-            nb_iter = int(self.searchLimit / len(actions))
-            for child in self.root.children.values():
-                for i in range(nb_iter):
-                    self.executeRound(child)
+            for i in range(self.iterationLimit):
+                child = self.selectNode()
+                self.executeRound(child)
 
-        bestChild = self.getBestChild(self.root)
+        bestChild = self.getBestChild(self.root, self.explorationConstant)
         action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
         if needDetails:
@@ -89,6 +86,9 @@ class mc():
             print(action)
             
         return action
+
+    def selectNode(self):
+        return self.getBestChild(self.root, self.explorationConstant)
 
     def executeRound(self, node):
         reward = self.rollout(node)
@@ -102,15 +102,15 @@ class mc():
             node = node.parent
 
 
-    def getBestChild(self, node):
+    def getBestChild(self, node, explorationValue):
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():
-            nodeValue = child.totalReward / child.numVisits
+            nodeValue = child.totalReward / child.numVisits + explorationValue * sqrt(
+                log(node.numVisits) / child.numVisits )
             if nodeValue > bestValue:
                 bestValue = nodeValue
                 bestNodes = [child]
             elif nodeValue == bestValue:
                 bestNodes.append(child)
         return random.choice(bestNodes)
-

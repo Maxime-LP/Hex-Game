@@ -4,7 +4,6 @@ import random
 import numpy as np
 import networkx as nx
 import plotly.graph_objects as go
-#from AI.mcts.Game_mcts import Action
 
 def randomPolicy(state):
     while not state.isTerminal():
@@ -127,7 +126,6 @@ class mcts():
     def getBestChild(self, node, explorationValue):
         bestValue = float("-inf")
         bestNodes = []
-        
         for child in node.children.values():
             nodeValue = child.totalReward / child.numVisits + explorationValue * sqrt(
                 log(node.numVisits) / child.numVisits)
@@ -136,7 +134,6 @@ class mcts():
                 bestNodes = [child]
             elif nodeValue == bestValue:
                 bestNodes.append(child)
-        
         return random.choice(bestNodes)
 
 '''
