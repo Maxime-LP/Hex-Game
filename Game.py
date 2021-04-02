@@ -92,8 +92,8 @@ class Game:
                         self.on = False
                         pause=False
 
+
     def runNoDisplay(self):
-        #i = 0
         while self.on:
             currplayer = self.players[self.turn] 
             if currplayer.plays(self.board):
