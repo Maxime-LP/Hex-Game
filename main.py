@@ -37,7 +37,7 @@ screen.blit(background,(0,0))
 ####### Init Game, Players and Board instances #######
 
 #init boardgame
-board = Board(board_size, background, screen)
+board = Board(board_size)
 
 #init players
 RED, BLUE = 1, 2
@@ -53,7 +53,7 @@ else:
 if sys.argv[2] == '0':
     player2 = Human(BLUE)
 elif sys.argv[2] == '1':
-    player2 = AI(BLUE, 'random')
+    player2 = AI(BLUE, 'mc')
 else:
     print('Veuilliez saisir un type de joueur correct : 0 ou 1.')
     exit()
@@ -75,7 +75,7 @@ elif sys.argv[4]=='0' and sys.argv[1]=='1' and sys.argv[2]=='1':
     n = 10000
     w = 0
     for i in range(n):
-        board = Board(board_size, background, screen)
+        board = Board(board_size)
         game = Game(board, player1, player2)
         w += game.runNoDisplay()
     print(f'Win rate Blue: {w/n}')

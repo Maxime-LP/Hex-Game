@@ -1,8 +1,10 @@
 import string
+import pygame
+from misc import background, screen
 
 class Board:
 
-    def __init__(self, board_size, background, screen):
+    def __init__(self, board_size):
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
         #self.actions = list(range(self.size**2))
@@ -143,8 +145,12 @@ class Board:
                             #in case we are considering an already deleted set
                             except IndexError:
                                 pass
-            return hex_vertices
-        
+            
+            if hex_vertices != None:
+                color = 'red' if color==1 else 'blue'
+                pygame.draw.polygon(screen, color, hex_vertices)
+                return True
+            
         else:
             return None
 

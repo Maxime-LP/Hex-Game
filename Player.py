@@ -20,13 +20,14 @@ class Human(Player):
         pos = pygame.mouse.get_pos()
 
         if background.get_at(pos) == (223, 223, 223, 255):
-
+            return board.update(pos, self.color)
+            '''
             hex_vertices = board.update(pos, self.color)
 
             if hex_vertices != None:
                 color = 'red' if self.color==1 else 'blue'
                 pygame.draw.polygon(screen, color, hex_vertices)
-                return True
+                return True'''
 
                 
 class AI(Player):
@@ -45,8 +46,10 @@ class AI(Player):
     def plays(self, board):
         pos = self.algorithm(board, self.color)
         tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
+        return board.update(tile_center, self.color, True)
+        '''
         hex_vertices = board.update(tile_center, self.color, True)
         if hex_vertices != None:
             color = 'red' if self.color==1 else 'blue'
             pygame.draw.polygon(screen, color, hex_vertices)
-            return True
+            return True'''
