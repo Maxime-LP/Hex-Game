@@ -1,7 +1,7 @@
 import random
 from math import sqrt
 from AI.Hex import Hex
-from AI.mc0.best_action import *
+from AI.mc0.best_action import best_action
 from AI.mc_ucb1 import mc_ucb1
 from AI.mcts import mcts
 from copy import deepcopy
@@ -12,7 +12,7 @@ def run_random(board, color):
     Pick a random legal action.
     """
     return random.choice(board.actions)
-'''
+
 def run_mc(board, color):
     n = 10
     action = best_action(board, n, color)
@@ -30,7 +30,7 @@ def run_mc(board, color):
     searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 10)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
-
+'''
 
 def run_mc_ucb1(board, color):
     """
