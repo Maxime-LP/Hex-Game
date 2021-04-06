@@ -1,6 +1,6 @@
 import string
 import pygame
-from misc import background, screen
+from misc import screen
 
 class Board:
 
@@ -116,8 +116,6 @@ class Board:
         
         if self.board[i][j] == 0:
             self.board[i][j] = color
-            #action = self.coord_to_action(i,j)
-            #action_index = self.actions.index(action)
             self.actions.remove((i,j))
             
             neighbors = self.get_neighbors(i,j)

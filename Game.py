@@ -16,7 +16,17 @@ class Game:
         1 : red player
         2 : blue player
         """
-        size=self.board.size
+        for component in self.board.components[currplayer.color - 1]:
+            if currplayer.color == 1:
+                if self.board.north_component.issubset(component) \
+                    and self.board.south_component.issubset(component):
+                    return currplayer
+            else: # currplayer.color == 2
+                if self.board.west_component.issubset(component) \
+                    and self.board.east_component.issubset(component):
+                    return currplayer
+        return None
+        '''
         if currplayer.color == 1:
             for component in self.board.components[currplayer.color - 1]:
                 if self.board.north_component.issubset(component) and self.board.south_component.issubset(component):
@@ -26,6 +36,7 @@ class Game:
                 if self.board.west_component.issubset(component) and self.board.east_component.issubset(component):
                     return currplayer
         return None
+        '''
 
     
     def reset(self):
@@ -39,6 +50,8 @@ class Game:
 
     def run(self):
 
+        pause = True
+        
         while self.on:
             
             for event in pygame.event.get():
@@ -77,7 +90,6 @@ class Game:
                     font = pygame.font.SysFont("Times New Roman", 30)
                     label = font.render(f"  {winner.name} won!", 1, (255, 255, 255))
                     screen.blit(label, (0, 0))
-                    pause = True
                     pygame.display.flip()
                     break
 
@@ -86,7 +98,7 @@ class Game:
                 if event.type == pygame.QUIT: 
                     self.on = False
                     pause=False
-                
+
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.on = False

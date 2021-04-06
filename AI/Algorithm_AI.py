@@ -1,9 +1,6 @@
 import random
 from math import sqrt
-from AI.Hex import Hex
-from AI.mc0.best_action import best_action
-from AI.mc_ucb1 import mc_ucb1
-from AI.mcts import mcts
+from AI import *
 from copy import deepcopy
 
 
