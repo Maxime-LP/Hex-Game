@@ -26,26 +26,21 @@ class Game:
                     and self.board.east_component.issubset(component):
                     return currplayer
         return None
-        '''
-        if currplayer.color == 1:
-            for component in self.board.components[currplayer.color - 1]:
-                if self.board.north_component.issubset(component) and self.board.south_component.issubset(component):
-                    return currplayer
-        elif currplayer.color == 2:
-            for component in self.board.components[currplayer.color - 1]:  
-                if self.board.west_component.issubset(component) and self.board.east_component.issubset(component):
-                    return currplayer
-        return None
-        '''
 
-    
+    '''
     def reset(self):
         """Resets the game."""
-        self.board.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        self.board.actions = 0
-        self.board.components = [ [self.board.north_component, self.board.south_component], [self.board.west_component, self.board.east_component] ]
+        size = self.board.size
+        self.board.board = [[0 for i in range(size)] for j in range(size)]
+        self.board.actions = [(i,j) for i in range(size) for j in range(size)]
+        self.board.east_component = set([(i,size) for i in range(size)])
+        self.board.west_component = set([(i,-1) for i in range(size)])
+        self.board.north_component = set([(-1,i) for i in range(size)])
+        self.board.south_component = set([(size,i) for i in range(size)])
+        self.board.components = [[self.board.north_component, self.board.south_component],
+                            [self.board.west_component, self.board.east_component]]
         self.turn = 0
-        self.on = True
+        self.on = True'''
     
 
     def run(self):
@@ -85,7 +80,6 @@ class Game:
                 if winner != None:
                     self.on = False
                     print(f"It's over! {winner.name} won!")
-
                     # pick a font and writes the winner
                     font = pygame.font.SysFont("Times New Roman", 30)
                     label = font.render(f"  {winner.name} won!", 1, (255, 255, 255))

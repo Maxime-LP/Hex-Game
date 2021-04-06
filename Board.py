@@ -7,7 +7,6 @@ class Board:
     def __init__(self, board_size):
         self.size = int(board_size)
         self.board = [[0 for i in range(self.size)] for j in range(self.size)]
-        #self.actions = list(range(self.size**2))
         self.actions = [(i,j) for i in range(self.size) for j in range(self.size)]
         # init connex componant list
         self.east_component = set([(i,self.size) for i in range(self.size)])
@@ -88,7 +87,7 @@ class Board:
         hex_vertices = [(x+l/2,y-h/4),(x+l/2,y+h/4),(x,y+h/2),(x-l/2,y+h/4),(x-l/2,y-h/4),(x,y-h/2)]
         return hex_vertices, min_pos
 
-###############################################################
+###################################################################
 
 
 ## Fonction to create edge between tiles of the same color ########
@@ -102,10 +101,10 @@ class Board:
                     neighbors.append((i+a,j+b))
         return neighbors
 
-###############################################################
+##################################################################
 
 
-## Update board state after put a stone ######################
+## Update board state after put a stone ##########################
 
     def update(self, pos, color, center=False):
         """ Update the board after an action. """
@@ -143,12 +142,12 @@ class Board:
                             #in case we are considering an already deleted set
                             except IndexError:
                                 pass
-            
+            #update dsplay
             if hex_vertices != None:
                 color = 'red' if color==1 else 'blue'
                 pygame.draw.polygon(screen, color, hex_vertices)
                 return True
-            
+                
         else:
             return None
 

@@ -56,12 +56,12 @@ if sys.argv[4]=='1':
 
 elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_algorithms:
     time0 = time()
-    n = 1000
+    n = 100
     w = 0
     for i in range(n):
         board = Board(board_size)
         game = Game(board, player1, player2)
-        w += game.runNoDisplay()
+        w += game.runNoDisplay()    
     print(f'#games = {n}')
     print(f'Win rate Blue: {w/n}')
     print(f'{round(n/(time()-time0), 4)} games/s')

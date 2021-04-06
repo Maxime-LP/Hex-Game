@@ -1,4 +1,4 @@
-class Game:
+class Game_aux:
     
     def __init__(self, board, player1, player2):
         self.board = board
@@ -33,7 +33,6 @@ class Game:
                 self.turn = 1 - self.turn
             
             winner = self.check_win(self.board, currplayer)
-
             if winner != None:
                 self.on = False
                 return winner.color

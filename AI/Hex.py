@@ -13,13 +13,9 @@ class Hex():
         self.north_component = board.north_component
         self.south_component = board.south_component
         self.components = board.components
+        self.currplayer = color
         self.winner = None
         self.player = color
-
-    '''
-    def getCurrentPlayer(self):
-        return 1 if self.currplayer == self.player else 0
-    '''
 
     def getPossibleActions(self):
         return self.actions

@@ -1,6 +1,10 @@
 import random
 from math import sqrt
-from AI import *
+from AI.Hex import Hex
+from AI.mc import mc
+from AI.mc_ucb1 import mc_ucb1
+from AI.mcts import mcts
+from AI.mc0.best_action import best_action
 from copy import deepcopy
 
 
@@ -10,12 +14,12 @@ def run_random(board, color):
     """
     return random.choice(board.actions)
 
-def run_mc(board, color):
-    n = 10
+def run_mc0(board, color):
+    n = 50
     action = best_action(board, n, color)
     return action
 
-'''
+
 def run_mc(board, color):
     """
     Plays games with iteration or time limit.
@@ -24,10 +28,10 @@ def run_mc(board, color):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 10)
+    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 2)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
-'''
+
 
 def run_mc_ucb1(board, color):
     """

@@ -14,20 +14,10 @@ class Human(Player):
     def __init__(self, color):
         super().__init__(color)
    
-
     def plays(self, board):
-        have_play = False
         pos = pygame.mouse.get_pos()
-
         if background.get_at(pos) == (223, 223, 223, 255):
             return board.update(pos, self.color)
-            '''
-            hex_vertices = board.update(pos, self.color)
-
-            if hex_vertices != None:
-                color = 'red' if self.color==1 else 'blue'
-                pygame.draw.polygon(screen, color, hex_vertices)
-                return True'''
 
                 
 class AI(Player):
@@ -35,21 +25,15 @@ class AI(Player):
     def __init__(self, color, algorithm):
         super().__init__(color)
         algorithms = {
-                    'random':run_random,  # random
-                    'mc':run_mc,          # simple monte-carlo
-                    'mc_ucb1':run_mc_ucb1,# mc + ucb1
-                    'mcts':run_mcts       # monte-carlo tree search
+                    'random':run_random,    # random
+                    'mc0':run_mc0,          # simple monte-carlo v0
+                    'mc':run_mc,            # simple monte-carlo
+                    'mc_ucb1':run_mc_ucb1,  # mc + ucb1
+                    'mcts':run_mcts         # monte-carlo tree search
                     }
         self.algorithm = algorithms[algorithm]
-
 
     def plays(self, board):
         pos = self.algorithm(board, self.color)
         tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
         return board.update(tile_center, self.color, True)
-        '''
-        hex_vertices = board.update(tile_center, self.color, True)
-        if hex_vertices != None:
-            color = 'red' if self.color==1 else 'blue'
-            pygame.draw.polygon(screen, color, hex_vertices)
-            return True'''

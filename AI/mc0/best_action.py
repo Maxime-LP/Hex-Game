@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from AI.mc0.Game_aux import Game
+from AI.mc0.Game_aux import Game_aux
 from AI.mc0.AI_player import AI_player
 from AI.mc0.Board_aux import Board
 from copy import deepcopy
@@ -29,19 +29,24 @@ def best_action(initial_board, n, color):
 
         for _ in range(n):
             tmp_board = deepcopy(tboard)
-            tmp_game = Game(tmp_board, player1, player2)
-            
+            tmp_game = Game_aux(tmp_board, player1, player2)
             i, j = action
             tmp_game.players[0].plays(tmp_game.board, i, j)
-        
             winner = tmp_game.run()
             del tmp_game
             del tmp_board
             games_won += (winner == color)
 
         res[action] = games_won
-    print(res)
+
     best_action = max(res, key = res.get)
+
+
+    for action, score in res.items():
+        if action != best_action:
+            print(action,':',round(score/n,3))
+        else:
+            print("   ",action,':',round(score/n,3))
 
     return best_action
 
