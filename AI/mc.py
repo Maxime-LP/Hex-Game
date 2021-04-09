@@ -70,7 +70,6 @@ class mc():
 
 
     def search(self, initialState, needDetails=False):
-        time0 = time()
         self.root = Node(initialState, None)
         actions = self.root.state.actions
         # Note :
