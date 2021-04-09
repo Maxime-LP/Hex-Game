@@ -147,7 +147,7 @@ class mcts():
 
         G = nx.Graph()
         x,y = 0,0
-        G.add_node(self.root,pos=(x,y),score=f"{self.root.totalReward} / {self.root.numVisits}",player=self.root.player,action=Action(player=self.root.player, x='ro', y='ot'))
+        G.add_node(self.root,pos=(x,y),score=f"{self.root.totalReward} / {self.root.numVisits}",player=self.root.player,action='root')
         
         nodes = self.root.children
         while nodes != {}:
@@ -215,7 +215,7 @@ class mcts():
             node_trace['y'] += tuple([y])
 
             node_trace['marker']['color'] += 100 * node.totalReward / (node.numVisits+1)
-            node_info = f"{G.nodes[node]['score']}, player : {G.nodes[node]['player']}, action : ({G.nodes[node]['action'].x},{G.nodes[node]['action'].y})"
+            node_info = f"{G.nodes[node]['score']}, player : {G.nodes[node]['player']}, action : {G.nodes[node]['action']}"
             node_trace['text'] += tuple([node_info])
 
         fig = go.Figure(data=[edge_trace, node_trace],
