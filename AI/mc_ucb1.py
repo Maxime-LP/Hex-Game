@@ -1,38 +1,49 @@
-import time
+from time import time
 from math import log, sqrt
 import random
 import numpy as np
 
-def randomPolicy(node):
-    state = node.state
+def randomPolicy(state):
+
     while not state.isTerminal():
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
         state = state.takeAction(action, state.currplayer)
-    state.winner = 3 - state.currplayer
-    if state.winner==2 & state.getReward()!=0:
-        print(state)
+
     return state.getReward()
+
 
 class Node():
 
     def __init__(self, state, parent):
         self.state = state
-        self.isTerminal = state.isTerminal()
-        self.isFullyExpanded = self.isTerminal
         self.parent = parent
         self.numVisits = 0
         self.totalReward = 0
         self.children = {}
 
+        # if there is no parent node, state.player (1 or 2) is the player running 
+        # the mcts algorithm and we want to have the other player as the root node player
+        if parent is None : 
+            self.player =  3 - state.player
+        else:
+            self.player = 3 - self.parent.player
+    
+    def isTerminal(self):
+        return self.state.isTerminal()
+
+    def isFullyExpanded(self):
+        return len(self.state.actions)==len(self.children)
+
     def __str__(self):
         s = []
         s.append("totalReward: %s"%(self.totalReward))
         s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal))
-        s.append("possibleActions: %s"%(self.children.keys()))
+        s.append("isTerminal: %s"%(self.isTerminal()))
+        s.append("possibleActions: %s"%(list(self.children.keys())))
+        s.append("player: %s"%(self.player))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
 
 class mc_ucb1():
@@ -55,6 +66,7 @@ class mc_ucb1():
             self.limitType = 'iterations'
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
+        self.root = None
 
 
     def search(self, initialState, needDetails=False):
@@ -63,13 +75,12 @@ class mc_ucb1():
         actions = self.root.state.actions
         # Init each node
         for action in actions:
-            treeNode = Node(self.root.state, self.root)
-            self.root.children[action] = treeNode
-            self.executeRound(treeNode)
+            node = Node(self.root.state.takeAction(action, self.root.state.currplayer), self.root)
+            self.root.children[action] = node
+            self.executeRound(node)
 
         if self.limitType == 'time':
-            timeLimit = time.time() + self.timeLimit / 1000
-            while time.time() < timeLimit:
+            while time.time() < self.timeLimit:
                 child = self.selectNode()
                 self.executeRound(child)
         else:
@@ -77,7 +88,7 @@ class mc_ucb1():
                 child = self.selectNode()
                 self.executeRound(child)
 
-        bestChild = self.getBestChild(self.root, self.explorationConstant)
+        bestChild = self.getBestChild(self.root, 0)
         action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
         if needDetails:
@@ -91,7 +102,7 @@ class mc_ucb1():
         return self.getBestChild(self.root, self.explorationConstant)
 
     def executeRound(self, node):
-        reward = self.rollout(node)
+        reward = self.rollout(node.state)
         self.backpropogate(node, reward)
 
 

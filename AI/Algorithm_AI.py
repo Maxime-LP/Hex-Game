@@ -15,7 +15,7 @@ def run_random(board, color):
     return random.choice(board.actions)
 
 def run_mc0(board, color):
-    n = 50
+    n = 40
     action = best_action(board, n, color)
     return action
 
@@ -28,8 +28,8 @@ def run_mc(board, color):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 2)
-    action = searcher.search(initialState=initialState, needDetails=False)
+    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * 40)
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 
@@ -41,8 +41,8 @@ def run_mc_ucb1(board, color):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc_ucb1(timeLimit=None, iterationLimit=49, explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=False)
+    searcher = mc_ucb1(timeLimit=None, iterationLimit=1000, explorationConstant=sqrt(2))
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 def run_mcts(board, color):
@@ -50,6 +50,6 @@ def run_mcts(board, color):
     Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mcts(timeLimit=None, iterationLimit=400, explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=False)
+    searcher = mcts(timeLimit=None, iterationLimit=1000, explorationConstant=sqrt(2))
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action

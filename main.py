@@ -21,14 +21,14 @@ board = Board(board_size)
 
 #init players
 RED, BLUE = 1, 2
-ai_algorithms = ['random', 'mc0', 'mc', 'mcts']
+ai_algorithms = ['random', 'mc0', 'mc', 'mc_ucb1', 'mcts']
 
 if sys.argv[1] == 'h':   # h for human
     player1 = Human(RED)
 elif sys.argv[1] in ai_algorithms:
     player1 = AI(RED, sys.argv[1])
 else:
-    print(f'Wrong player type : {["h"] + ai_algorithms}.')
+    print(f'Wrong player type. Available options: {["h"] + ai_algorithms}.')
     exit()
 
 if sys.argv[2] == 'h':
@@ -36,7 +36,7 @@ if sys.argv[2] == 'h':
 elif sys.argv[2] in ai_algorithms:
     player2 = AI(BLUE, sys.argv[2])
 else:
-    print(f'Wrong player type : {["h"] + ai_algorithms}.')
+    print(f'Wrong player type. Available options: {["h"] + ai_algorithms}.')
     exit()
 
 
