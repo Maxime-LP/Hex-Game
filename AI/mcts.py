@@ -131,8 +131,6 @@ class mcts():
             if action not in node.children.keys():
                 newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
                 node.children[action] = newNode
-                if len(actions) == len(node.children):
-                    node.isFullyExpanded = True
                 return newNode
         raise Exception("No actions available after this node")
 
