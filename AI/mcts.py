@@ -6,14 +6,17 @@ import networkx as nx
 import plotly.graph_objects as go
 
 def randomPolicy(state):
-    
-    while not state.isTerminal():
+    player = state.player
+    winner = state.check_win()
+    while winner is None:
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
-        state = state.takeAction(action, state.currplayer)
-    state.winner = state.currplayer
+        state = state.takeAction(action, state.player)
+        winner = state.check_win()
+    
+    print(state.getReward(), (winner==player)*1)
     return state.getReward()
 
 
@@ -28,11 +31,11 @@ class treeNode():
         self.totalReward = 0
         self.children = {}
 
-        #if the is no parent node, state.player (1 or 2) is the player currently playing and we want to have the other player as the root node player
+        #if the is no parent node, state.player (1 or 2) is the player running the mcts algorithm and we want to have the other player as the root node player
         if parent is None : 
-            self.player = 1 if state.player == 2 else 2
+            self.player =  3 - state.player
         else:
-            self.player = 1 if self.parent.player == 2 else 2
+            self.player = 3 - self.parent.player
 
     def __str__(self):
         s = []
@@ -79,11 +82,14 @@ class mcts():
         """
         test_node = self.root
         while test_node is not None:
-            print(test_node)
+            print('node :',test_node)
+            print('children dict :',test_node.children)
+            children = list(test_node.children.values())
+            print('children dict values to list :',children,'\n\n\n')
             maxi = 0
             next_node = None
-            for child in list(test_node.children.values()):
-                if len(list(child.children.values()))>maxi:
+            for child in children:
+                if len(child.children)>maxi:
                     next_node = child
             test_node = next_node
         """
@@ -117,7 +123,8 @@ class mcts():
 
     def expand(self, node):
         actions = node.state.getPossibleActions()
-        for action in actions:
+        while actions!=[]:
+            action = random.choice(actions)
             if action not in node.children:
                 newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
                 node.children[action] = newNode
@@ -128,11 +135,11 @@ class mcts():
 
     def backpropogate(self, node, reward):
         """
-        reward is the reward gained by the root player
+        reward is the reward of the player who is running the mcts algorithm
         """
-        while node is not None:    
+        while node is not None:
             node.numVisits += 1
-            node.totalReward += (reward == 1) * (node.player != self.root.player) + (reward == 0) * (node.player == self.root.player)
+            node.totalReward += (reward == 1) * (node.player != self.root.player)
             node = node.parent
 
     def getBestChild(self, node, explorationValue):

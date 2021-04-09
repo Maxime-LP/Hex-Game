@@ -38,6 +38,7 @@ class Hex():
         neighbors = self.getNeighbors(i, j)
         added = False
         index = 0
+
         for component in new_state.components[currplayer-1]:
             if component.intersection(neighbors) != set():
                 new_state.components[currplayer-1][index].add((i,j))
@@ -73,15 +74,35 @@ class Hex():
         #red connected components : self.components[0]
         for component in self.components[0]:
             if self.north_component.issubset(component) and self.south_component.issubset(component):
+                self.winner = 1
                 return True
 
         #blue connected components : self.components[1]
         for component in self.components[1]:
             if self.west_component.issubset(component) and self.east_component.issubset(component):
+                self.winner = 2
                 return True
 
         return False
+    
+    def check_win(self):
+        """
+        Checks if a player won the game. 
+        Returns the winner's name if there is any or None if there is none.
+        1 : red player
+        2 : blue player
+        """
+        #red connected components : self.components[0]
+        for component in self.components[0]:
+            if self.north_component.issubset(component) and self.south_component.issubset(component):
+                return 1
 
+        #blue connected components : self.components[1]
+        for component in self.components[1]:
+            if self.west_component.issubset(component) and self.east_component.issubset(component):
+                return 2
+
+        return None
 
     def getReward(self):
         if self.winner != None:
