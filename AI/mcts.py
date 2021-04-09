@@ -21,8 +21,6 @@ class treeNode():
 
     def __init__(self, state, parent):
         self.state = state
-        #self.isTerminal = state.isTerminal()
-        #self.isFullyExpanded = self.isTerminal
         self.parent = parent
         self.numVisits = 0
         self.totalReward = 0
@@ -82,20 +80,6 @@ class mcts():
             for i in range(self.searchLimit):
                 self.executeRound()
         
-        """
-        test_node = self.root
-        while test_node is not None:
-            print('node :',test_node)
-            print('children dict :',test_node.children)
-            children = list(test_node.children.values())
-            print('children dict values to list :',children,'\n\n\n')
-            maxi = 0
-            next_node = None
-            for child in children:
-                if len(child.children)>maxi:
-                    next_node = child
-            test_node = next_node
-        """
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
         
