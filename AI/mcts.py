@@ -28,7 +28,7 @@ class treeNode():
         self.totalReward = 0
         self.children = {}
 
-        #if the is no parent node, state.player (1 or 2) is the player running the mcts algorithm and we want to have the other player as the root node player
+        #if there is no parent node, state.player (1 or 2) is the player running the mcts algorithm and we want to have the other player as the root node player
         if parent is None : 
             self.player =  3 - state.player
         else:
@@ -44,8 +44,8 @@ class treeNode():
         s = []
         s.append("totalReward: %s"%(self.totalReward))
         s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal))
-        s.append("possibleActions: %s"%(self.children.keys()))
+        s.append("isTerminal: %s"%(self.isTerminal()))
+        s.append("possibleActions: %s"%(list(self.children.keys())))
         s.append("player: %s"%(self.player))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
 
@@ -118,10 +118,8 @@ class mcts():
 
     def selectNode(self, node):
         while not node.isTerminal():
-            print(type(node))
             if node.isFullyExpanded():
                 node = self.getBestChild(node, self.explorationConstant)
-                print(type(node))
             else:
                 return self.expand(node)
         return node
