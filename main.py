@@ -28,7 +28,7 @@ if sys.argv[1] == 'h':   # h for human
 elif sys.argv[1] in ai_algorithms:
     player1 = AI(RED, sys.argv[1])
 else:
-    print(f'Veuilliez saisir un type de joueur correct : {["h"] + ai_algorithms}.')
+    print(f'Wrong player type : {["h"] + ai_algorithms}.')
     exit()
 
 if sys.argv[2] == 'h':
@@ -36,7 +36,7 @@ if sys.argv[2] == 'h':
 elif sys.argv[2] in ai_algorithms:
     player2 = AI(BLUE, sys.argv[2])
 else:
-    print(f'Veuilliez saisir un type de joueur correct : {["h"] + ai_algorithms}.')
+    print(f'Wrong player type : {["h"] + ai_algorithms}.')
     exit()
 
 

@@ -13,7 +13,6 @@ class Hex():
         self.north_component = board.north_component
         self.south_component = board.south_component
         self.components = board.components
-        self.currplayer = color
         self.winner = None
         self.player = color
 
@@ -68,17 +67,19 @@ class Hex():
 
 
     def isTerminal(self):
-        size = len(self.board)
-        currplayer = 3 - self.currplayer
-        if currplayer == 1:
-            for component in self.components[currplayer-1]:
-                if self.north_component.issubset(component) and self.south_component.issubset(component):
-                    return True
+        """
+        The state is terminal if one of the player wins
+        """
+        #red connected components : self.components[0]
+        for component in self.components[0]:
+            if self.north_component.issubset(component) and self.south_component.issubset(component):
+                return True
 
-        elif currplayer == 2:
-            for component in self.components[currplayer-1]:
-                if self.west_component.issubset(component) and self.east_component.issubset(component):
-                    return True
+        #blue connected components : self.components[1]
+        for component in self.components[1]:
+            if self.west_component.issubset(component) and self.east_component.issubset(component):
+                return True
+
         return False
 
 

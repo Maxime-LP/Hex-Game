@@ -6,6 +6,7 @@ import networkx as nx
 import plotly.graph_objects as go
 
 def randomPolicy(state):
+    
     while not state.isTerminal():
         try:
             action = random.choice(state.actions)
@@ -74,7 +75,18 @@ class mcts():
         else:
             for i in range(self.searchLimit):
                 self.executeRound()
-
+        
+        """
+        test_node = self.root
+        while test_node is not None:
+            print(test_node)
+            maxi = 0
+            next_node = None
+            for child in list(test_node.children.values()):
+                if len(list(child.children.values()))>maxi:
+                    next_node = child
+            test_node = next_node
+        """
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
         
