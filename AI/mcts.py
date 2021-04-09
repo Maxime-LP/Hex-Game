@@ -6,17 +6,14 @@ import networkx as nx
 import plotly.graph_objects as go
 
 def randomPolicy(state):
-    player = state.player
-    winner = state.check_win()
-    while winner is None:
+
+    while not state.isTerminal():
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
-        state = state.takeAction(action, state.player)
-        winner = state.check_win()
-    
-    print(state.getReward(), (winner==player)*1)
+        state = state.takeAction(action, state.currplayer)
+
     return state.getReward()
 
 
@@ -24,8 +21,8 @@ class treeNode():
 
     def __init__(self, state, parent):
         self.state = state
-        self.isTerminal = state.isTerminal()
-        self.isFullyExpanded = self.isTerminal
+        #self.isTerminal = state.isTerminal()
+        #self.isFullyExpanded = self.isTerminal
         self.parent = parent
         self.numVisits = 0
         self.totalReward = 0
@@ -36,6 +33,12 @@ class treeNode():
             self.player =  3 - state.player
         else:
             self.player = 3 - self.parent.player
+    
+    def isTerminal(self):
+        return self.state.isTerminal()
+
+    def isFullyExpanded(self):
+        return len(self.state.actions)==len(self.children)
 
     def __str__(self):
         s = []
@@ -114,9 +117,11 @@ class mcts():
         self.backpropogate(node, reward)
 
     def selectNode(self, node):
-        while not node.isTerminal:
-            if node.isFullyExpanded:
+        while not node.isTerminal():
+            print(type(node))
+            if node.isFullyExpanded():
                 node = self.getBestChild(node, self.explorationConstant)
+                print(type(node))
             else:
                 return self.expand(node)
         return node
@@ -125,13 +130,13 @@ class mcts():
         actions = node.state.getPossibleActions()
         while actions!=[]:
             action = random.choice(actions)
-            if action not in node.children:
+            if action not in node.children.keys():
                 newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
                 node.children[action] = newNode
                 if len(actions) == len(node.children):
                     node.isFullyExpanded = True
                 return newNode
-        raise Exception("Should never reach here")
+        raise Exception("No actions available after this node")
 
     def backpropogate(self, node, reward):
         """

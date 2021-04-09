@@ -14,6 +14,8 @@ class Hex():
         self.south_component = board.south_component
         self.components = board.components
         self.winner = None
+
+        #the player running the mcts algorithm
         self.player = color
 
     def getPossibleActions(self):
@@ -84,30 +86,11 @@ class Hex():
                 return True
 
         return False
-    
-    def check_win(self):
-        """
-        Checks if a player won the game. 
-        Returns the winner's name if there is any or None if there is none.
-        1 : red player
-        2 : blue player
-        """
-        #red connected components : self.components[0]
-        for component in self.components[0]:
-            if self.north_component.issubset(component) and self.south_component.issubset(component):
-                return 1
-
-        #blue connected components : self.components[1]
-        for component in self.components[1]:
-            if self.west_component.issubset(component) and self.east_component.issubset(component):
-                return 2
-
-        return None
 
     def getReward(self):
         if self.winner != None:
-            return 1 if self.winner == self.player else 0
-        return
+            return (self.winner == self.player)*1
+        return 0
 
     def __str__(self):
         """ Returns a string containing the current state of the board. """
