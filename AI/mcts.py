@@ -68,7 +68,6 @@ class mcts():
             self.limitType = 'iterations'
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
-        self.root = None
 
     def search(self, initialState, needDetails=False):
         self.root = treeNode(initialState, None)
@@ -82,7 +81,7 @@ class mcts():
         
         bestChild = self.getBestChild(self.root, 0)
         action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
-        
+
         #self.show_graph()
 
         if needDetails:
