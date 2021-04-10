@@ -25,7 +25,6 @@ class Game_aux:
 
 
     def run(self):
-
         while self.on:
             currplayer = self.players[self.turn]
 
