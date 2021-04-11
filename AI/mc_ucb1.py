@@ -1,21 +1,19 @@
 from time import time
 from math import log, sqrt
 import random
-import numpy as np
+from copy import deepcopy
 
 def randomPolicy(state):
-
     while not state.isTerminal():
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
-        state = state.takeAction(action, state.currplayer)
-
+        state.takeAction(action, state.currplayer)
     return state.getReward()
 
 
-class Node():
+class treeNode():
 
     def __init__(self, state, parent):
         self.state = state
@@ -30,18 +28,11 @@ class Node():
             self.player =  3 - state.player
         else:
             self.player = 3 - self.parent.player
-    
-    def isTerminal(self):
-        return self.state.isTerminal()
-
-    def isFullyExpanded(self):
-        return len(self.state.actions)==len(self.children)
 
     def __str__(self):
         s = []
         s.append("totalReward: %s"%(self.totalReward))
         s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal()))
         s.append("possibleActions: %s"%(list(self.children.keys())))
         s.append("player: %s"%(self.player))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
@@ -71,11 +62,13 @@ class mc_ucb1():
 
     def search(self, initialState, needDetails=False):
 
-        self.root = Node(initialState, None)
+        self.root = treeNode(initialState, None)
         actions = self.root.state.actions
         # Init each node
         for action in actions:
-            node = Node(self.root.state.takeAction(action, self.root.state.currplayer), self.root)
+            root_state = deepcopy(self.root.state)
+            root_state.takeAction(action, root_state.currplayer)
+            node = treeNode(root_state, self.root)
             self.root.children[action] = node
             self.executeRound(node)
 
@@ -102,7 +95,8 @@ class mc_ucb1():
         return self.getBestChild(self.root, self.explorationConstant)
 
     def executeRound(self, node):
-        reward = self.rollout(node.state)
+        state = deepcopy(node.state)
+        reward = self.rollout(state)
         self.backpropogate(node, reward)
 
 

@@ -1,8 +1,6 @@
 import random
 from math import sqrt
 from AI.Hex import Hex
-#from AI.mc_node import mc
-from AI.mc0 import mc0
 from AI.mc import mc
 from AI.mc_ucb1 import mc_ucb1
 from AI.mcts import mcts

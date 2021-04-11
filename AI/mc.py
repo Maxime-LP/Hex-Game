@@ -1,7 +1,6 @@
 from time import time
 from math import log, sqrt
 import random
-import numpy as np
 from copy import deepcopy
 
 def randomPolicy(state):
@@ -11,11 +10,10 @@ def randomPolicy(state):
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
         state.takeAction(action, state.currplayer)
-
     return state.getReward()
 
 
-class Node():
+class treeNode():
     
     def __init__(self, state, parent):
         self.state = state
@@ -30,12 +28,6 @@ class Node():
             self.player =  3 - state.player
         else:
             self.player = 3 - self.parent.player
-    '''
-    def isTerminal(self):
-        return self.state.isTerminal()'''
-
-    def isFullyExpanded(self):
-        return len(self.state.actions)==len(self.children)
 
     def __str__(self):
         s = []
@@ -69,15 +61,12 @@ class mc():
 
 
     def search(self, initialState, needDetails=False):
-        self.root = Node(initialState, None)
+        self.root = treeNode(initialState, None)
         actions = self.root.state.actions
-        # Note :
-        # imputer le temps passé ou les itérations faites
-        # plus bas pour comparaison avec mcts
         for action in actions:
             root_state = deepcopy(self.root.state)
             root_state.takeAction(action, root_state.currplayer)
-            node = Node(root_state, self.root)
+            node = treeNode(root_state, self.root)
             self.root.children[action] = node
             self.executeRound(node)
 
