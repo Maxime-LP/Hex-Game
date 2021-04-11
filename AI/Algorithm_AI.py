@@ -2,13 +2,14 @@ import random
 from math import sqrt
 from AI.Hex import Hex
 #from AI.mc_node import mc
+from AI.mc0.mc0 import mc0
 from AI.mc import mc
 from AI.mc_ucb1 import mc_ucb1
 from AI.mcts import mcts
 from copy import deepcopy
 from time import time
 
-n = 10
+n = 400
 
 def run_random(board, color):
     """
