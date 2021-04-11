@@ -45,7 +45,6 @@ class Hex():
         return neighbors
 
     def takeAction(self, action, currplayer):
-        #self = deepcopy(self)
         (i,j) = action
         self.board[i][j] = currplayer
         self.actions.remove((i,j))

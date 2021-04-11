@@ -29,15 +29,6 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
-    def __str__(self):
-        s = []
-        s.append("totalReward: %s"%(self.totalReward))
-        s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal()))
-        s.append("possibleActions: %s"%(list(self.children.keys())))
-        s.append("player: %s"%(self.player))
-        return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
-
 class mc():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=None,
@@ -63,6 +54,7 @@ class mc():
     def search(self, initialState, needDetails=False):
         self.root = treeNode(initialState, None)
         actions = self.root.state.actions
+        # init each node
         for action in actions:
             root_state = deepcopy(self.root.state)
             root_state.takeAction(action, root_state.currplayer)

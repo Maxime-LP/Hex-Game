@@ -29,14 +29,6 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
-    def __str__(self):
-        s = []
-        s.append("totalReward: %s"%(self.totalReward))
-        s.append("numVisits: %d"%(self.numVisits))
-        s.append("possibleActions: %s"%(list(self.children.keys())))
-        s.append("player: %s"%(self.player))
-        return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
-
 class mc_ucb1():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=None,
@@ -64,7 +56,7 @@ class mc_ucb1():
 
         self.root = treeNode(initialState, None)
         actions = self.root.state.actions
-        # Init each node
+        # init each node
         for action in actions:
             root_state = deepcopy(self.root.state)
             root_state.takeAction(action, root_state.currplayer)
@@ -99,13 +91,11 @@ class mc_ucb1():
         reward = self.rollout(state)
         self.backpropogate(node, reward)
 
-
     def backpropogate(self, node, reward):
         while node is not None:
             node.numVisits += 1
             node.totalReward += reward
             node = node.parent
-
 
     def getBestChild(self, node, explorationValue):
         bestValue = float("-inf")

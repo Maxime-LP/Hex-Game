@@ -28,17 +28,8 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
-
     def isFullyExpanded(self):
         return len(self.state.actions)==len(self.children)
-
-    def __str__(self):
-        s = []
-        s.append("totalReward: %s"%(self.totalReward))
-        s.append("numVisits: %d"%(self.numVisits))
-        s.append("possibleActions: %s"%(list(self.children.keys())))
-        s.append("player: %s"%(self.player))
-        return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
 
 
 class mcts():
