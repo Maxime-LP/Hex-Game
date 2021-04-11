@@ -22,9 +22,9 @@ def test(testType,player1Type,player2Type,board_size):
         pass
 
 
-def test1(player1Type,player2Type,board_size,n=10):
+def test1(player1Type,player2Type,board_size,n=100):
 
-    C = np.linspace(0,3,10)
+    C = np.linspace(0,2,10)
     res = []
     RED, BLUE = 1, 2
 
