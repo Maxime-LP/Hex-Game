@@ -56,7 +56,7 @@ if sys.argv[4]=='1':
 
 elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_algorithms:
     time0 = time()
-    n = 1
+    n = 10
     w = 0
     for i in range(n):
         board = Board(board_size)
@@ -64,7 +64,10 @@ elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_alg
         w += game.runNoDisplay()    
     print(f'#games = {n}')
     print(f'Win rate Blue: {w/n}')
-    print(f'{round(n/(time()-time0), 4)} games/s')
+    t = round(time()-time0, 4)
+    print(f'Time for {n} games:', t)
+    print(f'{n / t} games/s')
+    print(f'{n*60 / t} games/min')
 
 elif (sys.argv[1]=='h') | (sys.argv[2]=='h'):
     print('Players must be AI.')

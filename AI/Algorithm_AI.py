@@ -29,7 +29,7 @@ def run_mc(board, color):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = mc(timeLimit=None, iterationLimit=n)
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 def run_mc_ucb1(board, color):
@@ -41,7 +41,7 @@ def run_mc_ucb1(board, color):
     """
     initialState = Hex(color, board)
     searcher = mc_ucb1(timeLimit=None, iterationLimit=n, explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 def run_mcts(board, color):
@@ -50,5 +50,5 @@ def run_mcts(board, color):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = mcts(timeLimit=None, iterationLimit=n, explorationConstant=sqrt(2))
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
