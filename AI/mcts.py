@@ -4,16 +4,15 @@ import random
 import numpy as np
 import networkx as nx
 import plotly.graph_objects as go
+from copy import deepcopy
 
 def randomPolicy(state):
-
     while not state.isTerminal():
         try:
             action = random.choice(state.actions)
         except IndexError:
             raise Exception("Non-terminal state has no possible actions: \n" + str(state))
-        state = state.takeAction(action, state.currplayer)
-
+        state.takeAction(action, state.currplayer)
     return state.getReward()
 
 
@@ -32,8 +31,10 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
     
+    '''
     def isTerminal(self):
         return self.state.isTerminal()
+    '''
 
     def isFullyExpanded(self):
         return len(self.state.actions)==len(self.children)
@@ -42,7 +43,7 @@ class treeNode():
         s = []
         s.append("totalReward: %s"%(self.totalReward))
         s.append("numVisits: %d"%(self.numVisits))
-        s.append("isTerminal: %s"%(self.isTerminal()))
+        #s.append("isTerminal: %s"%(self.isTerminal()))
         s.append("possibleActions: %s"%(list(self.children.keys())))
         s.append("player: %s"%(self.player))
         return "%s: {%s}"%(self.__class__.__name__, ', '.join(s))
@@ -96,11 +97,12 @@ class mcts():
             execute a selection-expansion-simulation-backpropagation round
         """
         node = self.selectNode(self.root)
-        reward = self.rollout(node.state)
+        state = deepcopy(node.state)
+        reward = self.rollout(state)
         self.backpropogate(node, reward)
 
     def selectNode(self, node):
-        while not node.isTerminal():
+        while not node.state.isTerminal():
             if node.isFullyExpanded():
                 node = self.getBestChild(node, self.explorationConstant)
             else:
@@ -112,7 +114,12 @@ class mcts():
         while actions!=[]:
             action = random.choice(actions)
             if action not in node.children.keys():
-                newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
+
+                node_state = deepcopy(node.state)
+                node_state.takeAction(action, node_state.currplayer)
+                newNode = treeNode(node_state, node)
+
+                #newNode = treeNode(node.state.takeAction(action, node.state.currplayer), node)
                 node.children[action] = newNode
                 return newNode
         raise Exception("No actions available after this node")

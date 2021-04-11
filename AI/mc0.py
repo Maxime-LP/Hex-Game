@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from AI.mc0.Game_aux import *
+from AI.Hex_mc0 import *
 from copy import deepcopy
 
 

@@ -2,14 +2,14 @@ import random
 from math import sqrt
 from AI.Hex import Hex
 #from AI.mc_node import mc
-from AI.mc0.mc0 import mc0
+from AI.mc0 import mc0
 from AI.mc import mc
 from AI.mc_ucb1 import mc_ucb1
 from AI.mcts import mcts
 from copy import deepcopy
 from time import time
 
-n = 400
+n = 500
 
 def run_random(board, color):
     """
@@ -18,9 +18,7 @@ def run_random(board, color):
     return random.choice(board.actions)
 
 def run_mc0(board, color):
-    t0 = time()
     action = mc0(board, n, color)
-    print(time() - t0)
     return action
 
 
@@ -32,7 +30,7 @@ def run_mc(board, color):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(timeLimit=None, iterationLimit=board.size**2 * n)
+    searcher = mc(timeLimit=None, iterationLimit=n)
     action = searcher.search(initialState=initialState, needDetails=True)
     return action
 

@@ -1,8 +1,21 @@
-from copy import deepcopy
+from copy import deepcopy, copy
 import string
 
 class Hex():
-    
+    '''
+    def copy(self, color, board):
+        self.size = deepcopy(board.size)
+        self.board = deepcopy(board.board)
+        self.actions = deepcopy(board.actions)
+        self.currplayer = color
+        self.east_component = deepcopy(board.east_component)
+        self.west_component = deepcopy(board.west_component)
+        self.north_component = deepcopy(board.north_component)
+        self.south_component = deepcopy(board.south_component)
+        self.components = deepcopy(board.components
+        self.winner = None
+    '''
+
     def __init__(self, color, board):
         self.size = board.size
         self.board = board.board
@@ -14,7 +27,6 @@ class Hex():
         self.south_component = board.south_component
         self.components = board.components
         self.winner = None
-
         #the player running the mcts algorithm
         self.player = color
 
@@ -33,40 +45,40 @@ class Hex():
         return neighbors
 
     def takeAction(self, action, currplayer):
-        new_state = deepcopy(self)
+        #self = deepcopy(self)
         (i,j) = action
-        new_state.board[i][j] = currplayer
-        new_state.actions.remove((i,j))
+        self.board[i][j] = currplayer
+        self.actions.remove((i,j))
         neighbors = self.getNeighbors(i, j)
         added = False
         index = 0
 
-        for component in new_state.components[currplayer-1]:
+        for component in self.components[currplayer-1]:
             if component.intersection(neighbors) != set():
-                new_state.components[currplayer-1][index].add((i,j))
+                self.components[currplayer-1][index].add((i,j))
                 added = True
             index += 1
 
         if not added:
-            new_state.components[currplayer-1].append(set([(i,j)]))
+            self.components[currplayer-1].append(set([(i,j)]))
         
         #groups the adjacent components
-        length = len(new_state.components[currplayer-1])
+        length = len(self.components[currplayer-1])
         if length > 1:
             for index1 in range(length):
                 for index2 in range(length):
                     if index1 != index2:
                         try:
                             #in case we are considering an already deleted list
-                            if (i,j) in new_state.components[currplayer-1][index1] and (i,j) in new_state.components[currplayer-1][index2]:
-                                new_state.components[currplayer-1][index1] = new_state.components[currplayer-1][index2] | new_state.components[currplayer-1][index1]
-                                new_state.components[currplayer-1].remove(new_state.components[currplayer-1][index2])
+                            if (i,j) in self.components[currplayer-1][index1] and (i,j) in self.components[currplayer-1][index2]:
+                                self.components[currplayer-1][index1] = self.components[currplayer-1][index2] | self.components[currplayer-1][index1]
+                                self.components[currplayer-1].remove(self.components[currplayer-1][index2])
                         except IndexError:
                             pass
 
-        new_state.currplayer = 3 - currplayer
+        self.currplayer = 3 - currplayer
         
-        return new_state
+        return self
 
 
     def isTerminal(self):
@@ -78,13 +90,11 @@ class Hex():
             if self.north_component.issubset(component) and self.south_component.issubset(component):
                 self.winner = 1
                 return True
-
         #blue connected components : self.components[1]
         for component in self.components[1]:
             if self.west_component.issubset(component) and self.east_component.issubset(component):
                 self.winner = 2
                 return True
-
         return False
 
     def getReward(self):
