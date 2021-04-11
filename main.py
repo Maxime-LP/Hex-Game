@@ -16,10 +16,7 @@ CONTROLS
 ESC : Quit the game
 """
 
-
 ####### Init Game, Players and Board instances #######
-if not isinstance(board_size,int):
-    raise Exception("Invalid board size")
 
 #init boardgame
 board = Board(board_size)

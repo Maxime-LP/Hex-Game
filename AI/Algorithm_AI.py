@@ -41,11 +41,8 @@ def run_mc_ucb1(board, color, explorationConstant=sqrt(2)):
     Return the action with the best win rate.
     """
     initialState = Hex(color, board)
-<<<<<<< Updated upstream
-    searcher = mc_ucb1(timeLimit=None, iterationLimit=n, explorationConstant=sqrt(2))
-=======
+
     searcher = mc_ucb1(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
->>>>>>> Stashed changes
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
@@ -54,10 +51,7 @@ def run_mcts(board, color, explorationConstant=sqrt(2)):
     Uses mcts method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-<<<<<<< Updated upstream
-    searcher = mcts(timeLimit=None, iterationLimit=n, explorationConstant=sqrt(2))
-=======
+
     searcher = mcts(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
->>>>>>> Stashed changes
     action = searcher.search(initialState=initialState, needDetails=False)
     return action

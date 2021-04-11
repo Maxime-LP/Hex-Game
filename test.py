@@ -16,7 +16,7 @@ def test(testType,player1Type,player2Type,board_size):
     
     if testType == 'test1':
         RED, BLUE = 1, 2
-        player1 = AI(BLUE, player1Type)
+        player1 = AI(RED, player1Type)
         player2 = AI(BLUE, player2Type)
         test1(player1,player2,board_size)
 
@@ -24,9 +24,7 @@ def test(testType,player1Type,player2Type,board_size):
         pass
 
 
-
-
-def test1(player1,player2,board_size,n=1):
+def test1(player1,player2,board_size,n=10):
 
     C = np.linspace(0,2,10)
     res = []
