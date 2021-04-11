@@ -22,9 +22,9 @@ def test(testType,player1Type,player2Type,board_size):
         pass
 
 
-def test1(player1Type,player2Type,board_size,n=1000):
+def test1(player1Type,player2Type,board_size,n=10):
 
-    C = np.linspace(0,2,20)
+    C = np.linspace(0,3,10)
     res = []
     RED, BLUE = 1, 2
 
@@ -41,8 +41,7 @@ def test1(player1Type,player2Type,board_size,n=1000):
         if player1Type in ['mc_ucb1','mcts']:
             player1 = AI(BLUE, player1Type, explorationConstant)
         elif player2Type in ['mc_ucb1','mcts']:
-            player2 = AI(BLUE, player1Type, explorationConstant)
-
+            player2 = AI(BLUE, player2Type, explorationConstant)
         blueWinrate = 0
 
         for i in range(n):
@@ -53,6 +52,15 @@ def test1(player1Type,player2Type,board_size,n=1000):
         res.append(blueWinrate/n)
 
     plt.plot(C,res)
+    plt.xlabel("Exploration constant", size = 16,)
+    plt.ylabel("Winrate", size = 16)
+
+    plt.title(f"Winrate of mcts for {n} games", 
+          fontdict={'family': 'serif', 
+                    'color' : 'darkblue',
+                    'weight': 'bold',
+                    'size': 18})
+
     plt.show()
 
 def test2():

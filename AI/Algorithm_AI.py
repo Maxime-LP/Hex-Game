@@ -8,7 +8,7 @@ from AI.mcts import mcts
 from copy import deepcopy
 from time import time
 
-n = 500
+n = 100
 
 def run_random(board, color, explorationConstant=None):
     """
