@@ -15,30 +15,44 @@ def test(testType,player1Type,player2Type,board_size):
         raise Exception("Wrong player 2 type")
     
     if testType == 'test1':
-        RED, BLUE = 1, 2
-        player1 = AI(RED, player1Type)
-        player2 = AI(BLUE, player2Type)
-        test1(player1,player2,board_size)
+        #mcts vs another algo
+        test1(player1Type,player2Type,board_size)
 
     elif testType == 'test2':
         pass
 
 
-def test1(player1,player2,board_size,n=10):
+def test1(player1Type,player2Type,board_size,n=1000):
 
-    C = np.linspace(0,2,10)
+    C = np.linspace(0,2,20)
     res = []
+    RED, BLUE = 1, 2
+
+    if player1Type not in ['mc_ucb1','mcts']:
+        player1 = AI(RED, player1Type)
+    elif player2Type not in ['mc_ucb1','mcts']:
+        player2 = AI(RED, player1Type)
+    else:
+        raise Exception("run test2 to compare two mcts")
+
     for explorationConstant in C:
         print(explorationConstant)
+
+        if player1Type in ['mc_ucb1','mcts']:
+            player1 = AI(BLUE, player1Type, explorationConstant)
+        elif player2Type in ['mc_ucb1','mcts']:
+            player2 = AI(BLUE, player1Type, explorationConstant)
+
         blueWinrate = 0
+
         for i in range(n):
             board = Board(board_size)
             game = Game(board, player1, player2)
-            blueWinrate += game.runNoDisplay(explorationConstant)
+            blueWinrate += game.runNoDisplay()
 
         res.append(blueWinrate/n)
 
-    plt.bar(C,res)
+    plt.plot(C,res)
     plt.show()
 
 def test2():
