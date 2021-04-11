@@ -87,7 +87,7 @@ class Board:
         """ Returns a string containing the current state of the board. """
         schema = ""
         headers = "     "
-        alphabet = list(string.ascii_uppercase) 
+        alphabet = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         alphabet.reverse()
 
         red_line_top = headers + "\033[31m--\033[0m" * (len(self.board))

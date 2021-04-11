@@ -7,6 +7,7 @@ class Game:
         self.board = board
         self.players = [player1, player2]
         self.turn = 0
+        # changer self.on en self.winner
         self.on = True
 
     def check_win(self, currplayer):
@@ -64,7 +65,8 @@ class Game:
                 
                 # when current human player plays
                 elif currplayer.__class__.__name__ == 'Human':
-                    if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):
+                    if event.type == pygame.MOUSEBUTTONDOWN and \
+                        pygame.mouse.get_pressed(num_buttons=3)==(True,False,False):
                         if currplayer.plays(self.board):
                             self.turn = 1 - self.turn
                             print(self.board)
@@ -103,6 +105,7 @@ class Game:
         while self.on:
             currplayer = self.players[self.turn] 
             if currplayer.plays(self.board):
+                #print(self.board)
                 self.turn = 1 - self.turn
 
             # did someone win ?

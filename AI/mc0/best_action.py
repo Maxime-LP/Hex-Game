@@ -1,12 +1,25 @@
 #!/usr/bin/env python3
-from AI.mc0.Game_aux import Game_aux
-from AI.mc0.AI_player import AI_player
-from AI.mc0.Board_aux import Board
+from AI.mc0.Game_aux import *
 from copy import deepcopy
 
-##################### Let's play ####################
 
-def best_action(initial_board, n, color):
+'''def __deepcopy__(self, color):
+    self.size = board.size
+    self.board = board.board
+    self.actions = board.actions
+    self.currplayer = color
+    self.east_component = board.east_component
+    self.west_component = board.west_component
+    self.north_component = board.north_component
+    self.south_component = board.south_component
+    self.components = board.components
+    self.winner = None
+
+    #the player running the mcts algorithm
+    self.player = color
+    return self'''
+
+def mc0(initial_board, n, color):
 
     # Final dict
     res = {action:0 for action in initial_board.actions}
@@ -21,8 +34,8 @@ def best_action(initial_board, n, color):
     tboard.board = deepcopy(initial_board.board)
     tboard.actions = deepcopy(possible_plays)
     tboard.components = deepcopy(initial_board.components)
-
-    #tboard = deepcopy(initial_board)
+    
+    #tboard = initial_board #deepcopy(initial_board)
 
     for action in possible_plays:
         games_won = 0
@@ -41,13 +54,13 @@ def best_action(initial_board, n, color):
 
     best_action = max(res, key = res.get)
 
-
+    
     for action, score in res.items():
         if action != best_action:
             print(action,':',round(score/n,3))
         else:
             print("   ",action,':',round(score/n,3))
-
+    
     return best_action
 
 #####################################################

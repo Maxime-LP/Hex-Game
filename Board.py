@@ -32,7 +32,7 @@ class Board:
 
 
 ## Convert point and coord for display ##############################
-
+    # => influe sur tile_center dans Player.py
     def coord_to_action(self, i, j):
         """ Convert board coord (i,j) to hexagon index in board actions. """
         return i * self.size + j

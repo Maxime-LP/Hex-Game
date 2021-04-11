@@ -16,7 +16,7 @@ def randomPolicy(state):
 
 
 class Node():
-
+    
     def __init__(self, state, parent):
         self.state = state
         self.parent = parent
@@ -66,7 +66,6 @@ class mc():
             self.limitType = 'iterations'
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
-        self.root = None
 
 
     def search(self, initialState, needDetails=False):

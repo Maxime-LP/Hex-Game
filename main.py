@@ -56,7 +56,7 @@ if sys.argv[4]=='1':
 
 elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_algorithms:
     time0 = time()
-    n = 100
+    n = 1
     w = 0
     for i in range(n):
         board = Board(board_size)
