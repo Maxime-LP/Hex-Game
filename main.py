@@ -6,6 +6,8 @@ from misc import board_size, screen, background
 from Game import Game
 from Player import Human, AI
 from Board import Board
+from math import sqrt
+from test import test
 import colorama # translate ANSI sequence for Windows
 colorama.init()
 
@@ -14,7 +16,10 @@ CONTROLS
 ESC : Quit the game
 """
 
+
 ####### Init Game, Players and Board instances #######
+if not isinstance(board_size,int):
+    raise Exception("Invalid board size")
 
 #init boardgame
 board = Board(board_size)
@@ -22,6 +27,7 @@ board = Board(board_size)
 #init players
 RED, BLUE = 1, 2
 ai_algorithms = ['random', 'mc0', 'mc', 'mc_ucb1', 'mcts']
+
 
 if sys.argv[1] == 'h':   # h for human
     player1 = Human(RED)
@@ -40,8 +46,8 @@ else:
     exit()
 
 
-#init game
-game = Game(board, player1, player2)
+
+
 
 #####################################################
 
@@ -49,6 +55,7 @@ game = Game(board, player1, player2)
 # Let's play ####################
 
 if sys.argv[4]=='1':
+    game = Game(board, player1, player2)
     pygame.init()
     pygame.display.set_caption("Hex")
     screen.blit(background,(0,0))
@@ -59,9 +66,10 @@ elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_alg
     n = 10
     w = 0
     for i in range(n):
+        print(i)
         board = Board(board_size)
         game = Game(board, player1, player2)
-        w += game.runNoDisplay()    
+        w += game.runNoDisplay(explorationConstant=sqrt(2))    
     print(f'#games = {n}')
     print(f'Win rate Blue: {w/n}')
     t = round(time()-time0, 4)
@@ -69,7 +77,13 @@ elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_alg
     print(f'{n / t} games/s')
     print(f'{n*60 / t} games/min')
 
+if sys.argv[4] == 'test1':
+    test('test1',sys.argv[1],sys.argv[2],board_size)
+
 elif (sys.argv[1]=='h') | (sys.argv[2]=='h'):
     print('Players must be AI.')
 
+
 #####################################################
+
+

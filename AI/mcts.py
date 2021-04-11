@@ -53,7 +53,7 @@ class mcts():
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
 
-    def search(self, initialState, needDetails=False):
+    def search(self, initialState, needDetails):
         self.root = treeNode(initialState, None)
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000

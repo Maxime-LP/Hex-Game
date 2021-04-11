@@ -101,10 +101,10 @@ class Game:
                         pause=False
 
 
-    def runNoDisplay(self):
+    def runNoDisplay(self, explorationConstant):
         while self.on:
             currplayer = self.players[self.turn] 
-            if currplayer.plays(self.board):
+            if currplayer.plays(self.board, explorationConstant):
                 #print(self.board)
                 self.turn = 1 - self.turn
 

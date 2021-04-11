@@ -33,7 +33,7 @@ class AI(Player):
                     }
         self.algorithm = algorithms[algorithm]
 
-    def plays(self, board):
-        pos = self.algorithm(board, self.color)
+    def plays(self, board, explorationConstant=sqrt(2)):
+        pos = self.algorithm(board, self.color, explorationConstant)
         tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
         return board.update(tile_center, self.color, True)
