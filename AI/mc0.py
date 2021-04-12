@@ -19,7 +19,7 @@ from copy import deepcopy
     self.player = color
     return self'''
 
-def mc0(initial_board, n, color):
+def mc0(initial_board, n, color, needDetails):
 
     # Final dict
     res = {action:0 for action in initial_board.actions}
@@ -54,12 +54,12 @@ def mc0(initial_board, n, color):
 
     best_action = max(res, key = res.get)
 
-    
-    for action, score in res.items():
-        if action != best_action:
-            print(action,':',round(score/n,3))
-        else:
-            print("   ",action,':',round(score/n,3))
+    if needDetails :
+        for action, score in res.items():
+            if action != best_action:
+                print(action,':',round(score/n,3))
+            else:
+                print("   ",action,':',round(score/n,3))
     
     return best_action
 
