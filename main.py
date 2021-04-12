@@ -63,10 +63,10 @@ elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_alg
     n = 10000
     w = 0
     for i in range(n):
-        print(i)
+        #print(i)
         board = Board(board_size)
         game = Game(board, player1, player2)
-        w += game.runNoDisplay(explorationConstant=sqrt(2))    
+        w += game.runNoDisplay()    
     print(f'#games = {n}')
     print(f'Win rate Blue: {w/n}')
     t = round(time()-time0, 4)
