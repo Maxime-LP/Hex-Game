@@ -24,7 +24,7 @@ def test(testType,player1Type,player2Type,board_size):
 
 def test1(player1Type,player2Type,board_size,n=100):
 
-    C = np.linspace(0,2,10)
+    C = np.linspace(0.25,0.75,10)
     res = []
     RED, BLUE = 1, 2
 
@@ -45,6 +45,7 @@ def test1(player1Type,player2Type,board_size,n=100):
         blueWinrate = 0
 
         for i in range(n):
+            print(i)
             board = Board(board_size)
             game = Game(board, player1, player2)
             blueWinrate += game.runNoDisplay()
@@ -55,7 +56,7 @@ def test1(player1Type,player2Type,board_size,n=100):
     plt.xlabel("Exploration constant", size = 16,)
     plt.ylabel("Winrate", size = 16)
 
-    plt.title(f"Winrate of mcts for {n} games", 
+    plt.title(f"Winrate of UCT on {n} games", 
           fontdict={'family': 'serif', 
                     'color' : 'darkblue',
                     'weight': 'bold',
