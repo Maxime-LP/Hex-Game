@@ -1,25 +1,26 @@
 import random
 from math import sqrt
-from AI.Hex import Hex
-from AI.mc0 import mc0
-from AI.mc import mc
-from AI.mc_ucb1 import mc_ucb1
-from AI.mcts import mcts
 from copy import deepcopy
 from time import time
 
-n = 100
+from AI.Hex import Hex
+#from AI.mc0 import mc0
+from AI.mc import mc
+from AI.mc_ucb1 import mc_ucb1
+from AI.mcts import mcts
+
+n = 1000
 
 def run_random(board, color, explorationConstant=None):
     """
     Pick a random legal action.
     """
     return random.choice(board.actions)
-
+'''
 def run_mc0(board, color, explorationConstant=None):
     action = mc0(board, n, color, needDetails = False)
     return action
-
+'''
 
 def run_mc(board, color, explorationConstant=None):
     """

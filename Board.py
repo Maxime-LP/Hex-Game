@@ -1,5 +1,7 @@
-import pygame
-from misc import screen
+from misc import display
+if display:
+    import pygame
+    from misc import screen
 
 class Board:
 
@@ -141,10 +143,11 @@ class Board:
                             #in case we are considering an already deleted set
                             except IndexError:
                                 pass
-            #update dsplay
+            #update display
             if hex_vertices != None:
                 color = 'red' if color==1 else 'blue'
-                pygame.draw.polygon(screen, color, hex_vertices)
+                if display:
+                    pygame.draw.polygon(screen, color, hex_vertices)
                 return True
                 
         else:

@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from Board import Board
 from Game import Game
-from Player import Human, AI
+from Player import AI
 
 
 

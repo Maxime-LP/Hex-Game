@@ -1,5 +1,7 @@
-import pygame
-from misc import background, screen
+from misc import display
+if display:
+    import pygame
+    from misc import background, screen
 from AI.Algorithm_AI import *
 
 class Player:
@@ -26,7 +28,7 @@ class AI(Player):
         super().__init__(color)
         algorithms = {
                     'random':run_random,    # random
-                    'mc0':run_mc0,          # simple monte-carlo v0
+                    #'mc0':run_mc0,          # simple monte-carlo v0
                     'mc':run_mc,            # simple monte-carlo v1
                     'mc_ucb1':run_mc_ucb1,  # mc + ucb1
                     'mcts':run_mcts         # monte-carlo tree search
