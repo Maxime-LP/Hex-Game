@@ -1,20 +1,4 @@
-from copy import deepcopy, copy
-import string
-
 class Hex():
-    '''
-    def copy(self, color, board):
-        self.size = deepcopy(board.size)
-        self.board = deepcopy(board.board)
-        self.actions = deepcopy(board.actions)
-        self.currplayer = color
-        self.east_component = deepcopy(board.east_component)
-        self.west_component = deepcopy(board.west_component)
-        self.north_component = deepcopy(board.north_component)
-        self.south_component = deepcopy(board.south_component)
-        self.components = deepcopy(board.components
-        self.winner = None
-    '''
 
     def __init__(self, color, board):
         self.size = board.size
@@ -27,8 +11,7 @@ class Hex():
         self.south_component = board.south_component
         self.components = board.components
         self.winner = None
-        #the player running the mcts algorithm
-        self.player = color
+        self.player = color # player who use the mcts algorithm
 
     def getPossibleActions(self):
         return self.actions
@@ -105,7 +88,7 @@ class Hex():
         """ Returns a string containing the current state of the board. """
         schema = ""
         headers = "     "
-        alphabet = list(string.ascii_uppercase) 
+        alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") 
         alphabet.reverse()
 
         red_line_top = headers + "\033[31m--\033[0m" * (len(self.board))
