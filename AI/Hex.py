@@ -1,5 +1,5 @@
 class Hex():
-
+    
     def __init__(self, color, board):
         self.size = board.size
         self.board = board.board
