@@ -60,7 +60,7 @@ def test1(player1, player2, board_size, n=1):
           fontdict={'color' : 'darkblue',
                     'size': 14})
     plt.show()
-    plt.savefig(f"{time()}.png")
+    plt.savefig(f"simulations/{time()}.png")
     
 
 def test2(player1, player2, board_size, n=10):
