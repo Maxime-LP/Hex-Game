@@ -26,10 +26,10 @@ def test(testType, player1_type, player2_type, board_size):
     tests = {'test1': test1,
              'test2': test2}
     make_test = tests[sys.argv[5]]
-    make_test(player1, player2, board_size, 10)
+    make_test(player1, player2, board_size, 1)
 
 
-def test1(player1, player2, board_size, n=10):
+def test1(player1, player2, board_size, n=1):
     """find the """
     print('Simulations in progress...')
     time0 = time()
@@ -53,7 +53,7 @@ def test1(player1, player2, board_size, n=10):
         res.append(mcts_winrate / n)
     print(f'Execution : {time()-time0}s')
 
-    plt.scatter(C, res)
+    plt.plot(C, res, marker='o')
     plt.xlabel("Exploration constant", size = 16,)
     plt.ylabel("Winrate", size = 16)
     plt.title(f"UCT's winrate on {n} games vs {player1.algorithm.__name__}", 
