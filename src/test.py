@@ -26,15 +26,15 @@ def test(testType, player1_type, player2_type, board_size):
     tests = {'test1': test1,
              'test2': test2}
     make_test = tests[sys.argv[5]]
-    make_test(player1, player2, board_size, 1)
+    make_test(player1, player2, board_size, 10000)
 
 
-def test1(player1, player2, board_size, n=1):
+def test1(player1, player2, board_size, n):
     """find the """
     print('Simulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(0.1,2,2)
+    C = np.linspace(0.05,4,20)
     res = []
 
     if player2.algorithm.__name__ != 'mcts':
@@ -63,8 +63,9 @@ def test1(player1, player2, board_size, n=1):
     plt.savefig(f"simulations/{time()}.png")
     
 
-def test2(player1, player2, board_size, n=10):
+def test2(player1, player2, board_size, n):
     print('Simulations in progress...')
+    n = 10000
     time0 = time()
     w = 0
     for i in range(n):
