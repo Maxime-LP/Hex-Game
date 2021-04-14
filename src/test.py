@@ -31,6 +31,7 @@ def test(testType, player1_type, player2_type, board_size):
 
 def test1(player1, player2, board_size, n=10):
     """find the """
+    print('Simulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
     C = np.linspace(0,4,20)
@@ -63,7 +64,8 @@ def test1(player1, player2, board_size, n=10):
     plt.show()
     
 
-def test2(player1, player2, board_size, n=100):
+def test2(player1, player2, board_size, n=10):
+    print('Simulations in progress...')
     time0 = time()
     w = 0
     for i in range(n):
@@ -72,7 +74,7 @@ def test2(player1, player2, board_size, n=100):
         w += game.runNoDisplay()    
     print(f'#games = {n}')
     print(f'Win rate Blue: {w/n}')
-    t = round(time()-time0, 4)
-    print(f'Time for {n} games:', t)
-    print(f'{n / t} games/s')
-    print(f'{n*60 / t} games/min')
+    t = time()-time0
+    print(f'Time for {n} games: {round(t,3)}s')
+    print(f'{round(n/t,3)} games/s')
+    print(f'{round(n*60/t,3)} games/min')
