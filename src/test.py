@@ -59,7 +59,7 @@ def test1(player1, player2, board_size, n=1):
     plt.title(f"UCT's winrate on {n} games vs {player1.algorithm.__name__}", 
           fontdict={'color' : 'darkblue',
                     'size': 14})
-    plt.show()
+    #plt.show()
     plt.savefig(f"simulations/{time()}.png")
     
 
