@@ -92,10 +92,10 @@ class Game:
         while self.on:
             currplayer = self.players[self.turn] 
             if currplayer.plays(self.board):
-                #print(self.board)
                 self.turn = 1 - self.turn
 
             # did someone win ?
             winner = self.check_win(currplayer)
             if winner != None:
+                print(self.board)
                 return int(winner.color) - 1

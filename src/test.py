@@ -2,11 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from Board import Board
 from Game import Game
-from Player import Human, AI
+from Player import AI
 
 
 
-def test(testType,player1Type,player2Type,board_size):
+def test(testType, player1Type, player2Type, board_size):
     ai_algorithms = ['random', 'mc0', 'mc', 'mc_ucb1', 'mcts']
 
     if player1Type not in ai_algorithms:
@@ -22,7 +22,7 @@ def test(testType,player1Type,player2Type,board_size):
         pass
 
 
-def test1(player1Type,player2Type,board_size,n=100):
+def test1(player1Type, player2Type, board_size,n=100):
 
     C = np.linspace(0.25,0.75,10)
     res = []

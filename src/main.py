@@ -28,21 +28,22 @@ board = Board(board_size)
 
 #init players
 RED, BLUE = 1, 2
-ai_algorithms = ['random', 'mc0', 'mc', 'mc_ucb1', 'mcts'] # supprimer mc0
+player1_type = sys.argv[1]
+player2_type = sys.argv[2]
+ai_algorithms = ['random', 'mc', 'mc_ucb1', 'mcts']
 
-
-if sys.argv[1] == 'h':   # h for human
+if player1_type == 'h':   # h for human
     player1 = Human(RED)
-elif sys.argv[1] in ai_algorithms:
-    player1 = AI(RED, sys.argv[1])
+elif player1_type in ai_algorithms:
+    player1 = AI(RED, player1_type)
 else:
     print(f'Wrong player type. Available options: {["h"] + ai_algorithms}.')
     exit()
 
-if sys.argv[2] == 'h':
+if player2_type == 'h':
     player2 = Human(BLUE)
-elif sys.argv[2] in ai_algorithms:
-    player2 = AI(BLUE, sys.argv[2])
+elif player2_type in ai_algorithms:
+    player2 = AI(BLUE, player2_type)
 else:
     print(f'Wrong player type. Available options: {["h"] + ai_algorithms}.')
     exit()
@@ -52,18 +53,20 @@ else:
 
 # Let's play ####################
 
-if sys.argv[4]=='1':
+if display:
     game = Game(board, player1, player2)
     pygame.init()
     pygame.display.set_caption("Hex")
     screen.blit(background,(0,0))
     game.run()
 
-elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_algorithms:
+elif not display and player1_type in ai_algorithms and \
+                     player2_type in ai_algorithms:
     time0 = time()
-    n = 2000
+    n = 1
     w = 0
     for i in range(n):
+        print(i)
         board = Board(board_size)
         game = Game(board, player1, player2)
         w += game.runNoDisplay()    
@@ -74,10 +77,11 @@ elif sys.argv[4]=='0' and sys.argv[1] in ai_algorithms and sys.argv[2] in ai_alg
     print(f'{n / t} games/s')
     print(f'{n*60 / t} games/min')
 
-if sys.argv[4] == 'test1':
-    test('test1',sys.argv[1],sys.argv[2],board_size)
+elif not display and player1_type in ai_algorithms and \
+                     player2_type in ai_algorithms:
+    test('test1', player1_type, player2_type, board_size)
 
-elif (sys.argv[1]=='h') | (sys.argv[2]=='h'):
+elif (player1_type=='h') and (player2_type=='h'):
     print('Players must be AI.')
 
 #####################################################

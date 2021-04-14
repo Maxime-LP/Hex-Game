@@ -25,11 +25,10 @@ class Human(Player):
                 
 class AI(Player):
 
-    def __init__(self, color, algorithm,explorationConstant=None):
+    def __init__(self, color, algorithm, explorationConstant=None):
         super().__init__(color)
         algorithms = {
                     'random':run_random,    # random
-                    'mc0':run_mc0,          # simple monte-carlo v0
                     'mc':run_mc,            # simple monte-carlo v1
                     'mc_ucb1':run_mc_ucb1,  # mc + ucb1
                     'mcts':run_mcts         # monte-carlo tree search
@@ -40,10 +39,10 @@ class AI(Player):
 
     def plays(self, board):
         if self.algorithm in ['mc_ucb1','mcts']:
-            pos = self.algorithm(board, self.color, self.explorationConstant)
+            (i,j) = self.algorithm(board, self.color, self.explorationConstant)
         else:
-            pos = self.algorithm(board, self.color)
-        tile_center = board.tiles_centers[board.coord_to_action(pos[0], pos[1])]
+            (i,j) = self.algorithm(board, self.color)
+        tile_center = board.tiles_centers[board.coord_to_index(i, j)]
         return board.update(tile_center, self.color, True)
     
     def __str__(self):
