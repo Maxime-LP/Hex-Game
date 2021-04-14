@@ -34,7 +34,7 @@ def test1(player1, player2, board_size, n):
     print('\nSimulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(3,4,5)
+    C = np.linspace(0.05,1,5)
     res = []
 
     if player2.algorithm.__name__ != 'mcts':
@@ -45,7 +45,7 @@ def test1(player1, player2, board_size, n):
         player2.explorationConstant = explorationConstant
         mcts_winrate = 0
         for i in range(n):
-            if i%10 == 0: print(f'{i} - ', end='')
+            if i%2 == 0: print(f'{i} - ', end=' ')
             board = Board(board_size)
             game = Game(board, player1, player2)
             mcts_winrate += game.runNoDisplay()
