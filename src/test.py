@@ -29,7 +29,7 @@ def test(testType, player1_type, player2_type, board_size):
     make_test(player1, player2, board_size, 1000)
 
 
-def test1(player1, player2, board_size, n=10000):
+def test1(player1, player2, board_size, n=5000):
     """find the """
     print('Simulations in progress...')
     time0 = time()
