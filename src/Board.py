@@ -1,5 +1,7 @@
-import pygame
-from misc import screen
+from misc import display
+if display:
+    import pygame
+    from misc import screen
 
 class Board:
 
@@ -32,15 +34,10 @@ class Board:
 
 ## Convert point and coord for display ##############################
     # => influe sur tile_center dans Player.py
-    def coord_to_action(self, i, j):
+
+    def coord_to_index(self, i, j):
         """ Convert board coord (i,j) to hexagon index in board actions. """
         return i * self.size + j
-
-
-    def action_to_coord(self, action):
-        """ Convert hexagon index in board.actions to board coord (i,j). """
-        return action // self.size, action % self.size
-
 
     def center_to_coord(self, tile_center):
         """ Convert tile_center to board coord (i,j). """
@@ -48,7 +45,6 @@ class Board:
         i = index // self.size
         j = index % self.size
         return i, j
-
 
     def get_polygon(self, pos, center=False):
         """
@@ -141,10 +137,11 @@ class Board:
                             #in case we are considering an already deleted set
                             except IndexError:
                                 pass
-            #update dsplay
+            #update display
             if hex_vertices != None:
-                color = 'red' if color==1 else 'blue'
-                pygame.draw.polygon(screen, color, hex_vertices)
+                if display:
+                    color = 'red' if color==1 else 'blue'
+                    pygame.draw.polygon(screen, color, hex_vertices)
                 return True
                 
         else:
