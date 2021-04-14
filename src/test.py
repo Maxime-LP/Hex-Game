@@ -31,7 +31,7 @@ def test(testType, player1_type, player2_type, board_size):
 
 def test1(player1, player2, board_size, n):
     """find the """
-    print('Simulations in progress...')
+    print('\nSimulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
     C = np.linspace(0.05,4,20)
@@ -64,11 +64,11 @@ def test1(player1, player2, board_size, n):
     
 
 def test2(player1, player2, board_size, n):
-    print('Simulations in progress...')
+    print('\nSimulations in progress...')
     if player2.algorithm.__name__=='random':
         n = 100000
     else:
-        n = 100
+        n = 10
     time0 = time()
     w = 0
     for i in range(n):
