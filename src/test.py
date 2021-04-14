@@ -29,12 +29,12 @@ def test(testType, player1_type, player2_type, board_size):
     make_test(player1, player2, board_size, 1000)
 
 
-def test1(player1, player2, board_size, n=10):
+def test1(player1, player2, board_size, n=10000):
     """find the """
     print('Simulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(0,4,20)
+    C = np.linspace(0.1,2,20)
     res = []
 
     if player2.algorithm.__name__ != 'mcts':
