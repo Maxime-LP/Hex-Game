@@ -65,7 +65,10 @@ def test1(player1, player2, board_size, n):
 
 def test2(player1, player2, board_size, n):
     print('Simulations in progress...')
-    n = 10000
+    if player2.algorithm.__name__=='random':
+        n = 100000
+    else:
+        n = 100
     time0 = time()
     w = 0
     for i in range(n):
