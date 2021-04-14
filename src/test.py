@@ -34,7 +34,7 @@ def test1(player1, player2, board_size, n):
     print('\nSimulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(1,2,5)
+    C = np.linspace(2,3,5)
     res = []
 
     if player2.algorithm.__name__ != 'mcts':
