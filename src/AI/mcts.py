@@ -32,7 +32,7 @@ class treeNode():
         return len(self.state.actions)==len(self.children)
 
 
-class mcts():
+class MCTS():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=sqrt(2),
                  rolloutPolicy=randomPolicy):

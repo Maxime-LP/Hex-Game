@@ -29,7 +29,7 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
-class mc_ucb1():
+class MC_UCB1():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=None,
                  rolloutPolicy=randomPolicy):
