@@ -1,5 +1,7 @@
-import pygame
-from misc import screen
+from misc import display
+if display:
+    import pygame
+    from misc import screen
 
 class Game:
     
@@ -27,21 +29,6 @@ class Game:
                     and self.board.east_component.issubset(component):
                     return currplayer
         return None
-
-    '''
-    def reset(self):
-        """Resets the game."""
-        size = self.board.size
-        self.board.board = [[0 for i in range(size)] for j in range(size)]
-        self.board.actions = [(i,j) for i in range(size) for j in range(size)]
-        self.board.east_component = set([(i,size) for i in range(size)])
-        self.board.west_component = set([(i,-1) for i in range(size)])
-        self.board.north_component = set([(-1,i) for i in range(size)])
-        self.board.south_component = set([(size,i) for i in range(size)])
-        self.board.components = [[self.board.north_component, self.board.south_component],
-                            [self.board.west_component, self.board.east_component]]
-        self.turn = 0
-        self.on = True'''
     
 
     def run(self):
