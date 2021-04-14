@@ -14,7 +14,6 @@ from Player import AI
 from Board import Board
 from test import test
 
-
 """
 CONTROLS
 ESC : Quit the game
@@ -62,24 +61,7 @@ if display:
     pygame.display.set_caption("Hex")
     screen.blit(background,(0,0))
     game.run()
-'''
-elif not display and player1_type in ai_algorithms and \
-                     player2_type in ai_algorithms:
-    time0 = time()
-    n = 1
-    w = 0
-    for i in range(n):
-        print(i)
-        board = Board(board_size)
-        game = Game(board, player1, player2)
-        w += game.runNoDisplay()    
-    print(f'#games = {n}')
-    print(f'Win rate Blue: {w/n}')
-    t = round(time()-time0, 4)
-    print(f'Time for {n} games:', t)
-    print(f'{n / t} games/s')
-    print(f'{n*60 / t} games/min')
-'''
+
 if not display:
     test('test1', player1_type, player2_type, board_size)
 
