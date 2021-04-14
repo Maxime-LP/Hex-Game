@@ -60,6 +60,7 @@ def test1(player1, player2, board_size, n=10000):
           fontdict={'color' : 'darkblue',
                     'size': 14})
     plt.show()
+    plt.savefig("Simulations_test1.png")
     
 
 def test2(player1, player2, board_size, n=10):
