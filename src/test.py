@@ -49,7 +49,6 @@ def test1(player1, player2, board_size, n=10000):
             board = Board(board_size)
             game = Game(board, player1, player2)
             mcts_winrate += game.runNoDisplay()
-            print(game.board)
 
         res.append(mcts_winrate / n)
     print(f'Execution : {time()-time0}s')
