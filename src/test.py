@@ -26,10 +26,10 @@ def test(testType, player1_type, player2_type, board_size):
     tests = {'test1': test1,
              'test2': test2}
     make_test = tests[sys.argv[5]]
-    make_test(player1, player2, board_size, 1)
+    make_test(player1, player2, board_size, 10)
 
 
-def test1(player1, player2, board_size, n=10000):
+def test1(player1, player2, board_size, n=10):
     """find the """
     print('Simulations in progress...')
     time0 = time()
