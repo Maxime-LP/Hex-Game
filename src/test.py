@@ -81,3 +81,4 @@ def test2(player1, player2, board_size, n):
     print(f'Time for {n} games: {round(t,3)}s')
     print(f'{round(n/t,3)} games/s')
     print(f'{round(n*60/t,3)} games/min')
+    
