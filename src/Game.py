@@ -97,5 +97,4 @@ class Game:
             # did someone win ?
             winner = self.check_win(currplayer)
             if winner != None:
-                print(self.board)
                 return int(winner.color) - 1
