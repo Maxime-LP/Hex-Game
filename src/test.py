@@ -26,7 +26,7 @@ def test(testType, player1_type, player2_type, board_size):
     tests = {'test1': test1,
              'test2': test2}
     make_test = tests[sys.argv[5]]
-    make_test(player1, player2, board_size, 1)
+    make_test(player1, player2, board_size, 10000)
 
 
 def test1(player1, player2, board_size, n):
@@ -34,7 +34,7 @@ def test1(player1, player2, board_size, n):
     print('\nSimulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(0.05,4,2)
+    C = np.linspace(0.05,1,5)
     res = []
 
     if player2.algorithm.__name__ != 'mcts':
