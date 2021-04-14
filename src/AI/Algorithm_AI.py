@@ -23,7 +23,7 @@ def mc(board, color, explorationConstant=None):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = mc(timeLimit=None, iterationLimit=n)
+    searcher = MC(timeLimit=None, iterationLimit=n)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
