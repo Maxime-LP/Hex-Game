@@ -35,7 +35,7 @@ def mc_ucb1(board, color, explorationConstant=sqrt(2)):
     Return the action with the best win rate.
     """
     initialState = Hex(color, board)
-    searcher = mc_ucb1(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
+    searcher = MC_UCB1(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
