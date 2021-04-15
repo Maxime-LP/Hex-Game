@@ -82,7 +82,7 @@ if __name__ == "__main__":
     # number of simulations
     n = 1000
     # exploration constants for mcts
-    cst_list = np.linspace(0.05, 4, 16)
+    cst_list = np.linspace(0.05, 2, 20)
 
     num_processes = 50 #os.cpu_count()
     if n // num_processes == 0:
