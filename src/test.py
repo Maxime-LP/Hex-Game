@@ -2,7 +2,7 @@
 import sys
 import os
 from time import time
-from multiprocessing import Process
+from multiprocessing import Process, Queue
 import numpy as np
 import matplotlib.pyplot as plt
 from Board import Board
@@ -30,11 +30,11 @@ def test(testType, player1_type, player2_type, board_size, n=10):
     make_test(player1, player2, board_size, n)
 
 
-def test1(player1, player2, board_size, n):
+def test1(player1, player2, board_size, n, q):
     print('Simulations in progress...')
     time0 = time()
     RED, BLUE = 1, 2
-    C = np.linspace(0.05,1,5)
+    C = np.linspace(0.05,4,5)
     res = []
     if player2.algorithm.__name__ != 'mcts':
         raise Exception("Player 2 type must be mcts for test1.")
@@ -50,18 +50,20 @@ def test1(player1, player2, board_size, n):
             mcts_winrate += game.runNoDisplay()
         res.append(mcts_winrate / n)
 
-    print(f'Execution : {time()-time0}s')
+    q.put(res)
 
-    plt.plot(C, res, marker='o')
-    plt.xlabel("Exploration constant", size = 16,)
-    plt.ylabel("Winrate", size = 16)
-    plt.title(f"UCT's winrate on {n} games vs {player1.algorithm.__name__}", 
-          fontdict={'color' : 'darkblue',
-                    'size': 14})
-    plt.savefig(f"simulations/{time()}.png")
+    if __name__=="__main__":
+        print(f'Execution : {time()-time0}s')
+        plt.plot(C, res, marker='o')
+        plt.xlabel("Exploration constant", size = 16,)
+        plt.ylabel("Winrate", size = 16)
+        plt.title(f"UCT's winrate on {n} games vs {player1.algorithm.__name__}", 
+              fontdict={'color' : 'darkblue',
+                        'size': 14})
+        plt.savefig(f"simulations/{time()}.png")
     
 
-def test2(player1, player2, board_size, n):
+def test2(player1, player2, board_size, n, q):
     #print('Simulations in progress...')
     time0 = time()
     w = 0
@@ -70,6 +72,8 @@ def test2(player1, player2, board_size, n):
         game = Game(board, player1, player2)
         w += game.runNoDisplay()
 
+    q.put([w/n])
+    
     if __name__!='__main__':
         print(f'Win rate Blue: {w/n}')
         t = time()-time0
@@ -82,34 +86,45 @@ if __name__ == "__main__":
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     testType = sys.argv[5]
-    n = 300
-    for num_processes in [30]:#range(50,51):
-        processes = []
-        #num_processes = os.cpu_count()
-        # Use os.cpu_count() to obtain num CPU
-        d, r = n//num_processes, n%num_processes
-        nb_games = [d] * (num_processes-1) + [d+r]
-        for i in range(num_processes):
-            process = Process(target=test,
-                              args=(testType,
-                                    player1_type,
-                                    player2_type,
-                                    board_size,
-                                    nb_games[i]))
-            processes.append(process)
+    n = 10
 
-        print('Simulations in progress...')
-        print(f'# CPU: {os.cpu_count()}')
-        print(f'# processes: {num_processes}')
-        print(f'# games per process: {nb_games}.')
+    #for num_processes in [50]:
+    processes = []
+    num_processes = 50 #os.cpu_count()
+    if n // num_processes == 0:
+        raise Exception('# of processes should divide # of games n.')
+    d, r = n//num_processes, n%num_processes
+    nb_games = [d] * (num_processes-1) + [d+r]
 
-        time0 = time()
+    q = Queue()
 
-        for process in processes:
-            process.start()
+    for i in range(num_processes):
+        process = Process(target=test,
+                          args=(testType,
+                                player1_type,
+                                player2_type,
+                                board_size,
+                                nb_games[i],
+                                q ))
+        processes.append(process)
 
-        for process in processes:
-            process.join()
+    print('Simulations in progress...')
+    print(f'# CPU: {os.cpu_count()}')
+    print(f'# processes: {num_processes}')
+    print(f'# games per process: {nb_games}.')
 
-        print(f'-> Time for {n} games: {round(time()-time0,2)}s with {num_processes} processes.\n')
+    time0 = time()
+
+    for process in processes:
+        process.start()
+
+    for process in processes:
+        process.join()
+
+    while not q.empty():
+        res.vstack(np.array(q.get()))
+
+    print(res)
+
+    print(f'-> {round(n / (time()-time0),2)}s with {num_processes} processes.\n')
 
