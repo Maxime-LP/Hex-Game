@@ -13,7 +13,7 @@ from Player import AI
 def test(queue, player1_type, player2_type, board_size, test_type, n, cst_list):
     # init red player
     RED, BLUE = 1, 2
-    ai_algorithms = ['random', 'mc', 'mc_ucb1', 'mcts']
+    ai_algorithms = ['random', 'mc', 'mc_ucb1', 'uct']
     if player1_type in ai_algorithms:
         player1 = AI(RED, player1_type)
     else:
@@ -36,10 +36,10 @@ def best_explor_cst(queue, player1, player2, board_size, n, cst_list):
 
     mcts_winrate_per_cst = []
 
-    if player2.algorithm.__name__ not in ['mc_ucb1', 'mcts']:
-        raise Exception("Player 2 type must be mc_ucb1 or mcts for test1.")
+    if player2.algorithm.__name__ not in ['mc_ucb1', 'uct']:
+        raise Exception("Player 2 type must be mc_ucb1 or uct for test1.")
 
-    for explorationConstant in cst_list:
+    for explorationConstant in progressbar(cst_list, "Computing: ", 40):
         player2.explorationConstant = explorationConstant
         mcts_winrate = 0
         for i in range(n):
@@ -82,9 +82,9 @@ if __name__ == "__main__":
     # number of simulations
     n = 1000
     # exploration constants for mcts
-    cst_list = np.linspace(0, .5, 20)
+    cst_list = np.linspace(0,6,25)
 
-    num_processes = 50 #os.cpu_count()
+    num_processes = 4 #os.cpu_count()
     if n // num_processes == 0:
         print("Tips: use a divisor of n to increase speed.")
         #raise Exception('# of processes should divide # of games n.')
@@ -126,11 +126,11 @@ if __name__ == "__main__":
         res.append(np.mean(col))
 
     print(f'Blue player winrate: {res}.')
-    print(f'-> {round(n / (time()-time0),2)} games/s with {num_processes} processes.')
-
+    print(f'-> {round(n * 100 * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
+    print(f'Execution time: {round(time()-time0,2)}')
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
         plt.xlabel("Exploration constant")
         plt.ylabel("Winrate")
-        plt.title(f"UCT's winrate on {n} games vs {player1_type}")
+        plt.title(f"UCT's winrate on {n} games vs UCT with theorical constant")
         plt.savefig(f"simulations/{time()}.png")
