@@ -10,7 +10,7 @@ from Game import Game
 from Player import AI
 
 
-def test(testType, player1_type, player2_type, board_size, n=None):
+def test(testType, player1_type, player2_type, board_size, n=10):
     RED, BLUE = 1, 2
     ai_algorithms = ['random', 'mc', 'mc_ucb1', 'mcts']
     # init red player
@@ -27,7 +27,7 @@ def test(testType, player1_type, player2_type, board_size, n=None):
     tests = {'test1': test1,
              'test2': test2}
     make_test = tests[sys.argv[5]]
-    make_test(player1, player2, board_size, 5)
+    make_test(player1, player2, board_size, n)
 
 
 def test1(player1, player2, board_size, n):
@@ -63,12 +63,14 @@ def test1(player1, player2, board_size, n):
 
 def test2(player1, player2, board_size, n):
     #print('Simulations in progress...')
+    print('n:',n)
     time0 = time()
     w = 0
     for i in range(n):
         board = Board(board_size)
         game = Game(board, player1, player2)
-        w += game.runNoDisplay() 
+        w += game.runNoDisplay()
+
     if __name__!='__main__':
         print(f'Win rate Blue: {w/n}')
         t = time()-time0
@@ -81,13 +83,13 @@ if __name__ == "__main__":
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     testType = sys.argv[5]
-    n = 10
+    n = 20
     
     processes = []
-    num_processes = 1 #os.cpu_count() to get num CPU
+    num_processes = 4
+    # Use os.cpu_count() to obtain num CPU
     d, r = n//num_processes, n%num_processes
     nb_games = [d] * (num_processes-1) + [d+r]
-
     for i in range(num_processes):
         process = Process(target=test,
                           args=(testType,
