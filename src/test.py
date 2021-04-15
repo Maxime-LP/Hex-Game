@@ -83,7 +83,7 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     testType = sys.argv[5]
     n = 100
-    for num_processes in range(5,45,5):
+    for num_processes in range(50,51):
         processes = []
         #num_processes = os.cpu_count()
         # Use os.cpu_count() to obtain num CPU
@@ -112,3 +112,4 @@ if __name__ == "__main__":
             process.join()
 
         print(f'-> Time for {n} games: {round(time()-time0,2)}s with {num_processes} processes.\n')
+
