@@ -7,14 +7,12 @@ from time import time
 from math import sqrt
 import colorama # translate ANSI sequence for Windows
 colorama.init()
-#if display:
 import pygame
+
 from misc import screen, background
-from Player import Human
 from Game import Game
-from Player import AI
 from Board import Board
-#from test import test
+from Player import AI, Human
 
 """
 CONTROLS
@@ -31,9 +29,8 @@ board = Board(board_size)
 RED, BLUE = 1, 2
 player1_type = sys.argv[1]
 player2_type = sys.argv[2]
-ai_algorithms = ['random', 'mc', 'mc_ucb1', 'mcts']
+ai_algorithms = ['random', 'mc', 'mc_ucb1', 'uct']
 
-#if display:
 if player1_type == 'h':   # h for human
     player1 = Human(RED)
 elif player1_type in ai_algorithms:
@@ -55,17 +52,13 @@ else:
 #####################################################
 
 
-# Let's play ####################
+# Let's play ########################################
 
-#if display:
 game = Game(board, player1, player2)
 pygame.init()
 pygame.display.set_caption("Hex")
 screen.blit(background,(0,0))
 game.run()
-
-#if not display:
-#    test('test1', player1_type, player2_type, board_size)
 
 #####################################################
 

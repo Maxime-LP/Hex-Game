@@ -21,8 +21,6 @@ class treeNode():
         self.numVisits = 0
         self.totalReward = 0
         self.children = {}
-
-        #if there is no parent node, state.player (1 or 2) is the player running the mcts algorithm and we want to have the other player as the root node player
         if parent is None : 
             self.player =  3 - state.player
         else:
@@ -32,14 +30,14 @@ class treeNode():
         return len(self.state.actions)==len(self.children)
 
 
-class MCTS():
+class UCT():
 
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=sqrt(2),
                  rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
                 raise ValueError("Cannot have both a time limit and an iteration limit")
-            # time taken for each MCTS search in milliseconds
+            # time taken for each UCT search in milliseconds
             self.timeLimit = timeLimit
             self.limitType = 'time'
         else:
@@ -104,7 +102,7 @@ class MCTS():
 
     def backpropogate(self, node, reward):
         """
-        Returns 1 if the winner is the player who is running the mcts algorithm
+        Returns 1 if the winner is the player who is running the UCT algorithm
         else return 0.
         """
         while node is not None:

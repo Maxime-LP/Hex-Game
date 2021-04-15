@@ -1,19 +1,19 @@
-import random
+from random import choice
 from math import sqrt
 from AI.Hex import Hex
 from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
-from AI.mcts import MCTS
+from AI.uct import UCT
 from copy import deepcopy
 from time import time
 
-n = 100
+n = 1000
 
-def rand(board, color, explorationConstant=None):
+def random(board, color, explorationConstant=None):
     """
     Pick a random legal action.
     """
-    return random.choice(board.actions)
+    return choice(board.actions)
 
 def mc(board, color, explorationConstant=None):
     """
@@ -39,11 +39,11 @@ def mc_ucb1(board, color, explorationConstant=sqrt(2)):
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
-def mcts(board, color, explorationConstant=sqrt(2)):
+def uct(board, color, explorationConstant=sqrt(2)):
     """
-    Uses mcts method with time (ms) or iteration limit.
+    Uses UCT method with time (ms) or iteration limit.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = MCTS(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
+    searcher = UCT(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action

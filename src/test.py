@@ -36,8 +36,8 @@ def best_explor_cst(queue, player1, player2, board_size, n, cst_list):
 
     mcts_winrate_per_cst = []
 
-    if player2.algorithm.__name__ != 'mcts':
-        raise Exception("Player 2 type must be mcts for test1.")
+    if player2.algorithm.__name__ not in ['mc_ucb1', 'mcts']:
+        raise Exception("Player 2 type must be mc_ucb1 or mcts for test1.")
 
     for explorationConstant in cst_list:
         player2.explorationConstant = explorationConstant
@@ -51,7 +51,7 @@ def best_explor_cst(queue, player1, player2, board_size, n, cst_list):
     queue.put(mcts_winrate_per_cst)
     
 
-def who_is_the_best(queue, player1, player2, board_size, n, C=None):
+def who_is_the_best(queue, player1, player2, board_size, n, cst_list=None):
     w = 0
     for i in progressbar(range(n), "Computing: ", 40):
         board = Board(board_size)
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     if n // num_processes == 0:
         print("Tips: use a divisor of n to increase speed.")
         #raise Exception('# of processes should divide # of games n.')
-    d, r = n//num_processes, n%num_processes
+    d, r = n // num_processes, n % num_processes
     nb_games = [d] * (num_processes-1) + [d+r] # nb of simulated games per process
 
     queue = Queue()
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     for process in processes:
         process.start()
 
-    for process in progressbar(processes, "Computing: ", 40):
+    for process in processes:
         process.join()
 
     winrates = np.empty(shape=(0,len(cst_list)))
@@ -130,9 +130,7 @@ if __name__ == "__main__":
 
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
-        plt.xlabel("Exploration constant")#, size = 16)
-        plt.ylabel("Winrate")#, size = 16)
-        plt.title(f"UCT's winrate on {n} games vs {player1_type}") 
-              #fontdict={'color' : 'darkblue',
-                #        'size': 14})
+        plt.xlabel("Exploration constant")
+        plt.ylabel("Winrate")
+        plt.title(f"UCT's winrate on {n} games vs {player1_type}")
         plt.savefig(f"simulations/{time()}.png")
