@@ -16,7 +16,6 @@ def test(queue, player1_type, player2_type, board_size, test_type, n, cst_list):
     ai_algorithms = ['random', 'mc', 'mc_ucb1', 'mcts']
     if player1_type in ai_algorithms:
         player1 = AI(RED, player1_type)
-        print(player1.explorationConstant)
     else:
         raise TypeError("Wrong player 1 type ")
 
@@ -40,9 +39,8 @@ def best_explor_cst(queue, player1, player2, board_size, n, cst_list):
     if player2.algorithm.__name__ != 'mcts':
         raise Exception("Player 2 type must be mcts for test1.")
 
-    for explorationConstant in progressbar(cst_list, "Computing: ", 40):
+    for explorationConstant in cst_list:
         player2.explorationConstant = explorationConstant
-        print(player2.explorationConstant)
         mcts_winrate = 0
         for i in range(n):
             board = Board(board_size)
@@ -116,7 +114,7 @@ if __name__ == "__main__":
     for process in processes:
         process.start()
 
-    for process in processes:
+    for process in progressbar(processes, "Computing: ", 40):
         process.join()
 
     winrates = np.empty(shape=(0,len(cst_list)))
