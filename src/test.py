@@ -63,7 +63,6 @@ def test1(player1, player2, board_size, n):
 
 def test2(player1, player2, board_size, n):
     #print('Simulations in progress...')
-    print('n:',n)
     time0 = time()
     w = 0
     for i in range(n):
@@ -83,31 +82,32 @@ if __name__ == "__main__":
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     testType = sys.argv[5]
-    n = 20
-    
-    processes = []
-    num_processes = 4
-    # Use os.cpu_count() to obtain num CPU
-    d, r = n//num_processes, n%num_processes
-    nb_games = [d] * (num_processes-1) + [d+r]
-    for i in range(num_processes):
-        process = Process(target=test,
-                          args=(testType,
-                                player1_type,
-                                player2_type,
-                                board_size,
-                                nb_games[i]))
-        processes.append(process)
+    n = 200
+    print('num CPU:', os.cpu_count())
+    for num_processes in range(4,22,2):
+        processes = []
+        #num_processes = os.cpu_count()
+        # Use os.cpu_count() to obtain num CPU
+        d, r = n//num_processes, n%num_processes
+        nb_games = [d] * (num_processes-1) + [d+r]
+        for i in range(num_processes):
+            process = Process(target=test,
+                              args=(testType,
+                                    player1_type,
+                                    player2_type,
+                                    board_size,
+                                    nb_games[i]))
+            processes.append(process)
 
-    print('Simulations in progress...')
-    print(f'#process: {len(processes)}')
+        print('Simulations in progress...')
+        print(f'# games per process: {nb_games}.')
 
-    time0 = time()
+        time0 = time()
 
-    for process in processes:
-        process.start()
+        for process in processes:
+            process.start()
 
-    for process in processes:
-        process.join()
+        for process in processes:
+            process.join()
 
-    print(f'Time for {n} games: {round(time()-time0,2)}s')
+        print(f'-> Time for {n} games: {round(time()-time0,2)}s with {num_processes} processes.')
