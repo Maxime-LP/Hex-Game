@@ -130,9 +130,9 @@ if __name__ == "__main__":
 
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
-        plt.xlabel("Exploration constant", size = 16)
-        plt.ylabel("Winrate", size = 16)
-        plt.title(f"UCT's winrate on {n} games vs {player1_type}", 
-              fontdict={'color' : 'darkblue',
-                        'size': 14})
+        plt.xlabel("Exploration constant")#, size = 16)
+        plt.ylabel("Winrate")#, size = 16)
+        plt.title(f"UCT's winrate on {n} games vs {player1_type}") 
+              #fontdict={'color' : 'darkblue',
+                #        'size': 14})
         plt.savefig(f"simulations/{time()}.png")
