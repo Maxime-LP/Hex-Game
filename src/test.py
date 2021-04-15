@@ -82,9 +82,9 @@ if __name__ == "__main__":
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     testType = sys.argv[5]
-    n = 200
+    n = 50
     print('num CPU:', os.cpu_count())
-    for num_processes in range(4,22,2):
+    for num_processes in range(10,30,5):
         processes = []
         #num_processes = os.cpu_count()
         # Use os.cpu_count() to obtain num CPU
