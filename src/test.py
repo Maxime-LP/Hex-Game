@@ -80,12 +80,12 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     test_type = sys.argv[5]
     # number of simulations
-    n = 10
+    n = 100
     # exploration constants for mcts
-    cst_list = 1 #np.linspace(0.05, 3, 2)
+    cst_list = [1] #np.linspace(0.05, 3, 2)
 
     # Tips: use a divisor of n to increase speed
-    num_processes = 10 #os.cpu_count()
+    num_processes = 50 #os.cpu_count()
     if n // num_processes == 0:
         raise Exception('# of processes should divide # of games n.')
     d, r = n//num_processes, n%num_processes
