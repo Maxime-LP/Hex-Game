@@ -83,7 +83,7 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     testType = sys.argv[5]
     n = 300
-    for num_processes in [60]:#range(50,51):
+    for num_processes in [30]:#range(50,51):
         processes = []
         #num_processes = os.cpu_count()
         # Use os.cpu_count() to obtain num CPU
