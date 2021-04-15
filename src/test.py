@@ -82,9 +82,8 @@ if __name__ == "__main__":
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     testType = sys.argv[5]
-    n = 50
-    print('num CPU:', os.cpu_count())
-    for num_processes in range(10,30,5):
+    n = 100
+    for num_processes in range(5,45,5):
         processes = []
         #num_processes = os.cpu_count()
         # Use os.cpu_count() to obtain num CPU
@@ -100,6 +99,8 @@ if __name__ == "__main__":
             processes.append(process)
 
         print('Simulations in progress...')
+        print(f'# CPU: {os.cpu_count()}')
+        print(f'# processes: {num_processes}')
         print(f'# games per process: {nb_games}.')
 
         time0 = time()
@@ -110,4 +111,4 @@ if __name__ == "__main__":
         for process in processes:
             process.join()
 
-        print(f'-> Time for {n} games: {round(time()-time0,2)}s with {num_processes} processes.')
+        print(f'-> Time for {n} games: {round(time()-time0,2)}s with {num_processes} processes.\n')
