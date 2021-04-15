@@ -131,6 +131,6 @@ if __name__ == "__main__":
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
         plt.xlabel("Exploration constant")
-        plt.ylabel("Winrate")
-        plt.title(f"UCT's winrate on {n} games vs UCT with theorical constant")
+        plt.ylabel("Win rate")
+        plt.title(f"UCT's win rate on {n} games vs UCT with a theoretical constant")
         plt.savefig(f"simulations/{time()}.png")
