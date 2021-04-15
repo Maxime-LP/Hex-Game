@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # exploration constants for mcts
     cst_list = np.linspace(0,6,25)
 
-    num_processes = 4 #os.cpu_count()
+    num_processes = 50 #os.cpu_count()
     if n // num_processes == 0:
         print("Tips: use a divisor of n to increase speed.")
         #raise Exception('# of processes should divide # of games n.')
