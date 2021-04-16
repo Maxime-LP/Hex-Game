@@ -1,7 +1,5 @@
 # Hex-Game
 
-En cours de développement...
-
 Hex est un jeu de société pour deux personnes dans lequel les joueurs essaient de relier les côtés opposés d'une grille hexagonale. Hex est intéressant car malgré des règles extrêmement simples le jeu offre une grande compléxité : cinq milliards de fois plus de positions possibles que les échecs (sur un plateau de 11x11). Cette grande profondeur signifie que le jeu reste difficile à jouer pour les ordinateurs.
 
 ## Comment jouer ?
@@ -29,3 +27,15 @@ Pour lancer une partie, saisir dans le terminal :
 joueur_1 et joueur_2 : 'h' pour un joueur humain et 'random', 'mc', 'mc_ucb1' ou 'mcts' pour une IA, correspondant à la méthode implémentée. 
 Taille_du_plateau : 7 ou 11
 affichage : 0 (pas d'affichage) ou 1
+
+### Tests
+
+Dans le fichier test.py est implémenté deux fonctions:
+- une permettant de trouver la meilleur constante pour UCT au jeu de Hex (Spoiler : 0.4).
+- un autre pour se faire affronter deux IA.
+
+Les commandes sont de la forme:
+
+```bash
+./test.py AI1Name AI2Name 7 0 testName
+```
