@@ -81,11 +81,11 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     test_type = sys.argv[4]
     # number of simulations
-    total_games = 10
+    total_games = 1000
     # exploration constants for mcts
-    cst_list = np.linspace(0,6,2)
+    cst_list = np.linspace(0,6,25)
 
-    num_processes = 5 #os.cpu_count()
+    num_processes = 50 #os.cpu_count()
     if total_games // num_processes == 0:
         print("Tips: use a divisor of n to increase speed.")
         #raise Exception('# of processes should divide # of games n.')
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         res.append(np.mean(col))
 
     print(f'Blue player winrate: {res}.')
-    print(f'{round(total_games * 100 * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
+    print(f'{round(total_games * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
     print(f'Execution time: {round(time()-time0,2)}')
     
     if test_type == "test1":
