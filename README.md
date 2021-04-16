@@ -36,20 +36,19 @@ $ pip3 install -r requirements.txt
 ## Start a game
 
 ```bash
-$ ./main.py joueur1Type joueur2Type taille_du_plateau
+$ ./main.py player1_type player2_type board_size
 ```
 
-joueur1Type/joueur2Type : 'h' pour un joueur humain et 'random', 'mc', 'mc_ucb1' ou 'uct' pour une IA, correspondant à la méthode implémentée. 
-Taille_du_plateau : 7 ou 11
+`player1_type`/`player2_type` : 'h' for human player and 'random', 'mc', 'mc_ucb1' or 'uct' for AI, correspond to implemented method. 
+board_size : 7 or 11
 
 ## Test
 
-Dans le fichier test.py est implémenté deux fonctions:
-- une permettant de trouver la meilleur constante pour UCT au jeu de Hex (Spoiler : 0.4).
-- un autre pour se faire affronter deux IA.
+In file *test.py* two test functions are implemented.
+- *test1* allows to find the best constant for UCT at the set of Hex (Spoiler : 0.4).
+- `test2` makes one AI play against the other.
 
-Les commandes sont de la forme:
-
+Commands:
 ```bash
 $ ./test.py AI1Name AI2Name 7 testName
 ```
