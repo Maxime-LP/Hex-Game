@@ -81,9 +81,9 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     test_type = sys.argv[4]
     # number of simulations
-    total_games = 1000
+    total_games = 2000
     # exploration constants for mcts
-    cst_list = np.linspace(0,6,25)
+    cst_list = np.linspace(0.1,0.8,15)
 
     num_processes = 50 #os.cpu_count()
     if total_games // num_processes == 0:
@@ -134,5 +134,5 @@ if __name__ == "__main__":
         plt.plot(cst_list, res, marker='o')
         plt.xlabel("Exploration constant")
         plt.ylabel("Win rate")
-        plt.title(f"UCT's win rate on {total_games} games vs UCT with a theoretical constant")
+        plt.title(f"UCT's win rate on {total_games} games vs UCT")
         plt.savefig(f"simulations/{time()}.png")
