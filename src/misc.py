@@ -3,6 +3,8 @@ try:
     display = bool(int(sys.argv[4]))
 except IndexError:
     display = True
+except ValueError:
+    display = False
     
 if display:
     import pygame

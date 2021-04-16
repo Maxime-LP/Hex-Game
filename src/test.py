@@ -78,7 +78,7 @@ if __name__ == "__main__":
     player1_type = sys.argv[1]
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
-    test_type = sys.argv[5]
+    test_type = sys.argv[4]
     # number of simulations
     n = 1000
     # exploration constants for mcts

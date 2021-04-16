@@ -1,11 +1,12 @@
 from random import choice
 from math import sqrt
+from copy import deepcopy
+from time import time
+
 from AI.Hex import Hex
 from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
 from AI.uct import UCT
-from copy import deepcopy
-from time import time
 
 n = 1000
 
@@ -41,7 +42,11 @@ def mc_ucb1(board, color, explorationConstant=sqrt(2)):
 
 def uct(board, color, explorationConstant=sqrt(2)):
     """
-    Uses UCT method with time (ms) or iteration limit.
+    Plays games with iteration or time limit.
+    Uses UCT method and UCB1 criterion for node selection.
+    Random policy is use.
+     with time (ms) or iteration limit.
+    Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
