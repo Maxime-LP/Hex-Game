@@ -39,14 +39,14 @@ $ pip3 install -r requirements.txt
 $ ./main.py player1_type player2_type board_size
 ```
 
-`player1_type`/`player2_type` : 'h' for human player and 'random', 'mc', 'mc_ucb1' or 'uct' for AI, correspond to implemented method. 
-board_size : 7 or 11
+*player1_type*/*player2_type* : 'h' for human player and 'random', 'mc', 'mc_ucb1' or 'uct' for AI, correspond to implemented method. 
+*board_size* : 7 or 11
 
 ## Test
 
 In file *test.py* two test functions are implemented.
 - *test1* allows to find the best constant for UCT at the set of Hex (Spoiler : 0.4).
-- `test2` makes one AI play against the other.
+- *test2* makes one AI play against the other.
 
 Commands:
 ```bash
