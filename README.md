@@ -10,13 +10,11 @@ Il est possible de jouer contre une IA, dont plusieurs implémentations sont dis
 - random
 - mc
 - mc_ucb1
-- uct(https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
+- [uct](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Hex_board_11x11.svg/800px-Hex_board_11x11.svg.png)
 
-## Quick start
-
-> UNZIP the sources or clone the private repository. After getting the code, open a terminal and navigate to the working directory, with product source code.
+## Setup
 
 ```bash
 $ # Get the code
@@ -35,16 +33,16 @@ $ # Install modules - SQLite Storage
 $ pip3 install -r requirements.txt
 ```
 
-## Lancement d'une patie
+## Start a game
 
 ```bash
-*./main.py joueur1Type joueur2Type taille_du_plateau
+$ ./main.py joueur1Type joueur2Type taille_du_plateau
 ```
 
 joueur1Type/joueur2Type : 'h' pour un joueur humain et 'random', 'mc', 'mc_ucb1' ou 'uct' pour une IA, correspondant à la méthode implémentée. 
 Taille_du_plateau : 7 ou 11
 
-## Tests
+## Test
 
 Dans le fichier test.py est implémenté deux fonctions:
 - une permettant de trouver la meilleur constante pour UCT au jeu de Hex (Spoiler : 0.4).
@@ -53,5 +51,5 @@ Dans le fichier test.py est implémenté deux fonctions:
 Les commandes sont de la forme:
 
 ```bash
-./test.py AI1Name AI2Name 7 testName
+$ ./test.py AI1Name AI2Name 7 testName
 ```
