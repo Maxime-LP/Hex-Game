@@ -39,10 +39,11 @@ def best_explor_cst(queue, player1, player2, board_size, n, cst_list):
     if player2.algorithm.__name__ not in ['mc_ucb1', 'uct']:
         raise Exception("Player 2 type must be mc_ucb1 or uct for test1.")
 
-    for explorationConstant in progressbar(cst_list, "Computing: ", 40):
+    for explorationConstant in cst_list: #progressbar(cst_list, "Computing: ", 40):
+        print(explorationConstant)
         player2.explorationConstant = explorationConstant
         mcts_winrate = 0
-        for i in range(n):
+        for i in progressbar(range(n), "Computing: ", 40):
             board = Board(board_size)
             game = Game(board, player1, player2)
             mcts_winrate += game.runNoDisplay()
@@ -80,16 +81,16 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     test_type = sys.argv[4]
     # number of simulations
-    n = 1000
+    total_games = 10
     # exploration constants for mcts
-    cst_list = np.linspace(0,6,25)
+    cst_list = np.linspace(0,6,2)
 
-    num_processes = 50 #os.cpu_count()
-    if n // num_processes == 0:
+    num_processes = 5 #os.cpu_count()
+    if total_games // num_processes == 0:
         print("Tips: use a divisor of n to increase speed.")
         #raise Exception('# of processes should divide # of games n.')
-    d, r = n // num_processes, n % num_processes
-    nb_games = [d] * (num_processes-1) + [d+r] # nb of simulated games per process
+    d, r = total_games // num_processes, total_games % num_processes
+    games_per_process = [d] * (num_processes-1) + [d+r]
 
     queue = Queue()
 
@@ -101,13 +102,13 @@ if __name__ == "__main__":
                                 player2_type,
                                 board_size,
                                 test_type,
-                                nb_games[i],
+                                games_per_process[i],
                                 cst_list))
         processes.append(process)
 
     print(f'# CPU: {os.cpu_count()}')
     print(f'# processes: {num_processes}')
-    print(f'# games per process: {nb_games}.')
+    print(f'# games per process: {games_per_process}.')
 
     time0 = time() 
     
@@ -126,11 +127,12 @@ if __name__ == "__main__":
         res.append(np.mean(col))
 
     print(f'Blue player winrate: {res}.')
-    print(f'-> {round(n * 100 * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
+    print(f'{round(total_games * 100 * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
     print(f'Execution time: {round(time()-time0,2)}')
+    
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
         plt.xlabel("Exploration constant")
         plt.ylabel("Win rate")
-        plt.title(f"UCT's win rate on {n} games vs UCT with a theoretical constant")
+        plt.title(f"UCT's win rate on {total_games} games vs UCT with a theoretical constant")
         plt.savefig(f"simulations/{time()}.png")
