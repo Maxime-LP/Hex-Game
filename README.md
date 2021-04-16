@@ -13,6 +13,7 @@ Il est possible de jouer contre une IA, dont plusieurs implémentations sont dis
 - [uct](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Hex_board_11x11.svg/800px-Hex_board_11x11.svg.png = 600x380)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Hex_board_11x11.svg/800px-Hex_board_11x11.svg.png" height="400" />
 
 ## Setup
 
