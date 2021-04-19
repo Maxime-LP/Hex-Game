@@ -19,7 +19,7 @@ Il est possible de jouer contre une IA, dont plusieurs implémentations sont dis
 ```bash
 $ # Get the code
 $ git clone https://github.com/Maxime-LP/Hex-Game/main
-$ cd argon-dashboard-django
+$ cd Hex-Game
 $
 $ # Virtualenv modules installation (Unix based systems)
 $ virtualenv env
@@ -29,7 +29,7 @@ $ # Virtualenv modules installation (Windows based systems)
 $ # virtualenv env
 $ # .\env\Scripts\activate
 $
-$ # Install modules - SQLite Storage
+$ # Install modules
 $ pip3 install -r requirements.txt
 ```
 
@@ -48,7 +48,6 @@ In file *test.py* two test functions are implemented.
 - *test1* allows to find the best constant for UCT at the set of Hex (Spoiler : 0.4).
 - *test2* makes one AI play against the other.
 
-Commands:
 ```bash
 $ ./test.py AI1Name AI2Name 7 testName
 ```
