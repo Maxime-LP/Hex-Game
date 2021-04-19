@@ -81,9 +81,9 @@ if __name__ == "__main__":
     board_size = sys.argv[3]
     test_type = sys.argv[4]
     # number of simulations
-    total_games = 2000
+    total_games = 5000
     # exploration constants for mcts
-    cst_list = np.linspace(0.1,0.8,15)
+    cst_list = np.linspace(0,0.5,11)
 
     num_processes = 50 #os.cpu_count()
     if total_games // num_processes == 0:
