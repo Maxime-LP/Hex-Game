@@ -75,15 +75,18 @@ def progressbar(it, prefix="", size=60, file=sys.stdout):
     file.flush()
 
 if __name__ == "__main__":
-
+    '''
     player1_type = sys.argv[1]
     player2_type = sys.argv[2]
     board_size = sys.argv[3]
     test_type = sys.argv[4]
+    '''
+    print(type(sys.argv))
+    player1_type,player2_type,board_size,test_type = sys.argv[1:]
     # number of simulations
-    total_games = 5000
+    total_games = 500
     # exploration constants for mcts
-    cst_list = np.linspace(0,0.5,11)
+    cst_list = [None]#np.linspace(0,0.5,11)
 
     num_processes = 50 #os.cpu_count()
     if total_games // num_processes == 0:
@@ -128,7 +131,7 @@ if __name__ == "__main__":
 
     print(f'Blue player winrate: {res}.')
     print(f'{round(total_games * len(cst_list) / (time()-time0),2)} games/s with {num_processes} processes.')
-    print(f'Execution time: {round(time()-time0,2)}')
+    print(f'Execution time: {round(time()-time0,2)}s')
     
     if test_type == "test1":
         plt.plot(cst_list, res, marker='o')
