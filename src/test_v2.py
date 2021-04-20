@@ -10,7 +10,7 @@ from Game import Game
 from Player import AI
 
 
-def progressbar(it, prefix="Computing: ", size=60, file=sys.stdout):
+def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
     count = len(it)
     def show(j):
         x = int(size*j/count)
@@ -55,7 +55,7 @@ def test1(player1, player2, board_size, n, c):
 
 
 if __name__ == "__main__":
-    
+
     start_time = time()
     
     n = int(sys.argv[4])
