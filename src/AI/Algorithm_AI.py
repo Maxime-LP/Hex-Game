@@ -37,7 +37,7 @@ def mc_ucb1(board, color, explorationConstant=sqrt(2)):
     """
     initialState = Hex(color, board)
     searcher = MC_UCB1(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 def uct(board, color, explorationConstant=sqrt(2)):
@@ -50,5 +50,5 @@ def uct(board, color, explorationConstant=sqrt(2)):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
-    action = searcher.search(initialState=initialState, needDetails=True)
+    action = searcher.search(initialState=initialState, needDetails=False)
     return action
