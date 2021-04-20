@@ -75,13 +75,7 @@ def progressbar(it, prefix="", size=60, file=sys.stdout):
     file.flush()
 
 if __name__ == "__main__":
-    '''
-    player1_type = sys.argv[1]
-    player2_type = sys.argv[2]
-    board_size = sys.argv[3]
-    test_type = sys.argv[4]
-    '''
-    print(type(sys.argv))
+    
     player1_type,player2_type,board_size,test_type = sys.argv[1:]
     # number of simulations
     total_games = 500

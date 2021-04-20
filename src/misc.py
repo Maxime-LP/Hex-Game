@@ -1,6 +1,6 @@
 import sys
 try:
-    display = bool(int(sys.argv[4]))
+    display = True if sys.argv[4]==1 else False
 except IndexError:
     display = True
 except ValueError:
