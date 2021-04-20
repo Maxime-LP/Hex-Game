@@ -10,6 +10,19 @@ from Game import Game
 from Player import AI
 
 
+def progressbar(it, prefix="Computing: ", size=60, file=sys.stdout):
+    count = len(it)
+    def show(j):
+        x = int(size*j/count)
+        file.write("%s[%s%s] %i/%i\r" % (prefix, "#"*x, "."*(size-x), j, count))
+        file.flush()        
+    show(0)
+    for i, item in enumerate(it):
+        yield item
+        show(i+1)
+    file.write("\n")
+    file.flush()
+
 def test(args):
     #n, c = args
     # settings
@@ -42,14 +55,14 @@ def test1(player1, player2, board_size, n, c):
 
 
 if __name__ == "__main__":
-
+    
     start_time = time()
     
     n = int(sys.argv[4])
     cst_list = list(np.linspace(0,0.5,21))
 
     result = []
-    for c in cst_list:
+    for c in progressbar(cst_list):
         p = Pool(processes=os.cpu_count())
         win_rate = p.map(test, [[n, c]]*n)
         result.append(np.mean(win_rate))
