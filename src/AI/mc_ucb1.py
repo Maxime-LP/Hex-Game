@@ -80,6 +80,7 @@ class MC_UCB1():
             for node, info in self.root.children.items():
                 print(node,':',info.totalReward, info.numVisits, round(info.totalReward/info.numVisits,2))
             print(action)
+            return action
             
         return action
 

@@ -67,11 +67,12 @@ class UCT():
         if needDetails:
             for node, info in self.root.children.items():
                 print(node,':',info.totalReward, info.numVisits, round(info.totalReward/info.numVisits,2))
+            print(action)
             return action
         else:
             return action
 
-    def executeRound(self):
+    def executeRound(self, iter=None):
         """
         Execute a selection-expansion-simulation-backpropagation round.
         """
