@@ -2,7 +2,7 @@ from misc import display
 if display:
     import pygame
     from misc import background, screen
-from AI.Algorithm_AI import *
+from AI.dispatcher import *
 
 
 class Player:
