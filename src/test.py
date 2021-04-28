@@ -64,18 +64,18 @@ if __name__ == "__main__":
     n = int(sys.argv[4])
     cst_list = [None, None] #list(np.linspace(0,0.5,21))
     result = []
+    '''
     for c in cst_list:
         leave = True if len(cst_list) <= 1 else False
         with Pool(processes=os.cpu_count()) as p:
             win_rate = list(tqdm(p.imap(test, [[c,1]]*n), total=n, leave=leave))
             result.append(np.mean(win_rate))
     '''
-    result = []
     for c in progressbar(cst_list):
         p = Pool(processes=os.cpu_count())
         win_rate = p.map(test, [[c,1]]*n)
         result.append(np.mean(win_rate))
-    '''
+    
 
     exe_time = time() - start_time
 
