@@ -29,7 +29,7 @@ board = Board(board_size)
 RED, BLUE = 1, 2
 player1_type = sys.argv[1]
 player2_type = sys.argv[2]
-ai_algorithms = ['random', 'mc', 'mc_ucb1', 'uct']
+ai_algorithms = ['random', 'mc', 'mc_ucb1', 'uct', 'uct_wm']
 
 if player1_type == 'h':   # h for human
     player1 = Human(RED)
