@@ -31,7 +31,7 @@ class treeNode():
 
 
 class UCT():
-
+    n=1
     def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=sqrt(2),
                  rolloutPolicy=randomPolicy):
         if timeLimit != None:
@@ -112,6 +112,18 @@ class UCT():
             node = node.parent
 
     def getBestChild(self, node, explorationValue):
+        return self.ucb1(node,explorationValue)
+        #return self.egreedy(node)
+    
+    def egreedy(self,node,c=0.2,d=0.01):
+        e = min([1, c*len(node.state.actions)/d**2*n])
+        n+=1
+        if random.random()<1-e:
+            return self.ucb1(node,0)
+        else:
+            return random.choice(node.children)
+
+    def ucb1(self,node,explorationValue):
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():
@@ -123,3 +135,5 @@ class UCT():
             elif nodeValue == bestValue:
                 bestNodes.append(child)
         return random.choice(bestNodes)
+    
+    
