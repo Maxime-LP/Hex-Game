@@ -31,8 +31,7 @@ class treeNode():
 
 class MC():
 
-    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=None,
-                 rolloutPolicy=randomPolicy):
+    def __init__(self, timeLimit=None, iterationLimit=None, rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
                 raise ValueError("Cannot have both a time limit and an iteration limit")

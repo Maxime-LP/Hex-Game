@@ -36,12 +36,12 @@ class AI(Player):
                     }
         self.algorithm_name = algorithm
         self.algorithm = algorithms[algorithm]
-        self.explorationConstant = 0.3
+        self.explorationConstant = sqrt(2)
         self.tree = None
 
     def plays(self, board):
         if self.algorithm_name == 'uct_wm':
-            self.tree, (i,j) = self.algorithm(board, self.color, self.tree, self.explorationConstant)
+            self.tree, (i,j) = self.algorithm(board, self.color, self.explorationConstant, self.tree)
         else:
             (i,j) = self.algorithm(board, self.color, self.explorationConstant)
         tile_center = board.tiles_centers[board.coord_to_index(i, j)]
