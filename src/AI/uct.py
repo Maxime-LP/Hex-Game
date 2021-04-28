@@ -116,7 +116,7 @@ class UCT():
         #return self.egreedy(node)
     
     def egreedy(self,node,c=0.2,d=0.01):
-        e = min([1, c*len(node.state.actions)/d**2*n])
+        e = min(1, c*len(node.state.actions)/d**2*n)
         n+=1
         if random.random()<1-e:
             return self.ucb1(node,0)
