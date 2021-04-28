@@ -10,14 +10,14 @@ from AI.uct import UCT
 
 n = 100
 
-def random(board, color, explorationConstant=None):
+def random(board, color, explorationConstant):
     """
     Pick a random legal action.
     """
     return choice(board.actions)
 
 
-def mc(board, color, explorationConstant=None):
+def mc(board, color, explorationConstant):
     """
     Plays games with iteration or time limit.
     The same number of games is played for each action.
@@ -30,7 +30,7 @@ def mc(board, color, explorationConstant=None):
     return action
 
 
-def mc_ucb1(board, color, explorationConstant=None):
+def mc_ucb1(board, color, explorationConstant):
     """
     Plays games with iteration or time limit.
     The actions are selected with UCB1 criterion.
@@ -38,12 +38,12 @@ def mc_ucb1(board, color, explorationConstant=None):
     Return the action with the best win rate.
     """
     initialState = Hex(color, board)
-    searcher = MC_UCB1(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
+    searcher = MC_UCB1(explorationConstant, timeLimit=None, iterationLimit=n)
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 
-def uct(board, color, tree, explorationConstant=sqrt(2)):
+def uct(board, color, explorationConstant):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.
@@ -51,12 +51,12 @@ def uct(board, color, tree, explorationConstant=sqrt(2)):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = UCT(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
+    searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     tree, action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
 
-def uct_wm(board, color, tree, explorationConstant=sqrt(2)):
+def uct_wm(board, color, explorationConstant, tree):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.
@@ -65,7 +65,7 @@ def uct_wm(board, color, tree, explorationConstant=sqrt(2)):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = UCT(timeLimit=None, iterationLimit=n, explorationConstant=explorationConstant)
+    searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     new_tree = cut(tree, initialState)
     tree, action = searcher.search(initialState=initialState, needDetails=False, root=new_tree)
     return tree, action

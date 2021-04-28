@@ -34,8 +34,8 @@ class UCT():
 
     n = 1
     
-    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=0.3,
-                 rolloutPolicy=randomPolicy):
+    def __init__(self, explorationConstant, timeLimit=None, iterationLimit=None, 
+                                                        rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
                 raise ValueError("Cannot have both a time limit and an iteration limit")

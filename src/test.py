@@ -10,7 +10,7 @@ from Board import Board
 from Game import Game
 from Player import AI
 
-
+'''
 def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
     count = len(it)
     def show(j):
@@ -23,7 +23,7 @@ def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
         show(i+1)
     file.write("\n")
     file.flush()
-
+'''
 
 
 def test(args):
@@ -79,14 +79,17 @@ if __name__ == "__main__":
     exe_time = time() - start_time
 
     try:
+        
         if sys.argv[5] == 'save':
             with open("simulations/logs.txt", "a") as filout:
                 filout.write(f'>> {sys.argv[1]} vs {sys.argv[1]} on {n} games.\n')
                 filout.write(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s\n')
-                filout.write(f'cst_list = {cst_list}\n')
+                filout.write(f'cst_list = {np.around(cst_list,3)}\n')
                 filout.write(f'res = {result}\n\n\n')
+    
     except IndexError:
+        
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
-        print(f'List explorationConstant: {cst_list}')
-        print(f'Win rate(s): {result}')
+        print(f'List explorationConstant: {np.around(cst_list,3)}')
+        print(f'Win rate(s): {np.round(result,4)}')
     
