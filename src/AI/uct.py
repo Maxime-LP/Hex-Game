@@ -31,8 +31,10 @@ class treeNode():
 
 
 class UCT():
-    n=1
-    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=sqrt(2),
+
+    n = 1
+    
+    def __init__(self, timeLimit=None, iterationLimit=None, explorationConstant=0.3,
                  rolloutPolicy=randomPolicy):
         if timeLimit != None:
             if iterationLimit != None:
@@ -51,8 +53,8 @@ class UCT():
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
 
-    def search(self, initialState, needDetails):
-        self.root = treeNode(initialState, None)
+    def search(self, initialState,  needDetails, root=None):
+        self.root = treeNode(initialState, None) if root==None else root
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000
             while time.time() < timeLimit:
@@ -62,15 +64,17 @@ class UCT():
                 self.executeRound()
         
         bestChild = self.getBestChild(self.root, 0)
-        action=(action for action, node in self.root.children.items() if node is bestChild).__next__()
+        action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
         if needDetails:
+            print(f'Color: {3 - self.root.player}')
             for node, info in self.root.children.items():
                 print(node,':',info.totalReward, info.numVisits, round(info.totalReward/info.numVisits,2))
-            print(action)
-            return action
+            print(f'Best action: {action}')
+            print(f'Root numVisits: {self.root.numVisits}')
+            return deepcopy(bestChild), action
         else:
-            return action
+            return deepcopy(bestChild), action
 
     def executeRound(self, iter=None):
         """
