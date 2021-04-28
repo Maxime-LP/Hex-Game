@@ -1,6 +1,7 @@
 from random import choice
 from copy import deepcopy
 from time import time
+from math import sqrt
 
 from AI.Hex import Hex
 from AI.mc import MC
@@ -42,7 +43,7 @@ def mc_ucb1(board, color, explorationConstant=None):
     return action
 
 
-def uct(board, color, tree, explorationConstant=0.3):
+def uct(board, color, tree, explorationConstant=sqrt(2)):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.
@@ -55,7 +56,7 @@ def uct(board, color, tree, explorationConstant=0.3):
     return action
 
 
-def uct_wm(board, color, tree, explorationConstant=1.1):
+def uct_wm(board, color, tree, explorationConstant=sqrt(2)):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.
