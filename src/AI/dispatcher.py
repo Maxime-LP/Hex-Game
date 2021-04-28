@@ -7,7 +7,7 @@ from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
 from AI.uct import UCT
 
-n = 5000
+n = 100
 
 def random(board, color, explorationConstant=None):
     """
@@ -55,7 +55,7 @@ def uct(board, color, tree, explorationConstant=0.3):
     return action
 
 
-def uct_wm(board, color, tree, explorationConstant=0.3):
+def uct_wm(board, color, tree, explorationConstant=1.1):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.

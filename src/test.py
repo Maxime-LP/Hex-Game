@@ -2,6 +2,7 @@
 import sys
 import os
 from time import time
+from tqdm import tqdm, trange
 import numpy as np
 from multiprocessing import Pool
 
@@ -9,7 +10,7 @@ from Board import Board
 from Game import Game
 from Player import AI
 
-
+'''
 def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
     count = len(it)
     def show(j):
@@ -22,13 +23,15 @@ def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
         show(i+1)
     file.write("\n")
     file.flush()
+'''
+
 
 def test(args):
-    #n, c = args
+    c, n = args 
     # settings
     RED, BLUE = 1, 2
     ai_algorithms = ['random', 'mc', 'mc_ucb1', 'uct', 'uct_wm']
-    player1_type, player2_type, board_size, n = sys.argv[1:]
+    player1_type, player2_type, board_size = sys.argv[1:4]
     
     # init red player
     if player1_type in ai_algorithms:
@@ -42,16 +45,16 @@ def test(args):
     else:
         raise Exception("Wrong player 2 type")
 
-    return test1(player1, player2, board_size, *args)
-  
-
-def test1(player1, player2, board_size, n, c):
     if c != None:
         player2.explorationConstant = c
+        print(c)
+
     board = Board(board_size)
     game = Game(board, player1, player2)
     winner = game.runNoDisplay()
+    
     return winner
+
 
 
 if __name__ == "__main__":
@@ -59,16 +62,24 @@ if __name__ == "__main__":
     start_time = time()
     
     n = int(sys.argv[4])
-    cst_list = [None] #list(np.linspace(0,0.5,21))
-
+    cst_list = [None, None] #list(np.linspace(0,0.5,21))
+    result = []
+    for c in cst_list:
+        leave = True if len(cst_list) <= 1 else False
+        with Pool(processes=os.cpu_count()) as p:
+            win_rate = list(tqdm(p.imap(test, [[c,1]]*n), total=n, leave=leave))
+            result.append(np.mean(win_rate))
+    '''
     result = []
     for c in progressbar(cst_list):
         p = Pool(processes=os.cpu_count())
-        win_rate = p.map(test, [[n, c]]*n)
+        win_rate = p.map(test, [[c,1]]*n)
         result.append(np.mean(win_rate))
+    '''
 
     exe_time = time() - start_time
 
-    print(f'{round(n*len(cst_list)/exe_time,3)} games/s in {round(exe_time,3)}s.')
+    print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
     print(f'List explorationConstant: {cst_list}')
     print(f'Win rate(s): {result}')
+    
