@@ -40,7 +40,7 @@ def mc_ucb1(board, color, explorationConstant=sqrt(2)):
     action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
-def uct(board, color, explorationConstant=sqrt(2)):
+def uct(board, color, explorationConstant=0.3):
     """
     Plays games with iteration or time limit.
     Uses UCT method and UCB1 criterion for node selection.
