@@ -10,7 +10,7 @@ from Board import Board
 from Game import Game
 from Player import AI
 
-'''
+
 def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
     count = len(it)
     def show(j):
@@ -23,7 +23,7 @@ def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
         show(i+1)
     file.write("\n")
     file.flush()
-'''
+
 
 
 def test(args):
