@@ -139,5 +139,3 @@ class UCT():
             elif nodeValue == bestValue:
                 bestNodes.append(child)
         return random.choice(bestNodes)
-    
-    
