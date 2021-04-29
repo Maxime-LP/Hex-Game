@@ -61,7 +61,7 @@ if __name__ == "__main__":
     start_time = time()
     
     n = int(sys.argv[4])
-    cst_list = list(np.linspace(0,4,21))
+    cst_list = list(np.linspace(0,0.6,19))
     result = []
     
     for c in tqdm(cst_list):
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         
         if sys.argv[5] == 'save':
             with open("simulations/logs.txt", "a") as filout:
-                filout.write(f'>> {sys.argv[1]} vs {sys.argv[1]} on {n} games.\n')
+                filout.write(f'>> {sys.argv[1]} vs {sys.argv[2]} on {n} games.\n')
                 filout.write(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s\n')
                 filout.write(f'cst_list = {np.around(cst_list,3)}\n')
                 filout.write(f'res = {result}\n\n\n')
