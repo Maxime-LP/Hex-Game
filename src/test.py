@@ -61,7 +61,7 @@ if __name__ == "__main__":
     start_time = time()
     
     n = int(sys.argv[4])
-    cst_list = list(np.linspace(0,0.6,19))
+    cst_list = list(np.linspace(0,1,11))
     result = []
     
     for c in tqdm(cst_list):
@@ -84,12 +84,16 @@ if __name__ == "__main__":
             with open("simulations/logs.txt", "a") as filout:
                 filout.write(f'>> {sys.argv[1]} vs {sys.argv[2]} on {n} games.\n')
                 filout.write(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s\n')
-                filout.write(f'cst_list = {np.around(cst_list,3)}\n')
-                filout.write(f'res = {result}\n\n\n')
+                filout.write(f'cst_list = {cst_list}\n')
+                filout.write(f'res = {result}\n')
+                filout.write(f'n = {n}')
+                filout.write(f'plt.plot(cst_list, res, marker="o")')
+                filout.write(f'plt.xlabel("Exploration constant")')
+                filout.write(f'plt.ylabel("{sys.argv[2]} win rate")')
+                filout.write(f'plt.title(f"{sys.argv[2]}\'s win rate on {n} games per constant vs {sys.argv[1]}")\n\n\n')
     
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
-        print(f'List explorationConstant: {np.around(cst_list,3)}')
+        print(f'List explorationConstant: {cst_list,3}')
         print(f'Win rate(s): {np.round(result,4)}')
-    
