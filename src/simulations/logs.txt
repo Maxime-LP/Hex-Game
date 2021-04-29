@@ -33,3 +33,14 @@ plt.ylabel("uct_wm win rate")
 plt.title(f"uct_wm's win rate on 2000 games per constant vs uct_wm")
 
 
+>> uct vs uct_wm on 1000 games.
+1000 games in 182.634s => 5.475 games/s
+cst_list = [None]
+res = [0.486]
+n = 1000
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 1000 games per constant vs uct")
+
+
