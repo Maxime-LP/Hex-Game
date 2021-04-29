@@ -55,3 +55,80 @@ plt.ylabel("uct_wm win rate")
 plt.title(f"uct_wm's win rate on 2000 games per constant vs uct")
 
 
+>> uct vs uct_wm on 1 games.
+1 games in 14.185s => 0.07 games/s
+cst_list = [None]
+res = [1.0]
+n = 1
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 1 games per constant vs uct")
+
+
+>> uct vs uct_wm on 100 games.
+100 games in 84.005s => 1.19 games/s
+cst_list = [None]
+res = [0.27]
+n = 100
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 100 games per constant vs uct")
+
+
+>> uct vs uct_wm on 10 games.
+10 games in 24.055s => 0.416 games/s
+cst_list = [1]
+res = [0.3]
+n = 10
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 10 games per constant vs uct")
+
+
+>> uct vs uct_wm on 10 games.
+10 games in 21.601s => 0.463 games/s
+cst_list = [1]
+res = [0.1]
+n = 10
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 10 games per constant vs uct")
+
+
+>> uct vs uct_wm on 10 games.
+10 games in 197.842s => 0.051 games/s
+cst_list = [1]
+res = [0.3]
+n = 10
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 10 games per constant vs uct")
+
+
+>> uct vs uct_wm on 48 games.
+48 games in 383.236s => 0.125 games/s
+cst_list = [1]
+res = [0.2708333333333333]
+n = 48
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 48 games per constant vs uct")
+
+
+>> uct vs uct_wm on 10 games.
+10 games in 195.967s => 0.051 games/s
+cst_list = [1]
+res = [0.1]
+n = 10
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 10 games per constant vs uct")
+
+

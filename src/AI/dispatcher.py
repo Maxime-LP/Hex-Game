@@ -8,7 +8,7 @@ from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
 from AI.uct import UCT
 
-n = 100
+n = 10000
 
 def random(board, color, explorationConstant):
     """
@@ -51,7 +51,7 @@ def uct(board, color, explorationConstant):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = UCT(explorationConstant=0.3, timeLimit=None, iterationLimit=n)
+    searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     tree, action = searcher.search(initialState=initialState, needDetails=False)
     return action
 
@@ -65,7 +65,7 @@ def uct_wm(board, color, explorationConstant, tree):
     Return the action with the best win rate.
     """
     initialState = Hex(color, deepcopy(board))
-    searcher = UCT(explorationConstant=1, timeLimit=None, iterationLimit=n)
+    searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     new_tree = cut(tree, initialState)
     tree, action = searcher.search(initialState=initialState, needDetails=False, root=new_tree)
     return tree, action
