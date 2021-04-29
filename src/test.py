@@ -61,7 +61,7 @@ if __name__ == "__main__":
     start_time = time()
     
     n = int(sys.argv[4])
-    cst_list = list(np.linspace(0,0.6,19))
+    cst_list = list(np.linspace(0,4,21))
     result = []
     
     for c in tqdm(cst_list):
