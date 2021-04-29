@@ -85,10 +85,10 @@ if __name__ == "__main__":
                 filout.write(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s\n')
                 filout.write(f'cst_list = {cst_list}\n')
                 filout.write(f'res = {result}\n')
-                filout.write(f'n = {n}')
-                filout.write(f'plt.plot(cst_list, res, marker="o")')
-                filout.write(f'plt.xlabel("Exploration constant")')
-                filout.write(f'plt.ylabel("{sys.argv[2]} win rate")')
+                filout.write(f'n = {n}\n')
+                filout.write(f'plt.plot(cst_list, res, marker="o")\n')
+                filout.write(f'plt.xlabel("Exploration constant")\n')
+                filout.write(f'plt.ylabel("{sys.argv[2]} win rate")\n')
                 filout.write(f'plt.title(f"{sys.argv[2]}\'s win rate on {n} games per constant vs {sys.argv[1]}")\n\n\n')
     
     except IndexError:

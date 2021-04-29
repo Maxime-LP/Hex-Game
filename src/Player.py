@@ -36,7 +36,7 @@ class AI(Player):
                     }
         self.algorithm_name = algorithm
         self.algorithm = algorithms[algorithm]
-        self.explorationConstant = sqrt(2)
+        self.explorationConstant = 0.3
         self.tree = None
 
     def plays(self, board):
