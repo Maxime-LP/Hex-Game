@@ -94,5 +94,5 @@ if __name__ == "__main__":
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
-        print(f'List explorationConstant: {cst_list,3}')
+        print(f'List explorationConstant: {cst_list}')
         print(f'Win rate(s): {np.round(result,4)}')
