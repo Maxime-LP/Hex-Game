@@ -1,7 +1,9 @@
+import os
 import time
 from math import log, sqrt
 import random
 from copy import deepcopy
+#from multiprocessing import Process, Pipe, Pool
 
 def randomPolicy(state):
     while not state.isTerminal():
@@ -55,13 +57,14 @@ class UCT():
             # number of iterations of the search
             if iterationLimit < 1:
                 raise ValueError("Iteration limit must be greater than one")
-            self.searchLimit = iterationLimit
+            self.iterationLimit = iterationLimit
             self.limitType = 'iterations'
         self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
 
+
     def search(self, initialState,  needDetails, root=None):
-        
+
         self.root = treeNode(initialState, None) if root==None else root
 
         if self.limitType == 'time':
@@ -69,9 +72,9 @@ class UCT():
             while time.time() < timeLimit:
                 self.executeRound()
         else:
-            for i in range(self.searchLimit):
+            for i in range(self.iterationLimit):
                 self.executeRound()
-        
+
         bestChild = self.getBestChild(self.root, 0)
         action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
@@ -85,7 +88,7 @@ class UCT():
         else:
             return deepcopy(bestChild), action
 
-    def executeRound(self, iter=None):
+    def executeRound(self):
         """
         Execute a selection-expansion-simulation-backpropagation round.
         """

@@ -6,7 +6,7 @@ from math import sqrt
 from AI.Hex import Hex
 from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
-from AI.uct import UCT, treeNode
+from AI.uct import UCT
 
 n = 10000
 
