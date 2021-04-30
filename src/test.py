@@ -47,9 +47,6 @@ def test(args):
 
     if c != None:
         player2.explorationConstant = c
-    print(player1.explorationConstant)
-    print(player2.explorationConstant)
-
 
     board = Board(board_size)
     game = Game(board, player1, player2)
