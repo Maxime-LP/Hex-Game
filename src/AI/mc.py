@@ -46,7 +46,6 @@ class MC():
                 raise ValueError("Iteration limit must be greater than one")
             self.searchLimit = iterationLimit
             self.limitType = 'iterations'
-        self.explorationConstant = explorationConstant
         self.rollout = rolloutPolicy
 
 
