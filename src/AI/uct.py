@@ -26,6 +26,9 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
+        def __str__(self):
+            return 
+
     def isFullyExpanded(self):
         return len(self.state.actions)==len(self.children)
 
@@ -55,6 +58,7 @@ class UCT():
 
     def search(self, initialState,  needDetails, root=None):
         self.root = treeNode(initialState, None) if root==None else root
+
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000
             while time.time() < timeLimit:
