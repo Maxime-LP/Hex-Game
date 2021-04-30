@@ -67,7 +67,7 @@ def uct_wm(board, color, explorationConstant, tree):
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     new_tree = cut(tree, initialState)
-    tree, action = searcher.search(initialState=initialState, needDetails=True, root=new_tree)
+    tree, action = searcher.search(initialState=initialState, needDetails=False, root=new_tree)
     return tree, action
 
 

@@ -214,3 +214,25 @@ plt.ylabel("uct win rate")
 plt.title(f"uct's win rate on 10 games per constant vs uct_wm")
 
 
+>> uct_wm vs uct on 100 games.
+100 games in 79.159s => 1.263 games/s
+cst_list = [0.6]
+res = [0.38]
+n = 100
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct win rate")
+plt.title(f"uct's win rate on 100 games per constant vs uct_wm")
+
+
+>> uct_wm vs uct on 100 games.
+100 games in 81.375s => 1.229 games/s
+cst_list = [0.3]
+res = [0.39]
+n = 100
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct win rate")
+plt.title(f"uct's win rate on 100 games per constant vs uct_wm")
+
+
