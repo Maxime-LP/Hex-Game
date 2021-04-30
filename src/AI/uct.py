@@ -3,7 +3,6 @@ import time
 from math import log, sqrt
 import random
 from copy import deepcopy
-#from multiprocessing import Process, Pipe, Pool
 
 def randomPolicy(state):
     while not state.isTerminal():
