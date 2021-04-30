@@ -302,3 +302,47 @@ plt.ylabel("random win rate")
 plt.title(f"random's win rate on 100 games per constant vs random")
 
 
+>> uct_wm vs uct on 200 games.
+200 games in 1315.118s => 0.152 games/s
+cst_list = [0.3]
+res = [0.335]
+n = 200
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct win rate")
+plt.title(f"uct's win rate on 200 games per constant vs uct_wm")
+
+
+>> uct vs uct_wm on 200 games.
+200 games in 1331.359s => 0.15 games/s
+cst_list = [0.3]
+res = [0.36]
+n = 200
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 200 games per constant vs uct")
+
+
+>> mc vs uct_wm on 100 games.
+100 games in 555.239s => 0.18 games/s
+cst_list = [0.3]
+res = [0.44]
+n = 100
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct_wm win rate")
+plt.title(f"uct_wm's win rate on 100 games per constant vs mc")
+
+
+>> mc vs uct on 100 games.
+100 games in 534.959s => 0.187 games/s
+cst_list = [0.3]
+res = [0.35]
+n = 100
+plt.plot(cst_list, res, marker="o")
+plt.xlabel("Exploration constant")
+plt.ylabel("uct win rate")
+plt.title(f"uct's win rate on 100 games per constant vs mc")
+
+
