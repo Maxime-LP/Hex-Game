@@ -47,9 +47,6 @@ def test(args):
 
     if c != None:
         player2.explorationConstant = c
-    print(player1.explorationConstant)
-    print(player2.explorationConstant)
-
 
     board = Board(board_size)
     game = Game(board, player1, player2)
@@ -63,7 +60,7 @@ if __name__ == "__main__":
     start_time = time()
     
     n = int(sys.argv[4])
-    cst_list = [0.2, 0.4, 0.6, 0.8, 1, 1.2] #np.round(list(np.linspace(0,4,21)),3)
+    cst_list = [0.3] #np.round(list(np.linspace(0,4,21)),3)
     result = []
     
     for c in tqdm(cst_list):
@@ -97,5 +94,5 @@ if __name__ == "__main__":
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
-        print(f'List explorationConstant: {cst_list,3}')
+        print(f'List explorationConstant: {cst_list}')
         print(f'Win rate(s): {np.round(result,4)}')
