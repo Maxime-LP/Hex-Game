@@ -26,8 +26,12 @@ class treeNode():
         else:
             self.player = 3 - self.parent.player
 
-        def __str__(self):
-            return 
+    def __str__(self):
+        parent = f'Parent: {self.parent}\n'
+        numVisits = f'numVisits: {self.numVisits}\n'
+        totalReward = f'totalReward: {self.totalReward}\n'
+        children = f'children: { {action for action in self.children.keys()} }\n'
+        return parent + numVisits + totalReward + children
 
     def isFullyExpanded(self):
         return len(self.state.actions)==len(self.children)
@@ -57,6 +61,7 @@ class UCT():
         self.rollout = rolloutPolicy
 
     def search(self, initialState,  needDetails, root=None):
+        
         self.root = treeNode(initialState, None) if root==None else root
 
         if self.limitType == 'time':

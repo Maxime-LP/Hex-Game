@@ -6,9 +6,9 @@ from math import sqrt
 from AI.Hex import Hex
 from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
-from AI.uct import UCT
+from AI.uct import UCT, treeNode
 
-n = 1000
+n = 10000
 
 def random(board, color, explorationConstant):
     """
@@ -67,7 +67,7 @@ def uct_wm(board, color, explorationConstant, tree):
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     new_tree = cut(tree, initialState)
-    tree, action = searcher.search(initialState=initialState, needDetails=False, root=new_tree)
+    tree, action = searcher.search(initialState=initialState, needDetails=True, root=new_tree)
     return tree, action
 
 
