@@ -46,7 +46,7 @@ $ ./main.py player1_type player2_type board_size
 ## Test
 
 ```bash
-$ ./test.py AI1_name AI2_name board_size num_games_to_simulate save
+$ ./test.py AI1_name AI2_name board_size num_games_to_simulate (save)
 ```
 *AI1_name* / *AI2_name*: 'random', 'mc', 'mc_ucb1', 'uct' or 'uct_wm for AI, correspond to implemented method.
 *board_size*: within the limit of the computing power.
