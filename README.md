@@ -11,6 +11,7 @@ Il est possible de jouer contre une IA, dont plusieurs implémentations sont dis
 - mc
 - mc_ucb1
 - [uct](https://en.wikipedia.org/wiki/Monte_Carlo_tree_search)
+- uct_wm
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Hex_board_11x11.svg/800px-Hex_board_11x11.svg.png" height="300" />
 
@@ -39,15 +40,16 @@ $ pip3 install -r requirements.txt
 $ ./main.py player1_type player2_type board_size
 ```
 
-*player1_type*/*player2_type* : 'h' for human player and 'random', 'mc', 'mc_ucb1' or 'uct' for AI, correspond to implemented method. 
-*board_size* : 7 or 11
+*player1_type*/*player2_type*: 'h' for human player and 'random', 'mc', 'mc_ucb1', 'uct' or 'uct_wm for AI, correspond to implemented method. 
+*board_size*: 7 or 11
 
 ## Test
 
-In file *test.py* two test functions are implemented.
-- *test1* allows to find the best constant for UCT at the set of Hex (Spoiler : 0.4).
-- *test2* makes one AI play against the other.
-
 ```bash
-$ ./test.py AI1Name AI2Name 7 testName
+$ ./test.py AI1_name AI2_name board_size num_games_to_simulate save
 ```
+
+*board_size*: within the limit of the computing power
+*num_games_to_simulate*: number of game to simulate per constant (the list of constants can be modified in the test.py file)
+*save*: write "save" if you want to save the results of the simulation, otherwise nothing
+
