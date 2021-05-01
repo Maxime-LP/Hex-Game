@@ -40,7 +40,7 @@ $ pip3 install -r requirements.txt
 $ ./main.py player1_type player2_type board_size
 ```
 
-*player1_type*/*player2_type*: 'h' for human player and 'random', 'mc', 'mc_ucb1', 'uct' or 'uct_wm for AI, correspond to implemented method. 
+*player1_type* / *player2_type*: 'h' for human player and 'random', 'mc', 'mc_ucb1', 'uct' or 'uct_wm for AI, correspond to implemented method. 
 *board_size*: 7 or 11
 
 ## Test
@@ -48,8 +48,8 @@ $ ./main.py player1_type player2_type board_size
 ```bash
 $ ./test.py AI1_name AI2_name board_size num_games_to_simulate save
 ```
-
-*board_size*: within the limit of the computing power
-*num_games_to_simulate*: number of game to simulate per constant (the list of constants can be modified in the test.py file)
-*save*: write "save" if you want to save the results of the simulation, otherwise nothing
+*AI1_name* / *AI2_name*: 'random', 'mc', 'mc_ucb1', 'uct' or 'uct_wm for AI, correspond to implemented method.
+*board_size*: within the limit of the computing power.
+*num_games_to_simulate*: number of game to simulate per constant (the list of constants can be modified in the test.py file).
+*save*: write "save" if you want to save the results of the simulation, otherwise nothing.
 
