@@ -2,28 +2,13 @@
 import sys
 import os
 from time import time
-from tqdm import tqdm, trange
+from tqdm import tqdm
 import numpy as np
 from multiprocessing import Pool
 
 from Board import Board
 from Game import Game
 from Player import AI
-
-'''
-def progressbar(it, prefix="Computing: ", size=40, file=sys.stdout):
-    count = len(it)
-    def show(j):
-        x = int(size*j/count)
-        file.write("%s[%s%s] %i/%i\r" % (prefix, "#"*x, "."*(size-x), j, count))
-        file.flush()        
-    show(0)
-    for i, item in enumerate(it):
-        yield item
-        show(i+1)
-    file.write("\n")
-    file.flush()
-'''
 
 
 def test(args):
@@ -68,12 +53,6 @@ if __name__ == "__main__":
         with Pool(processes=os.cpu_count()) as p:
             win_rate = list(tqdm(p.imap(test, [[c,1]]*n), total=n, leave=leave))
             result.append(np.mean(win_rate))
-    '''
-    for c in progressbar(cst_list):
-        p = Pool(processes=os.cpu_count())
-        win_rate = p.map(test, [[c,1]]*n)
-        result.append(np.mean(win_rate))
-    '''
 
     exe_time = time() - start_time
 

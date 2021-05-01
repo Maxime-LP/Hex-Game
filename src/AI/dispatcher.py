@@ -8,7 +8,7 @@ from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
 from AI.uct import UCT
 
-n = 100
+n = 10000
 
 def random(board, color, explorationConstant):
     """
@@ -26,7 +26,7 @@ def mc(board, color, explorationConstant):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = MC(timeLimit=None, iterationLimit=n)
-    action = searcher.search(initialState=initialState, needDetails=False)
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 
@@ -39,7 +39,7 @@ def mc_ucb1(board, color, explorationConstant):
     """
     initialState = Hex(color, board)
     searcher = MC_UCB1(explorationConstant, timeLimit=None, iterationLimit=n)
-    action = searcher.search(initialState=initialState, needDetails=False)
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 
@@ -52,7 +52,7 @@ def uct(board, color, explorationConstant):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
-    tree, action = searcher.search(initialState=initialState, needDetails=False)
+    tree, action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 
@@ -67,7 +67,7 @@ def uct_wm(board, color, explorationConstant, tree):
     initialState = Hex(color, deepcopy(board))
     searcher = UCT(explorationConstant, timeLimit=None, iterationLimit=n)
     new_tree = cut(tree, initialState)
-    tree, action = searcher.search(initialState=initialState, needDetails=False, root=new_tree)
+    tree, action = searcher.search(initialState=initialState, needDetails=True, root=new_tree)
     return tree, action
 
 
