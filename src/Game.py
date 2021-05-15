@@ -14,7 +14,7 @@ class Game:
 
     def check_win(self, currplayer):
         """
-        Checks if a the current player won the game. 
+        Checks if the current player won the game. 
         Returns the winner's name if there is any or None if there is none.
         1 : red player
         2 : blue player

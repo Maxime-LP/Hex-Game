@@ -86,7 +86,7 @@ Le premier objectif de ce projet est l'étude de l'algorithme UCB1 (Upper Confid
 
 \subsection{Le problème du bandit à K bras}
 
-Le problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras, peut se formuler ainsi : un agent est face à des machines à sous (portant le nom de ``bandits manchots'') dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
+Le problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras, peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
 
 Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation (de la machine qui empiriquement lui rapporte le plus) et l'exploration (pour espérer trouver une machine rapportant plus).
 
@@ -137,7 +137,53 @@ Nous verrons dans un premier temps une manière d'implémenter ce jeu sous pytho
 
 \section{Implémentation du jeu de Hex}
 
-\subsection{subsection}
+Nous avons utilisé pour ce projet le langage python. Notre implémentation du jeu de Hex utilise le module pygame pour l'affichage et les interactions avec les joueurs humains. Le jeu repose sur une classe "Board" représentant le plateau.
+
+\begin{lstlisting}
+class Board:
+
+    def __init__(self, board_size):
+        self.size = int(board_size)
+        self.board = [ [0 for i in range(self.size)]   for j in range(self.size)]
+        self.actions = [(i,j) for i in range(self.size) for j in range(self.size)]
+
+        # Composantes connexes initiales
+        self.east_component = set([(i,self.size) for i in range(self.size)])
+        self.west_component = set([(i,-1) for i in range(self.size)])
+        self.north_component = set([(-1,i) for i in range(self.size)])
+        self.south_component = set([(self.size,i) for i in range(self.size)])
+	 
+        self.components = [[self.north_component, self.south_component], [self.west_component, self.east_component]]
+
+        ...
+\end{lstlisting}
+
+
+
+\subsection{Le problème de la fin de la partie}
+
+Le principal problème de cette implémentation a été de trouver un moyen assez rapide (pour ne pas ralentir les simulations) de déterminer s'il y avait un gagnant ou si la partie pouvait continuer. Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe. 
+
+\begin{lstlisting}
+def check_win(self, currplayer):
+        """
+        Checks if the current player won the game. 
+        Returns the winner's name if there is any or None if there is none.
+        1 : red player
+        2 : blue player
+        """
+
+        for component in self.board.components[currplayer.color - 1]:
+            if currplayer.color == 1:
+                if self.board.north_component.issubset(component) \
+                    and self.board.south_component.issubset(component):
+                    return currplayer
+            else: # currplayer.color == 2
+                if self.board.west_component.issubset(component) \
+                    and self.board.east_component.issubset(component):
+                    return currplayer
+        return None
+\end{lstlisting}
 
 
 \clearpage
@@ -145,12 +191,40 @@ Nous verrons dans un premier temps une manière d'implémenter ce jeu sous pytho
 
 \section{La méthode Monte-Carlo}
 
+\subsection{Bases de la méthode}
 
-\subsection{subsection}
+La première méthode que nous avons programmé est une méthode naïve et empirique. Elle consiste simplement à simuler un certain nombre de parties à partir de chaque action restante pour déterminer le meilleur coup à jouer.
 
+\subsection{L'algorithme de sélection du meilleur coup}
+
+\begin{lstlisting}
+def search(self, initialState):
+        self.root = treeNode(initialState, None)
+        actions = self.root.state.actions
+ 
+	#On copie l'etat actuel du plateau
+        for action in actions:
+            root_state = deepcopy(self.root.state)
+            root_state.takeAction(action, root_state.currplayer)
+            node = treeNode(root_state, self.root)
+            self.root.children[action] = node
+            self.executeRound(node)
+	
+	 #On simule un certain nombre de parties sur chaque action possible
+        nb_iter = int(self.searchLimit / len(actions))
+        for child in self.root.children.values():
+            for i in range(nb_iter):
+                self.executeRound(child)
+
+	 #On selectionne l'action menant au plus haut taux de victoire
+        bestChild = self.getBestChild(self.root)
+        action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
+            
+        return action
+\end{lstlisting}
 
 \clearpage
-%SECTION 3 : UCB
+%SECTION 3 : UCT
 
 \section{La méthode UCT}
 
@@ -185,16 +259,34 @@ Une fois le noeud sélectionné, et si ce noeud n'est pas un noeud de fin de par
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.18]{MCTS_wikipedia.png}
-\caption{Exemple d'une étape d'un algorithme MCTS. On voit que la partie simulée est perdante pour le joueur qui cherche un coup à jouer. Les noeuds blancs correspondent à un coup joué par le joueur adverse (dont le coup à la racine qui est l'état actuel du plateau). \textit{Source : wikipedia}}
+\caption{On voit dans cet exemple d'une étape d'un algorithme MCTS que la partie simulée est perdante pour le joueur qui cherche un coup à jouer. Les noeuds blancs correspondent à un coup joué par le joueur adverse (dont le coup à la racine qui est l'état actuel du plateau). \textit{Source : wikipedia}}
 \end{figure}
 
 \subsection{Recherche de la constante d'exploration optimale}
 
+Nos premiers résultats ont montré que l'algorithme UCT ne gagnait que peu de parties contre l'algorithme Monte-Carlo. On peut expliquer ce défaut par le fait que la constante d'exploration $\sqrt{2}$ ne conduit pas aux meilleurs résultats. Nous avons donc simulé un grand nombre de parties grâce à des méthodes de multi-processing pour déterminer une meilleure constante.
 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{test1.png}
+\caption{}
+\end{figure}
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{test2.png}
+\caption{}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{test3.png}
+\caption{}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{test4.png}
 \caption{}
 \end{figure}
 
