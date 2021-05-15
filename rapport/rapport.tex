@@ -82,7 +82,7 @@
 
 \vspace{5pt}
 
-Le premier objectif de ce projet est l'étude de l'algorithme UCB (Upper Confidence Bound). Cet algorithme a été proposé en 2002 dans le cadre du problème du bandit à $K$ bras.
+Le premier objectif de ce projet est l'étude de l'algorithme UCB1 (Upper Confidence Bound 1). Cet algorithme a été proposé en 2002 dans le cadre du problème du bandit à $K$ bras.
 
 \subsection{Le problème du bandit à K bras}
 
@@ -145,6 +145,7 @@ Nous verrons dans un premier temps une manière d'implémenter ce jeu sous pytho
 
 \section{La méthode Monte-Carlo}
 
+
 \subsection{subsection}
 
 
@@ -153,15 +154,15 @@ Nous verrons dans un premier temps une manière d'implémenter ce jeu sous pytho
 
 \section{La méthode UCT}
 
-La méthode Monte-Carlo, bien que relativement efficace, présente pour principal défaut un nombre de calcul très important. Là où cette dernière simule tous les coups possibles, on va plutôt chercher à ne simuler que certains coups, choisis par le critère UCB, dans le cadre d'une recherche arborescente Monte-Carlo.
+La méthode Monte-Carlo, bien que relativement efficace, présente pour principal défaut un nombre de calcul très important. Là où cette dernière simule tous les coups possibles, on va plutôt chercher à ne simuler que certains coups, choisis par le critère UCB1, dans le cadre d'une recherche arborescente Monte-Carlo.
 
 \subsection{Recherche arborescente Monte-Carlo}
 
-La recherche arborescente Monte-Carlo (Monte Carlo tree search) ...
+La recherche arborescente Monte-Carlo ou \textit{Monte Carlo tree search} (MCTS) est un algorithme de prise de décision principalement utilisé dans les jeux \footnote{On peut citer son utilisation dans certains programmes de Go, d'échecs ou de shogi, ou encore le jeu Total War : Rome II}. Le principe de cet algorithme consiste à parcourir l'arbre des possibles dont la racine est l'état actuel du jeu. Chaque noeud est donc une configuration possible et ses enfants représentent les configurations suivantes. Ainsi, on va simuler un certain nombre de coups pour trouver le plus intéressant à jouer.
 
 \subsection{Implémentation de la méthode UCT}
 
-Dans le cas du jeu de Hex, on ne cherche plus à maximiser des gains d'argent, mais des taux de victoires.
+La première étape consiste à sélectionner un noeud à partir d'un noeud parent. Dans la méthode UCT, introduite par Levente Kocsis et Csaba Szepesv\`ari, on utilise le critère UCB1, c'est-à-dire que l'on va choisir le noeud qui maximise $\frac{w}{n} + \sqrt{ 2\frac{\ln{N}}{n} }$ où $w$ est le nombre de parties gagnées après avoir joué ce coup, $n$ le nombre de fois où l'on a joué ce coup et $N$ le nombre de fois où l'on a joué le coup du noeud parent.
 
 \begin{lstlisting}
 bestValue = float("-inf")
@@ -179,7 +180,23 @@ for child in node.children.values():
 return random.choice(bestNodes)
 \end{lstlisting}
 
+Une fois le noeud sélectionné, et si ce noeud n'est pas un noeud de fin de partie, on procède à une phase d'expansion, lors de laquelle on va choisir aléatoirement un coup à jouer et créer un noeud enfant en conséquence. On va ensuite simuler une partie 	une partie jusqu'à la fin pour obtenir un gagnant. Enfin, on utilise ce résultat lors de la phase de rétropropagation pour mettre à jour les scores des joueurs dans l'arbre. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.18]{MCTS_wikipedia.png}
+\caption{Exemple d'une étape d'un algorithme MCTS. On voit que la partie simulée est perdante pour le joueur qui cherche un coup à jouer. Les noeuds blancs correspondent à un coup joué par le joueur adverse (dont le coup à la racine qui est l'état actuel du plateau). \textit{Source : wikipedia}}
+\end{figure}
+
 \subsection{Recherche de la constante d'exploration optimale}
+
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.7]{test2.png}
+\caption{}
+\end{figure}
 
 \subsection{Améliorations possibles}
 
