@@ -57,12 +57,22 @@
 \newtheorem{remark}[theorem]{Remarque}
 \newtheorem{example}[theorem]{Exemple}
 \renewcommand{\proofname}{Démonstration}
+% abstract styling
+\renewenvironment{abstract}
+{
+	\centerline
+	{\large \bfseries \scshape Résumé}
+	\begin{quote}
+	}
+	{
+	\end{quote}
+}
 
 %%% lines
 \frenchspacing
 \linespread{1.1}
 
-\title{\huge Des casinos à l'intelligence articficielle\\[15pt] \small TER M1 DS 2021}
+\title{\huge Des casinos à l'intelligence articficielle\\[15pt] \small Travail Encadré de Recherche M1 DS 2021}
 \author{Adrien Maitammar \\ Maxime Le Paumier}
 %\email{@}
 
@@ -70,7 +80,7 @@
 \begin{document}
 \maketitle
 
-\vspace{30pt}
+\vspace{40pt}
 
 \renewcommand{\contentsname}{Sommaire}
 \tableofcontents
