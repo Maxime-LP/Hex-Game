@@ -172,7 +172,7 @@ class Board:
 
 \subsection{Le problème de la fin de la partie}
 
-Le principal problème de cette implémentation a été de trouver un moyen assez rapide (pour ne pas ralentir les simulations) de déterminer s'il y avait un gagnant ou si la partie pouvait continuer. Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe. 
+Le principal problème de cette implémentation a été de trouver un moyen assez rapide (pour ne pas ralentir les simulations) de déterminer s'il y avait un gagnant ou si la partie pouvait continuer. Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
 
 \begin{lstlisting}
 def check_win(self, currplayer):
