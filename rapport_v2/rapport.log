@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 19:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 21:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -747,15 +747,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 245--246
 <étapes_mcts_.png, id=284, 1696.6587pt x 583.9416pt>
 File: étapes_mcts_.png Graphic file (type png)
 <use étapes_mcts_.png>
-Package pdftex.def Info: étapes_mcts_.png  used on input line 312.
-(pdftex.def)             Requested size: 373.26607pt x 128.46754pt.
+Package pdftex.def Info: étapes_mcts_.png  used on input line 313.
+(pdftex.def)             Requested size: 339.32573pt x 116.78624pt.
 
-Overfull \hbox (14.76115pt too wide) in paragraph at lines 312--313
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--319
+Underfull \hbox (badness 10000) in paragraph at lines 318--319
 
  []
 
@@ -769,12 +764,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 325--327
 
  []
 
-[9 <./étapes_mcts_.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
  []
 
-[10] [11]
+[9 <./étapes_mcts_.png>] [10] [11]
 <test1.png, id=384, 433.62pt x 289.08pt>
 File: test1.png Graphic file (type png)
 <use test1.png>
@@ -845,14 +840,19 @@ LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: CB2706CA2CD8552828AE15AA9A4D3081;3515.
-Package rerunfilecheck Info: File `rapport.brf' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+
+Package rerunfilecheck Warning: File `rapport.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+Package rerunfilecheck Info: Checksums for `rapport.brf':
+(rerunfilecheck)             Before: D9DDE9E5FC0B0F3C71B5EF2DF43BC673;36
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  
 Here is how much of TeX's memory you used:
- 17309 strings out of 479023
- 258420 string characters out of 5859398
+ 17310 strings out of 479023
+ 258426 string characters out of 5859398
  887290 words of memory out of 5000000
- 34283 multiletter control sequences out of 15000+600000
+ 34284 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,9n,103p,815b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -876,7 +876,7 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (17 pages, 614328 bytes).
+Output written on rapport.pdf (17 pages, 614224 bytes).
 PDF statistics:
  544 PDF objects out of 1000 (max. 8388607)
  488 compressed objects within 5 object streams

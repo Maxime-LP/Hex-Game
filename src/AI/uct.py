@@ -70,7 +70,7 @@ class UCT():
             while time.time() < timeLimit:
                 self.executeRound()
         else:
-            for i in range(self.iterationLimit+board_size**2):
+            for i in range(self.iterationLimit + len(self.root.state.actions)):
                 self.executeRound()
 
         bestChild = self.getBestChild(self.root, 0)
