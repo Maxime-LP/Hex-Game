@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 16:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -746,10 +746,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--232
  []
 
 [6] [7]
-<étapes_mcts.png, id=268, 1696.6587pt x 583.9416pt>
-File: étapes_mcts.png Graphic file (type png)
-<use étapes_mcts.png>
-Package pdftex.def Info: étapes_mcts.png  used on input line 299.
+<étapes_mcts_.png, id=268, 1696.6587pt x 583.9416pt>
+File: étapes_mcts_.png Graphic file (type png)
+<use étapes_mcts_.png>
+Package pdftex.def Info: étapes_mcts_.png  used on input line 299.
 (pdftex.def)             Requested size: 373.26607pt x 128.46754pt.
 
 Overfull \hbox (14.76115pt too wide) in paragraph at lines 299--300
@@ -771,7 +771,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 312--314
 
  []
 
-[8 <./étapes_mcts.png>]
+[8 <./étapes_mcts_.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 315--317
 
  []
@@ -834,7 +834,7 @@ Package rerunfilecheck Info: File `rapport.brf' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  17296 strings out of 479023
- 258273 string characters out of 5859398
+ 258279 string characters out of 5859398
  887290 words of memory out of 5000000
  34276 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
@@ -859,7 +859,7 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (16 pages, 593677 bytes).
+Output written on rapport.pdf (16 pages, 593970 bytes).
 PDF statistics:
  521 PDF objects out of 1000 (max. 8388607)
  469 compressed objects within 5 object streams
