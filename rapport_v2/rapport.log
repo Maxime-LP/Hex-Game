@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 17:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -781,17 +781,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 315--317
 File: test1.png Graphic file (type png)
 <use test1.png>
 Package pdftex.def Info: test1.png  used on input line 419.
-(pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
 <test2.png, id=370, 433.62pt x 289.08pt>
 File: test2.png Graphic file (type png)
 <use test2.png>
 Package pdftex.def Info: test2.png  used on input line 426.
-(pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
 <test3.png, id=371, 433.62pt x 289.08pt>
 File: test3.png Graphic file (type png)
 <use test3.png>
 Package pdftex.def Info: test3.png  used on input line 433.
-(pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
+(pdftex.def)             Requested size: 179.25246pt x 119.50279pt.
  [11 <./test1.png> <./test2.png> <./test3.png>] [12]
 Underfull \hbox (badness 10000) in paragraph at lines 452--457
 
@@ -859,7 +859,7 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (16 pages, 593970 bytes).
+Output written on rapport.pdf (16 pages, 593170 bytes).
 PDF statistics:
  521 PDF objects out of 1000 (max. 8388607)
  469 compressed objects within 5 object streams
