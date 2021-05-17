@@ -86,7 +86,7 @@
 \vspace{40pt}
 
 \begin{abstract}
-Hex est un jeu de plateau à information complète aux règles simples mais pouvant présenter une grande complexité. En effet, des stratégies gagnantes sont connues pour le premier joueur pour des plateaux de taille restreinte, mais la recherche de telles stratégies devient impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en présenter 3 reposant sur des méthodes de Monte-Carlo et Monte-Carlo avec recherche arborescente. 
+Hex est un jeu de plateau à information complète aux règles simples mais pouvant présenter une grande complexité. En effet, des stratégies gagnantes sont connues pour le premier joueur pour des plateaux de taille restreinte, mais la recherche de telles stratégies devient impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en développer 3 reposant sur des méthodes de Monte-Carlo et Monte-Carlo avec recherche arborescente. 
 \end{abstract}
 \newpage
 
@@ -110,8 +110,8 @@ Hex est un jeu de société pour deux joueurs dont le but est de relier les deux
 
 \subsection{Spécificité du jeu}
 
-Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde.
-Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle (IA).
+Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un unique gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde [1].
+Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante \footnote{On appelle stratégie gagnante toute stratégie assurant la victoire quels que soient les choix que fait la partie adverse.} est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente \footnote{Un plateau de taille 9x9 peut être rempli d'environ $10^{120}$ manières différentes!}. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle.
 
 \begin{figure}[h]
 	\centering
@@ -123,13 +123,30 @@ Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégi
 
 \subsection{Python Orienté Objet}
 
-Le jeu a été implémenté en langage Python. Le principaux modules utilisés sont le module pygame pour l'interface graphique pour les parties avec un joueur humain ainsi que le module multiprocessing pour augmenter la rapidité d'exécution des parties dans la phase de test des IA. Le projet est téléchargeable depuis \href{https://github.com/Maxime-LP/Hex-Game}{GitHub}.\\
-\\
-Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe principale, \texttt{Game}, faisant interagir deux instances de la classe \texttt{Player} tour par tour en effectuant des actions sur le plateau, instance de la classe \texttt{Board}.
+Le jeu a été implémenté en langage Python. Le module pygame a été utilisé pour l'interface graphique lorsque les parties se déroulent avec un joueur humain. Le module multiprocessing a été utiliser pour augmenter la rapidité d'exécution des parties dans la phase de test des IA. Le projet est téléchargeable depuis le site \href{https://github.com/Maxime-LP/Hex-Game}{GitHub}.\\
+
+Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe principale, \texttt{Game}, faisant interagir deux instances de la classe \texttt{Player} tour par tour en effectuant des actions sur l'objet de la classe \texttt{Board} représentant le plateau.
 
 \subsection{Condition de fin de partie}
 
-À chaque coup la fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remportée par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde. Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes par couleur du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
+À chaque coup la fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remportée par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde en jouant aléatoirement. Avec l'utilisation de multiprocessing, nous avons pu atteindre 23000 parties par seconde pour des parties sur des plateau de taille 7x7 avec un ordinateur possédant un processeur muni de 48 coeurs.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{pps.png}
+	\caption{Rapidité d'exécution des parties}
+	\label{fig:pps}
+\end{figure}
+
+
+Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes par couleur du plateau. 
+On considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
+
+
+Atteindre une bonne rapidité d'exécution en jouant aléatoirement est crucial car toutes les méthodes d'intelligence artificielle mises en ouvre par la suite en bénéficierons.
+
+\newpage
 
 \begin{lstlisting}
 def check_win(self, currplayer):
@@ -152,14 +169,11 @@ def check_win(self, currplayer):
 	return None
 \end{lstlisting}
 
-Avec l'utilisation de multiprocessing, nous avons pu atteindre 23000 parties par seconde sur une machine possédant un processeur muni de 48 coeurs.
-
 \newpage
-
 
 \section{Joueur artificiel}
 
-Au cours du projet, nous avons implémenté des algorithmes de plus en plus performants. Chaque nouvelle version reprenait les bases de la précédente en ajoutant des amélioration, qui nous verrons, au fur et à mesure, se rapproche de la façon dont un joueur humain pourrait jouer et adopte de bons comportements liés à la structure du plateau de jeu.
+Au cours du projet, nous avons implémenté 4 algorithmes. Chaque nouvelle version reprenait les bases de la précédente en ajoutant des améliorations. Le but étant que le joueur artificiel adopte des stratégies intelligentes en utilisant à son avantage la structure du plateau \footnote{On parle notamment ici des connections virtuelles et cases mortes (cf. p14).} sans programmer cela explicitement.
 
 \subsection{Monte-Carlo}
 
@@ -220,22 +234,20 @@ Voici le fonctionnement de l'algorithme:
 	\caption{Algorithme UCB1}
 \end{figure}
 
-Cet algorithme a initialement été propos dans le cadre du problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
+Cet algorithme répond initialement au problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
 
 Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation de la machine qui empiriquement lui rapporte le plus et l'exploration pour espérer trouver une machine rapportant davantage.
 
 L'agent peut bien sûr adopter une approche naïve et jouer la machine maximisant la récompense moyenne sur les coups joués mais  cette stratégie peut le conduire à ignorer certaines machines, qui pourraient être plus intéressantes à jouer. \\
 
-Peter Auer, Nicol\`o Cesa-Bianchi et Paul Fischer développent cette stratégie dans un article de référence, \textit{Finite-time Analysis of the Multiarmed Bandit Problem}, permettant à l'agent de continuer à explorer les machines tout en maximisant ses gains : plutôt que de procéder naïvement, celui-ci joue les machines selon la procédure UCB1.\\
+Peter Auer, Nicol\`o Cesa-Bianchi et Paul Fischer développent cette stratégie dans un article de référence, \textit{Finite-time Analysis of the Multiarmed Bandit Problem} [2], permettant à l'agent de continuer à explorer les machines tout en maximisant ses gains.\\
 
-La constante théorique optimale est $c=\sqrt{2}$. Cependant, bien que des améliorations soient perceptibles comparé à l'algorithme \texttt{mc}, la constant d'exploration peut être optimisée. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\ \\
- 
-%Graph mc vs mc\_ucb1.
+Le premier terme $\bar{x_j}$ représente la composante d'exploitation du critère UCB1 et le terme $\sqrt{\frac{\ln{n}}{n_j} }$ celui de l'exploration. La constante $c$ permet donc de donner plus ou moins d'importance à l'exploration. La constante théorique optimale est $c=\sqrt{2}$. Cependant, bien que des améliorations soient significatives par rapport à l'algorithme \texttt{mc}, la constante d'exploration optimale n'est pas $\sqrt{2}$ dans notre cas. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\
 
 \newpage
 \subsubsection{Algorithme}
 
-Une notion de nœud est intégrée à l'algorithme. Chaque nœud représente un état du jeu avec des attributs qui permettent de calculer son score avec le critère UCB1.
+Introduisons à présent les notions d'arbre et de nœud. On définit le nœud racine comme étant l'état initial du plateau de jeu, c'est le nœud parent. Ainsi, chaque nœud enfant représente un état du jeu avec 1 coup supplémentaire par rapport à son nœud parent. On lui affecte des attributs permettant de calculer son score avec le critère UCB1.
 
 \begin{lstlisting}
 	class treeNode():
@@ -255,7 +267,7 @@ Une notion de nœud est intégrée à l'algorithme. Chaque nœud représente un 
 				self.player = 3 - self.parent.player
 \end{lstlisting}
 
-Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est le nœud parent. Il possède ainsi des enfants représentant les coups à évaluer. Compte tenu de ce qui a été dit précédemment, la fonction retournant le meilleur coup pour l'algorithme \texttt{mc\_ucb1} est la suivante:
+Dans cet algorithme, l'arbre possède une profondeur de 1. La fonction retournant le meilleur coup pour l'algorithme \texttt{mc\_ucb1} est la suivante:
 
 \begin{lstlisting}
 def search(self, initialState):
@@ -294,6 +306,7 @@ L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup ma
 \subsubsection{Principe}
 
 On dispose de $n$ simulations par tour.
+
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.22]{étapes_mcts_.png}
@@ -455,6 +468,8 @@ Illustration d'arbre tronqué ?\\
 \\
 Cependant cette méthode ne produit pas d'amélioration significative si le nombre de simulations par coup n'est pas assez grand. Avec une telle méthode, nous n'avons obtenu qu'un gain d'information inférieur à 1\%.
 
+
+
 \subsection{Algorithme RAVE et GRAVE}
 
 Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant.\\
@@ -479,6 +494,9 @@ A développer
 %\bibliographystyle{myalpha}
 \begin{thebibliography}{9}
 
+
+\bibitem{AZ}
+Hex - Wikipédia
 \bibitem{AZ}
 Peter Auer, Nicol\`o Cesa-Bianchi \& Paul Fischer, {\em Finite time Analysis of the Multiarmed Bandit Problem}
 \bibitem{AZ}

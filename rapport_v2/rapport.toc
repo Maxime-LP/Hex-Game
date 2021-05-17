@@ -5,20 +5,20 @@
 \contentsline {section}{\numberline {2}Implémentation}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Python Orienté Objet}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Condition de fin de partie}{4}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Joueur artificiel}{5}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Monte-Carlo}{5}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Principe}{5}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Algorithme}{5}{subsubsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.2}Monte-Carlo et UCB1}{6}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Principe}{6}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Algorithme}{7}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Upper Confidence bounds applied to Trees (UCT)}{8}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Principe}{8}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Algorithme}{9}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Constante d'exploration optimale}{10}{subsubsection.3.3.3}%
-\contentsline {section}{\numberline {4}Évaluation des algorithmes}{12}{section.4}%
-\contentsline {section}{\numberline {5}Axes d'amélioration}{13}{section.5}%
-\contentsline {subsection}{\numberline {5.1}UCT avec mémoire}{13}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Algorithme RAVE et GRAVE}{13}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Connections virtuelles et cases mortes}{13}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Conclusion}{14}{section.6}%
+\contentsline {section}{\numberline {3}Joueur artificiel}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Monte-Carlo}{6}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Principe}{6}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Algorithme}{6}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Monte-Carlo et UCB1}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Principe}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Algorithme}{8}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Upper Confidence bounds applied to Trees (UCT)}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Principe}{9}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Algorithme}{10}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Constante d'exploration optimale}{11}{subsubsection.3.3.3}%
+\contentsline {section}{\numberline {4}Évaluation des algorithmes}{13}{section.4}%
+\contentsline {section}{\numberline {5}Axes d'amélioration}{14}{section.5}%
+\contentsline {subsection}{\numberline {5.1}UCT avec mémoire}{14}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Algorithme RAVE et GRAVE}{14}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Connections virtuelles et cases mortes}{14}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}%

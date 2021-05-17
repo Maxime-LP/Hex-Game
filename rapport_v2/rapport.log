@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 17:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 19:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,6 +555,9 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 
 LaTeX Warning: Label `AZ' multiply defined.
 
+
+LaTeX Warning: Label `AZ' multiply defined.
+
 )
 \openout1 = `rapport.aux'.
 
@@ -702,125 +705,138 @@ File: 11x11.png Graphic file (type png)
 <use 11x11.png>
 Package pdftex.def Info: 11x11.png  used on input line 107.
 (pdftex.def)             Requested size: 167.02986pt x 118.6173pt.
-<11x11_gagnant.jpg, id=138, 158.994pt x 112.7412pt>
+<11x11_gagnant.jpg, id=140, 158.994pt x 112.7412pt>
 File: 11x11_gagnant.jpg Graphic file (type jpg)
 <use 11x11_gagnant.jpg>
 Package pdftex.def Info: 11x11_gagnant.jpg  used on input line 118.
 (pdftex.def)             Requested size: 158.9936pt x 112.7409pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 126--129
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
 
 [3
 
- <./11x11.png> <./11x11_gagnant.jpg>] [4] [5]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 213--220
+ <./11x11.png> <./11x11_gagnant.jpg>]
+<pps.png, id=156, 433.62pt x 289.08pt>
+File: pps.png Graphic file (type png)
+<use pps.png>
+Package pdftex.def Info: pps.png  used on input line 137.
+(pdftex.def)             Requested size: 260.17401pt x 173.44933pt.
+ [4 <./pps.png>] [5] [6]
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 227--234
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 243--244
 
  []
 
 
-Overfull \hbox (12.08087pt too wide) in paragraph at lines 231--232
-[]\OT1/cmr/m/n/10 La constante th^^Seorique op-ti-male est $\OML/cmm/m/it/10 c 
-\OT1/cmr/m/n/10 = []$. Ce-pen-dant, bien que des am^^Seliorations
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
+Underfull \hbox (badness 10000) in paragraph at lines 245--246
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
-
- []
-
-[6] [7]
-<étapes_mcts_.png, id=268, 1696.6587pt x 583.9416pt>
+[7] [8]
+<étapes_mcts_.png, id=284, 1696.6587pt x 583.9416pt>
 File: étapes_mcts_.png Graphic file (type png)
 <use étapes_mcts_.png>
-Package pdftex.def Info: étapes_mcts_.png  used on input line 299.
+Package pdftex.def Info: étapes_mcts_.png  used on input line 312.
 (pdftex.def)             Requested size: 373.26607pt x 128.46754pt.
 
-Overfull \hbox (14.76115pt too wide) in paragraph at lines 299--300
+Overfull \hbox (14.76115pt too wide) in paragraph at lines 312--313
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--306
+Underfull \hbox (badness 10000) in paragraph at lines 317--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--311
+Underfull \hbox (badness 10000) in paragraph at lines 320--324
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 312--314
+Underfull \hbox (badness 10000) in paragraph at lines 325--327
 
  []
 
-[8 <./étapes_mcts_.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 315--317
+[9 <./étapes_mcts_.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
  []
 
-[9] [10]
-<test1.png, id=369, 433.62pt x 289.08pt>
+[10] [11]
+<test1.png, id=384, 433.62pt x 289.08pt>
 File: test1.png Graphic file (type png)
 <use test1.png>
-Package pdftex.def Info: test1.png  used on input line 419.
+Package pdftex.def Info: test1.png  used on input line 432.
 (pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
-<test2.png, id=370, 433.62pt x 289.08pt>
+<test2.png, id=385, 433.62pt x 289.08pt>
 File: test2.png Graphic file (type png)
 <use test2.png>
-Package pdftex.def Info: test2.png  used on input line 426.
+Package pdftex.def Info: test2.png  used on input line 439.
 (pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
-<test3.png, id=371, 433.62pt x 289.08pt>
+<test3.png, id=386, 433.62pt x 289.08pt>
 File: test3.png Graphic file (type png)
 <use test3.png>
-Package pdftex.def Info: test3.png  used on input line 433.
+Package pdftex.def Info: test3.png  used on input line 446.
 (pdftex.def)             Requested size: 179.25246pt x 119.50279pt.
- [11 <./test1.png> <./test2.png> <./test3.png>] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 452--457
+ [12 <./test1.png> <./test2.png> <./test3.png>] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 465--470
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--457
+Underfull \hbox (badness 10000) in paragraph at lines 465--470
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--463
+Underfull \hbox (badness 10000) in paragraph at lines 475--478
 
  []
 
-[13] [14] (./rapport.lof)
+[14] [15] (./rapport.lof)
 \tf@lof=\write5
 \openout5 = `rapport.lof'.
 
- [15] (./rapport.brf)
+ [16] (./rapport.brf)
 \tf@brf=\write6
 \openout6 = `rapport.brf'.
 
- [16pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ})
- has been already used, duplicate ignored
+)
+Runaway argument?
+ Levente Kocsis \& Csaba Szepesv\`ari, {\em Bandit Based Monte-Carlo \ETC.
+! File ended while scanning use of \BR@@bibitem.
+<inserted text> 
+                \par 
+<*> rapport.tex
+               
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+[17pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ}) 
+has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.489 \end{document}
-                    ] (./rapport.aux)
+<*> rapport.tex
+               pdfTeX warning (ext4): destination with the same identifier (nam
+e{cite.AZ}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+<*> rapport.tex
+               ] (./rapport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -831,38 +847,39 @@ Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: CB2706CA2CD8552828AE15AA9A4D3081;3515.
 Package rerunfilecheck Info: File `rapport.brf' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 17296 strings out of 479023
- 258279 string characters out of 5859398
+ 17309 strings out of 479023
+ 258420 string characters out of 5859398
  887290 words of memory out of 5000000
- 34276 multiletter control sequences out of 15000+600000
+ 34283 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,9n,103p,751b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/lo
-cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
-l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
-texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
-xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
-ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
-2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/202
-0/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (16 pages, 593170 bytes).
+ 98i,9n,103p,815b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
+usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
+l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
+xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texl
+ive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
+/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
+20/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2020/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on rapport.pdf (17 pages, 614328 bytes).
 PDF statistics:
- 521 PDF objects out of 1000 (max. 8388607)
- 469 compressed objects within 5 object streams
- 213 named destinations out of 1000 (max. 500000)
- 215 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 544 PDF objects out of 1000 (max. 8388607)
+ 488 compressed objects within 5 object streams
+ 218 named destinations out of 1000 (max. 500000)
+ 220 words of extra memory for PDF output out of 10000 (max. 10000000)
 
