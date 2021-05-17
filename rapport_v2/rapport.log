@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 12:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -746,74 +746,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--232
  []
 
 [6] [7]
-<MCTS_wikipedia.png, id=274, 1927.2pt x 644.4075pt>
-File: MCTS_wikipedia.png Graphic file (type png)
-<use MCTS_wikipedia.png>
-Package pdftex.def Info: MCTS_wikipedia.png  used on input line 308.
-(pdftex.def)             Requested size: 346.88104pt x 115.98834pt.
+<étapes_mcts_.png, id=268, 1696.6587pt x 583.9416pt>
+File: étapes_mcts_.png Graphic file (type png)
+<use étapes_mcts_.png>
+Package pdftex.def Info: étapes_mcts_.png  used on input line 299.
+(pdftex.def)             Requested size: 373.26607pt x 128.46754pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 313--315
+Overfull \hbox (14.76115pt too wide) in paragraph at lines 299--300
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--320
-
- []
-
-[8 <./MCTS_wikipedia.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 321--323
+Underfull \hbox (badness 10000) in paragraph at lines 307--311
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--326
+Underfull \hbox (badness 10000) in paragraph at lines 312--314
+
+ []
+
+[8 <./étapes_mcts_.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 315--317
 
  []
 
 [9] [10]
-<test1.png, id=380, 433.62pt x 289.08pt>
+<test1.png, id=369, 433.62pt x 289.08pt>
 File: test1.png Graphic file (type png)
 <use test1.png>
-Package pdftex.def Info: test1.png  used on input line 428.
+Package pdftex.def Info: test1.png  used on input line 419.
 (pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 429--429
-[]\OT1/cmr/m/n/9 (a) |$\OML/cmm/m/it/9 n \OT1/cmr/m/n/9 = 100$,
- []
-
-<test2.png, id=381, 433.62pt x 289.08pt>
+<test2.png, id=370, 433.62pt x 289.08pt>
 File: test2.png Graphic file (type png)
 <use test2.png>
-Package pdftex.def Info: test2.png  used on input line 435.
+Package pdftex.def Info: test2.png  used on input line 426.
 (pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 436--436
-[]\OT1/cmr/m/n/9 (b) |$\OML/cmm/m/it/9 n \OT1/cmr/m/n/9 = 100$,
- []
-
-<test3.png, id=382, 433.62pt x 289.08pt>
+<test3.png, id=371, 433.62pt x 289.08pt>
 File: test3.png Graphic file (type png)
 <use test3.png>
-Package pdftex.def Info: test3.png  used on input line 442.
+Package pdftex.def Info: test3.png  used on input line 433.
 (pdftex.def)             Requested size: 114.7242pt x 76.48232pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 443--443
-[]\OT1/cmr/m/n/9 (c) |$\OML/cmm/m/it/9 n \OT1/cmr/m/n/9 = 100$,
- []
-
-[11 <./test1.png> <./test2.png> <./test3.png>] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 461--466
+ [11 <./test1.png> <./test2.png> <./test3.png>] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 452--457
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 461--466
+Underfull \hbox (badness 10000) in paragraph at lines 452--457
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 469--472
+Underfull \hbox (badness 10000) in paragraph at lines 460--463
 
  []
 
@@ -829,7 +819,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 469--472
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.498 \end{document}
+l.489 \end{document}
                     ] (./rapport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -838,18 +828,18 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 2CBD6ED847A270B0486C8E497FAF15D0;3520.
+(rerunfilecheck)             Checksum: CB2706CA2CD8552828AE15AA9A4D3081;3515.
 Package rerunfilecheck Info: File `rapport.brf' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 17306 strings out of 479023
- 258435 string characters out of 5859398
- 894290 words of memory out of 5000000
+ 17296 strings out of 479023
+ 258279 string characters out of 5859398
+ 887290 words of memory out of 5000000
  34276 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,9n,103p,759b,1909s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,9n,103p,751b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -869,10 +859,10 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (16 pages, 486231 bytes).
+Output written on rapport.pdf (16 pages, 593970 bytes).
 PDF statistics:
- 537 PDF objects out of 1000 (max. 8388607)
- 484 compressed objects within 5 object streams
- 223 named destinations out of 1000 (max. 500000)
+ 521 PDF objects out of 1000 (max. 8388607)
+ 469 compressed objects within 5 object streams
+ 213 named destinations out of 1000 (max. 500000)
  215 words of extra memory for PDF output out of 10000 (max. 10000000)
 

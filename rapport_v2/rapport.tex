@@ -296,8 +296,8 @@ L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup ma
 On dispose de $n$ simulations par tour.
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.18]{MCTS_wikipedia.png}
-\caption{Déroulement d'une simulation avec l'algorithme UCT (\textit{Source : Wikipedia})}
+\includegraphics[scale=0.22]{étapes_mcts_.png}
+\caption{Déroulement d'une simulation avec l'algorithme UCT}
 \label{fig:uct}
 \end{figure}
 
@@ -306,7 +306,7 @@ On initialise tous les nœuds de profondeur 1 en effectuant une simulation de pa
 
 1. Sélection\\
 Premièrement, on effectue la phase de descente en sélectionnant les nœuds via le critère UCB1 jusqu'à atteindre un nœud sans enfant.\\
-Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constance théorique optimale $c=\sqrt{2}$ respectivement de la gauche à la droite $\frac{8}{10} + \sqrt{\frac{2\log21}{10}} \simeq 1,580$, $1.497$ et $1.425$. On choisit donc le nœud de gauche. Puis, on calcule de nouveau les scores des nœuds enfant, ici de profondeur 2. On obtient $1.572$ pour le nœud de gauche et $1.709$ pour le nœud de droite. On sélectionne donc le nœud de droite puis avec le même critère encore le nœud de droite. On arrive à un nœud sans enfant aussi appelé feuille de l'arbre. C'est la fin de la première étape.
+Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constance théorique optimale $c=\sqrt{2}$ respectivement de la gauche à la droite $\frac{8}{10} + \sqrt{\frac{2\log21}{10}} \simeq 1,480$, $1.372$ et $1.425$. On choisit donc le nœud de gauche. Puis, on calcule de nouveau les scores des nœuds enfant, ici de profondeur 2. On obtient $1.573$ pour le nœud de gauche et $1.709$ pour le nœud de droite. On sélectionne donc le nœud de droite puis avec le même critère encore le nœud de droite. On arrive à un nœud sans enfant aussi appelé feuille de l'arbre. C'est la fin de la première étape.
 \\
 
 2. Expansion\\
