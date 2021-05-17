@@ -63,23 +63,14 @@ class UCT():
 
 
     def search(self, initialState,  needDetails, root=None):
-
         self.root = treeNode(initialState, None) if root==None else root
-        actions = self.root.state.actions
-        # init each node
-        for action in actions:
-            root_state = deepcopy(self.root.state)
-            root_state.takeAction(action, root_state.currplayer)
-            node = treeNode(root_state, self.root)
-            self.root.children[action] = node
-            self.executeRound(node)
-
+        board_size = self.root.state.size
         if self.limitType == 'time':
             timeLimit = time.time() + self.timeLimit / 1000
             while time.time() < timeLimit:
                 self.executeRound()
         else:
-            for i in range(self.iterationLimit):
+            for i in range(self.iterationLimit+board_size**2):
                 self.executeRound()
 
         bestChild = self.getBestChild(self.root, 0)
