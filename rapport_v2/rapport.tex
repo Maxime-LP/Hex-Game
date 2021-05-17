@@ -86,7 +86,7 @@
 \vspace{40pt}
 
 \begin{abstract}
-Hex est un jeu de plateau a information complète au règles simples mais pouvant présenté une grande complexité. En effet, des stratégies gagnantes sont connus pour le premier joueur pour des plateaux de taille restreinte. Cependant la recherche de telles stratégies devient impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en présenter 3 reposant sur des méthodes de Monte-Carlo et Monte-Carlo avec recherche arborescente. 
+Hex est un jeu de plateau à information complète aux règles simples mais pouvant présenter une grande complexité. En effet, des stratégies gagnantes sont connues pour le premier joueur pour des plateaux de taille restreinte. Cependant la recherche de telles stratégies devient impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en présenter 3 reposant sur des méthodes de Monte-Carlo et Monte-Carlo avec recherche arborescente. 
 \end{abstract}
 \newpage
 
@@ -110,8 +110,8 @@ Hex est un jeu de société pour deux joueurs dont le but est de relier les deux
 
 \subsection{Spécificité du jeu}
 
-Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un gagnant. Ce résultat a été établit par John Nash et repose sur une preuve par l'absurde.
-Ainsi, pour des les plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante est connu pour le premier joueur. Mais ce n'est pas le cas pour les plateau de taille supérieur et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle (IA).
+Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde.
+Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9, une stratégie gagnante est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle (IA).
 
 \begin{figure}[h]
 	\centering
@@ -129,7 +129,7 @@ Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe p
 
 \subsection{Condition de fin de partie}
 
-À chaque coup la fonction fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remporté par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde. Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes par couleur du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
+À chaque coup la fonction fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remportée par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde. Après une tentative avec la théorie des graphes et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes par couleur du plateau. En effet, on considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
 
 \begin{lstlisting}
 	def check_win(self, currplayer):
@@ -157,15 +157,15 @@ Avec l'utilisation de multiprocessing, nous avons pu atteindre 23000 parties par
 \newpage
 
 
-\section{Joueur artificielle}
+\section{Joueur artificiel}
 
-Au cours du projet, nous avons implémenté des algorithmes de plus en plus performants. Chaque nouvelle version reprenait les bases de la précédente en ajoutant des amélioration, qui nous verrons, au fur et à mesure, se rapproche de la façon dont un joueur humain pourrait jouer et adopte de bons comportements liés à la structure du plateau de jeu.
+Au cours du projet, nous avons implémenté des algorithmes de plus en plus performants. Chaque nouvelle version reprenait les bases de la précédente en ajoutant des améliorations qui, comme nous le verrons, se rapprochent au fur et à mesure de la façon dont un joueur humain pourrait jouer et adopte de bons comportements liés à la structure du plateau de jeu.
 
 \subsection{Monte-Carlo}
 
 \subsubsection{Principe}
 
-La première méthode que nous avons programmé est une méthode naïve et empirique. Elle consiste simplement à simuler $n$ de parties réparties équitablement entre les actions possibles pour déterminer le meilleur coup à jouer.
+La première méthode que nous avons programmé est une méthode naïve et empirique. Elle consiste simplement à simuler $n$ parties réparties équitablement entre les actions possibles pour déterminer le meilleur coup à jouer.
 
 \subsubsection{Algorithme}
 
@@ -195,19 +195,19 @@ La première méthode que nous avons programmé est une méthode naïve et empir
 		return action
 \end{lstlisting}
 
-Avec cette méthode et en simulant 10000 parties par coups joués, il est possible de voir que le joueur artificielle joue des coups sensés. En effet, il joue majoritairement au centre du plateau, ce qui est une bonne stratégie puisque cela offre davantage de possibilité de connections par la suite.
+Avec cette méthode et en simulant un nombre $n=10000$ parties, il est possible de voir que le joueur artificielle joue des coups sensés. En effet, il joue majoritairement au centre du plateau, ce qui est une bonne stratégie puisque cela offre davantage de possibilité de connexions par la suite.
 
 \newpage 
 
 
 \subsection{Monte-Carlo et UCB1}
 
-Le problème de l'algorithme Monte-Carlo naïf est qu'il utilise autant de simulation pour chaque coup. De ce fait, il utilise autant de ressources pour évaluer la qualité des mauvais coups que pour évaluer la qualité des bons coups. Le critère de sélection UCB1 permet de pallier à ce problème.
+Le problème de l'algorithme Monte-Carlo naïf est qu'il utilise autant de simulation pour chaque coup. De ce fait, il utilise autant de ressources pour évaluer la qualité des mauvais coups que pour évaluer la qualité des bons coups. Le critère de sélection UCB1 permet de pallier ce problème.
 Cet algorithme est nommé \texttt{mc\_ucb1} dans les fichiers Python.
 
 \subsubsection{Principe}
 
-Voici le fonctionnement le l'algorithme: 
+Voici le fonctionnement de l'algorithme: 
 
 \begin{figure}[h]
 	\noindent\fbox{%
@@ -220,7 +220,7 @@ Voici le fonctionnement le l'algorithme:
 	\caption{Algorithme UCB1}
 \end{figure}
 
-Cette algorithme est initialement conçut pour résoudre le problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
+Cet algorithme est initialement conçu pour résoudre le problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
 
 Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation de la machine qui empiriquement lui rapporte le plus et l'exploration pour espérer trouver une machine rapportant davantage.
 
@@ -228,7 +228,7 @@ L'agent peut bien sûr adopter une approche naïve et jouer la machine maximisan
 
 Peter Auer, Nicol\`o Cesa-Bianchi et Paul Fischer développent dans un article de référence, \textit{Finite-time Analysis of the Multiarmed Bandit Problem}, une stratégie permettant à l'agent de continuer à explorer les machines tout en maximisant ses gains. Plutôt que de procéder naïvement, celui-ci joue les machines selon la procédure UCB1.\\
 
-La constante théorique optimale est $c=\sqrt{2}$. Cependant, bien que des améliorations soit perceptibles, comparé à l'algorithme \texttt{mc}, la constant d'exploration peut être optimiser. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\ \\
+La constante théorique optimale est $c=\sqrt{2}$. Cependant, bien que des améliorations soient perceptibles comparé à l'algorithme \texttt{mc}, la constant d'exploration peut être optimisée. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\ \\
  
 Graph mc vs mc\_ucb1.
 
@@ -254,7 +254,7 @@ Une notion de nœud est intégrée à l'algorithme. Chaque nœud représente un 
 				self.player = 3 - self.parent.player
 \end{lstlisting}
 
-Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est le nœud parent. Il possède ainsi des enfants représentant les coups à évaluer. Compte tenu de ce qui en été dit précédemment, la fonction retournant le meilleurs coup pour l'algorithme \texttt{mc\_ucb1} est la suivante:
+Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est le nœud parent. Il possède ainsi des enfants représentant les coups à évaluer. Compte tenu de ce qui en été dit précédemment, la fonction retournant le meilleur coup pour l'algorithme \texttt{mc\_ucb1} est la suivante:
 
 \begin{lstlisting}
 	def search(self, initialState):
@@ -294,15 +294,15 @@ Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est
 		return random.choice(bestNodes)
 \end{lstlisting}
 
-La fonction \texttt{select\_node} calcule le score de chaque nœud via le critère UCB1 renvoyer par la fonction  \texttt{ucb1}. On note qu'une valeur d'exploration nulle correspond au taux de partie gagnées pour un nœud.
+La fonction \texttt{select\_node} calcule le score de chaque nœud via le critère UCB1 renvoyé par la fonction \texttt{ucb1}. On note qu'une constante d'exploration nulle correspond au taux de parties gagnées pour un nœud.
 
 \subsection{Upper Confidence bounds applied to Trees (UCT)}
 
-L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup mais ne permet pas d'anticiper les états du jeu un fois ce coup joué. Il est alors intéressant d'effectuer une recherche arborescente du meilleur coup. Cette méthode est appelée Upper Confidence bounds applied to Trees, nommée \texttt{uct} dans les programmes Python. Cet algorithme de prise de décision est largement développé dans les jeux \footnote{On peut citer son utilisation dans certains programmes de Go, d'Échecs, de Shogi, ou encore le jeu Total War : Rome II}.
+L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup mais ne permet pas d'anticiper les états du jeu une fois ce coup joué. Il est alors intéressant d'effectuer une recherche arborescente du meilleur coup. Cette méthode est appelée Upper Confidence bounds applied to Trees, \texttt{uct} dans les programmes Python. Cet algorithme de prise de décision est largement développé dans les jeux \footnote{On peut citer son utilisation dans certains programmes de Go, d'Échecs, de Shogi, ou encore le jeu Total War : Rome II}.
 
 \subsubsection{Principe}
 
-On dispose de $n$ simulation par tour.
+On va effectuer $n$ simulations par tour.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.18]{MCTS_wikipedia.png}
@@ -311,28 +311,28 @@ On dispose de $n$ simulation par tour.
 \end{figure}
 
 Tout d'abord, il faut noter que le coup à la racine de l'arborescence est l'état actuel du plateau. De plus, les nœuds blancs correspondent à un coup joué par le joueur adverse.\\
-On initialise tous les nœuds de profondeurs 1 en effectuant une simulation de parties aléatoire sur ces dernier avant de répéter les quatre étapes décrites ci-dessous. La figure 4 est prise comme exemple pour illustrer le propos.\\
+On initialise tous les nœuds de profondeur 1 en effectuant une simulation de parties aléatoire sur ces derniers avant de répéter les quatre étapes décrites ci-dessous. La figure 4 est prise comme exemple pour illustrer le propos.\\
 
 1. Sélection\\
 Premièrement, on effectue la phase de descente en sélectionnant les nœuds via le critères UCB1 jusqu'à atteindre un nœud sans enfant.\\
-Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constance théorique optimale $c=\sqrt{2}$ respectivement de la gauche à la droite $\frac{8}{10} + \sqrt{\frac{2\log21}{10}} \simeq 1,580$, $1.497$ et $1.425$. On choisit donc le nœud de gauche. Puis, on calcule de nouveau les scores des nœuds enfant, ici de profondeur 2. On obtient $1.572$ pour le nœud de gauche et $1.709$ pour le nœud de droite. On sélectionne donc le nœud de droite puis avec le même critère encore le nœud de droite. On arrive à un nœud sans enfant aussi appelé feuille de l'arbre. C'est la fin de la première étape.
+Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constante théorique optimale $c=\sqrt{2}$ respectivement de gauche à droite $\frac{8}{10} + \sqrt{\frac{2\ln{21}}{10}} \simeq 1,580$, $1.497$ et $1.425$. On choisit donc le nœud de gauche. Puis, on calcule de nouveau les scores des nœuds enfant, ici de profondeur 2. On obtient $1.572$ pour le nœud de gauche et $1.709$ pour le nœud de droite. On sélectionne donc le nœud de droite puis avec le même critère encore le nœud de droite. On arrive à un nœud sans enfant aussi appelé feuille de l'arbre. C'est la fin de la première étape.
 \\
 
 2. Expansion\\
-Deuxièmement, lorsque on atteint une feuille de l'arbre, on crée un nouveau nœud représentant en nouveau coup joué. Ce coup est choisit de manière aléatoire.\\
+Deuxièmement, lorsque on atteint une feuille de l'arbre, on crée un nouveau nœud représentant un nouveau coup joué. Ce coup est choisi de manière aléatoire.\\
 
 3. Simulation\\
-Troisièmement, on fini la partie en sélectionnant les coups de manière aléatoire. Dans l'exemple la partie simulée a été perdue.\\
+Troisièmement, on finit la partie en sélectionnant les coups de manière aléatoire. Dans l'exemple, la partie simulée a été perdue.\\
 
 4. Rétro-propagation\\
-Quatrièmement, on rétro-propage ce résultat jusqu'à la racine.\\
-Exemple: On ajoute 1 au dénominateur (nombre de visites) pour chaque nœuds correspondant aux coups joués et on ajoute 1 au numérateur si la partie simulée a été gagnée et si le nœud est gris, c'est a dire si il correspond a un coup joué par le joueur artificielle utilisant l'algorithme.
+Quatrièmement, on rétropropage ce résultat jusqu'à la racine.\\
+Exemple: On ajoute 1 au dénominateur (nombre de visites) pour chaque nœuds correspondant aux coups joués et on ajoute 1 au numérateur si la partie simulée a été gagnée et si le nœud est gris, c'est a dire si il correspond a un coup joué par le joueur artificielle ``utilisant'' l'algorithme.
 
-Une fois que les $n$ simulations ont été effectuer, sélectionne le nœud de profondeur 1 ayant le meilleur taux de victoire.
+Une fois que les $n$ simulations ont été effectuées, on sélectionne le nœud de profondeur 1 ayant le meilleur taux de victoire.
 
 \subsubsection{Algorithme}
 
-L'algorithme \texttt{uct} reprend en grande partie de code de l'algorithme \texttt{mc\_ucb1} mais avec une structure d'arbre.
+L'algorithme \texttt{uct} reprend en grande partie le code de l'algorithme \texttt{mc\_ucb1} mais avec une structure d'arbre.
 
 \begin{lstlisting}
 	def randomPolicy(state):
@@ -419,31 +419,31 @@ L'algorithme \texttt{uct} reprend en grande partie de code de l'algorithme \text
 
 \subsubsection{Constante d'exploration optimale}
 
-La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots, les meilleures résultats sont obtenus pour $c \simeq 0.3$. Cette observation semble être partagée pour les jeu ayant des récompense entre 0 et 1, ce qui est le cas ici: une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
+La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots, les meilleurs résultats sont obtenus pour $c \simeq 0.3$. Cette observation semble être partagée par les jeux ayant des récompenses entre 0 et 1, ce qui est le cas ici: une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
 
 \begin{figure}[!h]
 	\centering
 	\begin{subfigure}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{test1.png}
-		\caption{$n=100$, $parties/constante = 2000$, contre \texttt{mc}}
+		\caption{$n=100$, parties/constante : $2000$, contre \texttt{mc}}
 		\label{fig:1_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{test2.png}
-		\caption{$n=100$, $parties/constante = 2000$, contre \texttt{uct} avec $c = \sqrt{2}$}
+		\caption{$n=100$, parties/constante : $2000$, contre \texttt{uct} avec $c' = \sqrt{2}$}
 		\label{fig:2_}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.32\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{test3.png}
-		\caption{$n=100$, $parties/constante = 5000$, vs \texttt{uct} avec $c = \sqrt{2}$}
+		\caption{$n=100$, parties/constante : $5000$, contre \texttt{uct} avec $c' = \sqrt{2}$}
 		\label{fig:3_}
 	\end{subfigure}
-	\caption{Constante d'exploration optimal pour UCT}
+	\caption{Constante d'exploration optimale pour UCT}
 	\label{fig:best-cst}
 \end{figure}
 
@@ -458,15 +458,15 @@ La constante d'exploration optimale ne correspond pas à la valeur théorique $c
 
 \subsection{UCT avec mémoire}
 
-L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations effectuer pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
+L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations effectuées pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
 \\
 Illustration d'arbre tronqué ?\\
 \\
-Cependant cette méthode ne produit pas  d'amélioration significative si le nombre de simulation par coup n'est pas grand. Car si on tronque l'arbre et en étant optimiste on n'obtient un gain d'informations inférieur à 1\%.
+Cependant cette méthode ne produit pas d'amélioration significative si le nombre de simulation par coup n'est pas assez grand. Avec cette méthode, nous avons obtenu un gain d'information inférieur à 1\%.
 
 \subsection{Algorithme RAVE et GRAVE}
 
-Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possible, moins les estimations de la qualité de ces derniers est juste. C'est pourquoi, compléter l'algorithme \texttt{uct} avec une autre approche serrait intéressant.\\
+Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possible, moins les estimations de leur pertinence sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant.\\
 \\
 A développer
 
