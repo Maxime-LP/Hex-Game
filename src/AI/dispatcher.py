@@ -8,7 +8,7 @@ from AI.mc import MC
 from AI.mc_ucb1 import MC_UCB1
 from AI.uct import UCT
 
-n = 100
+n = 1000
 
 def random(board, color, explorationConstant):
     """
