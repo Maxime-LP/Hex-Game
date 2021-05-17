@@ -66,7 +66,7 @@ class MC():
                 while time.time() < timeLimit:
                     self.executeRound(child)
         else:
-            nb_iter = int(self.searchLimit / len(actions))
+            nb_iter = int(self.searchLimit / len(actions)) + 1
             for child in self.root.children.values():
                 for i in range(nb_iter):
                     self.executeRound(child)
