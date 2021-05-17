@@ -111,7 +111,7 @@ Hex est un jeu de société pour deux joueurs dont le but est de relier les deux
 \subsection{Spécificité du jeu}
 
 Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un unique gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde \cite{preuvewiki}.
-Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante \footnote{On appelle stratégie gagnante toute stratégie assurant la victoire quels que soient les choix que fait la partie adverse.} est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente \footnote{Un plateau de taille 9x9 peut être rempli d'environ $10^{120}$ manières différentes!}. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle.
+Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante \footnote{On appelle stratégie gagnante toute stratégie assurant la victoire quels que soient les choix que fait la partie adverse.} est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente \footnote{Un plateau de taille classique, soit 11x11, a un facteur de branchement de 121.}. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle.
 
 \begin{figure}[h]
 	\centering
@@ -421,6 +421,8 @@ L'algorithme \texttt{uct} reprend en grande partie le code de l'algorithme \text
 			return random.choice(bestNodes)
 \end{lstlisting}
 
+\newpage
+
 \subsubsection{Constante d'exploration optimale}
 
 La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots. Les meilleurs résultats sont obtenus pour $c \simeq 0.3$. Cette observation empirique est partagée pour les jeux ayant des récompenses entre 0 et 1 \cite{cazenav}, ce qui est le cas ici : une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
@@ -451,15 +453,6 @@ La constante d'exploration optimale ne correspond pas à la valeur théorique $c
 	\label{fig:best-cst}
 \end{figure}
 
-\newpage
-
-\section{Évaluation des algorithmes}
-
-
-\newpage
-
-\section{Axes d'amélioration}
-
 \subsection{UCT avec mémoire}
 
 L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations effectuées pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
@@ -471,20 +464,22 @@ L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations
 	\label{fig:arbre-tronqué}
 \end{figure}
 
-Cependant cette méthode ne produit pas d'amélioration significative si le nombre de simulations par coup n'est pas assez grand. Avec une telle méthode, nous n'avons obtenu qu'un gain d'information inférieur à 1\%.
+Cependant cette méthode ne produit pas d'amélioration significative si le nombre de simulations par coup n'est pas assez grand.
+
+\newpage
+
+\section{Évaluation des algorithmes}
 
 
+\newpage
+
+\section{Axes d'amélioration}
 
 \subsection{Algorithme RAVE et GRAVE}
 
-Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant.\\
-\\
-A développer
+Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant.
 
-\subsection{Connections virtuelles et cases mortes}
-
-A développer
-\newpage
+On peut pour cela utiliser
 
 \section{Conclusion}
 
