@@ -1,0 +1,6 @@
+\babel@toc {french}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Plateau de jeu 11x11\relax }}{3}{figure.caption.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Configuration gagnante pour le joueur bleu\relax }}{3}{figure.caption.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Algorithme UCB1\relax }}{6}{figure.caption.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Déroulement d'une simulation avec l'algorithme UCT (\textit {Source : Wikipedia})\relax }}{8}{figure.caption.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Constante d'exploration optimal pour UCT\relax }}{11}{figure.caption.5}%
