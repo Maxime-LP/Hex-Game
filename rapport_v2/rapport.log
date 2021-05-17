@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 23:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  18 MAY 2021 00:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -551,7 +551,11 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 \c@theorem=\count328
 
-(./rapport.aux)
+(./rapport.aux
+
+LaTeX Warning: Label `AZ' multiply defined.
+
+)
 \openout1 = `rapport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
@@ -693,7 +697,7 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 \openout4 = `rapport.toc'.
 
  [2]
-<11x11.png, id=131, 1284.8pt x 912.40875pt>
+<11x11.png, id=136, 1284.8pt x 912.40875pt>
 File: 11x11.png Graphic file (type png)
 <use 11x11.png>
 Package pdftex.def Info: 11x11.png  used on input line 107.
@@ -702,7 +706,7 @@ Package pdftex.def Info: 11x11.png  used on input line 107.
 
 LaTeX Warning: Citation `preuvewiki' on page 3 undefined on input line 113.
 
-<11x11_gagnant.jpg, id=135, 158.994pt x 112.7412pt>
+<11x11_gagnant.jpg, id=140, 158.994pt x 112.7412pt>
 File: 11x11_gagnant.jpg Graphic file (type jpg)
 <use 11x11_gagnant.jpg>
 Package pdftex.def Info: 11x11_gagnant.jpg  used on input line 118.
@@ -715,7 +719,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 126--127
 [3
 
  <./11x11.png> <./11x11_gagnant.jpg>]
-<pps.png, id=150, 433.62pt x 289.08pt>
+<pps.png, id=155, 433.62pt x 289.08pt>
 File: pps.png Graphic file (type png)
 <use pps.png>
 Package pdftex.def Info: pps.png  used on input line 137.
@@ -744,7 +748,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 245--246
  []
 
 [7] [8]
-<étapes_mcts_.png, id=278, 1696.6587pt x 583.9416pt>
+<étapes_mcts_.png, id=283, 1696.6587pt x 583.9416pt>
 File: étapes_mcts_.png Graphic file (type png)
 <use étapes_mcts_.png>
 Package pdftex.def Info: étapes_mcts_.png  used on input line 313.
@@ -773,17 +777,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
 LaTeX Warning: Citation `cazenav' on page 12 undefined on input line 428.
 
-<test1.png, id=378, 433.62pt x 289.08pt>
+<test1.png, id=383, 433.62pt x 289.08pt>
 File: test1.png Graphic file (type png)
 <use test1.png>
 Package pdftex.def Info: test1.png  used on input line 434.
 (pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
-<test2.png, id=379, 433.62pt x 289.08pt>
+<test2.png, id=384, 433.62pt x 289.08pt>
 File: test2.png Graphic file (type png)
 <use test2.png>
 Package pdftex.def Info: test2.png  used on input line 441.
 (pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
-<test3.png, id=380, 433.62pt x 289.08pt>
+<test3.png, id=385, 433.62pt x 289.08pt>
 File: test3.png Graphic file (type png)
 <use test3.png>
 Package pdftex.def Info: test3.png  used on input line 448.
@@ -793,7 +797,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 458--459
 
  []
 
-<arbre_tronqué.png, id=381, 585.387pt x 364.4817pt>
+<arbre_tronqué.png, id=386, 585.387pt x 364.4817pt>
 File: arbre_tronqué.png Graphic file (type png)
 <use arbre_tronqué.png>
 Package pdftex.def Info: arbre_tronqué.png  used on input line 462.
@@ -812,21 +816,35 @@ si-gni-fi-ca-tive si le nombre
 \tf@lof=\write5
 \openout5 = `rapport.lof'.
 
- [15] (./rapport.aux)
+ [15] (./rapport.brf)
+\tf@brf=\write6
+\openout6 = `rapport.brf'.
+
+ [16pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.509 \end{document}
+                    ] (./rapport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: E0D706B34DAC117F4046545DEE0DBAE8;3255.
+(rerunfilecheck)             Checksum: BACC7D4E29432DED4550A62937C26412;3388.
+Package rerunfilecheck Info: File `rapport.brf' has not changed.
+(rerunfilecheck)             Checksum: CC6CF99B5FEA410C0A637B76853E23E4;150.
  ) 
 Here is how much of TeX's memory you used:
- 17299 strings out of 479023
- 258417 string characters out of 5859398
+ 17317 strings out of 479023
+ 258577 string characters out of 5859398
  887290 words of memory out of 5000000
- 34278 multiletter control sequences out of 15000+600000
+ 34290 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,9n,103p,807b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -849,10 +867,10 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (15 pages, 652887 bytes).
+Output written on rapport.pdf (16 pages, 655826 bytes).
 PDF statistics:
- 524 PDF objects out of 1000 (max. 8388607)
- 469 compressed objects within 5 object streams
- 215 named destinations out of 1000 (max. 500000)
- 217 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 539 PDF objects out of 1000 (max. 8388607)
+ 483 compressed objects within 5 object streams
+ 218 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 

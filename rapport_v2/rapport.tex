@@ -470,10 +470,15 @@ Cependant cette méthode ne produit pas d'amélioration significative si le nomb
 
 \section{Évaluation des algorithmes}
 
+Simulations finales... en cours
 
 \newpage
 
 \section{Axes d'amélioration}
+
+\subsection{Multiprocessing}
+
+Au cours de l'algorithme UCT la puissance de calcul est utilisé par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave pourrait améliorer la rapidité de l'algorithme. Le maître effectuerait les déplacements au sein de l'arbre puis les processus esclaves effectuerait un certains nombre de simulations.
 
 \subsection{Algorithme RAVE et GRAVE}
 
@@ -483,7 +488,7 @@ On peut pour cela utiliser
 
 \section{Conclusion}
 
-A développer
+L'algorithme UCT permet d'obtenir de bons résultats avec des capacité de calculs relativement faible. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi c'est propriété, nous pouvons citer les connections virtuelles ainsi que les 
 
 \newpage
 
@@ -491,5 +496,14 @@ A développer
 
 \newpage
 
+%\bibliographystyle{myalpha}
+\begin{thebibliography}{9}
+	
+	\bibitem{AZ}
+	Peter Auer, Nicol\`o Cesa-Bianchi \& Paul Fischer, {\em Finite time Analysis of the Multiarmed Bandit Problem}
+	\bibitem{AZ}
+	Levente Kocsis \& Csaba Szepesv\`ari, {\em Bandit Based Monte-Carlo Planning}
+	
+\end{thebibliography}
 
 \end{document}
