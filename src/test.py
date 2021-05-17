@@ -52,16 +52,18 @@ if __name__ == "__main__":
         leave = True if len(cst_list) <= 1 else False
         with Pool(processes=os.cpu_count()) as p:
             win_rate = list(tqdm(p.imap(test, [[c,1]]*n), total=n, leave=leave))
-            result.append(np.mean(win_rate))
+            #result.append(np.mean(win_rate))
 
     exe_time = time() - start_time
 
     try:
         
         if sys.argv[5] == 'save':
-            with open("simulations/logs.txt", "a") as filout:
-                filout.write(f'>> {sys.argv[1]} vs {sys.argv[2]} on {n} games.\n')
+            with open("simulations_rapport/logs.txt", "a") as filout:
+                filout.write(f'>> {sys.argv[1]} vs {sys.argv[2]} on {n} games and 100 simu/plays.\n')
                 filout.write(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s\n')
+                filout.write(win_rate)
+                '''
                 filout.write(f'cst_list = {cst_list}\n')
                 filout.write(f'res = {result}\n')
                 filout.write(f'n = {n}\n')
@@ -69,7 +71,7 @@ if __name__ == "__main__":
                 filout.write(f'plt.xlabel("Exploration constant")\n')
                 filout.write(f'plt.ylabel("{sys.argv[2]} win rate")\n')
                 filout.write(f'plt.title(f"{sys.argv[2]}\'s win rate on {n} games per constant vs {sys.argv[1]}")\n\n\n')
-    
+                '''
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
