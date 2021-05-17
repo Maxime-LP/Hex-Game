@@ -73,7 +73,7 @@ class MC_UCB1():
                 child = self.selectNode()
                 self.executeRound(child)
 
-        bestChild = self.getBestChild(self.root, 0)
+        bestChild = self.ucb1(self.root, 0)
         action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 
         if needDetails:
@@ -85,7 +85,7 @@ class MC_UCB1():
         return action
 
     def selectNode(self):
-        return self.getBestChild(self.root, self.explorationConstant)
+        return self.ucb1(self.root, self.explorationConstant)
 
     def executeRound(self, node):
         state = deepcopy(node.state)
@@ -98,7 +98,7 @@ class MC_UCB1():
             node.totalReward += reward
             node = node.parent
 
-    def getBestChild(self, node, explorationValue):
+    def ucb1(self, node, explorationValue):
         bestValue = float("-inf")
         bestNodes = []
         for child in node.children.values():

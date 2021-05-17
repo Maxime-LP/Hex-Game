@@ -165,7 +165,7 @@ Au cours du projet, nous avons implémenté des algorithmes de plus en plus perf
 
 \subsubsection{Principe}
 
-La première méthode que nous avons programmé est une méthode naïve et empirique. Elle consiste simplement à simuler un certain nombre de parties à partir de chaque action restante pour déterminer le meilleur coup à jouer.
+La première méthode que nous avons programmé est une méthode naïve et empirique. Elle consiste simplement à simuler $n$ de parties réparties équitablement entre les actions possibles pour déterminer le meilleur coup à jouer.
 
 \subsubsection{Algorithme}
 
@@ -274,14 +274,14 @@ Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est
 			child = self.selectNode()
 			self.executeRound(child)
 		
-		bestChild = self.getBestChild(self.root, 0)
+		bestChild = self.ucb1(self.root, 0)
 		action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
 		return action
 	
 	def selectNode(self):
-		return self.getBestChild(self.root, self.explorationConstant)
+		return self.ucb1(self.root, self.explorationConstant)
 		
-	def getBestChild(self, node, explorationValue):
+	def ucb1(self, node, explorationValue):
 		bestValue = float("-inf")
 		bestNodes = []
 		for child in node.children.values():
@@ -294,7 +294,7 @@ Le nœud \texttt{self.root} représente l'état initial du plateau de jeu, c'est
 		return random.choice(bestNodes)
 \end{lstlisting}
 
-La fonction \texttt{select\_node} calcule le score de chaque nœud via le critère UCB1 renvoyer par la fonction  \texttt{best\_child}. On note qu'une valeur d'exploration nulle correspond au taux de partie gagnées pour un nœud.
+La fonction \texttt{select\_node} calcule le score de chaque nœud via le critère UCB1 renvoyer par la fonction  \texttt{ucb1}. On note qu'une valeur d'exploration nulle correspond au taux de partie gagnées pour un nœud.
 
 \subsection{Upper Confidence bounds applied to Trees (UCT)}
 
@@ -302,86 +302,189 @@ L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup ma
 
 \subsubsection{Principe}
 
-On dispose de $n$ simulation par tour. Chaque simulation comporte quatre étapes:
-
+On dispose de $n$ simulation par tour.
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.18]{MCTS_wikipedia.png}
 \caption{Déroulement d'une simulation avec l'algorithme UCT (\textit{Source : Wikipedia})}
+\label{fig:uct}
 \end{figure}
 
-Tout d'abord, il faut noter que les nœuds blancs correspondent à un coup joué par le joueur adverse. De plus, le coup à la racine de l'arborescence est l'état actuel du plateau.\\
-Avant chaque simulation on initialise tous les nœuds de profondeurs 1 en effectuant une simulation de parties aléatoire sur ces dernier. Puis on répète les quatre étapes décrites ci-dessous.\\
+Tout d'abord, il faut noter que le coup à la racine de l'arborescence est l'état actuel du plateau. De plus, les nœuds blancs correspondent à un coup joué par le joueur adverse.\\
+On initialise tous les nœuds de profondeurs 1 en effectuant une simulation de parties aléatoire sur ces dernier avant de répéter les quatre étapes décrites ci-dessous. La figure 4 est prise comme exemple pour illustrer le propos.\\
 
 1. Sélection\\
-Premièrement, on effectue la phase de descente en sélectionnant les nœuds via le critères UCB1. Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constance théorique optimale respectivement de la gauche à la droite $\frac{7}{10} + \sqrt{\frac{2\log21}{10}} \simeq 1,480$, $1.497$ et $1.425$.
+Premièrement, on effectue la phase de descente en sélectionnant les nœuds via le critères UCB1 jusqu'à atteindre un nœud sans enfant.\\
+Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la constance théorique optimale $c=\sqrt{2}$ respectivement de la gauche à la droite $\frac{8}{10} + \sqrt{\frac{2\log21}{10}} \simeq 1,580$, $1.497$ et $1.425$. On choisit donc le nœud de gauche. Puis, on calcule de nouveau les scores des nœuds enfant, ici de profondeur 2. On obtient $1.572$ pour le nœud de gauche et $1.709$ pour le nœud de droite. On sélectionne donc le nœud de droite puis avec le même critère encore le nœud de droite. On arrive à un nœud sans enfant aussi appelé feuille de l'arbre. C'est la fin de la première étape.
 \\
-Calcul du score: pb.
-
-\newpage
 
 2. Expansion\\
-Deuxièmement, lorsque on obtient un nœud n'ayant pas d'enfant, aussi appelé feuille de l'arbre, on créée un nouveau nœud représentant en nouveau coup joué. Ce coup est choisit de manière aléatoire.\\
+Deuxièmement, lorsque on atteint une feuille de l'arbre, on crée un nouveau nœud représentant en nouveau coup joué. Ce coup est choisit de manière aléatoire.\\
 
 3. Simulation\\
-Troisièmement, on fini la partie en sélectionnant les coups de manière aléatoire.\\
+Troisièmement, on fini la partie en sélectionnant les coups de manière aléatoire. Dans l'exemple la partie simulée a été perdue.\\
 
 4. Rétro-propagation\\
-Quatrièmement, on ...
+Quatrièmement, on rétro-propage ce résultat jusqu'à la racine.\\
+Exemple: On ajoute 1 au dénominateur (nombre de visites) pour chaque nœuds correspondant aux coups joués et on ajoute 1 au numérateur si la partie simulée a été gagnée et si le nœud est gris, c'est a dire si il correspond a un coup joué par le joueur artificielle utilisant l'algorithme.
+
+Une fois que les $n$ simulations ont été effectuer, sélectionne le nœud de profondeur 1 ayant le meilleur taux de victoire.
 
 \subsubsection{Algorithme}
 
 L'algorithme \texttt{uct} reprend en grande partie de code de l'algorithme \texttt{mc\_ucb1} mais avec une structure d'arbre.
 
 \begin{lstlisting}
-	uct's code
+	def randomPolicy(state):
+		while not state.isTerminal():
+			action = random.choice(state.actions)
+			state.takeAction(action, state.currplayer)
+		return state.getReward()
+	
+	class treeNode():
+		def __init__(self, state, parent):
+			self.state = state
+			self.parent = parent
+			self.numVisits = 0
+			self.totalReward = 0
+			self.children = {}
+			if parent is None : 
+				self.player =  3 - state.player
+			else:
+				self.player = 3 - self.parent.player
+	
+	def isFullyExpanded(self):
+		return len(self.state.actions)==len(self.children)
+	
+	class UCT():
+		def __init__(self, explorationConstant,iterationLimit=None):
+			self.iterationLimit = iterationLimit
+			self.explorationConstant = explorationConstant
+			self.rollout = randomPolicy
+		
+		def search(self, initialState):
+			self.root = treeNode(initialState, None) if root==None else root
+			for i in range(self.iterationLimit):
+				self.executeRound()
+			bestChild = self.getBestChild(self.root, 0)
+			action = (action for action, node in self.root.children.items() if node is bestChild).__next__()
+			return action
+		
+		def executeRound(self):
+			node = self.selectNode(self.root)
+			state = deepcopy(node.state)
+			reward = self.rollout(state)
+			self.backpropogate(node, reward)
+		
+		def selectNode(self, node):
+			while not node.state.isTerminal():
+				if node.isFullyExpanded():
+					node = self.getBestChild(node, self.explorationConstant)
+				else:
+					return self.expand(node)
+			return node
+		
+		def expand(self, node):
+			actions = node.state.getPossibleActions()
+			while actions!=[]:
+				action = random.choice(actions)
+				if action not in node.children.keys():
+					node_state = deepcopy(node.state)
+					node_state.takeAction(action, node_state.currplayer)
+					newNode = treeNode(node_state, node)
+					node.children[action] = newNode
+					return newNode
+			
+		def backpropogate(self, node, reward):
+			while node is not None:
+				node.numVisits += 1
+				node.totalReward += (reward == 1) * (node.player != self.root.player)
+				node = node.parent
+		
+		def getBestChild(self, node, explorationValue):
+			return self.ucb1(node,explorationValue)
+		
+		def ucb1(self,node,explorationValue):
+			bestValue = float("-inf")
+			bestNodes = []
+			for child in node.children.values():
+				nodeValue = child.totalReward / child.numVisits + explorationValue * sqrt(log(node.numVisits) / child.numVisits)
+				if nodeValue > bestValue:
+					bestValue = nodeValue
+					bestNodes = [child]
+				elif nodeValue == bestValue:
+					bestNodes.append(child)
+			return random.choice(bestNodes)
 \end{lstlisting}
 
 \subsubsection{Constante d'exploration optimale}
 
-La constante d'exploration optimale ne correspond pas à la valeur théorique $\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex, les meilleures résultats sont obtenus pour $c \simeq 0.3$. Cette observation semble être partagée pour les jeu ayant des récompense entre 0 et 1, ce qui est le cas ici: une partie gagnée vaut une récompense de 1 et une partie perdue vaut une récompense nulle.
+La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots, les meilleures résultats sont obtenus pour $c \simeq 0.3$. Cette observation semble être partagée pour les jeu ayant des récompense entre 0 et 1, ce qui est le cas ici: une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
-	\includegraphics[scale=0.7]{test1.png}
-	\caption{}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{test1.png}
+		\caption{$n=100$, $parties/constante = 2000$, contre \texttt{mc}}
+		\label{fig:1_}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{test2.png}
+		\caption{$n=100$, $parties/constante = 2000$, contre \texttt{uct} avec $c = \sqrt{2}$}
+		\label{fig:2_}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{test3.png}
+		\caption{$n=100$, $parties/constante = 5000$, vs \texttt{uct} avec $c = \sqrt{2}$}
+		\label{fig:3_}
+	\end{subfigure}
+	\caption{Constante d'exploration optimal pour UCT}
+	\label{fig:best-cst}
 \end{figure}
 
 \newpage
 
 \section{Évaluation des algorithmes}
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.7]{test1.png}
-\caption{}
-\end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.7]{test2.png}
-\caption{}
-\end{figure}
+\newpage
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.7]{test3.png}
-\caption{}
-\end{figure}
+\section{Axes d'amélioration}
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.7]{test4.png}
-\caption{}
-\end{figure}
+\subsection{UCT avec mémoire}
 
+L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations effectuer pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
+\\
+Illustration d'arbre tronqué ?\\
+\\
+Cependant cette méthode ne produit pas  d'amélioration significative si le nombre de simulation par coup n'est pas grand. Car si on tronque l'arbre et en étant optimiste on n'obtient un gain d'informations inférieur à 1\%.
+
+\subsection{Algorithme RAVE et GRAVE}
+
+Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possible, moins les estimations de la qualité de ces derniers est juste. C'est pourquoi, compléter l'algorithme \texttt{uct} avec une autre approche serrait intéressant.\\
+\\
+A développer
+
+\subsection{Connections virtuelles et case mortes}
+
+A développer
 \newpage
 
 \section{Conclusion}
 
-bla bla bla
+A développer
 
 \newpage
+
+\listoffigures 
+
+\newpage
+
 %\bibliographystyle{myalpha}
 \begin{thebibliography}{9}
 
