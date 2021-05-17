@@ -60,8 +60,8 @@ if __name__ == "__main__":
         k = 1
         if sys.argv[5] == 'save':
             with open("simulations_rapport/logs.py", "a") as filout:
-                filout.write(f'# {sys.argv[1]} vs {sys.argv[2]} on {n} games and n=100\n')
-                filout.write(f'win_rate = {win_rate}\n\n')
+                filout.write(f'# {sys.argv[1]} vs {sys.argv[2]} on {n} games and n=1000\n')
+                filout.write(f'win_rate_ = {win_rate}\n\n')
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')

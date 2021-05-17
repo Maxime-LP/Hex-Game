@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 21:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  17 MAY 2021 22:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -551,14 +551,7 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 \c@theorem=\count328
 
-(./rapport.aux
-
-LaTeX Warning: Label `AZ' multiply defined.
-
-
-LaTeX Warning: Label `AZ' multiply defined.
-
-)
+(./rapport.aux)
 \openout1 = `rapport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
@@ -705,6 +698,10 @@ File: 11x11.png Graphic file (type png)
 <use 11x11.png>
 Package pdftex.def Info: 11x11.png  used on input line 107.
 (pdftex.def)             Requested size: 167.02986pt x 118.6173pt.
+
+
+LaTeX Warning: Citation `preuvewiki' on page 3 undefined on input line 113.
+
 <11x11_gagnant.jpg, id=140, 158.994pt x 112.7412pt>
 File: 11x11_gagnant.jpg Graphic file (type jpg)
 <use 11x11_gagnant.jpg>
@@ -732,6 +729,9 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 227--234
 Underfull \hbox (badness 10000) in paragraph at lines 241--242
 
  []
+
+
+LaTeX Warning: Citation `ref1' on page 7 undefined on input line 243.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 243--244
@@ -769,7 +769,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
  []
 
-[9 <./étapes_mcts_.png>] [10] [11]
+[9 <./étapes_mcts_.png>] [10]
+
+LaTeX Warning: Citation `cazenav' on page 11 undefined on input line 426.
+
+[11]
 <test1.png, id=384, 433.62pt x 289.08pt>
 File: test1.png Graphic file (type png)
 <use test1.png>
@@ -786,100 +790,72 @@ File: test3.png Graphic file (type png)
 Package pdftex.def Info: test3.png  used on input line 446.
 (pdftex.def)             Requested size: 179.25246pt x 119.50279pt.
  [12 <./test1.png> <./test2.png> <./test3.png>] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 465--470
+Underfull \hbox (badness 10000) in paragraph at lines 465--466
 
  []
 
+<arbre_tronqué.png, id=404, 585.387pt x 364.4817pt>
+File: arbre_tronqué.png Graphic file (type png)
+<use arbre_tronqué.png>
+Package pdftex.def Info: arbre_tronqué.png  used on input line 469.
+(pdftex.def)             Requested size: 292.69278pt x 182.2404pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 465--470
-
+Overfull \hbox (2.0235pt too wide) in paragraph at lines 474--475
+[]\OT1/cmr/m/n/10 Cependant cette m^^Sethode ne pro-duit pas d'am^^Selioration 
+si-gni-fi-ca-tive si le nombre
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 475--478
+Underfull \hbox (badness 10000) in paragraph at lines 480--483
 
  []
 
-[14] [15] (./rapport.lof)
+[14 <./arbre_tronqué.png>] [15] (./rapport.lof)
 \tf@lof=\write5
 \openout5 = `rapport.lof'.
 
- [16] (./rapport.brf)
-\tf@brf=\write6
-\openout6 = `rapport.brf'.
-
-)
-Runaway argument?
- Levente Kocsis \& Csaba Szepesv\`ari, {\em Bandit Based Monte-Carlo \ETC.
-! File ended while scanning use of \BR@@bibitem.
-<inserted text> 
-                \par 
-<*> rapport.tex
-               
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
-[17pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ}) 
-has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-<*> rapport.tex
-               pdfTeX warning (ext4): destination with the same identifier (nam
-e{cite.AZ}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-<*> rapport.tex
-               ] (./rapport.aux)
+ [16] (./rapport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: CB2706CA2CD8552828AE15AA9A4D3081;3515.
-
-Package rerunfilecheck Warning: File `rapport.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `rapport.brf':
-(rerunfilecheck)             Before: D9DDE9E5FC0B0F3C71B5EF2DF43BC673;36
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
- 
+ ) 
 Here is how much of TeX's memory you used:
- 17310 strings out of 479023
- 258426 string characters out of 5859398
+ 17304 strings out of 479023
+ 258477 string characters out of 5859398
  887290 words of memory out of 5000000
- 34284 multiletter control sequences out of 15000+600000
+ 34281 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,9n,103p,815b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
-usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
-local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
-cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/loca
-l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
-texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
-xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texl
-ive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
-/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-20/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2020/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (17 pages, 614224 bytes).
+</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></us
+r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
+local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/lo
+cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
+l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
+texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/te
+xlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texli
+ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
+2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/202
+0/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2020/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2020/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on rapport.pdf (16 pages, 662142 bytes).
 PDF statistics:
- 544 PDF objects out of 1000 (max. 8388607)
- 488 compressed objects within 5 object streams
- 218 named destinations out of 1000 (max. 500000)
- 220 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 542 PDF objects out of 1000 (max. 8388607)
+ 485 compressed objects within 5 object streams
+ 217 named destinations out of 1000 (max. 500000)
+ 225 words of extra memory for PDF output out of 10000 (max. 10000000)
 
