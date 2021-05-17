@@ -61,16 +61,7 @@ if __name__ == "__main__":
         if sys.argv[5] == 'save':
             with open("simulations_rapport/logs.py", "a") as filout:
                 filout.write(f'# {sys.argv[1]} vs {sys.argv[2]} on {n} games and n=100\n')
-                filout.write(f'win_rate_{k} = {win_rate}\n \n')
-                '''
-                filout.write(f'cst_list = {cst_list}\n')
-                filout.write(f'res = {result}\n')
-                filout.write(f'n = {n}\n')
-                filout.write(f'plt.plot(cst_list, res, marker="o")\n')
-                filout.write(f'plt.xlabel("Exploration constant")\n')
-                filout.write(f'plt.ylabel("{sys.argv[2]} win rate")\n')
-                filout.write(f'plt.title(f"{sys.argv[2]}\'s win rate on {n} games per constant vs {sys.argv[1]}")\n\n\n')
-                '''
+                filout.write(f'win_rate_{k} = {win_rate}\n\n')
     except IndexError:
         
         print(f'{n*len(cst_list)} games in {round(exe_time,3)}s => {round(n*len(cst_list)/exe_time,3)} games/s')
