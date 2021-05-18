@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  18 MAY 2021 00:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  18 MAY 2021 08:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -793,38 +793,70 @@ File: test3.png Graphic file (type png)
 Package pdftex.def Info: test3.png  used on input line 448.
 (pdftex.def)             Requested size: 179.25246pt x 119.50279pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--459
+Underfull \hbox (badness 10000) in paragraph at lines 458--460
 
  []
 
 <arbre_tronqué.png, id=386, 585.387pt x 364.4817pt>
 File: arbre_tronqué.png Graphic file (type png)
 <use arbre_tronqué.png>
-Package pdftex.def Info: arbre_tronqué.png  used on input line 462.
+Package pdftex.def Info: arbre_tronqué.png  used on input line 463.
 (pdftex.def)             Requested size: 292.69278pt x 182.2404pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Overfull \hbox (2.0235pt too wide) in paragraph at lines 467--468
+[12 <./test1.png> <./test2.png> <./test3.png>]
+Overfull \hbox (2.0235pt too wide) in paragraph at lines 470--471
 []\OT1/cmr/m/n/10 Cependant cette m^^Sethode ne pro-duit pas d'am^^Selioration 
 si-gni-fi-ca-tive si le nombre
  []
 
-[12 <./test1.png> <./test2.png> <./test3.png>] [13 <./arbre_tronqué.png>]
-[14] (./rapport.lof)
+[13 <./arbre_tronqué.png>]
+<n100_uct_snd.png, id=406, 433.62pt x 289.08pt>
+File: n100_uct_snd.png Graphic file (type png)
+<use n100_uct_snd.png>
+Package pdftex.def Info: n100_uct_snd.png  used on input line 482.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+<n100_uct_first.png, id=407, 433.62pt x 289.08pt>
+File: n100_uct_first.png Graphic file (type png)
+<use n100_uct_first.png>
+Package pdftex.def Info: n100_uct_first.png  used on input line 489.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+<n1000_uct_snd.png, id=408, 433.62pt x 289.08pt>
+File: n1000_uct_snd.png Graphic file (type png)
+<use n1000_uct_snd.png>
+Package pdftex.def Info: n1000_uct_snd.png  used on input line 501.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+<n1000_uct_first.png, id=409, 433.62pt x 289.08pt>
+File: n1000_uct_first.png Graphic file (type png)
+<use n1000_uct_first.png>
+Package pdftex.def Info: n1000_uct_first.png  used on input line 508.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+<n10000_uct_snd.png, id=410, 433.62pt x 289.08pt>
+File: n10000_uct_snd.png Graphic file (type png)
+<use n10000_uct_snd.png>
+Package pdftex.def Info: n10000_uct_snd.png  used on input line 520.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+<n10000_uct_first.png, id=411, 433.62pt x 289.08pt>
+File: n10000_uct_first.png Graphic file (type png)
+<use n10000_uct_first.png>
+Package pdftex.def Info: n10000_uct_first.png  used on input line 527.
+(pdftex.def)             Requested size: 175.66937pt x 117.11205pt.
+ [14 <./n100_uct_snd.png> <./n100_uct_first.png> <./n1000_uct_snd.png> <./n1000
+_uct_first.png> <./n10000_uct_snd.png> <./n10000_uct_first.png>] [15] [16] (./r
+apport.lof)
 \tf@lof=\write5
 \openout5 = `rapport.lof'.
 
- [15] (./rapport.brf)
+ [17] (./rapport.brf)
 \tf@brf=\write6
 \openout6 = `rapport.brf'.
 
- [16pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ})
+ [18pdfTeX warning (ext4): destination with the same identifier (name{cite.AZ})
  has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.509 \end{document}
+l.570 \end{document}
                     ] (./rapport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -835,16 +867,22 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: BACC7D4E29432DED4550A62937C26412;3388.
+
+Package rerunfilecheck Warning: File `rapport.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `rapport.out':
+(rerunfilecheck)             Before: BACC7D4E29432DED4550A62937C26412;3388
+(rerunfilecheck)             After:  FDE276FBED127DB2FDC6E9AB78777DCE;3343.
 Package rerunfilecheck Info: File `rapport.brf' has not changed.
 (rerunfilecheck)             Checksum: CC6CF99B5FEA410C0A637B76853E23E4;150.
  ) 
 Here is how much of TeX's memory you used:
- 17317 strings out of 479023
- 258577 string characters out of 5859398
+ 17373 strings out of 479023
+ 259699 string characters out of 5859398
  887290 words of memory out of 5000000
- 34290 multiletter control sequences out of 15000+600000
+ 34335 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,9n,103p,807b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -867,10 +905,10 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (16 pages, 655826 bytes).
+Output written on rapport.pdf (18 pages, 767063 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 483 compressed objects within 5 object streams
- 218 named destinations out of 1000 (max. 500000)
- 225 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 568 PDF objects out of 1000 (max. 8388607)
+ 498 compressed objects within 5 object streams
+ 223 named destinations out of 1000 (max. 500000)
+ 255 words of extra memory for PDF output out of 10000 (max. 10000000)
 

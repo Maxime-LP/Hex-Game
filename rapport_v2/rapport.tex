@@ -455,7 +455,8 @@ La constante d'exploration optimale ne correspond pas à la valeur théorique $c
 
 \subsection{UCT avec mémoire}
 
-L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations effectuées pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
+L'algorithme \texttt{uct} pourrait garder en mémoire une partie de l'arbre pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
+Nous prenons comme exemple la figure 7. Si on considère que \texttt{uct} a joué le coup bleu puis son adversaire le coup rouge,  et que le nœud rouge à été visité précédemment alors on récupère comme racine le nœud rouge avec ses enfants.\\
 
 \begin{figure}[h]
 	\centering
@@ -464,13 +465,72 @@ L'algorithme \texttt{uct} pourrait garder en mémoire une partie des simulations
 	\label{fig:arbre-tronqué}
 \end{figure}
 
+\newpage
+
 Cependant cette méthode ne produit pas d'amélioration significative si le nombre de simulations par coup n'est pas assez grand.
 
 \newpage
 
 \section{Évaluation des algorithmes}
 
-Simulations finales... en cours
+Pour évaluer les performances des l'algorithmes nous les avons fait jouer sur un plateau 7x7 avec comme témoin l'algorithme \texttt{uct}. Ces comparaisons ont été faites pour 100, 1000 et 10000 parties simulées à chaque fois ainsi que pour \texttt{uct} en premier et deuxième joueur.
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n100_uct_snd.png}
+		\caption{\texttt{uct} premier joueur}
+		\label{fig:n100-uct-snd}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n100_uct_first.png}
+		\caption{\texttt{uct} second joueur}
+		\label{fig:n100-uct-first}
+	\end{subfigure}
+	\caption{100 parties simulées par coups}
+	\label{fig:n100}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n1000_uct_snd.png}
+		\caption{\texttt{uct} premier joueur}
+		\label{fig:n1000-uct-snd}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n1000_uct_first.png}
+		\caption{\texttt{uct} second joueur}
+		\label{fig:n1000-uct-first}
+	\end{subfigure}
+	\caption{1000 parties simulées par coups}
+	\label{fig:n1000}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n10000_uct_snd.png}
+		\caption{\texttt{uct} premier joueur}
+		\label{fig:n10000-uct-snd}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{n10000_uct_first.png}
+		\caption{\texttt{uct} second joueur}
+		\label{fig:n10000-uct-first}
+	\end{subfigure}
+	\caption{10000 parties simulées par coups}
+	\label{fig:n10000}
+\end{figure}
 
 \newpage
 
@@ -478,17 +538,18 @@ Simulations finales... en cours
 
 \subsection{Multiprocessing}
 
-Au cours de l'algorithme UCT la puissance de calcul est utilisé par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave pourrait améliorer la rapidité de l'algorithme. Le maître effectuerait les déplacements au sein de l'arbre puis les processus esclaves effectuerait un certains nombre de simulations.
+Au cours de l'algorithme UCT la puissance de calcul est utilisé par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave pourrait améliorer la rapidité de l'algorithme. Le maître effectuerait les déplacements au sein de l'arbre puis les processus esclaves effectuerait un certains nombre de simulations. Un gain de rapidité relatif pourrait être envisagé en augmentant le nombre de de parties pour coup et en faisant une dizaine, voir plus, de simulations à chaque nœuds enfants.
 
-\subsection{Algorithme RAVE et GRAVE}
+\subsection{Début de partie}
 
-Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant.
+Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant. Il existe pour cela les algorithme RAVE et GRAVE.
 
-On peut pour cela utiliser
+\newpage
 
 \section{Conclusion}
 
-L'algorithme UCT permet d'obtenir de bons résultats avec des capacité de calculs relativement faible. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi c'est propriété, nous pouvons citer les connections virtuelles ainsi que les 
+Les résultats montre une grande amélioration des performance grâce à l'utilisation du critère UCB1 permettant de simuler moins de parties sur les coups jugés mauvais. Cette différence se réduit à  mesure que le nombre de parties simulées par coup augmente. De plus, on observe que commencer à jouer en premier donne un avantage de plus en plus important lorsque ce dernier augmente.
+Enfin l'algorithme UCT permet d'obtenir de bons résultats avec des capacité de calculs relativement faible. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi ces propriétés, nous pouvons citer les connections virtuelles , les cases mortes ou encore les échelles. Faire intégrer ces notions à UCT pourrait être une piste d'amélioration.
 
 \newpage
 

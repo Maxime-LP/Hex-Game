@@ -6,3 +6,6 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Déroulement d'une simulation avec l'algorithme UCT\relax }}{9}{figure.caption.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Constante d'exploration optimale pour UCT avec $n=100$\relax }}{12}{figure.caption.6}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Arbre tronqué\relax }}{13}{figure.caption.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces 100 parties simulées par coups\relax }}{14}{figure.caption.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces 1000 parties simulées par coups\relax }}{14}{figure.caption.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces 10000 parties simulées par coups\relax }}{14}{figure.caption.10}%
