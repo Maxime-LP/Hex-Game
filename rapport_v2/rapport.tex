@@ -300,9 +300,9 @@ def ucb1(self, node, explorationValue):
 
 La fonction \texttt{ucb1} calcule le score de chaque nœud via le critère UCB1. On note qu'une constante d'exploration nulle correspond au taux de parties gagnées pour un nœud.
 
-\subsection{Upper Confidence bounds applied to Trees (UCT)}
+\subsection{Upper Confidence Bound applied to Trees (UCT)}
 
-L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup mais ne permet pas d'anticiper les états du jeu une fois ce coup joué. Il est alors intéressant d'effectuer une recherche arborescente du meilleur coup. Cette méthode est appelée Upper Confidence bounds applied to Trees, nommée \texttt{uct} dans les programmes Python. Cet algorithme de prise de décision est largement développé dans les jeux \footnote{On peut citer son utilisation dans certains programmes de Go, d'Échecs, de Shogi, ou encore le jeu Total War : Rome II}.
+L'algorithme \texttt{mc\_ucb1} permet d'optimiser les simulations sur un coup mais ne permet pas d'anticiper les états du jeu une fois ce coup joué. Il est alors intéressant d'effectuer une recherche arborescente du meilleur coup. Cette méthode est appelée Upper Confidence Bound applied to Trees, nommée \texttt{uct} dans les programmes Python. Cet algorithme de prise de décision est largement développé dans les jeux \footnote{On peut citer son utilisation dans certains programmes de Go, d'Échecs, de Shogi, ou encore le jeu Total War : Rome II}.
 
 \subsubsection{Principe}
 
