@@ -129,7 +129,7 @@ Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe p
 
 \subsection{Condition de fin de partie}
 
-À chaque coup la fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remportée par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde en jouant aléatoirement. Avec l'utilisation de multiprocessing, nous avons pu atteindre 23000 parties par seconde pour des parties sur des plateau de taille 7x7 avec un ordinateur possédant un processeur muni de 48 coeurs.
+À chaque coup la fonction \texttt{check\_win} est appelée pour vérifier si la partie a été remportée par un joueur. La rapidité d'exécution de cette fonction a été la principale source d'amélioration qui nous a permis d'augmenter le nombre de parties simulées par seconde en jouant aléatoirement. Avec l'utilisation de multiprocessing, nous avons pu atteindre 23000 parties par seconde pour des parties sur des plateaux de taille 7x7 avec un ordinateur possédant un processeur muni de 48 cœurs.
 
 
 \begin{figure}[h]
@@ -141,10 +141,10 @@ Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe p
 
 
 Après une tentative avec la théorie des graphe et l'algorithme de Dijkstra, nous avons opté pour une méthode utilisant les composantes connexes par couleur du plateau. 
-On considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous ensembles d'une même composante connexe.
+On considère qu'un joueur gagne s'il relie par une ligne continue les deux bords opposés du plateau, c'est-à-dire si les composantes connexes artificielles Nord et Sud ou Est et Ouest sont des sous-ensembles d'une même composante connexe.
 
 
-Atteindre une bonne rapidité d'exécution en jouant aléatoirement est crucial car toutes les méthodes d'intelligence artificielle mises en ouvre par la suite en bénéficierons.
+Atteindre une bonne rapidité d'exécution en jouant aléatoirement est crucial car toutes les méthodes d'intelligence artificielle mises en œuvre par la suite en bénéficieront.
 
 \newpage
 
@@ -234,7 +234,7 @@ Voici le fonctionnement de l'algorithme:
 	\caption{Algorithme UCB1}
 \end{figure}
 
-Cet algorithme répond initialement au problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connait pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
+Cet algorithme répond initialement au problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connaît pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
 
 Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation de la machine qui empiriquement lui rapporte le plus et l'exploration pour espérer trouver une machine rapportant davantage.
 
@@ -323,7 +323,7 @@ Exemple: Les nœuds gris sur la ligne de profondeur 1 ont pour score avec la con
 \\
 
 2. Expansion\\
-Deuxièmement, lorsque on atteint une feuille de l'arbre, on crée un nouveau nœud représentant un nouveau coup joué. Ce coup est choisi de manière aléatoire.\\
+Deuxièmement, lorsqu'on atteint une feuille de l'arbre, on crée un nouveau nœud représentant un nouveau coup joué. Ce coup est choisi de manière aléatoire.\\
 
 3. Simulation\\
 Troisièmement, on finit la partie en sélectionnant les coups de manière aléatoire. Dans l'exemple la partie simulée a été perdue.\\
@@ -425,7 +425,7 @@ L'algorithme \texttt{uct} reprend en grande partie le code de l'algorithme \text
 
 \subsubsection{Constante d'exploration optimale}
 
-La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots. Les meilleurs résultats sont obtenus pour $c \simeq 0.3$. Cette observation empirique est partagée pour les jeux ayant des récompenses entre 0 et 1 \cite{expcst}, ce qui est le cas ici : une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
+La constante d'exploration optimale ne correspond pas à la valeur théorique $c=\sqrt{2}$. En pratique, cette dernière est plus faible pour le jeu de Hex que pour le problème des bandits manchots. Les meilleurs résultats sont obtenus pour $c \simeq 0.3$. Cette observation empirique est partagée pour les jeux ayant des récompenses entre 0 et 1 \cite{expcst}, ce qui est le cas ici : une partie gagnée vaut une récompense de 1 et une partie perdue donne une récompense nulle.
 
 \begin{figure}[!h]
 	\centering
@@ -473,7 +473,7 @@ Cependant cette méthode ne produit pas d'amélioration significative si le nomb
 
 \section{Évaluation des algorithmes}
 
-Pour évaluer les performances des l'algorithmes nous les avons fait jouer sur un plateau 7x7 avec comme témoin l'algorithme \texttt{uct}. Ces comparaisons ont été faites pour 100, 1000 et 10000 parties simulées à chaque fois ainsi que pour \texttt{uct} en premier et deuxième joueur.
+Pour évaluer les performances des algorithmes nous les avons fait jouer sur un plateau 7x7 avec comme témoin l'algorithme \texttt{uct}. Ces comparaisons ont été faites pour 100, 1000 et 10000 parties simulées à chaque fois ainsi que pour \texttt{uct} en premier et deuxième joueur.
 
 \begin{figure}[!h]
 	\centering
@@ -538,18 +538,18 @@ Pour évaluer les performances des l'algorithmes nous les avons fait jouer sur u
 
 \subsection{Multiprocessing}
 
-Au cours de l'algorithme UCT la puissance de calcul est utilisé par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave pourrait améliorer la rapidité de l'algorithme. Le maître effectuerait les déplacements au sein de l'arbre puis les processus esclaves effectuerait un certains nombre de simulations. Un gain de rapidité relatif pourrait être envisagé en augmentant le nombre de de parties pour coup et en faisant une dizaine, voir plus, de simulations à chaque nœuds enfants.
+Au cours de l'algorithme UCT la puissance de calcul est utilisée par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave peut améliorer la rapidité de l'algorithme. Le maître effectue les déplacements au sein de l'arbre puis les processus esclaves effectuent les simulations pour finir les parties. Un gain de rapidité relatif pourrait être envisagé en augmentant le nombre de de parties pour coup et en faisant une dizaine, voir plus, de simulations à chaque nœuds enfants.
 
 \subsection{Début de partie}
 
-Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant. Il existe pour cela les algorithme RAVE et GRAVE \cite{rave} \cite{grave}.
+Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups possibles, moins les estimations de la qualité de ces derniers sont justes. C'est pourquoi compléter l'algorithme \texttt{uct} avec une autre approche serait intéressant. Il existe pour cela les algorithmes RAVE et GRAVE \cite{rave} \cite{grave}.
 
 \newpage
 
 \section{Conclusion}
 
-Les résultats montre une grande amélioration des performance grâce à l'utilisation du critère UCB1 permettant de simuler moins de parties sur les coups jugés mauvais. Cette différence se réduit à  mesure que le nombre de parties simulées par coup augmente. De plus, on observe que commencer à jouer en premier donne un avantage de plus en plus important lorsque ce dernier augmente.
-Enfin l'algorithme UCT permet d'obtenir de bons résultats avec des capacité de calculs relativement faible. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi ces propriétés, nous pouvons citer les connections virtuelles , les cases mortes ou encore les échelles. Faire intégrer ces notions à UCT pourrait être une piste d'amélioration.
+Les résultats montrent une grande amélioration des performances grâce à l'utilisation du critère UCB1 permettant de simuler moins de parties sur les coups jugés mauvais. Cette différence se réduit à  mesure que le nombre de parties simulées par coup augmente. De plus, on observe que commencer à jouer en premier donne un avantage de plus en plus important lorsque ce dernier augmente.
+Enfin l'algorithme UCT permet d'obtenir de bons résultats avec des capacités de calculs relativement faibles. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi ces propriétés, nous pouvons citer les connexions virtuelles , les cases mortes ou encore les échelles. Faire intégrer ces notions à UCT pourrait être une piste d'amélioration.
 
 \newpage
 
