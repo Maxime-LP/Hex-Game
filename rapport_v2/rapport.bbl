@@ -1,0 +1,32 @@
+\begin{thebibliography}{1}
+
+\bibitem{ref1}
+Peter Auer, Nicolò Cesa-Bianchi, and Paul Fischer.
+\newblock Finite-time analysis of the multiarmed bandit problem.
+\newblock {\em Machine Learning}, 05 2002.
+
+\bibitem{expcst}
+Tristan Cazenav.
+\newblock {\em Intelligence Artificielle une Approche Ludique}.
+\newblock 2011.
+
+\bibitem{grave}
+Tristan Cazenave.
+\newblock Generalized rapid action value estimation.
+\newblock 01 2015.
+
+\bibitem{hexwiki}
+Wikipedia contributors.
+\newblock Hex (board game), 2021.
+
+\bibitem{ref2}
+Levente Kocsis and Csaba Szepesvári.
+\newblock Bandit based monte-carlo planning.
+\newblock volume 2006, pages 282--293, 09 2006.
+
+\bibitem{rave}
+Abdallah Saffidine.
+\newblock Utilisation d'uct au hex.
+\newblock 05 2021.
+
+\end{thebibliography}
