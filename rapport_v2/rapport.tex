@@ -86,7 +86,7 @@
 \vspace{40pt}
 
 \begin{abstract}
-Hex est un jeu de plateau à information complète aux règles simples mais pouvant présenter une grande complexité. En effet, des stratégies gagnantes sont connues pour le premier joueur pour des plateaux de taille restreinte, mais la recherche de telles stratégies devient impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en développer 3 reposant sur des méthodes de Monte-Carlo et Monte-Carlo avec recherche arborescente. 
+Hex est un jeu de plateau à information complète aux règles simples mais pouvant présenter une grande complexité. Des stratégies gagnantes sont connues pour le premier joueur et pour des plateaux de taille restreinte, mais la recherche de telles stratégies devient vite impraticable à mesure que la taille du plateau augmente. Il est alors question de trouver des stratégies efficaces à défaut de gagnantes. Nous en allons en développer 3 reposant sur des méthodes de Monte-Carlo et de recherche arborescente. 
 \end{abstract}
 \newpage
 
@@ -108,10 +108,10 @@ Hex est un jeu de société pour deux joueurs dont le but est de relier les deux
 	\caption{Plateau de jeu 11x11}
 \end{figure}
 
-\subsection{Spécificité du jeu}
+\subsection{Spécificités du jeu}
 
-Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un unique gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde \cite{hexwiki}.
-Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégie gagnante \footnote{On appelle stratégie gagnante toute stratégie assurant la victoire quels que soient les choix que fait la partie adverse.} est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente \footnote{Un plateau de taille classique, soit 11x11, a un facteur de branchement de 121.}. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle.
+Une particularité du jeu de Hex est qu'il ne peut pas y avoir de partie aboutissant à un match nul. En effet, indépendamment des coups joués et de la taille du plateau, lorsque que le plateau est rempli, il y a obligatoirement un gagnant. Ce résultat a été établi par John Nash et repose sur une preuve par l'absurde \cite{hexwiki}.
+Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9, une stratégie gagnante \footnote{On appelle stratégie gagnante toute stratégie assurant la victoire quels que soient les choix que fait le joueur adverse.} est connue pour le premier joueur. Mais ce n'est pas le cas pour les plateaux de taille supérieure et des résultats de la théorie de la complexité montre que la recherche d'une telle stratégie devient très rapidement impraticable quand la taille du jeu augmente \footnote{Un plateau de taille classique, soit 11x11, a un facteur de branchement de 120.}. C'est pourquoi, nous allons adopter une approche statistique afin d'obtenir un comportement de jeu optimal de la part d'un joueur programmé avec des techniques d'intelligence artificielle.
 
 \begin{figure}[h]
 	\centering
@@ -123,7 +123,7 @@ Ainsi, pour des plateaux de tailles inférieures ou égales à 9x9 une stratégi
 
 \subsection{Python Orienté Objet}
 
-Le jeu a été implémenté en langage Python. Le module pygame a été utilisé pour l'interface graphique lorsque les parties se déroulent avec un joueur humain. Le module multiprocessing a été utiliser pour augmenter la rapidité d'exécution des parties dans la phase de test des IA. Le projet est téléchargeable depuis le site \href{https://github.com/Maxime-LP/Hex-Game}{GitHub}.\\
+Le jeu a été implémenté en langage Python. Le module pygame a été utilisé pour l'interface graphique lorsque les parties se déroulent avec un joueur humain et le module multiprocessing a été utilisé pour augmenter la rapidité d'exécution des parties dans la phase de test des IA. Le projet est téléchargeable depuis \href{https://github.com/Maxime-LP/Hex-Game}{GitHub}.\\
 
 Concernant la partie orienté objet, nous avons utilisé 3 classes. Une classe principale, \texttt{Game}, faisant interagir deux instances de la classe \texttt{Player} tour par tour en effectuant des actions sur l'objet de la classe \texttt{Board} représentant le plateau.
 
@@ -173,7 +173,7 @@ def check_win(self, currplayer):
 
 \section{Joueur artificiel}
 
-Au cours du projet, nous avons implémenté 4 algorithmes. Chaque nouvelle version reprenait les bases de la précédente en ajoutant des améliorations. Le but étant que le joueur artificiel adopte des stratégies intelligentes en utilisant à son avantage la structure du plateau \footnote{On parle notamment ici des connections virtuelles et cases mortes (cf. p14).} sans programmer cela explicitement.
+Au cours du projet, nous avons implémenté 4 algorithmes, chaque nouvelle version reprenant les bases de la précédente en y  ajoutant des améliorations. Le but étant que le joueur artificiel adopte des stratégies intelligentes en utilisant à son avantage la structure du plateau \footnote{On parle notamment ici des connections virtuelles et cases mortes (cf. p14).} sans programmer cela explicitement.
 
 \subsection{Monte-Carlo}
 
@@ -234,15 +234,15 @@ Voici le fonctionnement de l'algorithme:
 	\caption{Algorithme UCB1}
 \end{figure}
 
-Cet algorithme répond initialement au problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connaît pas les récompenses moyennes. Son objectif est alors de maximiser ses gains.
+Cet algorithme est initialement une réponse au problème du bandit manchot ou, dans sa version générale, du bandit à $K$ bras. Le problème original peut se formuler ainsi : un agent est face à des machines à sous dont il ne connaît pas les récompenses moyennes, son objectif est alors de maximiser ses gains.
 
-Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation de la machine qui empiriquement lui rapporte le plus et l'exploration pour espérer trouver une machine rapportant davantage.
+Ce problème est en fait un exemple d'apprentissage par renforcement dans lequel l'agent doit faire des compromis entre l'exploitation de la machine qui empiriquement lui rapporte le plus et l'exploration des autres machines pour espérer trouver une machine rapportant davantage.
 
 L'agent peut bien sûr adopter une approche naïve et jouer la machine maximisant la récompense moyenne sur les coups joués mais  cette stratégie peut le conduire à ignorer certaines machines, qui pourraient être plus intéressantes à jouer. \\
 
 Peter Auer, Nicol\`o Cesa-Bianchi et Paul Fischer développent cette stratégie dans un article de référence, \textit{Finite-time Analysis of the Multiarmed Bandit Problem} \cite{ref1}, permettant à l'agent de continuer à explorer les machines tout en maximisant ses gains.\\
 
-Le premier terme $\bar{x_j}$ représente la composante d'exploitation du critère UCB1 et le terme $\sqrt{\frac{\ln{n}}{n_j} }$ celui de l'exploration. La constante $c$ permet donc de donner plus ou moins d'importance à l'exploration. La constante théorique optimale est $c=\sqrt{2}$. Cependant, bien que des améliorations soient significatives par rapport à l'algorithme \texttt{mc}, la constante d'exploration optimale n'est pas $\sqrt{2}$ dans notre cas. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\
+Le premier terme $\bar{x_j}$ représente la composante d'exploitation du critère UCB1 et le terme $\sqrt{\frac{\ln{n}}{n_j} }$ celui de l'exploration. La constante $c$ permet donc de donner plus ou moins d'importance à l'exploration. La constante théorique donnée dans le cadre du problème du bandit manchot est $c=\sqrt{2}$. Cependant, bien que des améliorations soient perceptibles par rapport à l'algorithme \texttt{mc} en utilisant cette constante, la constante d'exploration optimale n'est pas $\sqrt{2}$ dans notre cas. Nous reviendrons sur ce point dans la partie concernant l'algorithme UCT. \\
 
 \newpage
 
@@ -455,8 +455,8 @@ La constante d'exploration optimale ne correspond pas à la valeur théorique $c
 
 \subsection{UCT avec mémoire}
 
-L'algorithme \texttt{uct} pourrait garder en mémoire une partie de l'arbre pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspond à l'état actuel du plateau.\\
-Nous prenons comme exemple la figure 7. Si on considère que \texttt{uct} a joué le coup bleu puis son adversaire le coup rouge,  et que le nœud rouge à été visité précédemment alors on récupère comme racine le nœud rouge avec ses enfants.\\
+Pour aller plus loin, l'algorithme \texttt{uct} pourrait garder en mémoire une partie de l'arbre pour ses coups suivants. En effet, après avoir joué une première fois, le joueur artificiel \texttt{uct} pourrait tronquer l'arbre et considérer comme racine le nœud correspondant à l'état actuel du plateau, ce qui lui permettrait de conserver les simulations déjà effectuées.\\
+Nous prenons comme exemple la figure 7. Si on considère que \texttt{uct} a joué le coup bleu puis son adversaire le coup rouge,  et que le nœud rouge a été visité précédemment, alors on récupère comme racine le nœud rouge avec ses enfants.\\
 
 \begin{figure}[h]
 	\centering
@@ -538,7 +538,7 @@ Pour évaluer les performances des algorithmes nous les avons fait jouer sur un 
 
 \subsection{Multiprocessing}
 
-Au cours de l'algorithme UCT la puissance de calcul est utilisée par deux tâches en particulier, se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure maître/esclave peut améliorer la rapidité de l'algorithme. Le maître effectue les déplacements au sein de l'arbre puis les processus esclaves effectuent les simulations pour finir les parties. Un gain de rapidité relatif pourrait être envisagé en augmentant le nombre de de parties pour coup et en faisant une dizaine, voir plus, de simulations à chaque nœuds enfants.
+Au cours de l'algorithme UCT, la puissance de calcul est utilisée par deux tâches en particulier : se déplacer dans l'arbre et effectuer des simulations aléatoires. La partie simulation aléatoire est celle qui prend la majorité du temps de calcul. Une structure que l'on appelle maître/esclave peut améliorer la rapidité de l'algorithme. Le maître effectue les déplacements au sein de l'arbre puis les processus esclaves effectuent les simulations pour finir les parties. Un gain de rapidité pourrait être envisagé en augmentant le nombre de parties par coup et en faisant une dizaine, voir plus, de simulations à chaque nœud enfant.
 
 \subsection{Début de partie}
 
@@ -548,8 +548,8 @@ Un autre axe d'amélioration se trouve en début de partie. Plus il y a de coups
 
 \section{Conclusion}
 
-Les résultats montrent une grande amélioration des performances grâce à l'utilisation du critère UCB1 permettant de simuler moins de parties sur les coups jugés mauvais. Cette différence se réduit à  mesure que le nombre de parties simulées par coup augmente. De plus, on observe que commencer à jouer en premier donne un avantage de plus en plus important lorsque ce dernier augmente.
-Enfin l'algorithme UCT permet d'obtenir de bons résultats avec des capacités de calculs relativement faibles. En effet, à partir de plusieurs milliers de simulations par coups, soit moins de 5 secondes de calculs sur un ordinateur lambda, il est possible de voir que l'algorithme tire parti des propriétés géométriques du jeu. Parmi ces propriétés, nous pouvons citer les connexions virtuelles , les cases mortes ou encore les échelles. Faire intégrer ces notions à UCT pourrait être une piste d'amélioration.
+Les résultats montrent une grande amélioration des performances grâce à l'utilisation du critère UCB1 permettant de simuler moins de parties sur les coups jugés mauvais. Cette différence se réduit à mesure que le nombre de parties simulées par coup augmente. De plus, on observe que commencer à jouer en premier donne un avantage de plus en plus significatif lorsque ce dernier augmente.
+Enfin l'algorithme UCT permet d'obtenir de bons résultats avec des capacités de calculs relativement faibles. En effet, à partir de plusieurs milliers de simulations par coup, soit moins de 5 secondes de calcul sur un ordinateur lambda, il est possible de voir que l'algorithme tire partie des propriétés géométriques du jeu. Parmi ces propriétés, nous pouvons citer les connexions virtuelles , les cases mortes ou encore les échelles. Faire intégrer ces notions à UCT pourrait être une ultime piste d'amélioration.
 
 \newpage
 
