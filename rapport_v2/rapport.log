@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  18 MAY 2021 10:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.4)  19 MAY 2021 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -843,8 +843,14 @@ apport.lof)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: FDE276FBED127DB2FDC6E9AB78777DCE;3343.
+
+Package rerunfilecheck Warning: File `rapport.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `rapport.out':
+(rerunfilecheck)             Before: FDE276FBED127DB2FDC6E9AB78777DCE;3343
+(rerunfilecheck)             After:  B13450537C40EA0050A099B5A2C182EE;3343.
 Package rerunfilecheck Info: File `rapport.brf' has not changed.
 (rerunfilecheck)             Checksum: 516D8D268C18DD1991189AC709905B7D;235.
  ) 
@@ -855,7 +861,7 @@ Here is how much of TeX's memory you used:
  34354 multiletter control sequences out of 15000+600000
  414119 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 98i,9n,103p,807b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,9n,103p,808b,1907s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -875,7 +881,7 @@ ve/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2020/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on rapport.pdf (18 pages, 769113 bytes).
+Output written on rapport.pdf (18 pages, 771602 bytes).
 PDF statistics:
  584 PDF objects out of 1000 (max. 8388607)
  513 compressed objects within 6 object streams

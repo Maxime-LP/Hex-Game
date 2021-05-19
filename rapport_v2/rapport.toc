@@ -1,7 +1,7 @@
 \babel@toc {french}{}
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Règles du jeu}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Spécificité du jeu}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.2}Spécificités du jeu}{3}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Implémentation}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Python Orienté Objet}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Condition de fin de partie}{4}{subsection.2.2}%
@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {3.2}Monte-Carlo et UCB1}{7}{subsection.3.2}%
 \contentsline {subsubsection}{\numberline {3.2.1}Principe}{7}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}Algorithme}{8}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Upper Confidence bounds applied to Trees (UCT)}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Upper Confidence Bound applied to Trees (UCT)}{9}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Principe}{9}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}Algorithme}{10}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Constante d'exploration optimale}{12}{subsubsection.3.3.3}%
