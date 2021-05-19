@@ -26,7 +26,7 @@ def mc(board, color, explorationConstant):
     """
     initialState = Hex(color, deepcopy(board))
     searcher = MC(timeLimit=None, iterationLimit=n)
-    action = searcher.search(initialState=initialState, needDetails=False)
+    action = searcher.search(initialState=initialState, needDetails=True)
     return action
 
 
